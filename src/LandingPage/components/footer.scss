@@ -1,0 +1,27 @@
+.footer {
+    background-color: #f7f7f7;
+    padding-top: 100px;
+}
+@media screen and (max-width: 768px) {
+    .footer {
+        background-color: #f7f7f7;
+    }
+    .testing{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .copyright{
+        justify-content: center;
+    }
+    .footerlist{
+        color: #373737;
+    font-family: Poppins;
+    font-size: 10.248px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    }
+
+}

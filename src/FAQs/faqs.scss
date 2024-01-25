@@ -1,0 +1,127 @@
+.faqs {
+  width: 100%;
+  overflow-x: hidden;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  .space{
+    margin-top: 10em;
+  }
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    .title{
+      padding-top: 1em;
+      padding-bottom: 1em;
+      font-size: 50px;
+      font-weight: 700;
+      color: #363636;
+      text-align: center;
+    }
+    .faqsimg {
+      margin-top: 3em;
+      margin-bottom: 2em;
+      width: 350px;
+      height: 100px;
+    }
+    .didntfindanswimg {
+      height: 180px;
+      width: 50 0px;
+      margin-top: 3em;
+      margin-bottom: 3em;
+    }
+    .questions {
+      width: 100%;
+      .question-container {
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 8px;
+      }
+      .qc-header {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 10px;
+      }
+    }
+    .profiles {
+      width: 100%;
+      margin-bottom: 3em;
+      .profile-card {
+        height: 300px;
+        width: 308px;
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+        margin: 10px;        
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        .title-small{
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        h5{
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Poppins';
+        }
+        p{
+            margin: 0;
+            color: grey;
+        }
+    }
+      img{
+        height: 180px;
+        width: 180px;
+      }
+    }
+  }
+}
+.question-container {
+  max-height: 60px;
+  overflow: hidden;
+  transition: max-height 2.0s ease-in-out; 
+}
+
+.question-container.expanded {
+  max-height: 1000px;
+}
+
+@media screen and (max-width: 800px) {
+  .faqs {
+    .wrapper {
+      .faqsimg {
+        height: 109px;
+        width: 100%;
+        margin-bottom: 5em;
+        padding: 5px;
+      }
+      .didntfindanswimg {
+        height: 152px;
+        width: 100%;
+
+        margin-top:5em ;
+      }
+    }
+    .profiles{
+        width: 100%;
+        .row{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3em;
+        }
+    }
+  }
+}
