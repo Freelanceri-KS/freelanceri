@@ -58,9 +58,7 @@ const Login = (props) => {
       e?.target?.fullName?.value == null ||
       e?.target?.email?.value == '' ||
       e?.target?.email?.value == undefined ||
-      e?.target?.email?.value == null ||
-      PhoneNumber == "" ||
-      e?.target?.jobTitle?.value == ""
+      e?.target?.email?.value == null
     ) {
       toast.warning('please fill all the information');
     }
@@ -68,7 +66,7 @@ const Login = (props) => {
       toast.warning('please complete the captcha')
     }
     else {
-      setLoading(true); // Set loading to true when the request starts
+      setLoading(true);
 
       let Freelancer = {
         fullName: e?.target?.fullName?.value,
