@@ -17,7 +17,8 @@ function App() {
     <>
       <ToastContainer />
       <BrowserRouter>
-      {window.location.pathname != '/register' && window.location.pathname != "/welcome" ?
+      {window.location.pathname != '/register' && window.location.pathname
+      !="/job"&& window.location.pathname != "/welcome" ?
         <NewHeader />
         :
         ""
