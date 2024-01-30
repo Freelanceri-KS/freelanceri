@@ -12,8 +12,11 @@ body {
 .go-back p{
     margin-top: 5px;
 }
-
-
+.checkwithtxt{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
 .left {
     align-items: center;
     display: flex;
@@ -24,6 +27,18 @@ body {
     height: 90%;
     width: 55%;
     padding-right: 2em;
+}
+.dot{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: gray;
+}
+.selectdot{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: blue;
 }
 .main-input-sec{
     display: flex;

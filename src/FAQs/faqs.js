@@ -48,7 +48,7 @@ const FAQs = (props) => {
                 className={`question-container ${
                   isExpanded.freelancerPlatform ? "expanded" : ""
                 }`}
-              >
+               >
                 <div
                   className="qc-header"
                   onClick={() => toggleExpansion("freelancerPlatform")}
