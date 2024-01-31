@@ -34,15 +34,20 @@ const Login = (props) => {
   const [sector, setSector] = useState('')
   const [website, setWebsite] = useState('')
   const [socials, setSocials] = useState(
-    { facebook: '', instagram: '', linkedin: '' }
-  )
+    {
+      facebook: '', 
+      instagram: '',
+      linkedin: ''
+      }
+    )
+  
   const [jobEntries, setJobEntries] = useState([
     { title: '', company: '' },
   ]);
   const [educationEntries, setEducationEntries] = useState([
     { institution: '', title: '' }
   ]);
-
+console.log(socials[0])
   const handleInputChange = (index, key, value, entriesType) => {
     const updatedEntries = [...(entriesType === 'job' ? jobEntries : educationEntries)];
     updatedEntries[index][key] = value;
@@ -121,8 +126,9 @@ const Login = (props) => {
         sektori: sector,
         recaptchaToken: captcha,
         website: website,
-        socials: socials
+        socials: socials[0]
       };
+      console.log('Employer',Employer)
       axios.post('/trial', userType == "Freelancer" ? Freelancer : Employer)
         .then(data => {
           console.log(data);
@@ -350,8 +356,8 @@ const Login = (props) => {
                                 </div>
                               </div>
                             ))}
-                            <button className="mt-2 mb-2" onClick={() => handleAddEntry('job')}>
-                              Add More
+                            <button className="mt-2 mb-2 btn  btn-outline-primary" onClick={() => handleAddEntry('job')}>
+                              Add More +
                             </button>
                           </div>
                           <strong>{props?.language == true ? "Edukimi" : "Education"}</strong>
@@ -382,8 +388,8 @@ const Login = (props) => {
                               </div>
                             </div>
                           ))}
-                          <button className="mt-2" onClick={() => handleAddEntry('education')}>
-                            Add More
+                          <button className="mt-2 btn  btn-outline-primary" onClick={() => handleAddEntry('education')}>
+                            Add More +
                           </button>
                         </div>
                         :
@@ -454,14 +460,14 @@ const Login = (props) => {
                           </div>
                         </div>
                       }
-                      <div className="d-flex mb-2">
+                      <div className="d-flex mb-2 mt-4 justify-content-center">
                         <ReCAPTCHA
                           // size="invisible"
                           sitekey="6Le40lUpAAAAAGqI7r3xdzy8a1Wp3kUcV6MKkd30"
                           onChange={CaptchaValidation}
                         />
                       </div>
-                      <div class="d-grid">
+                      <div class="d-grid justify-content-center">
                         <button
                           class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
                           onClick={() => RegisterUser()}
