@@ -329,7 +329,7 @@ console.log(socials[0])
                                   <input
                                     required
                                     type="text"
-                                    className="form-control"
+                                    className="form-control mt-2"
                                     placeholder="title"
                                     value={entry.title}
                                     onChange={(e) => handleInputChange(index, 'title', e.target.value, 'job')}
@@ -342,7 +342,7 @@ console.log(socials[0])
                                   <input
                                     required
                                     type="text"
-                                    className="form-control"
+                                    className="form-control mt-2"
                                     placeholder="company"
                                     value={entry.company}
                                     onChange={(e) => handleInputChange(index, 'company', e.target.value, 'job')}
@@ -353,9 +353,9 @@ console.log(socials[0])
                                 </div>
                               </div>
                             ))}
-                            <button className="mt-2 mb-2 btn  btn-outline-primary" onClick={() => handleAddEntry('job')}>
+                            <div role='button' className="card addbtn mt-2 mb-1 text-primary" onClick={() => handleAddEntry('job')}>
                               Add More +
-                            </button>
+                            </div>
                           </div>
                           <strong>{props?.language == true ? "Edukimi" : "Education"}</strong>
 
@@ -365,7 +365,7 @@ console.log(socials[0])
                                 <input
                                   required
                                   type="text"
-                                  className="form-control"
+                                  className="form-control mt-2"
                                   placeholder="institution"
                                   value={entry.institution}
                                   onChange={(e) => handleInputChange(index, 'institution', e.target.value, 'education')}
@@ -376,7 +376,7 @@ console.log(socials[0])
                                 <input
                                   required
                                   type="text"
-                                  className="form-control"
+                                  className="form-control mt-2"
                                   placeholder="title"
                                   value={entry.title}
                                   onChange={(e) => handleInputChange(index, 'title', e.target.value, 'education')}
@@ -385,9 +385,9 @@ console.log(socials[0])
                               </div>
                             </div>
                           ))}
-                          <button className="mt-2 btn  btn-outline-primary" onClick={() => handleAddEntry('education')}>
+                          <div role='button' className="card addbtn mt-2 mb-1 text-primary" onClick={() => handleAddEntry('education')}>
                             Add More +
-                          </button>
+                          </div>
                         </div>
                         :
                         <div className='row'>
@@ -684,7 +684,7 @@ console.log(socials[0])
                                   <input
                                     required
                                     type="text"
-                                    className="form-control"
+                                    className="form-control mt-2"
                                     placeholder="title"
                                     value={entry.title}
                                     onChange={(e) => handleInputChange(index, 'title', e.target.value, 'job')}
@@ -697,7 +697,7 @@ console.log(socials[0])
                                   <input
                                     required
                                     type="text"
-                                    className="form-control"
+                                    className="form-control mt-2"
                                     placeholder="company"
                                     value={entry.company}
                                     onChange={(e) => handleInputChange(index, 'company', e.target.value, 'job')}
@@ -708,9 +708,9 @@ console.log(socials[0])
                                 </div>
                               </div>
                             ))}
-                            <button className="mt-2 mb-2 btn  btn-outline-primary" onClick={() => handleAddEntry('job')}>
+                            <div role='button' className="card addbtn mt-2 mb-1 text-primary"onClick={() => handleAddEntry('job')}>
                               Add More +
-                            </button>
+                            </div>
                           </div>
                           <strong>{props?.language == true ? "Edukimi" : "Education"}</strong>
 
@@ -720,7 +720,7 @@ console.log(socials[0])
                                 <input
                                   required
                                   type="text"
-                                  className="form-control"
+                                  className="form-control mt-2"
                                   placeholder="institution"
                                   value={entry.institution}
                                   onChange={(e) => handleInputChange(index, 'institution', e.target.value, 'education')}
@@ -731,7 +731,7 @@ console.log(socials[0])
                                 <input
                                   required
                                   type="text"
-                                  className="form-control"
+                                  className="form-control mt-2"
                                   placeholder="title"
                                   value={entry.title}
                                   onChange={(e) => handleInputChange(index, 'title', e.target.value, 'education')}
@@ -740,9 +740,9 @@ console.log(socials[0])
                               </div>
                             </div>
                           ))}
-                          <button className="mt-2 mb-2 btn  btn-outline-primary" onClick={() => handleAddEntry('education')}>
+                          <div role='button' className="card addbtn mt-2 mb-1 text-primary"onClick={() => handleAddEntry('education')}>
                             Add More +
-                          </button>
+                          </div>
                         </div>
                         :
                         <div className='row'>
