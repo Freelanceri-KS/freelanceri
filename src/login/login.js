@@ -33,9 +33,9 @@ const Login = (props) => {
   const [companyName, setCompanyName] = useState('')
   const [sector, setSector] = useState('')
   const [website, setWebsite] = useState('')
-  const [socials, setSocials] = useState([
+  const [socials, setSocials] = useState(
     { facebook: '', instagram: '', linkedin: '' }
-  ])
+  )
   const [jobEntries, setJobEntries] = useState([
     { title: '', company: '' },
   ]);
@@ -60,11 +60,8 @@ const Login = (props) => {
     const selectedTitles = selectedOptions.map((option) => option.value);
     setSelectedJobTitles(selectedTitles);
   };
-  console.log('selectedJobTitles', selectedJobTitles)
   function CaptchaValidation(data) {
-    console.log('captcha', data)
     setCaptcha(data)
-
   }
   // const handleGoogleLogin = (googleUser) => {
   //   const profile = googleUser.getBasicProfile();
@@ -126,7 +123,6 @@ const Login = (props) => {
         website: website,
         socials: socials
       };
-
       axios.post('/trial', userType == "Freelancer" ? Freelancer : Employer)
         .then(data => {
           console.log(data);
@@ -143,7 +139,6 @@ const Login = (props) => {
   useEffect(() => {
     getProffesion()
   }, [])
-  console.log('website edhe socials', website, socials)
   window.addEventListener("resize", () => {
     setViewportSize(window.innerWidth);
   });
