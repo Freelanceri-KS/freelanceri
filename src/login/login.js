@@ -11,8 +11,6 @@ import { useNavigate } from 'react-router';
 import { connect } from "react-redux";
 import { setLang } from "../redux/Functions/actions";
 import ReCAPTCHA from "react-google-recaptcha";
-// import ReCAPTCHA from "react-google-recaptcha-enterprise";
-// import { GoogleLogin } from '@react-oauth/google';
 // import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -128,7 +126,6 @@ console.log(socials[0])
         website: website,
         socials: socials[0]
       };
-      console.log('Employer',Employer)
       axios.post('/trial', userType == "Freelancer" ? Freelancer : Employer)
         .then(data => {
           console.log(data);
@@ -711,8 +708,8 @@ console.log(socials[0])
                                 </div>
                               </div>
                             ))}
-                            <button className="mt-2 mb-2" onClick={() => handleAddEntry('job')}>
-                              Add More
+                            <button className="mt-2 mb-2 btn  btn-outline-primary" onClick={() => handleAddEntry('job')}>
+                              Add More +
                             </button>
                           </div>
                           <strong>{props?.language == true ? "Edukimi" : "Education"}</strong>
@@ -743,8 +740,8 @@ console.log(socials[0])
                               </div>
                             </div>
                           ))}
-                          <button className="mt-2" onClick={() => handleAddEntry('education')}>
-                            Add More
+                          <button className="mt-2 mb-2 btn  btn-outline-primary" onClick={() => handleAddEntry('education')}>
+                            Add More +
                           </button>
                         </div>
                         :
