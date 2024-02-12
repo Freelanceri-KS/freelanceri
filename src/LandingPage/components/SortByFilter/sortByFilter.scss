@@ -1,6 +1,12 @@
 .filter{
-  left: 30px;
+  left: 20px;
   width: 300px;
-  top: 110px;
+  top: 155px;
+  position: absolute;
+  .expanded-content{
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 

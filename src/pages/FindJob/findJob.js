@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import './findJob.scss'
 import SortBy from "../../LandingPage/components/SortByFilter/sortByFilter";
 import Profile from "../../assets/profiles/2.png";
 import { FaBookmark } from "react-icons/fa";
+import axios from "../../axios";
+import Banner from "../../assets/images/banner.png"
 
 
 const FindJob = () => {
+const [jobs , setJobs] = useState([])
+
+function GetJobs(){
+  axios.get('')
+}
   return (
     <>
       <div className="container">
@@ -13,6 +20,7 @@ const FindJob = () => {
           <div className="col-sm-2"><SortBy /></div>
           <div className="col-sm-8 centerdiv">
             <div className="findjob">
+              {}
               <div className="post-wrapper">
                 <div className="post-header">
                   <div className="left">
@@ -303,8 +311,9 @@ const FindJob = () => {
               </div>
             </div>
           </div>
-          <div className="col-sm-2 ">
-            <div className="banner"></div>
+          <div className="col">
+            <img src={Banner} alt="banner" className="banner" />
+            {/* <div className="banner"></div> */}
           </div>
         </div>
       </div>
