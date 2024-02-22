@@ -84,6 +84,18 @@ const data = [
     budget: "$5000",
     image: User1,
   },
+  {
+    position: "Interior Designer",
+    creatorName: "Malena Buchholz",
+    location: "Prishtine",
+    type: "One-Project",
+    category: "Interior Designer",
+    description: "Create a responsive website for an online business",
+    amount: 1,
+    deadline: "1 dite",
+    budget: "$5000",
+    image: User1,
+  },
   // Other data items...
 ];
 
