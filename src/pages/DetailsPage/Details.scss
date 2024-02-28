@@ -1,0 +1,415 @@
+
+.app {
+	display: flex;
+}
+
+//   .sidebar {
+//     /* Styles for sidebar */
+//   }
+  
+//   .main-content {
+//     /* Styles for main content */
+//   }
+.main-content .interiordesigne{
+	width: 363px;
+	height: 51px;
+	position: relative;
+    top: 175px;
+    left: 865px;
+} 
+.main-content .savebuttoni{
+	
+    position: relative;
+    left: 1023px;
+    top: 97px;
+}
+.main-content .vertical-rectangle{
+	width: 1px;
+    height: 67px;
+    background-color: grey;
+    position: relative;
+    left: 34%;
+    top: 179px;
+}
+.main-content .vertical-rectangle__second{
+    width: 1px;
+    height: 71px;
+    background-color: grey;
+    position: relative;
+    left: 42%;
+    top: 113px;
+}
+
+.main-content .location-details{
+	width: 54px;
+	height: 19px;
+}
+
+.main-content .location-details__prishtine{
+	width: 68px;
+	height: 10px;
+	color: #455BEF;
+}
+.main-content  .type-details{
+	width: 31px;
+	height: 19px;
+
+}
+
+.main-content .oneproject-details{
+    width: 122px;
+    height: 10px;
+    color: #455BEF;
+    margin-left: -23px;
+}
+
+.main-content .category-details{
+	width: 60px;
+	height: 19px;
+}
+.main-content .interior-details{
+	color:  #455BEF;
+	height: 10px;
+	width: 134px;
+}
+
+
+
+.interior-text{
+
+	position: relative;
+    left:  438px;
+    top: 146px;
+    width: 363px;
+    height: 51px;
+}
+.section-location{
+	position: absolute;
+	top: 30%;
+	left: 26%;
+	padding: 20px;
+}
+.section-type{
+	position: absolute;
+	top: 30%;
+	left: 35%;
+	padding: 20px;
+}
+
+.section-category{
+	position: absolute;
+	top: 30%;
+	left: 44%;
+	padding: 20px;
+}
+
+.section-timeapply{
+	position: absolute;
+    top: 52%;
+    left: 27%;
+}
+
+.text-applied{
+	position: relative;
+    left: 30px;
+    top: 14px;
+
+}
+
+
+.section-timeapply{
+	display: inline-flex;
+}
+
+
+
+.clock-days{
+	position: relative;
+    left: 56%;
+    width: 34px;
+    height: 36px;
+    top: 10px;
+	
+}
+
+.clock-days__time{
+	position: relative;
+    left: 68%;
+    top: 16px;
+	
+}
+
+.job-explain__text{
+
+	position: relative;
+	bottom: -275px;
+	left: 343px;
+	
+}
+.maskgroup-img .maskgroup-img__image{
+	bottom: -253px;
+    float: right;
+    position: fixed;
+    right: 3%;
+	
+}
+.job-explain__aboutroom{
+	position: relative;
+    left: 23%;
+    top: 281px;
+}
+
+.job-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // background-color: #f0f0f0; 
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+	position: relative;
+    top: 18em;
+    width: 46%;
+    left: 22%;
+}
+
+.job-detail {
+    font-size: 16px;
+    color: #333; /* Replace with your actual color */
+}
+
+.job-card .apply-buttoni {
+    background-color: #0000ff; /* Replace with your actual color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+	position: relative;
+    left: 1%;
+    width: 239px;
+    height: 63px;
+}
+
+.job-card .apply-buttoni:hover {
+    background-color: #0000cc; /* Darker blue on hover */
+}
+.contact-card {
+	width: 291px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: Arial, sans-serif;
+    position: fixed;
+    margin-top: -29%;
+    margin-left: 2%;
+}
+  
+  .sidejob {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  .back {
+	align-self: flex-start;
+    margin-bottom: -11px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 16px;
+    margin-left: -158%;
+    margin-top: -13%;
+  }
+  
+  .profile-info {
+	text-align: center;
+  }
+  
+  .profile-pic {
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	margin-bottom: 8px;
+  }
+  
+//   h2 {
+// 	margin: 0;
+// 	color: #333;
+//   }
+  
+  .post-date {
+	color: #666;
+	font-size: 14px;
+	margin-left: 25px;
+
+  }
+  
+  .contact-info {
+	margin-top: 16px;
+  }
+  
+  .contact-info p {
+	margin: 4px 0;
+  }
+  
+  .contact-info a {
+	color: #007bff;
+	text-decoration: none;
+  }
+  
+  .contact-info a:hover {
+	text-decoration: underline;
+  }
+  .job-listing-card {
+	position: relative;
+    top: 70vh;
+    left: 48vh;
+	width: 100%;
+	max-width: 700px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	margin-bottom: 20px;
+	font-family: 'Arial', sans-serif;
+  }
+  
+  .job-header {
+	padding: 20px;
+	// background-color: #f2f2f2;
+	border-bottom: 1px solid #ddd;
+  }
+  
+  .job-header h2 {
+	margin: 0;
+	color: #333;
+	font-size: 24px;
+  }
+  
+  .posted-by {
+	color: #666;
+	font-size: 16px;
+  }
+  
+  .job-details {
+	display: inline-flex;
+    align-items: center;
+    margin-top: -18px;
+    justify-content: space-between;
+    width: 60%;
+    margin-left: 29px;
+	margin-top: 3px;
+  }
+  
+  .job-details p {
+	color: #555;
+	font-size: 14px;
+  }
+
+  
+//   .details-button {
+// 	background-color: #007bff;
+// 	color: white;
+// 	border: none;
+// 	padding: 10px 15px;
+// 	border-radius: 5px;
+// 	cursor: pointer;
+//   }
+  
+  .job-description {
+	color: #444;
+	font-size: 14px;
+	line-height: 1.5;
+	margin-top: 10px;
+	margin-top: 10px;
+    margin-left: 32px;
+  }
+
+  .job-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #fff;
+  }
+  
+  .job-footer span {
+	color: #555;
+	font-size: 14px;
+  }
+  
+  .apply-button {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  .job-header{
+	display: flex;
+  }
+.job-header .job-header__person{
+	border-radius: 26px;
+	height: 49px;
+}
+
+.job-header .savebutoni-details{
+    position: relative;
+     left: 35px;;
+}
+
+.apply-buttoni {
+    background-color: #0000ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    left: 1%;
+    width: 239px;
+    height: 63px;
+}
+.blackfriday-image {
+	position: relative;
+	margin-top: 33%;
+	left: 22%;
+}
+.job-listing-cardsecond{
+	position: relative;
+    top: 7vh;
+    left: 48vh;
+	width: 100%;
+	max-width: 700px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	margin-bottom: 20px;
+	font-family: 'Arial', sans-serif;
+}
+
+.sideJob .Back{
+	text-decoration: none;
+	color: black;
+}
+
+.profile-info{
+	display: inline-flex;
+	margin-top: 17px
+}
+
+.Relatet-p{
+	
+position: relative;
+left: 23%;
+top: 453px;
+font-size: 32px;
+}

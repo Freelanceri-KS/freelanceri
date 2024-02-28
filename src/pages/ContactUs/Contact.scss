@@ -14,12 +14,12 @@ $background-color_2: #0056b3;
     left: 46em;
     top: 9em;
 }
-.text-contact h2{
+.text-contact .contactus-text{
 	position: relative;
     left: 5em;
 	color: #373737;
 }
-.text-contact h5{
+.text-contact .contact-text__second{
 	position: relative;
     top: 0.5em;
     -webkit-user-modify: read-write-plaintext-only;
@@ -134,3 +134,46 @@ color: black;
 .footer p{
 	margin-top: 19px
 }
+///responsive
+
+@media only screen and (max-width: 600px) {
+	.foto-blackpretty{
+	  display: none;
+	}
+
+	.form-container{
+		position: relative;
+		left: -43px;
+	}
+	.form{
+display: revert-layer;
+	}
+	.form-second{
+		 display: contents;
+	}
+	.button-responsive{
+	    position: relative;
+    left: 15px;
+    top: 166px;
+    width: 368px;
+	}
+	.footer{
+		display: none;
+	}
+	.text-contact{
+	    position: relative;
+    	left: 15px;
+	}
+
+
+	.navbar-toggler{
+		position: relative;
+		left: 142px;
+		border: white;
+		top: -58px;
+	  
+
+	}
+  }
+
+
