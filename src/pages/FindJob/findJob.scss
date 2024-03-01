@@ -9,6 +9,256 @@
   position: relative;
   overflow: hidden;
 }
+
+.container {
+  margin-top: 2em;
+  max-width: 90% !important;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 48px;
+  height: auto;
+}
+
+.findjobrefact {
+  padding-top: 150px;
+  width: 100%;
+  max-width: 50em; /* Adjust max-width as needed */
+}
+
+.post-wrapper {
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  margin-top: 1em;
+  .ad-container img {
+    width: 100%;
+  }
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 1em;
+}
+.ad-banner-container {
+  padding: 20px; // Adjust padding as needed
+  margin-top: 80px; // Adjust the margin to move it down
+  width: 300px; // Set the width of the container
+  height: auto; // Let the height adjust according to the aspect ratio of the image
+}
+
+.ad-banner {
+  width: 100%; // Ensure the image takes up the full width of its container
+  height: auto; // Let the height adjust according to the aspect ratio of the image
+  max-width: 100%; // Ensure the image doesn't exceed its container
+  display: block; // Ensure the image behaves properly
+  margin: auto; // Center the image horizontally
+}
+
+.tag1 {
+  color: #455bef;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.identity {
+  margin-left: 10px;
+}
+
+.center {
+  display: flex;
+  justify-content: space-between;
+}
+
+.barrier {
+  height: 60px;
+  width: 2px;
+  background-color: #eaeaea;
+  margin: 0 1em;
+}
+.spacer {
+  // height: 60px;
+  // width: 2px;
+  background-color: white;
+  opacity: 100;
+  margin: 2px;
+}
+
+.location-tag {
+  margin: 0;
+}
+
+.post-body {
+  margin: 15px 1em;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #eaeaea;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2rem;
+  // margin: 0;
+
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .tag,
+    .value {
+      margin-bottom: 0;
+    }
+  }
+  @media (max-width: 768px) {
+    margin-right: 2rem; // Apply margin only on the right side for mobile devices
+    margin-left: 2rem; // Reset left margin
+  }
+  .viewNew {
+    background-color: #455bef;
+    border: none;
+    font-size: 20px;
+    color: white;
+    padding: 10px 20px; /* Adjust padding as needed */
+    text-align: center;
+    border-bottom-right-radius: 10px;
+    text-decoration: none; /* Remove underline */
+    // margin-right: auto; /* Push the link to the rightmost position */
+  }
+}
+
+// .viewNew {
+//   background-color: #455bef;
+//   border: none;
+//   width: 160px;
+//   font-size: 20px;
+//   color: white;
+//   text-align: center;
+//   border-bottom-right-radius: 10px;
+// }
+
+.value {
+  color: #455bef;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sort-by-filter-button {
+  display: none;
+  width: 80px;
+  height: 50px;
+  border: 1px solid rgb(224, 220, 220);
+  position: static;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.banner {
+  height: 70vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #455bef;
+  background-repeat: no-repeat;
+}
+
+/* Media Queries for Tablet and Mobile */
+@media screen and (max-width: 768px) {
+  .findjob {
+    .post-wrapper {
+      max-width: 100%;
+    }
+  }
+  .post-header {
+    .center {
+      .barrier:nth-child(1),
+      .barrier:nth-child(2),
+      .barrier:nth-child(3) {
+        display: none; // Hide the first and second barriers
+      }
+
+      .location,
+      .type {
+        display: none; // Hide the location and type sections
+      }
+    }
+  }
+  .post-footer {
+    .tag {
+      font-size: 10px;
+    }
+    .value {
+      font-size: 12px;
+    }
+  }
+  .searchinputLocationFJ,
+  .sort-by-filter,
+  .searchbtnFJ {
+    display: none;
+  }
+  .positioningFJ {
+    border: none !important;
+    width: 100%;
+  }
+  .searchinputJobFJ {
+    border: 1px solid rgb(224, 220, 220);
+    height: 41px;
+  }
+  .sort-by-filter-button {
+    display: inline;
+  }
+  .identity h5,
+  h6 {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    margin-top: 1em;
+  }
+
+  .findjob {
+    .post-wrapper {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .banner {
+    height: 50vh; /* Adjust height for smaller screens */
+  }
+}
+
+/* findJob.scss */
+.view-button {
+  @media (max-width: 767px) {
+    /* Styles for iPhone */
+    width: 100%; /* Make the button full width */
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    /* Styles for iPad */
+    width: 50%; /* Make the button take half of the container's width */
+  }
+
+  @media (min-width: 992px) {
+    /* Styles for Desktop */
+    /* Add any specific styles you want for the desktop view */
+  }
+}
+
 .cardFJ {
   width: 700px !important;
   margin-top: 20px;
@@ -25,7 +275,10 @@
   left: calc(50% - 350px);
   top: 164px;
 }
+
 .frame-144 {
+  padding-top: 10px;
+  padding: auto;
   border-radius: 10px;
   border-style: solid;
   border-color: #eaeaea;
@@ -39,6 +292,32 @@
   width: 700px;
   position: relative;
 }
+
+@media (max-width: 991px) {
+  .frame-144 {
+    width: 50%; /* Adjust width for smaller screens */
+  }
+}
+@media (max-width: 767px) {
+  .frame-1442 {
+    width: 350px;
+    background-color: crimson;
+  }
+  .frame-139 {
+    // width: 350px;
+    width: 317.53px;
+    background-color: cornflowerblue;
+  }
+  .frame-141 {
+    width: 317.53px;
+    // background-color: blueviolet;
+  }
+  .frame-30 {
+    width: 30px;
+    // background-color: crimson;
+  }
+}
+
 .frame-1442 {
   padding: 24px 26px 12px 26px;
   display: flex;
@@ -70,6 +349,7 @@
   position: relative;
 }
 .mask-group {
+  padding-left: 50px;
   flex-shrink: 0;
   width: 38.84px;
   height: 38.84px;
@@ -1567,14 +1847,15 @@
 .inputsFJ {
   display: flex;
   justify-content: center;
-  margin-top: 95px;
+  margin-top: -60px;
 }
 .positioningFJ {
   background-color: white;
-  border: 1px solid rgb(224, 220, 220);
+  // border: 1px solid rgb(224, 220, 220);
   display: flex;
   border-radius: 5px;
-  z-index: 999;
+  padding: auto;
+  // z-index: 999;
 }
 
 .searchinputJobFJ {
@@ -1603,10 +1884,12 @@
 }
 
 .searchbtnFJ {
+  position: static;
   color: #455bef;
   background-color: transparent;
   width: 120px;
-  border: none;
+  border: 1px solid rgb(214, 214, 214); /* Add border property */
+  height: 50px;
   font-weight: bold;
 }
 
