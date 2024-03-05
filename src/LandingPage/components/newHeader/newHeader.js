@@ -7,22 +7,17 @@ import HeaderLogo from "../../../assets/images/headerLogo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NewHeader = (props) => {
-  const location = useLocation("");
-  const navigate = useNavigate("");
+  const location = useLocation('')
+  const navigate = useNavigate('')
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light newHeader">
         <div className="container">
-          <a
-            role="button"
-            className="navbar-brand"
-            onClick={() => navigate("/")}
-          >
+          <a role="button" className="navbar-brand" onClick={()=> navigate('/')}>
             <img src={HeaderLogo} alt="Logo" height="35" />
           </a>
           <button
             className="navbar-toggler"
-            style={{ position: "absolute", width: "50px", right: "0" }}
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -35,33 +30,23 @@ const NewHeader = (props) => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li role="button" className="nav-item margin">
-                <a
-                  className={`nav-link ${
-                    location.pathname == "/" ? " active" : ""
-                  }`}
-                  onClick={() => navigate("/")}
-                >
+                <a className={`nav-link ${location.pathname == "/" ? ' active' : ''}`} onClick={()=> navigate('/')}>
                   Home
                 </a>
               </li>
               <li role="button" className="nav-item margin">
-                <a
-                  className={`nav-link ${
-                    location.pathname == "/faqs" ? " active" : ""
-                  }`}
-                  onClick={() => navigate("/faqs")}
-                >
+                <a className={`nav-link ${location.pathname == "/faqs" ? ' active' : ''}`}onClick={()=> navigate('/faqs')}>
                   FAQ
                 </a>
               </li>
               <li role="button" className="nav-item margin">
-                <a
-                  className={`nav-link ${
-                    location.pathname == "/about-us" ? " active" : ""
-                  }`}
-                  onClick={() => navigate("/about-us")}
-                >
-                  {props?.language == true ? "Rreth Nesh" : "About Us"}
+                <a className={`nav-link ${location.pathname == "/about-us" ? ' active' : ''}`}onClick={()=> navigate('/about-us')}>
+                  {props?.language == true ?'Rreth Nesh': "About Us"}
+                </a>
+              </li>
+              <li role="button" className="nav-item margin">
+                <a className={`nav-link ${location.pathname == "/contact-us" ? ' active' : ''}`}onClick={()=> navigate('/contact-us')}>
+                  {props?.language == true ?'Kontakt': "Contact"}
                 </a>
               </li>
             </ul>
@@ -82,13 +67,7 @@ const NewHeader = (props) => {
                 </a>
                 <ul className="dropdown-menu text-small lang-dr">
                   <li>
-                    <div
-                      role="button"
-                      className="dropdown-item"
-                      onClick={() => {
-                        props.setLang(true);
-                      }}
-                    >
+                    <div role="button" className="dropdown-item" onClick={() => {props.setLang(true)}}>
                       <img
                         src={Albania}
                         alt="mdo"
@@ -100,13 +79,7 @@ const NewHeader = (props) => {
                     </div>
                   </li>
                   <li>
-                    <div
-                      role="button"
-                      className="dropdown-item"
-                      onClick={() => {
-                        props.setLang(false);
-                      }}
-                    >
+                    <div role="button" className="dropdown-item" onClick={() => {props.setLang(false)}}>
                       <img
                         src={English}
                         alt="mdo"

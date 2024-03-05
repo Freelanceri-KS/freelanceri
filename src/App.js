@@ -11,8 +11,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginMessage from "./login/loginMessage";
 import NewHeader from "./LandingPage/components/newHeader/newHeader";
-import ContactForm from "./pages/ContactUs/Contact";
 import DetailsPage from "./pages/DetailsPage/Details";
+import Contact from "./pages/Contact/contact"
 
 function App() {
   return (
@@ -33,9 +33,8 @@ function App() {
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/welcome" element={<LoginMessage />} />
-          <Route path="/ContactUs" element={<ContactForm />} />
+          <Route path="/contact-us" element={<Contact />} />
           <Route path="/DetailsPage" element={<DetailsPage />} />
-          <Route path="/ContactUs" element={<ContactForm />} />
         </Routes>
       </BrowserRouter>
     </>
