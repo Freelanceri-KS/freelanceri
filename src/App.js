@@ -12,7 +12,8 @@ import "react-toastify/dist/ReactToastify.css";
 import LoginMessage from "./login/loginMessage";
 import NewHeader from "./LandingPage/components/newHeader/newHeader";
 import DetailsPage from "./pages/DetailsPage/Details";
-import Contact from "./pages/Contact/contact"
+import Contact from "./pages/Contact/contact";
+import RegisterPage from "./pages/RegisterPage/registerPage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/welcome" element={<LoginMessage />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/DetailsPage" element={<DetailsPage />} />
+          <Route path="/registerpage" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </>
