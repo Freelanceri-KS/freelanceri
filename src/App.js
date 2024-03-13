@@ -34,7 +34,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/welcome" element={<LoginMessage />} />
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="/DetailsPage" element={<DetailsPage />} />
+          <Route path="/DetailsPage/:id" element={<DetailsPage />} />
           <Route path="/registerpage" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>

@@ -9,6 +9,8 @@ import Ads from "../../assets/images/ads.png";
 // import Profile from "../../assets/images/Profile"; // Update the path accordingly
 // import Banner from "../../assets/images/Banner"; // Update the path accordingly
 import { Link } from "react-router-dom";
+import axios from "../../axios";
+import SortByFilter from "../../LandingPage/components/SortByFilter/sortByFilter";
 
 const data = [
   {
@@ -25,7 +27,7 @@ const data = [
     image: User2,
   },
   {
-    id: 1,
+    id: 2,
     position: "Social Media",
     creatorName: "Fjolla Berisha",
     location: "Prishtine",
@@ -38,7 +40,7 @@ const data = [
     image: User2,
   },
   {
-    id: 1,
+    id: 3,
     position: "Social Media",
     creatorName: "Fjolla Berisha",
     location: "Prishtine",
@@ -53,6 +55,7 @@ const data = [
   // Add more job post data here...
 ];
 
+
 const adsData = {
   position: "Advertisement",
   creatorName: "Ad Company",
@@ -66,11 +69,27 @@ const adsData = {
   image: Ads,
 };
 
+
 const FindJob = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTable] = useState(false);
+  const [jobs , setJobs] = useState([])
+
+  const getJobs = () => {
+    axios.get('').then(
+      data =>{
+        console.log(data.data)
+        setJobs(data?.data)
+      }
+    ).catch(
+      err => {
+        console.log(err)
+      }
+    )
+  }
 
   useEffect(() => {
+    getJobs()
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
       setIsTable(window.innerWidth > 768 && window.innerWidth <= 1024); // Define iPad breakpoint
@@ -87,8 +106,8 @@ const FindJob = () => {
 
   return (
     <div className="container">
-      <div className="sort-by-filter">{/* <SortBy /> */}</div>
       <div className="row">
+      <SortByFilter/>
         <div className="col-sm-8 centerdiv">
           <div className="findjobrefact">
             <div className="inputsFJ">
@@ -187,7 +206,7 @@ const FindJob = () => {
                   </div>
                   {!isMobile && (
                     <div className="footer-info">
-                      <Link to="/your-desired-route" className="viewNew">
+                      <Link to={`/DetailsPage/${job?.id}`} className="viewNew">
                         View
                       </Link>
                     </div>
@@ -210,7 +229,7 @@ const FindJob = () => {
 
         {/* </div> */}
         {!isTablet && !isMobile && (
-          <div className="col-sm-4">
+          <div className="col-sm-1">
             <div className="ad-banner-container">
               <img
                 src={AdBanner}

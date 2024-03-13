@@ -39,7 +39,10 @@
     width: 100%;
   }
 }
-
+.centerdiv{
+  display: flex;
+  justify-content: right;
+}
 .post-header {
   display: flex;
   justify-content: space-between;
