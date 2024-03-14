@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import text1 from "../../assets/images/text1.png";
-import { toast, useToast } from "react-toastify";
+import { toast } from "react-toastify";
+import maskgroup from "../../assets/images/maskgroup.png";
+import PhoneInput from "react-phone-input-2";
+import "./registerPage.scss";
+import Select from "react-select"; // Added import for Select component
 
 const RegisterPage = (props) => {
   const [step, setStep] = useState(1);
@@ -10,7 +13,7 @@ const RegisterPage = (props) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState("");
-  const [profession, setProfession] = useState("");
+  const [profession, setProfession] = useState([]);
   const [city, setCity] = useState("");
   const [education, setEducation] = useState("");
   const [qualifications, setQualifications] = useState("");
@@ -18,6 +21,7 @@ const RegisterPage = (props) => {
   const [portfolio, setPortfolio] = useState("");
   const [preferedRate, setPreferedRate] = useState("");
   const [prederdDurationEng, setPrederdDurationEng] = useState("");
+  const [selectedJobTitles, setSelectedJobTitles] = useState([]); // Added state for selected job titles
 
   useEffect(() => {
     getProfession();
@@ -112,59 +116,57 @@ const RegisterPage = (props) => {
     // }
   };
 
+  const handleJobTitleSelect = (selectedOptions) => {
+    const selectedTitles = selectedOptions.map((option) => option.value);
+    setSelectedJobTitles(selectedTitles);
+  };
+
   // Rendering the form based on the current step
   return (
-    <div className="container">
+    <div className="register-page-container" style={{ paddingTop: "40px" }}>
+      {" "}
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-12">
           <div class="container-fluid ps-md-0">
             <div class="row g-0">
-              <div class="col-md-8 col-lg-6">
+              <div class="col-md-4 ">
                 <div class="login d-flex align-items-center py-5">
                   <div class="container">
                     <div class="row">
                       {step === 1 && (
                         <div class="col-md-9 col-lg-8 mx-auto">
-                          <h1 class="login-heading mb-4">
+                          <h1 class="text-header mb-4">
                             {props?.language == true
-                              ? "Regjistrohu!"
-                              : "Register!"}
+                              ? "More About You!"
+                              : "More About You"}
                           </h1>
-                          <div class="form-floating mb-3">
-                            <input
-                              required
-                              type="text"
-                              class="form-control"
-                              onChange={(e) => setFirstName(e.target.value)}
-                              placeholder="Full Name"
-                            />
-                            <label for="floatingPassword">
-                              {props?.language == true
-                                ? "Emri i plote"
-                                : "Full Name"}
-                            </label>
+                          <div class="form-floating mb-3 row">
+                            <div class="col">
+                              <input
+                                required
+                                type="text"
+                                class="form-control"
+                                onChange={(e) => setFirstName(e.target.value)}
+                                placeholder="First Name"
+                              />
+                            </div>
+                            <div class="col">
+                              <input
+                                required
+                                type="text"
+                                class="form-control"
+                                onChange={(e) => setLastName(e.target.value)}
+                                placeholder="Last Name"
+                              />
+                            </div>
                           </div>
                           <div class="form-floating mb-3">
                             <input
                               required
-                              type="text"
-                              class="form-control"
-                              onChange={(e) => setLastName(e.target.value)}
-                              placeholder="Last Name"
-                            />
-                            <label for="floatingPassword">
-                              {props?.language == true
-                                ? "Emri i plote"
-                                : "Last Name"}
-                            </label>
-                          </div>
-                          <div class="form-floating mb-3">
-                            <input
-                              required
-                              type="text"
+                              type="email"
                               class="form-control"
                               onChange={(e) => setEmail(e.target.value)}
-                              placeholder="Email Address"
+                              placeholder="name@example.com"
                             />
                             <label for="floatingPassword">
                               {props?.language == true
@@ -173,22 +175,22 @@ const RegisterPage = (props) => {
                             </label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input
-                              required
-                              type="text"
-                              class="form-control"
-                              onChange={(e) => setPhone(e.target.value)}
-                              placeholder="Phone Number"
+                            <PhoneInput
+                              inputStyle={{
+                                width: "100%",
+                                height: "58px",
+                                border:
+                                  "var(--bs-border-width) solid var(--bs-border-color)",
+                              }}
+                              buttonStyle={{ zIndex: "999999" }}
+                              country={"xk"}
+                              value={phone}
+                              onChange={(e) => setPhone(e)}
                             />
-                            <label for="floatingPassword">
-                              {props?.language == true
-                                ? "Phone Number"
-                                : "Phone Number"}
-                            </label>
                           </div>
+
                           <form onSubmit={handleSubmitStep1}>
                             {/* Step 1 form fields */}
-
                             <button type="submit">Continue</button>
                           </form>
                         </div>
@@ -196,24 +198,29 @@ const RegisterPage = (props) => {
 
                       {step === 2 && (
                         <div class="col-md-9 col-lg-8 mx-auto">
-                          <h1 class="login-heading mb-4">
+                          <h1 class="text-header mb-4">
                             {props?.language == true
-                              ? "More about you !"
-                              : "More about"}
+                              ? "More About You!"
+                              : "More About You"}
                           </h1>
                           <div class="form-floating mb-3">
-                            <input
-                              required
-                              type="text"
-                              class="form-control"
-                              onChange={(e) => setProfession(e.target.value)}
-                              placeholder="Profession"
+                            <Select // Replaced input with Select component
+                              isMulti
+                              options={profession.map((el) => ({
+                                value: el.category,
+                                label: el.category,
+                              }))}
+                              onChange={handleJobTitleSelect}
+                              value={selectedJobTitles.map((title) => ({
+                                value: title,
+                                label: title,
+                              }))}
                             />
-                            <label for="floatingPassword">
+                            {/* <label for="floatingPassword">
                               {props?.language == true
-                                ? "Profession"
-                                : "Profession"}
-                            </label>
+                                ? "Select Profession"
+                                : "Select Profession"}
+                            </label> */}
                           </div>
                           <div class="form-floating mb-3">
                             <input
@@ -236,10 +243,10 @@ const RegisterPage = (props) => {
 
                       {step === 3 && (
                         <div class="col-md-9 col-lg-8 mx-auto">
-                          <h1 class="login-heading mb-4">
+                          <h1 class="text-header mb-4">
                             {props?.language == true
-                              ? "More about you !"
-                              : "More about"}
+                              ? "More About You!"
+                              : "More About You"}
                           </h1>
                           <div class="form-floating mb-3">
                             <input
@@ -294,10 +301,10 @@ const RegisterPage = (props) => {
 
                       {step === 4 && (
                         <div class="col-md-9 col-lg-8 mx-auto">
-                          <h1 class="login-heading mb-4">
+                          <h1 class="text-header mb-4">
                             {props?.language == true
-                              ? "More about you !"
-                              : "More about"}
+                              ? "More About You!"
+                              : "More About You"}
                           </h1>
                           <div class="form-floating mb-3">
                             <input
@@ -352,6 +359,23 @@ const RegisterPage = (props) => {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div
+                className="d-none d-md-flex col-md-6"
+                style={{ paddingLeft: "50px", paddingRight: "50px" }}
+              >
+                <img
+                  className="rightImage"
+                  src={maskgroup}
+                  alt="maskgroup"
+                  style={{
+                    width: "970px",
+                    height: "800px",
+                    paddingTop: "80px",
+                    paddingRight: "120px",
+                  }}
+                />{" "}
+                {/* Set width and height of the image */}{" "}
               </div>
             </div>
           </div>
