@@ -1,7 +1,5 @@
 import './AboutUs.scss';
-import aboutusimg from '../../assets/images/about-us-img.png'
 import ourmissionimg from "../../assets/images/our-mission-img.png";
-import problemswesolve from "../../assets/images/problemswesolve.png";
 import Footer from '../../LandingPage/components/footer';
 import { setLang } from "../../redux/Functions/actions";
 import { connect } from "react-redux";

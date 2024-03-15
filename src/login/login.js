@@ -1,6 +1,5 @@
 import './login.scss'
 import { IoChevronBack } from "react-icons/io5";
-import Welcome from '../assets/images/welcome-txt.png'
 import { FcGoogle } from "react-icons/fc";
 import { useEffect, useRef, useState } from 'react';
 import Logo from "../assets/images/freelanceLogo.jpg"
@@ -66,15 +65,6 @@ console.log(socials[0])
   function CaptchaValidation(data) {
     setCaptcha(data)
   }
-  // const handleGoogleLogin = (googleUser) => {
-  //   const profile = googleUser.getBasicProfile();
-  //   const googleUserData = {
-  //     fullName: profile.getName(),
-  //     email: profile.getEmail(),
-  //     userType: userType,
-  //     recaptchaToken: captcha,
-  //   };
-  // };
   const getProffesion = () => {
     axios.get('/profession').then(
       data => {

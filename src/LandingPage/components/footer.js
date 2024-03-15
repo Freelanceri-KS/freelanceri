@@ -12,17 +12,12 @@ const Footer = () => {
                         <div class="col-sm">
                             <ul className="list footerlist d-flex gap-4">
                                 <li>About</li>
-                                <li>Privacy</li>
-                                <li>Terms</li>
-                                <li>Tools</li>
+                                <li>Privacy & Policy</li>
                                 <li>Blog</li>
-                                {/* <li>Partners</li>
-                                <li>Contact</li> */}
+                                <li>Partners</li>
                             </ul>
                         </div>
-                        <div class="col">
-                            <div className="col d-flex justify-content-end">Privacy Policy</div>
-                        </div>
+
                         <div class="col">
                             <div className="col d-flex justify-content-end">Terms & Condition</div>
                         </div>

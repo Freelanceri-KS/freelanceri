@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import text1 from "../../assets/images/text1.png";
 import { toast, useToast } from "react-toastify";
 
 const RegisterPage = (props) => {

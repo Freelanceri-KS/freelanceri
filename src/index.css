@@ -23,3 +23,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+h6{
+  margin: 0;
+}
+p{
+  margin: 0;
+}

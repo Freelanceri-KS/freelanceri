@@ -1,852 +1,393 @@
-.app {
-  display: flex;
-}
-
-// //   .sidebar {
-// //     /* Styles for sidebar */
-// //   }
-
-// //   .main-content {
-// //     /* Styles for main content */
-// //   }
-// .main-content .interiordesigne {
-//   width: 363px;
-//   height: 51px;
-//   position: relative;
-//   top: 175px;
-//   left: 865px;
-
-// }
-// .main-content .savebuttoni {
-
-//   position: relative;
-//   left: 632px;
-//   top: -12px;
-// }
-
-// .main-content .vertical-rectangle {
-//   width: 0.5px;
-//   height: 47px;
-//   background-color: grey;
-//   position: absolute;
-//   left: 23%;
-//   top: 90px;
-// }
-
-// .main-content .vertical-rectangle__second {
-//   width: 0.5px;
-//   height: 52px;
-//   background-color: grey;
-
-//   margin-left: 39%;
-//   margin-top: 2%;
-// }
-
-// .main-content .location-details {
-//   width: 54px;
-//   height: 19px;
-// }
-
-// .main-content .location-details__prishtine {
-//   width: 68px;
-//   height: 10px;
-//   color: #455BEF;
-// }
-
-// .main-content .type-details {
-//   width: 31px;
-//   height: 19px;
-
-// }
-
-// .main-content .oneproject-details {
-//   width: 122px;
-//   height: 10px;
-//   color: #455BEF;
-//   margin-left: -23px;
-// }
-
-// .main-content .category-details {
-//   width: 60px;
-//   height: 19px;
-// }
-
-// .main-content .interior-details {
-//   color: #455BEF;
-//   height: 10px;
-//   width: 134px;
-// }
-
-
-
-// .interior-text {
-//   position: relative;
-//   left: 80px;
-//   top: 18px;
-//   width: 363px;
-//   height: 51px;
-//   font-size: 49px;
-// }
-
-// .section-location {
-//   position: absolute;
-//   top: 9%;
-//   left: 9%;
-//   padding: 20px;
-// }
-
-// .section-type {
-//   position: absolute;
-//   top: 9%;
-//   left: 25%;
-//   padding: 20px;
-// }
-
-// .section-category {
-//   position: absolute;
-//   top: 9%;
-//   left: 39%;
-//   padding: 20px;
-// }
-
-// .section-timeapply {
-//   position: absolute;
-//   top: 22%;
-//   left: 11%;
-// }
-
-// .text-applied {
-//   position: relative;
-//   left: 5px;
-//   top: 14px;
-
-// }
-
-
-// .section-timeapply {
-//   display: inline-flex;
-// }
-
-
-
-// .clock-days {
-//   position: relative;
-//   left: 19%;
-//   width: 34px;
-//   height: 36px;
-//   top: 4px;
-
-// }
-
-// .clock-days__time {
-//   position: relative;
-//   left: 26%;
-//   top: 17px;
-
-// }
-
-// .job-explain__text {
-
-//   position: relative;
-//   bottom: -120px;
-//   left: 63px;
-
-// }
-
-// .maskgroup-img .maskgroup-img__image {
-//   bottom: -137px;
-//   float: right;
-//   position: fixed;
-//   right: 4%;
-//   height: 102%;
-
-// }
-
-// .job-explain__aboutroom {
-//   position: relative;
-//   left: 13%;
-//   top: 160px;
-// }
-
-// .job-card {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 10px;
-//   border-radius: 5px;
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-//   margin: 10px;
-//   position: relative;
-//   top: 1em;
-//   width: 99%;
-//   left: -1%;
-// }
-
-// .job-detail {
-//   font-size: 16px;
-//   color: #333;
-//   /* Replace with your actual color */
-// }
-
-// .job-card .apply-buttoni {
-//   background-color: #0000ff;
-//   /* Replace with your actual color */
-//   color: white;
-//   border: none;
-//   padding: 10px 20px;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   font-size: 16px;
-//   position: relative;
-//   left: 1%;
-//   width: 239px;
-//   height: 63px;
-// }
-
-// .job-card .apply-buttoni:hover {
-//   background-color: #0000cc;
-//   /* Darker blue on hover */
-// }
-
-// .contact-card {
-//   width: 291px;
-//   border: 1px solid #ccc;
-//   border-radius: 8px;
-//   padding: 16px;
-//   font-family: Arial, sans-serif;
-//   position: fixed;
-//   margin-top: -37%;
-//   margin-left: 2%;
-//   height: auto;
-// }
-
-// .sidejob {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
-
-// .back {
-//   align-self: flex-start;
-//   margin-bottom: -11px;
-//   cursor: pointer;
-//   background: none;
-//   border: none;
-//   color: black;
-//   font-size: 16px;
-//   margin-left: -158%;
-//   margin-top: -13%;
-// }
-
-// .profile-info {
-//   text-align: center;
-// }
-
-// .profile-pic {
-//   border-radius: 50%;
-//   width: 60px;
-//   height: 60px;
-//   object-fit: cover;
-//   margin-bottom: 8px;
-// }
-
-// //   h2 {
-// // 	margin: 0;
-// // 	color: #333;
-// //   }
-
-// .post-date {
-//   color: #666;
-//   font-size: 14px;
-//   margin-left: 25px;
-
-// }
-
-// .contact-info {
-//   margin-top: 16px;
-// }
-
-// .contact-info p {
-//   margin: 4px 0;
-// }
-
-// .contact-info a {
-//   color: #007bff;
-//   text-decoration: none;
-// }
-
-// .contact-info a:hover {
-//   text-decoration: underline;
-// }
-
-// .job-listing-card {
-//   position: relative;
-//   top: 28vh;
-//   left: 48vh;
-//   width: 100%;
-//   max-width: 700px;
-//   background-color: #fff;
-//   border-radius: 10px;
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//   overflow: hidden;
-//   margin-bottom: 20px;
-//   font-family: 'Arial', sans-serif;
-// }
-
-// .job-header {
-//   padding: 20px;
-//   // background-color: #f2f2f2;
-//   border-bottom: 1px solid #ddd;
-// }
-
-// .job-header h2 {
-//   margin: 0;
-//   color: #333;
-//   font-size: 24px;
-// }
-
-// .posted-by {
-//   color: #666;
-//   font-size: 16px;
-// }
-
-// .job-details {
-//   display: inline-flex;
-//   align-items: center;
-//   margin-top: -18px;
-//   justify-content: space-between;
-//   width: 60%;
-//   margin-left: 29px;
-//   margin-top: 3px;
-// }
-
-// .job-details p {
-//   color: #555;
-//   font-size: 14px;
-// }
-
-
-// //   .details-button {
-// // 	background-color: #007bff;
-// // 	color: white;
-// // 	border: none;
-// // 	padding: 10px 15px;
-// // 	border-radius: 5px;
-// // 	cursor: pointer;
-// //   }
-
-// .job-description {
-//   color: #444;
-//   font-size: 14px;
-//   line-height: 1.5;
-//   margin-top: 10px;
-//   margin-top: 10px;
-//   margin-left: 32px;
-// }
-
-// .job-descriptionsec {
-//   color: #444;
-//   font-size: 13px;
-//   line-height: 1.5;
-//   margin-top: 10px;
-//   margin-top: 10px;
-//   margin-left: 32px;
-// }
-
-// .job-footer {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 20px;
-//   background-color: #fff;
-// }
-
-// .job-footer span {
-//   color: #555;
-//   font-size: 14px;
-// }
-
-// .apply-button {
-//   background-color: #28a745;
-//   color: white;
-//   border: none;
-//   padding: 10px 15px;
-//   border-radius: 5px;
-//   cursor: pointer;
-// }
-
-// .job-header {
-//   display: flex;
-// }
-
-// .job-header .job-header__person {
-//   border-radius: 26px;
-//   height: 49px;
-// }
-
-// .job-header .savebutoni-details {
-//   position: relative;
-//   left: 35px;
-//   ;
-// }
-
-// .apply-buttoni {
-//   background-color: #0000ff;
-//   color: white;
-//   border: none;
-//   padding: 10px 20px;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   font-size: 16px;
-//   position: relative;
-//   left: 1%;
-//   width: 239px;
-//   height: 63px;
-// }
-
-// .blackfriday-image {
-//   position: relative;
-//   margin-top: 13%;
-//   left: 22%;
-// }
-
-// .job-listing-cardsecond {
-//   position: relative;
-//   top: 7vh;
-//   left: 48vh;
-//   width: 100%;
-//   max-width: 700px;
-//   background-color: #fff;
-//   border-radius: 10px;
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//   overflow: hidden;
-//   margin-bottom: 20px;
-//   font-family: 'Arial', sans-serif;
-// }
-
-// .job-listing-cardthird {
-//   position: relative;
-//   top: 7vh;
-//   left: 48vh;
-//   width: 100%;
-//   max-width: 700px;
-//   background-color: #fff;
-//   border-radius: 10px;
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//   overflow: hidden;
-//   margin-bottom: 20px;
-// }
-
-// .sideJob .Back {
-//   text-decoration: none;
-//   color: black;
-// }
-
-// .profile-info {
-//   display: inline-flex;
-//   margin-top: 17px
-// }
-
-// .Relatet-p {
-
-//   position: relative;
-//   left: 23%;
-//   top: 170px;
-//   font-size: 32px;
-// }
-
-// .job-listing-interior {
-//   position: relative;
-//   top: 21vh;
-//   left: 51vh;
-//   width: 46%;
-//   max-width: 700px;
-//   border: 1px solid #eaeaea;
-//   background-color: #fff;
-//   border-radius: 10px;
-//   overflow: hidden;
-//   margin-bottom: 20px;
-//   font-family: "Arial", sans-serif;
-//   height: 732px;
-// }
-
-// .aboutroomparagrafi {
-//   margin-top: 19%;
-//   margin-left: 16%;
-// }
-
-// // responsive
-// @media only screen and (max-width: 768px) {
-//   .maskgroup-img .maskgroup-img__image {
-//     display: none;
-//   }
-
-//   .contact-card .contact-info {
-//     display: none;
-//   }
-
-//   .contact-card {
-//     border: 0px;
-//     position: absolute;
-//     bottom: 55%;
-//   }
-
-//   .section-timeapply {
-//     display: none;
-//   }
-
-//   .job-listing-card {
-//     display: none;
-//   }
-
-//   .blackfriday-image {
-//     position: absolute;
-//     top: 140%;
-//     left: 4%;
-//     height: auto;
-//     width: auto;
-//   }
-
-//   .job-listing-cardsecond {
-//     display: none;
-//   }
-
-
-//   .Relatet-p {
-//     position: absolute;
-//     top: 205%;
-//     left: 4%;
-//   }
-
-//   .job-listing-interior {
-//     position: absolute;
-//     top: 50%;
-//     width: 91%;
-//     left: 4%;
-//     height: auto;
-//   }
-
-//   .profile-info span {
-//     margin-left: 200%;
-//   }
-
-//   .job-explain__text {
-//     margin-top: -89px;
-//   }
-
-//   .job-listing-cardthird {
-//     position: absolute;
-//     width: auto;
-//     height: auto;
-//     top: 218%;
-//     left: 2%;
-//   }
-// }
-
-// // @media only screen and (min-width: 430px) {
-// //   .job-listing-interior{
-// //     width: 145%;
-// //     height: auto;
-// //     // margin-left: 6%;
-// //     position: absolute;
-// //     top: 31%;
-// //   }
-// //   .job-explain__text{
-// //     margin-left: -48px;
-// //   }
-// //   .aboutroomparagrafi{
-// //     margin-top: 20%;
-// //     margin-left: 52px;
-// //   }
-// //   .job-explain__aboutroom{
-
-// //     position: relative;
-// //     left: 36px;
-// //   }
-// //   .blackfriday-image{
-// //     position: absolute;
-// //     top: 96%;
-// //     width: 130%;
-// //     height: auto;
-// //     left: 10%;
-// //   }
-// //   .contact-card{
-// //     position: absolute;
-// //     top: 34%;
-// //   }
-// //   .Relatet-p{
-// //     margin-top: -160%;
-// //   }
-// //   .job-listing-cardthird{
-// //     width: 145%;
-// //     height: auto;
-// //     position: absolute;
-// //     top: 140%;
-// //   }
-// //   .profile-info span{
-// //     position: absolute;
-// //     left: 57%;
-// //   }
-// //   .sideJob .Back{
-// // position: absolute;
-// //   }
-// //   .profile-info{
-// //     position: absolute;
-// //     top: 20%;
-// //     left: 25%;
-// //   }
-// // }
-
-// @media only screen and (min-width: 769px) and (max-width: 1024px) {
-//   /* Stilet për ekrane midis 769px dhe 1024px */
-// }
-
-// @media only screen and (min-width: 1025px) {
-//   /* Stilet për ekrane më të mëdha se 1025px */
-// }
-.test{
+.details-page {
+  margin-top: 5em;
   display: flex;
   justify-content: space-around;
-  height: 100vh;
-  width: 100%;
-  margin-top: 5em;
-  .right{
-    height: 100vh;
+
+  .dp-left {
     width: 25%;
     margin: 10px;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+
+    .dp-left-container {
+      border: 1px solid #eaeaea;
+      width: 90%;
+      border-radius: 10px;
+
+      .dp-left-container-header {
+        margin-top: 1em;
+        display: flex;
+        align-items: center;
+      }
+
+      .dp-left-container-profile {
+        display: flex;
+        align-items: center;
+        margin: 1em;
+        justify-content: space-between;
+
+        .dp-cp-left {
+          display: flex;
+          align-items: center;
+
+          .dp-cp-data {
+            margin-left: 1em;
+          }
+        }
+
+        .dp-cp-data-time {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .dp-cp-data-p {
+          margin: 0;
+          color: grey;
+          font-weight: 300;
+        }
+
+        .dp-cp-data-h6 {
+          margin: 0;
+        }
+
+        .dpcp-image {
+          border-radius: 50%;
+        }
+      }
+
+      .dp-left-email {
+        margin: 1em;
+
+        .dp-cp-data-p {
+          margin: 0;
+          color: grey;
+          font-weight: 300;
+        }
+      }
+
+      .dp-left-linkedin {
+        margin: 1em;
+
+        .dp-cp-data-p {
+          margin: 0;
+          color: grey;
+          font-weight: 300;
+        }
+      }
+
+      .dp-left-instagram {
+        margin: 1em;
+
+        .dp-cp-data-p {
+          margin: 0;
+          color: grey;
+          font-weight: 300;
+        }
+      }
+
+      .horiz-barrier {
+        width: 100%;
+        height: 2px;
+        background-color: #eaeaea;
+        margin-top: 1em;
+      }
+    }
   }
-  .center{
-    height: 100vh;
+
+  .dp-center {
     width: 50%;
     margin: 10px;
-    .section-first{
-      border: 1px solid red;
-    }
-    .section-heder{
-      display: flex;
-      justify-content: space-between;
-    }
-    .section-heder__text{
-      font-size: 50px;
-      font-family: popins;
-    }
-    .section-underheder{
-      display: flex;
-      text-align: center;
-    }
-    .section-underheder .Blutext{
-      color: #455BEF;
-    }
-    .section-underheder__category{
-      margin-left:42px;
-    }
-    .section-underheder__type{
-      margin-left: 40px;
-    }
-    .hederapplied{
-      display: flex;
-      justify-content: space-around;
-      margin-left: -50vh;
-    }
-  
-    .bodyapplied{
-      display: flex;
-    }
-    .bodyapplied p{
-      position: relative;
-      left: 8px;
-      top: 10px;
-    }
-    .timeapply{
-      display: flex;
-      margin-left: -35vw;
-    }
-    .timeapply p{
-      position: relative;
-      top: 10px;
-      left: 20px;
-    }
-    .section-aboutroom{
-      font-size: 24px;
-    }
-    .section-text__info{
-      margin-left: 20px;
-      
-    }
-    .sectiontext{
-      margin-top: 8vh;
-    }
-    .section-footer{
-      display: flex;
-      justify-content: space-between;
-    }
-    .button{
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .Relatet{
-      font-size: 32px;
-      font-family: popins;
-    }
-    .section-second__header{
-      display: flex;
-      justify-content: space-around;
-      margin-top:8vh;
-    }
-    .section-second{
-      border: 1px solid red;
-    }
-    .image-black{
-      margin-top:5px;
-    }
-    .section-third{
-      border: 1px solid black;
-      margin-top:10px;
 
+    .dp-center-mainpost {
+      border: 1px solid #eaeaea;
+      width: 100%;
+      height: fit-content;
+      border-radius: 10px;
+
+      .mainpost-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+
+        .mainpost-title-h5 {
+          font-size: 35px;
+          font-weight: 600;
+        }
+      }
+
+      .mainpost-about {
+        padding-top: 0.5em;
+        padding-left: 1em;
+        display: flex;
+
+        .vert-barrier {
+          height: 50px;
+          width: 2px;
+          margin-left: 20px;
+          margin-right: 20px;
+          background-color: #eaeaea;
+        }
+
+        .mainpost-about-tag {
+          font-weight: 400;
+          color: grey;
+          font-size: 16px;
+          margin: 0;
+        }
+
+        .mainpost-about-value {
+          font-size: 18px;
+          color: #455bef;
+          font-weight: 600;
+        }
+      }
+
+      .mainpost-description {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+
+      .mainpost-footer {
+        border-top: 2px solid #eaeaea;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .vert-barrier {
+          height: 60px;
+          width: 2px;
+          margin-left: 20px;
+          margin-right: 20px;
+          background-color: #eaeaea;
+        }
+
+        .freelancers-nr {
+          margin-left: 1em;
+        }
+
+        .mainpost-footer-p {
+          margin: 0;
+          color: grey;
+          font-weight: 300;
+        }
+
+        .mainpost-footer-h6 {
+          color: #455bef;
+          font-weight: 600;
+        }
+
+        .apply-details {
+          height: 60px;
+          width: 140px;
+          background-color: #455bef;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-bottom-right-radius: 10px;
+          border: none;
+
+          .a-d-p {
+            margin: 0;
+            font-size: 18px;
+          }
+        }
+      }
     }
-    .section-fourth{
-      margin-top:10px;
-      border: 1px solid black;
+
+    .dp-center-related {
+      margin-top: 2em;
+
+      .job-post-container {
+        border: 1px solid #eaeaea;
+        border-radius: 15px;
+        margin-top: 2em;
+        margin-bottom: 1em;
+
+        .job-post-container-header {
+          padding: 0.8em;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .jpch-left {
+            display: flex;
+            text-align: start;
+
+            .jpch-left-user {
+              margin-left: 1em;
+            }
+
+            .jpch-l-h6 {
+              margin: 0;
+            }
+
+            .jpch-l-p {
+              margin: 0;
+            }
+          }
+
+          .jpch-center {
+            display: flex;
+
+            .vert-barrier {
+              height: 40px;
+              width: 2px;
+              margin-left: 10px;
+              margin-right: 10px;
+              background: #eaeaea;
+            }
+
+            .jpch-center-tags {
+              .jpch-c-tag {
+                font-size: 14px;
+                color: #363636;
+                font-weight: 400;
+              }
+
+              .jpch-c-value {
+                font-size: 18px;
+                font-weight: 600;
+                color: #455bef;
+              }
+            }
+          }
+        }
+
+        .footer-line {
+          width: 100%;
+          height: 2px;
+          background-color: #eaeaea;
+        }
+
+        .job-post-container-body {
+          padding: 0.8em;
+        }
+
+        .job-post-footer {
+          display: flex;
+          text-align: center;
+          justify-content: space-between;
+
+          .vert-barrier {
+            height: 60px;
+            width: 2px;
+            margin-left: 20px;
+            margin-right: 20px;
+            background-color: #eaeaea;
+          }
+
+          .jp-footer-info {
+            margin-left: 2em;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            .value {
+              color: #455bef;
+              font-weight: 700;
+              font-size: 18px;
+            }
+          }
+
+          .jp-apply-details {
+            height: 60px;
+            width: 140px;
+            background-color: #455bef;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom-right-radius: 10px;
+            border: none;
+
+            .a-d-p {
+              margin: 0;
+              font-size: 18px;
+            }
+          }
+        }
+      }
+
+      .related-title {
+        font-size: 26px;
+        color: #363636;
+        font-weight: 600;
+      }
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  .left{
-    margin: 10px;
-    // background-color: red;
-    height: 100vh;
+  .dp-right {
     width: 25%;
-    border: 1px solid red;
+    margin: 10px;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+
+    .dp-right-banner {
+      height: 100%;
+    }
   }
-
-  .sidejob{
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // margin-top: -138% !important;
-
-
-  }
-  
-  .back{
-  //   align-self: flex-start;
-  //   margin-bottom: -11px;
-  //   cursor: pointer;
-  //   background: none;
-  //   border: none;
-  //   color: black;
-  //   font-size: 16px;
-  //   position: absolute;
-  //   top: 17%;
-    position: absolute;
-    top: 17%;
-
 }
 
-  
-  .profile-info {
-    text-align: center;
+@media screen and (max-width:800px) {
+  .details-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
+    .dp-left {
+      height: fit-content;
+      width: 100%;
+
+      .dp-left-container {
+        .dp-left-container-header {
+          visibility: hidden;
+          margin: 0;
+          height: 0;
+        }
+
+        .dp-left-email {
+          height: 0;
+          visibility: hidden;
+          margin: 0;
+          height: 0;
+
+        }
+
+        .dp-left-linkedin {
+          visibility: hidden;
+          margin: 0;
+          height: 0;
+        }
+
+        .dp-left-instagram {
+          margin: 0;
+          height: 0;
+          visibility: hidden;
+        }
+
+        .horiz-barrier {
+          margin: 0;
+          height: 0;
+          visibility: hidden;
+        }
+      }
+    }
+
+    .dp-center {
+      width: 95%;
+    }
+
+    .dp-right {
+      visibility: hidden;
+    }
   }
-  
-  .profile-pic {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    margin-bottom: 8px;
-  }
-  
-  //   h2 {
-  // 	margin: 0;
-  // 	color: #333;
-  //   }
-  
-  .post-date {
-    color: #666;
-    font-size: 14px;
-    margin-left: 25px;
-  
-  }
-  
-  .contact-info {
-    margin-top: 16px;
-  }
-  
-  .contact-info p {
-    margin: 4px 0;
-  }
-  
-  .contact-info a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .contact-info a:hover {
-    text-decoration: underline;
-  }
-  
 }
-
-// .left-section-back a{
-  //   margin-top: -47vh;
-  //   margin-left: 219%;
-
-  // }
-  // .right-part{
-  //   margin-left: 52%;
-  //   line-height: 0.5;
-  // }
-  // .posted{
-  //   line-break: normal;
-  //   margin-left: 9px;
-  //   line-height: 1;
-  // }
-  
-  // .section-image__person{
-  //   display: inline-flex;
-  // }
-
-  // .left-section-back{
-  //   display: flex;
-  // }
-  // .link-left{
-  //   text-decoration: none;
-  //   color: black;
-  //   justify-content: left;
-  // }
-  // .section-person{
-  //   display: flex;
-  //   position: relative;
-  //   top: -35vh;
-  // }

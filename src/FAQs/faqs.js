@@ -1,14 +1,10 @@
-import faqs_txt from '../assets/images/faqs_txt.png'
 import './faqs.scss'
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-import didntfindanswer from "../assets/images/didnt_find_an_answer.png";
 import Footer from '../LandingPage/components/footer';
 import singleprofile from "../assets/images/single-profile.png";
 import { setLang } from "../redux/Functions/actions";
 import { connect } from "react-redux";
-import FAQshqip from '../assets/images/pyetjet_e_zakonshme.png'
-import didntfindanswersq from '../assets/images/skegjetprgj.png'
 import ExploreSection from '../pages/components/ExploreSection'
 import { useState } from 'react';
 
