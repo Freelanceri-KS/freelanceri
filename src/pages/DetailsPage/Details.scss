@@ -384,10 +384,69 @@
 
     .dp-center {
       width: 95%;
+
+      .dp-center-related {
+        .job-post-container {
+          .job-post-container-header {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            .jpch-left {
+              .jpch-left-img {
+                display: none;
+              }
+
+              .jpch-left-user {
+                margin: 0;
+                margin-bottom: 1em;
+                .jpch-l-p {
+                  display: none;
+                }
+
+                .jpch-l-h6 {
+                  font-size: 25px;
+                  font-weight: 700;
+                  color: #363636;
+                }
+              }
+            }
+
+            .jpch-center {
+              #jpch-barrier{
+                display: none;
+              }
+              .jpch-c-tag {
+                font-size: 10px;
+              }
+
+              .jpch-c-value {
+                font-size: 10px;
+              }
+            }
+
+            .jpch-bookmark {
+              display: none;
+            }
+          }
+          .job-post-footer{
+            .jp-footer-info{
+              .tag{
+                font-size: 12px;
+              }
+              .value{
+                font-size: 12px;
+              }
+            }
+            .jp-apply-details{
+              width: 100px;
+            }
+          }
+        }
+      }
     }
 
     .dp-right {
-      visibility: hidden;
+      display: none;
     }
   }
 }

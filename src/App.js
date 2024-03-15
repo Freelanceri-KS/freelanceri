@@ -13,7 +13,9 @@ import NewHeader from "./LandingPage/components/newHeader/newHeader";
 import DetailsPage from "./pages/DetailsPage/Details";
 import Contact from "./pages/Contact/contact";
 import RegisterPage from "./pages/RegisterPage/registerPage";
-import Profile from "./pages/profile/profile"
+import Profile from "./pages/profile/profile";
+import PostControll from "./pages/PostControll/postControll"
+import SuperDashboard from "./dashboards/super-admin/dashboard"
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path="/details-page" element={<DetailsPage />} />
           <Route path="/registerpage" element={<RegisterPage />} />
           <Route path="/profile" element={<Profile />}/>
+          <Route path="/post-controll" element={<PostControll />}/>
+          <Route path="/super-admin" element={<SuperDashboard/>} />
         </Routes>
       </BrowserRouter>
     </>

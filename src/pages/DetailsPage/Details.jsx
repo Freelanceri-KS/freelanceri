@@ -112,17 +112,17 @@ const DetailsPage = () => {
         </div>
         <div className="dp-center-related">
           <h2 className='related-title'>Related</h2>
-                    <div className="job-post-container">
+          <div className="job-post-container">
             <div className="job-post-container-header">
               <div className="jpch-left">
-                <img src={User2} alt="User" width={50} height={50} />
+                <img src={User2} alt="User" width={50} height={50} className='jpch-left-img'/>
                 <div className="jpch-left-user">
                   <h6 className="jpch-l-h6">Social Media</h6>
-                  <p className="jpch-l-p">By:Fjolla Berisha</p>
+                  <p className="jpch-l-p">Fjolla Berisha</p>
                 </div>
               </div>
               <div className="jpch-center">
-                <div className="vert-barrier"></div>
+                <div className="vert-barrier" id='jpch-barrier'></div>
                 <div className="jpch-center-tags">
                   <p className="jpch-c-tag">Location</p>
                   <h6 className="jpch-c-value">Prishtina</h6>
@@ -138,7 +138,7 @@ const DetailsPage = () => {
                   <h6 className="jpch-c-value">Graphic Designer</h6>
                 </div>
               </div>
-              <FaBookmark size={25} color="#455bef" />
+              <FaBookmark size={25} color="#455bef" className='jpch-bookmark' />
             </div>
             <div className="job-post-container-body">
               <p className="jpcb-p">

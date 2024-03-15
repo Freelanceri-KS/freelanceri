@@ -1,5 +1,5 @@
 import "./dashboard.scss"
-import Graph from "../../assets/images/graph.png"
+import Graph from "../../assets/graph.png"
 import { useState, createContext } from "react";
 import { BrowserRouter as Routes, Router, Route, Link } from 'react-router-dom';
 import ProfilePic from "../../assets/images/single-profile.png"
