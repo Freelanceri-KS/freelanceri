@@ -1,16 +1,12 @@
-import './login.scss'
-import { IoChevronBack } from "react-icons/io5";
-import { FcGoogle } from "react-icons/fc";
+import "./login.scss"
 import { useEffect, useRef, useState } from 'react';
-import Logo from "../assets/images/freelanceLogo.jpg"
-import Subs from "../assets/images/registerRes.png"
-import axios from '../axios';
+import Logo from "../../assets/images/freelanceLogo.jpg"
+import Subs from "../../assets/images/registerImg.jpg"
+import axios from '../../axios';
 import { toast, useToast } from 'react-toastify';
-import { useNavigate } from 'react-router';
 import { connect } from "react-redux";
-import { setLang } from "../redux/Functions/actions";
+import { setLang } from "../../redux/Functions/actions";
 import ReCAPTCHA from "react-google-recaptcha";
-// import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Select from 'react-select';
@@ -32,19 +28,19 @@ const Login = (props) => {
   const [website, setWebsite] = useState('')
   const [socials, setSocials] = useState(
     {
-      facebook: '', 
+      facebook: '',
       instagram: '',
       linkedin: ''
-      }
-    )
-  
+    }
+  )
+
   const [jobEntries, setJobEntries] = useState([
     { title: '', company: '' },
   ]);
   const [educationEntries, setEducationEntries] = useState([
     { institution: '', title: '' }
   ]);
-console.log(socials[0])
+  console.log(socials[0])
   const handleInputChange = (index, key, value, entriesType) => {
     const updatedEntries = [...(entriesType === 'job' ? jobEntries : educationEntries)];
     updatedEntries[index][key] = value;
@@ -93,41 +89,41 @@ console.log(socials[0])
     }
   }
 
-  function RegisterUser(){
-      setLoading(true);
-      let Freelancer = {
-        fullName: fullName,
-        email: email,
-        userType: userType,
-        jobTitle: selectedJobTitles,
-        recaptchaToken: captcha,
-        education: educationEntries,
-        experience: jobEntries
-      };
+  function RegisterUser() {
+    setLoading(true);
+    let Freelancer = {
+      fullName: fullName,
+      email: email,
+      userType: userType,
+      jobTitle: selectedJobTitles,
+      recaptchaToken: captcha,
+      education: educationEntries,
+      experience: jobEntries
+    };
 
-      let Employer = {
-        fullName: fullName,
-        email: email,
-        userType: userType,
-        companyName: companyName,
-        phone: PhoneNumber,
-        sektori: sector,
-        recaptchaToken: captcha,
-        website: website,
-        socials: socials[0]
-      };
-      axios.post('/trial', userType == "Freelancer" ? Freelancer : Employer)
-        .then(data => {
-          console.log(data);
-          window.location.href = '/welcome'
-        })
-        .catch(err => {
-          console.log('captchaerr', err);
-          toast.warning(err?.response?.data?.error)
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    let Employer = {
+      fullName: fullName,
+      email: email,
+      userType: userType,
+      companyName: companyName,
+      phone: PhoneNumber,
+      sektori: sector,
+      recaptchaToken: captcha,
+      website: website,
+      socials: socials[0]
+    };
+    axios.post('/trial', userType == "Freelancer" ? Freelancer : Employer)
+      .then(data => {
+        console.log(data);
+        window.location.href = '/welcome'
+      })
+      .catch(err => {
+        console.log('captchaerr', err);
+        toast.warning(err?.response?.data?.error)
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
   useEffect(() => {
     getProffesion()
@@ -698,7 +694,7 @@ console.log(socials[0])
                                 </div>
                               </div>
                             ))}
-                            <div role='button' className="card addbtn mt-2 mb-1 text-primary"onClick={() => handleAddEntry('job')}>
+                            <div role='button' className="card addbtn mt-2 mb-1 text-primary" onClick={() => handleAddEntry('job')}>
                               Add More +
                             </div>
                           </div>
@@ -730,7 +726,7 @@ console.log(socials[0])
                               </div>
                             </div>
                           ))}
-                          <div role='button' className="card addbtn mt-2 mb-1 text-primary"onClick={() => handleAddEntry('education')}>
+                          <div role='button' className="card addbtn mt-2 mb-1 text-primary" onClick={() => handleAddEntry('education')}>
                             Add More +
                           </div>
                         </div>

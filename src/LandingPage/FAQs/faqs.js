@@ -1,11 +1,11 @@
 import './faqs.scss'
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-import Footer from '../LandingPage/components/footer';
-import singleprofile from "../assets/images/single-profile.png";
-import { setLang } from "../redux/Functions/actions";
+import Footer from '../components/footer';
+import singleprofile from "../../assets/images/single-profile.png";
+import { setLang } from "../../redux/Functions/actions";
 import { connect } from "react-redux";
-import ExploreSection from '../pages/components/ExploreSection'
+import ExploreSection from '../explore/ExploreSection'
 import { useState } from 'react';
 
 const FAQs = (props) => {

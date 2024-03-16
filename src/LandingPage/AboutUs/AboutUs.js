@@ -1,9 +1,9 @@
 import './AboutUs.scss';
 import ourmissionimg from "../../assets/images/our-mission-img.png";
-import Footer from '../../LandingPage/components/footer';
+import Footer from '../components/footer';
 import { setLang } from "../../redux/Functions/actions";
 import { connect } from "react-redux";
-import ExploreSection from '../components/ExploreSection';
+import ExploreSection from '../../LandingPage/explore/ExploreSection';
 
 
 const AboutUs = (props) =>{

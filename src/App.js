@@ -1,21 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./LandingPage/Home/home";
-import Login from "./login/login";
-import FindJob from "./pages/FindJob/findJob";
-import Signup from "./signup/signup";
-import FAQs from "./FAQs/faqs";
-import AboutUs from "./pages/AboutUs/AboutUs";
-import Trial from "./pages/Trial/Trial";
+// import Login from "./Auth/login/login"
+import FindJob from "./Freelancer/FindJob/findJob";
+import FAQs from "./LandingPage/FAQs/faqs";
+import AboutUs from "./LandingPage/AboutUs/AboutUs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoginMessage from "./login/loginMessage";
+import LoginMessage from "./Auth/login/loginMessage";
 import NewHeader from "./LandingPage/components/newHeader/newHeader";
-import DetailsPage from "./pages/DetailsPage/Details";
-import Contact from "./pages/Contact/contact";
-import RegisterPage from "./pages/RegisterPage/registerPage";
-import Profile from "./pages/profile/profile";
-import PostControll from "./pages/PostControll/postControll"
-import SuperDashboard from "./dashboards/super-admin/dashboard"
+import DetailsPage from "./Freelancer/DetailsPage/Details";
+import Contact from "./LandingPage/Contact/contact";
+import RegisterPage from "./Auth/RegisterPage/registerPage";
+import Profile from "./Freelancer/profile/profile";
+import PostControll from "./super-admin/PostControll/postControll"
+import SuperDashboard from "./super-admin/super-admin/dashboard"
+import FreelancerDashboard from "./Freelancer/dashboard/dashboard"
 
 function App() {
   return (
@@ -31,7 +30,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/findjobs" element={<FindJob />} />
-          <Route path="/register" element={<Login />} />
+          {/* <Route path="/register" element={<Login />} /> */}
+          <Route path="/freelancer-dashboard" element={<FreelancerDashboard/>}/>
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/welcome" element={<LoginMessage />} />

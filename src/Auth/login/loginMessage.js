@@ -1,4 +1,4 @@
-import Pllum from "../assets/images/pllumat.png";
+import Pllum from "../../assets/images/pllumat.png";
 import "./loginMessage.scss";
 import { FiFacebook } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa6";
