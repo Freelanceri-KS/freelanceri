@@ -14,6 +14,7 @@ import NewHeader from "./LandingPage/components/newHeader/newHeader";
 import DetailsPage from "./pages/DetailsPage/Details";
 import Contact from "./pages/Contact/contact";
 import RegisterPage from "./pages/RegisterPage/registerPage";
+import LoginPage from "./pages/LoginPage/login-page";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/DetailsPage/:id" element={<DetailsPage />} />
           <Route path="/registerpage" element={<RegisterPage />} />
+          <Route path="/login-page" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </>
