@@ -1,18 +1,21 @@
-.register-page-container {
-  //   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-@media only screen and (min-width: 768px) {
-  .maskgroup-container {
-    display: block;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-}
 .text-header {
   font-weight: bold;
   font-size: 30px;
+}
+
+.select-input {
+  z-index: 3;
+}
+
+.lastBtn {
+  width: 100%;
+  height: 60px;
+  border-radius: 12px;
+  border: 1px solid #455bef;
+  background-color: #455bef;
+  color: white;
+}
+.custom-height-input {
+  height: 60px;
+  // width: 100%;
 }

@@ -1,62 +1,65 @@
-import './login.scss'
+import "./login.scss";
 import { IoChevronBack } from "react-icons/io5";
-import Welcome from '../assets/images/welcome-txt.png'
+import Welcome from "../assets/images/welcome-txt.png";
 import { FcGoogle } from "react-icons/fc";
-import { useEffect, useRef, useState } from 'react';
-import Logo from "../assets/images/freelanceLogo.jpg"
-import Subs from "../assets/images/registerRes.png"
-import axios from '../axios';
-import { toast, useToast } from 'react-toastify';
-import { useNavigate } from 'react-router';
+import { useEffect, useRef, useState } from "react";
+import Logo from "../assets/images/freelanceLogo.jpg";
+import Subs from "../assets/images/registerRes.png";
+import axios from "../axios";
+import { toast, useToast } from "react-toastify";
+import { useNavigate } from "react-router";
 import { connect } from "react-redux";
 import { setLang } from "../redux/Functions/actions";
 import ReCAPTCHA from "react-google-recaptcha";
 // import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
-import Select from 'react-select';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import Select from "react-select";
 
 const Login = (props) => {
   const [viewportSize, setViewportSize] = useState(window.innerWidth);
-  const [step, setStep] = useState(false)
+  const [step, setStep] = useState(false);
   const [userType, setUserType] = useState("Freelancer");
   const [loading, setLoading] = useState(false);
-  const [captcha, setCaptcha] = useState(false)
-  const [profession, setProfession] = useState([])
-  const [PhoneNumber, setPhoneNumber] = useState("")
+  const [captcha, setCaptcha] = useState(false);
+  const [profession, setProfession] = useState([]);
+  const [PhoneNumber, setPhoneNumber] = useState("");
   const [selectedJobTitles, setSelectedJobTitles] = useState([]);
-  const [multiStep, setMultiStep] = useState(1)
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [companyName, setCompanyName] = useState('')
-  const [sector, setSector] = useState('')
-  const [website, setWebsite] = useState('')
-  const [socials, setSocials] = useState(
-    {
-      facebook: '', 
-      instagram: '',
-      linkedin: ''
-      }
-    )
-  
-  const [jobEntries, setJobEntries] = useState([
-    { title: '', company: '' },
-  ]);
+  const [multiStep, setMultiStep] = useState(1);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [sector, setSector] = useState("");
+  const [website, setWebsite] = useState("");
+  const [socials, setSocials] = useState({
+    facebook: "",
+    instagram: "",
+    linkedin: "",
+  });
+
+  const [jobEntries, setJobEntries] = useState([{ title: "", company: "" }]);
   const [educationEntries, setEducationEntries] = useState([
-    { institution: '', title: '' }
+    { institution: "", title: "" },
   ]);
-console.log(socials[0])
+  console.log(socials[0]);
   const handleInputChange = (index, key, value, entriesType) => {
-    const updatedEntries = [...(entriesType === 'job' ? jobEntries : educationEntries)];
+    const updatedEntries = [
+      ...(entriesType === "job" ? jobEntries : educationEntries),
+    ];
     updatedEntries[index][key] = value;
-    entriesType === 'job' ? setJobEntries(updatedEntries) : setEducationEntries(updatedEntries);
+    entriesType === "job"
+      ? setJobEntries(updatedEntries)
+      : setEducationEntries(updatedEntries);
   };
 
   const handleAddEntry = (entriesType) => {
-    if (entriesType === 'job') {
-      setJobEntries([...jobEntries, { title: '', company: '' }]);
+    if (entriesType === "job") {
+      setJobEntries([...jobEntries, { title: "", company: "" }]);
     } else {
-      setEducationEntries([...educationEntries, { institution: '', title: '' }]);
+      setEducationEntries([
+        ...educationEntries,
+        { institution: "", title: "" },
+      ]);
     }
   };
   const handleJobTitleSelect = (selectedOptions) => {
@@ -64,7 +67,7 @@ console.log(socials[0])
     setSelectedJobTitles(selectedTitles);
   };
   function CaptchaValidation(data) {
-    setCaptcha(data)
+    setCaptcha(data);
   }
   // const handleGoogleLogin = (googleUser) => {
   //   const profile = googleUser.getBasicProfile();
@@ -76,72 +79,77 @@ console.log(socials[0])
   //   };
   // };
   const getProffesion = () => {
-    axios.get('/profession').then(
-      data => {
-        setProfession(data.data)
-      }
-    ).catch(err => {
-      console.log(err)
-    })
-  }
+    axios
+      .get("/profession")
+      .then((data) => {
+        setProfession(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   function Validation() {
     if (userType == "Freelancer") {
-      if (fullName == '' || email == '' || selectedJobTitles?.length == 0) {
-        toast.info('Please fill all the information')
+      if (fullName == "" || email == "" || selectedJobTitles?.length == 0) {
+        toast.info("Please fill all the information");
+      } else {
+        setMultiStep(2);
       }
-      else {
-        setMultiStep(2)
-      }
-    }
-    else {
-      if (fullName == '' || email == '' || sector == "" || PhoneNumber == "" || companyName == '') {
-        toast.info('Please fill all the information')
-      }
-      else {
-        setMultiStep(2)
+    } else {
+      if (
+        fullName == "" ||
+        email == "" ||
+        sector == "" ||
+        PhoneNumber == "" ||
+        companyName == ""
+      ) {
+        toast.info("Please fill all the information");
+      } else {
+        setMultiStep(2);
       }
     }
   }
 
-  function RegisterUser(){
-      setLoading(true);
-      let Freelancer = {
-        fullName: fullName,
-        email: email,
-        userType: userType,
-        jobTitle: selectedJobTitles,
-        recaptchaToken: captcha,
-        education: educationEntries,
-        experience: jobEntries
-      };
+  function RegisterUser() {
+    setLoading(true);
+    let Freelancer = {
+      fullName: fullName,
+      email: email,
+      userType: userType,
+      jobTitle: selectedJobTitles,
+      recaptchaToken: captcha,
+      education: educationEntries,
+      experience: jobEntries,
+    };
 
-      let Employer = {
-        fullName: fullName,
-        email: email,
-        userType: userType,
-        companyName: companyName,
-        phone: PhoneNumber,
-        sektori: sector,
-        recaptchaToken: captcha,
-        website: website,
-        socials: socials[0]
-      };
-      axios.post('/trial', userType == "Freelancer" ? Freelancer : Employer)
-        .then(data => {
-          console.log(data);
-          window.location.href = '/welcome'
-        })
-        .catch(err => {
-          console.log('captchaerr', err);
-          toast.warning(err?.response?.data?.error)
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-  };
+    let Employer = {
+      fullName: fullName,
+      email: email,
+      userType: userType,
+      companyName: companyName,
+      phone: PhoneNumber,
+      sektori: sector,
+      recaptchaToken: captcha,
+      website: website,
+      socials: socials[0],
+    };
+    axios
+      .post("/trial", userType == "Freelancer" ? Freelancer : Employer)
+      .then((data) => {
+        console.log(data);
+        window.location.href = "/welcome";
+      })
+      .catch((err) => {
+        console.log("captchaerr", err);
+        toast.warning(err?.response?.data?.error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
   useEffect(() => {
-    getProffesion()
-  }, [])
+    getProffesion();
+  }, []);
   window.addEventListener("resize", () => {
     setViewportSize(window.innerWidth);
   });
@@ -157,7 +165,9 @@ console.log(socials[0])
                     <div class="row">
                       <div class="col-md-9 col-lg-8 mx-auto">
                         <h1 class="login-heading mb-4">
-                          {props?.language == true ? "Regjistrohu!" : "Register!"}
+                          {props?.language == true
+                            ? "Regjistrohu!"
+                            : "Register!"}
                         </h1>
                         {/* <form onSubmit={RegisterUser}> */}
                         <div className="row mb-2">
@@ -223,9 +233,14 @@ console.log(socials[0])
                             </div>
                             <div class="form-floating mb-3">
                               <PhoneInput
-                                inputStyle={{ width: "100%", height: '58px', border: 'var(--bs-border-width) solid var(--bs-border-color)' }}
-                                buttonStyle={{ zIndex: '999999' }}
-                                country={'xk'}
+                                inputStyle={{
+                                  width: "100%",
+                                  height: "58px",
+                                  border:
+                                    "var(--bs-border-width) solid var(--bs-border-color)",
+                                }}
+                                buttonStyle={{ zIndex: "999999" }}
+                                country={"xk"}
                                 value={PhoneNumber}
                                 onChange={(e) => setPhoneNumber(e)}
                               />
@@ -260,16 +275,22 @@ console.log(socials[0])
                               ? "Email adresa"
                               : "Email address"}
                           </label>
-                          {userType === 'Freelancer' && (
+                          {userType === "Freelancer" && (
                             <div className="mt-3">
                               <p>Select Profession:</p>
                               <div>
                                 <div className="mt-3">
                                   <Select
                                     isMulti
-                                    options={profession.map((el) => ({ value: el.category, label: el.category }))}
+                                    options={profession.map((el) => ({
+                                      value: el.category,
+                                      label: el.category,
+                                    }))}
                                     onChange={handleJobTitleSelect}
-                                    value={selectedJobTitles.map((title) => ({ value: title, label: title }))}
+                                    value={selectedJobTitles.map((title) => ({
+                                      value: title,
+                                      label: title,
+                                    }))}
                                   />
                                 </div>
                               </div>
@@ -316,12 +337,18 @@ console.log(socials[0])
                 <div class="login d-flex align-items-center py-5">
                   <div class="container">
                     <div class="row">
-                      {userType == "Freelancer" ?
+                      {userType == "Freelancer" ? (
                         <div class="col-md-9 col-lg-8 mx-auto">
                           <h1 class="login-heading mb-4">
-                            {props?.language == true ? "Regjistrohu" : "Register!"}
+                            {props?.language == true
+                              ? "Regjistrohu"
+                              : "Register!"}
                           </h1>
-                          <strong>{props?.language == true ? "Eksperienca" : "Experience"}</strong>
+                          <strong>
+                            {props?.language == true
+                              ? "Eksperienca"
+                              : "Experience"}
+                          </strong>
                           <div>
                             {jobEntries.map((entry, index) => (
                               <div key={index} className="d-flex gap-2">
@@ -332,10 +359,19 @@ console.log(socials[0])
                                     className="form-control mt-2"
                                     placeholder="title"
                                     value={entry.title}
-                                    onChange={(e) => handleInputChange(index, 'title', e.target.value, 'job')}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        index,
+                                        "title",
+                                        e.target.value,
+                                        "job"
+                                      )
+                                    }
                                   />
                                   <label htmlFor="title">
-                                    {props?.language == true ? 'p.sh Web Zhvillues' : 'e.g Web Developer'}
+                                    {props?.language == true
+                                      ? "p.sh Web Zhvillues"
+                                      : "e.g Web Developer"}
                                   </label>
                                 </div>
                                 <div className="col-6 form-floating">
@@ -345,19 +381,34 @@ console.log(socials[0])
                                     className="form-control mt-2"
                                     placeholder="company"
                                     value={entry.company}
-                                    onChange={(e) => handleInputChange(index, 'company', e.target.value, 'job')}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        index,
+                                        "company",
+                                        e.target.value,
+                                        "job"
+                                      )
+                                    }
                                   />
                                   <label htmlFor="company">
-                                    {props?.language == true ? 'Emri i Kompanise' : 'Company Name'}
+                                    {props?.language == true
+                                      ? "Emri i Kompanise"
+                                      : "Company Name"}
                                   </label>
                                 </div>
                               </div>
                             ))}
-                            <div role='button' className="card addbtn mt-2 mb-1 text-primary" onClick={() => handleAddEntry('job')}>
+                            <div
+                              role="button"
+                              className="card addbtn mt-2 mb-1 text-primary"
+                              onClick={() => handleAddEntry("job")}
+                            >
                               Add More +
                             </div>
                           </div>
-                          <strong>{props?.language == true ? "Edukimi" : "Education"}</strong>
+                          <strong>
+                            {props?.language == true ? "Edukimi" : "Education"}
+                          </strong>
 
                           {educationEntries.map((entry, index) => (
                             <div key={index} className="d-flex gap-2">
@@ -368,9 +419,18 @@ console.log(socials[0])
                                   className="form-control mt-2"
                                   placeholder="institution"
                                   value={entry.institution}
-                                  onChange={(e) => handleInputChange(index, 'institution', e.target.value, 'education')}
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      index,
+                                      "institution",
+                                      e.target.value,
+                                      "education"
+                                    )
+                                  }
                                 />
-                                <label htmlFor="institution">institution or School</label>
+                                <label htmlFor="institution">
+                                  institution or School
+                                </label>
                               </div>
                               <div className="col-6 form-floating">
                                 <input
@@ -379,18 +439,29 @@ console.log(socials[0])
                                   className="form-control mt-2"
                                   placeholder="title"
                                   value={entry.title}
-                                  onChange={(e) => handleInputChange(index, 'title', e.target.value, 'education')}
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      index,
+                                      "title",
+                                      e.target.value,
+                                      "education"
+                                    )
+                                  }
                                 />
                                 <label htmlFor="title">title</label>
                               </div>
                             </div>
                           ))}
-                          <div role='button' className="card addbtn mt-2 mb-1 text-primary" onClick={() => handleAddEntry('education')}>
+                          <div
+                            role="button"
+                            className="card addbtn mt-2 mb-1 text-primary"
+                            onClick={() => handleAddEntry("education")}
+                          >
                             Add More +
                           </div>
                         </div>
-                        :
-                        <div className='row'>
+                      ) : (
+                        <div className="row">
                           <div class="form-floating mb-3">
                             <input
                               required
@@ -412,13 +483,18 @@ console.log(socials[0])
                               class="form-control"
                               onChange={(e) =>
                                 setSocials((prevSocials) => [
-                                  { ...prevSocials[0], linkedin: e.target.value },
+                                  {
+                                    ...prevSocials[0],
+                                    linkedin: e.target.value,
+                                  },
                                 ])
                               }
                               placeholder="LinkedIn"
                             />
                             <label for="linkedIn">
-                              {props?.language === true ? 'LinkedIn' : 'LinkedIn'}
+                              {props?.language === true
+                                ? "LinkedIn"
+                                : "LinkedIn"}
                             </label>
                           </div>
 
@@ -429,13 +505,18 @@ console.log(socials[0])
                               class="form-control"
                               onChange={(e) =>
                                 setSocials((prevSocials) => [
-                                  { ...prevSocials[0], instagram: e.target.value },
+                                  {
+                                    ...prevSocials[0],
+                                    instagram: e.target.value,
+                                  },
                                 ])
                               }
                               placeholder="Instagram"
                             />
                             <label for="instagram">
-                              {props?.language === true ? 'Instagram' : 'Instagram'}
+                              {props?.language === true
+                                ? "Instagram"
+                                : "Instagram"}
                             </label>
                           </div>
 
@@ -446,17 +527,22 @@ console.log(socials[0])
                               class="form-control"
                               onChange={(e) =>
                                 setSocials((prevSocials) => [
-                                  { ...prevSocials[0], facebook: e.target.value },
+                                  {
+                                    ...prevSocials[0],
+                                    facebook: e.target.value,
+                                  },
                                 ])
                               }
                               placeholder="Facebook"
                             />
                             <label for="Facebook">
-                              {props?.language === true ? 'Facebook' : 'Facebook'}
+                              {props?.language === true
+                                ? "Facebook"
+                                : "Facebook"}
                             </label>
                           </div>
                         </div>
-                      }
+                      )}
                       <div className="d-flex mb-2 mt-4 justify-content-center">
                         <ReCAPTCHA
                           // size="invisible"
@@ -480,10 +566,9 @@ console.log(socials[0])
               <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
             </div>
           </div>
-        )
+        );
     }
-  }
-  else {
+  } else {
     switch (multiStep) {
       case 1:
         return (
@@ -498,7 +583,9 @@ console.log(socials[0])
                     <div class="row">
                       <div class="col-md-9 col-lg-8 mx-auto">
                         <h1 class="login-heading mb-4">
-                          {props?.language == true ? "Regjistrohu!" : "Register!"}
+                          {props?.language == true
+                            ? "Regjistrohu!"
+                            : "Register!"}
                         </h1>
                         {/* <form onSubmit={RegisterUser}> */}
                         <div className="row mb-2">
@@ -564,9 +651,14 @@ console.log(socials[0])
                             </div>
                             <div class="form-floating mb-3">
                               <PhoneInput
-                                inputStyle={{ width: "100%", height: '58px', border: 'var(--bs-border-width) solid var(--bs-border-color)' }}
-                                buttonStyle={{ zIndex: '999999' }}
-                                country={'xk'}
+                                inputStyle={{
+                                  width: "100%",
+                                  height: "58px",
+                                  border:
+                                    "var(--bs-border-width) solid var(--bs-border-color)",
+                                }}
+                                buttonStyle={{ zIndex: "999999" }}
+                                country={"xk"}
                                 value={PhoneNumber}
                                 onChange={(e) => setPhoneNumber(e)}
                               />
@@ -601,16 +693,22 @@ console.log(socials[0])
                               ? "Email adresa"
                               : "Email address"}
                           </label>
-                          {userType === 'Freelancer' && (
+                          {userType === "Freelancer" && (
                             <div className="mt-3">
                               <p>Select Profession:</p>
                               <div>
                                 <div className="mt-3">
                                   <Select
                                     isMulti
-                                    options={profession.map((el) => ({ value: el.category, label: el.category }))}
+                                    options={profession.map((el) => ({
+                                      value: el.category,
+                                      label: el.category,
+                                    }))}
                                     onChange={handleJobTitleSelect}
-                                    value={selectedJobTitles.map((title) => ({ value: title, label: title }))}
+                                    value={selectedJobTitles.map((title) => ({
+                                      value: title,
+                                      label: title,
+                                    }))}
                                   />
                                 </div>
                               </div>
@@ -645,22 +743,22 @@ console.log(socials[0])
                   </div>
                 </div>
               </>
-
-            )
-
-              : (
-                <div className="container">
-                  <div className="col logores">
-                    <img src={Logo} className="logoja" />
-                  </div>
-                  <img src={Subs} alt="subsriptions" className="subs" />
-                  <div className="buttons mb-3">
-                    <button className="butoniRegister" onClick={() => setStep(true)}>
-                      Register Now!
-                    </button>
-                  </div>
+            ) : (
+              <div className="container">
+                <div className="col logores">
+                  <img src={Logo} className="logoja" />
                 </div>
-              )}
+                <img src={Subs} alt="subsriptions" className="subs" />
+                <div className="buttons mb-3">
+                  <button
+                    className="butoniRegister"
+                    onClick={() => setStep(true)}
+                  >
+                    Register Now!
+                  </button>
+                </div>
+              </div>
+            )}
           </>
         );
       case 2:
@@ -671,12 +769,18 @@ console.log(socials[0])
                 <div class="login d-flex align-items-center py-5">
                   <div class="container">
                     <div class="row">
-                      {userType == "Freelancer" ?
+                      {userType == "Freelancer" ? (
                         <div class="col-md-9 col-lg-8 mx-auto">
                           <h1 class="login-heading mb-4">
-                            {props?.language == true ? "Regjistrohu" : "Register!"}
+                            {props?.language == true
+                              ? "Regjistrohu"
+                              : "Register!"}
                           </h1>
-                          <strong>{props?.language == true ? "Eksperienca" : "Experience"}</strong>
+                          <strong>
+                            {props?.language == true
+                              ? "Eksperienca"
+                              : "Experience"}
+                          </strong>
                           <div>
                             {jobEntries.map((entry, index) => (
                               <div key={index} className="d-flex gap-2">
@@ -687,10 +791,19 @@ console.log(socials[0])
                                     className="form-control mt-2"
                                     placeholder="title"
                                     value={entry.title}
-                                    onChange={(e) => handleInputChange(index, 'title', e.target.value, 'job')}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        index,
+                                        "title",
+                                        e.target.value,
+                                        "job"
+                                      )
+                                    }
                                   />
                                   <label htmlFor="title">
-                                    {props?.language == true ? 'p.sh Web Zhvillues' : 'e.g Web Developer'}
+                                    {props?.language == true
+                                      ? "p.sh Web Zhvillues"
+                                      : "e.g Web Developer"}
                                   </label>
                                 </div>
                                 <div className="col-6 form-floating">
@@ -700,19 +813,34 @@ console.log(socials[0])
                                     className="form-control mt-2"
                                     placeholder="company"
                                     value={entry.company}
-                                    onChange={(e) => handleInputChange(index, 'company', e.target.value, 'job')}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        index,
+                                        "company",
+                                        e.target.value,
+                                        "job"
+                                      )
+                                    }
                                   />
                                   <label htmlFor="company">
-                                    {props?.language == true ? 'Emri i Kompanise' : 'Company Name'}
+                                    {props?.language == true
+                                      ? "Emri i Kompanise"
+                                      : "Company Name"}
                                   </label>
                                 </div>
                               </div>
                             ))}
-                            <div role='button' className="card addbtn mt-2 mb-1 text-primary"onClick={() => handleAddEntry('job')}>
+                            <div
+                              role="button"
+                              className="card addbtn mt-2 mb-1 text-primary"
+                              onClick={() => handleAddEntry("job")}
+                            >
                               Add More +
                             </div>
                           </div>
-                          <strong>{props?.language == true ? "Edukimi" : "Education"}</strong>
+                          <strong>
+                            {props?.language == true ? "Edukimi" : "Education"}
+                          </strong>
 
                           {educationEntries.map((entry, index) => (
                             <div key={index} className="d-flex gap-2">
@@ -723,9 +851,18 @@ console.log(socials[0])
                                   className="form-control mt-2"
                                   placeholder="institution"
                                   value={entry.institution}
-                                  onChange={(e) => handleInputChange(index, 'institution', e.target.value, 'education')}
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      index,
+                                      "institution",
+                                      e.target.value,
+                                      "education"
+                                    )
+                                  }
                                 />
-                                <label htmlFor="institution">institution or School</label>
+                                <label htmlFor="institution">
+                                  institution or School
+                                </label>
                               </div>
                               <div className="col-6 form-floating">
                                 <input
@@ -734,18 +871,29 @@ console.log(socials[0])
                                   className="form-control mt-2"
                                   placeholder="title"
                                   value={entry.title}
-                                  onChange={(e) => handleInputChange(index, 'title', e.target.value, 'education')}
+                                  onChange={(e) =>
+                                    handleInputChange(
+                                      index,
+                                      "title",
+                                      e.target.value,
+                                      "education"
+                                    )
+                                  }
                                 />
                                 <label htmlFor="title">title</label>
                               </div>
                             </div>
                           ))}
-                          <div role='button' className="card addbtn mt-2 mb-1 text-primary"onClick={() => handleAddEntry('education')}>
+                          <div
+                            role="button"
+                            className="card addbtn mt-2 mb-1 text-primary"
+                            onClick={() => handleAddEntry("education")}
+                          >
                             Add More +
                           </div>
                         </div>
-                        :
-                        <div className='row'>
+                      ) : (
+                        <div className="row">
                           <div class="form-floating mb-3">
                             <input
                               required
@@ -767,13 +915,18 @@ console.log(socials[0])
                               class="form-control"
                               onChange={(e) =>
                                 setSocials((prevSocials) => [
-                                  { ...prevSocials[0], linkedin: e.target.value },
+                                  {
+                                    ...prevSocials[0],
+                                    linkedin: e.target.value,
+                                  },
                                 ])
                               }
                               placeholder="LinkedIn"
                             />
                             <label for="linkedIn">
-                              {props?.language === true ? 'LinkedIn' : 'LinkedIn'}
+                              {props?.language === true
+                                ? "LinkedIn"
+                                : "LinkedIn"}
                             </label>
                           </div>
 
@@ -784,13 +937,18 @@ console.log(socials[0])
                               class="form-control"
                               onChange={(e) =>
                                 setSocials((prevSocials) => [
-                                  { ...prevSocials[0], instagram: e.target.value },
+                                  {
+                                    ...prevSocials[0],
+                                    instagram: e.target.value,
+                                  },
                                 ])
                               }
                               placeholder="Instagram"
                             />
                             <label for="instagram">
-                              {props?.language === true ? 'Instagram' : 'Instagram'}
+                              {props?.language === true
+                                ? "Instagram"
+                                : "Instagram"}
                             </label>
                           </div>
 
@@ -801,17 +959,22 @@ console.log(socials[0])
                               class="form-control"
                               onChange={(e) =>
                                 setSocials((prevSocials) => [
-                                  { ...prevSocials[0], facebook: e.target.value },
+                                  {
+                                    ...prevSocials[0],
+                                    facebook: e.target.value,
+                                  },
                                 ])
                               }
                               placeholder="Facebook"
                             />
                             <label for="Facebook">
-                              {props?.language === true ? 'Facebook' : 'Facebook'}
+                              {props?.language === true
+                                ? "Facebook"
+                                : "Facebook"}
                             </label>
                           </div>
                         </div>
-                      }
+                      )}
                       <div className="d-flex mb-2">
                         <ReCAPTCHA
                           // size="invisible"
@@ -836,10 +999,10 @@ console.log(socials[0])
               <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
             </div>
           </div>
-        )
+        );
     }
   }
-}
+};
 
 // export default Home;
 const mapStateToProps = (state) => {

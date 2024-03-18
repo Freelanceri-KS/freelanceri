@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../axios";
 import { toast } from "react-toastify";
 import maskgroup from "../../assets/images/maskgroup.png";
 import PhoneInput from "react-phone-input-2";
 import "./registerPage.scss";
-import Select from "react-select"; // Added import for Select component
+import Select from "react-select";
 
 const RegisterPage = (props) => {
   const [step, setStep] = useState(1);
@@ -21,7 +21,7 @@ const RegisterPage = (props) => {
   const [portfolio, setPortfolio] = useState("");
   const [preferedRate, setPreferedRate] = useState("");
   const [prederdDurationEng, setPrederdDurationEng] = useState("");
-  const [selectedJobTitles, setSelectedJobTitles] = useState([]); // Added state for selected job titles
+  const [selectedJobTitles, setSelectedJobTitles] = useState([]);
 
   useEffect(() => {
     getProfession();
@@ -38,7 +38,6 @@ const RegisterPage = (props) => {
       });
   };
 
-  // Define an array of steps with required fields
   const steps = [
     { fields: ["firstName", "lastName", "email", "phone"] },
     { fields: ["profession", "city"] },
@@ -46,7 +45,6 @@ const RegisterPage = (props) => {
     { fields: ["portfolio"] },
   ];
 
-  // Define a function to validate email using regex
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -62,7 +60,7 @@ const RegisterPage = (props) => {
       if (stepIndex === 0 && !validateEmail(email)) {
         toast.info("Please enter a valid email address.");
       } else {
-        setStep(step + 1); // Proceed to the next step
+        setStep(step + 1);
       }
     } else {
       const emptyFieldNames = emptyFields
@@ -92,8 +90,7 @@ const RegisterPage = (props) => {
 
   const handleSubmitFinal = (e) => {
     e.preventDefault();
-    // Check if required fields are filled
-    // if (portfolio) {
+
     setLoading(true);
     let DataUser = {
       firstName: firstName,
@@ -110,10 +107,6 @@ const RegisterPage = (props) => {
       prederdDurationEng: prederdDurationEng,
     };
     console.log(DataUser);
-    // Api call qitu e shtin Data User mi qu databaz
-    // } else {
-    //   alert("Please fill in all required fields.");
-    // }
   };
 
   const handleJobTitleSelect = (selectedOptions) => {
@@ -121,7 +114,6 @@ const RegisterPage = (props) => {
     setSelectedJobTitles(selectedTitles);
   };
 
-  // Rendering the form based on the current step
   return (
     <div className="register-page-container" style={{ paddingTop: "40px" }}>
       {" "}
@@ -145,7 +137,7 @@ const RegisterPage = (props) => {
                               <input
                                 required
                                 type="text"
-                                class="form-control"
+                                class="form-control custom-height-input"
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="First Name"
                               />
@@ -154,7 +146,7 @@ const RegisterPage = (props) => {
                               <input
                                 required
                                 type="text"
-                                class="form-control"
+                                class="form-control custom-height-input"
                                 onChange={(e) => setLastName(e.target.value)}
                                 placeholder="Last Name"
                               />
@@ -190,8 +182,9 @@ const RegisterPage = (props) => {
                           </div>
 
                           <form onSubmit={handleSubmitStep1}>
-                            {/* Step 1 form fields */}
-                            <button type="submit">Continue</button>
+                            <button type="submit" className="lastBtn">
+                              Continue
+                            </button>
                           </form>
                         </div>
                       )}
@@ -204,8 +197,9 @@ const RegisterPage = (props) => {
                               : "More About You"}
                           </h1>
                           <div class="form-floating mb-3">
-                            <Select // Replaced input with Select component
+                            <Select
                               isMulti
+                              className="select-input"
                               options={profession.map((el) => ({
                                 value: el.category,
                                 label: el.category,
@@ -216,11 +210,6 @@ const RegisterPage = (props) => {
                                 label: title,
                               }))}
                             />
-                            {/* <label for="floatingPassword">
-                              {props?.language == true
-                                ? "Select Profession"
-                                : "Select Profession"}
-                            </label> */}
                           </div>
                           <div class="form-floating mb-3">
                             <input
@@ -235,8 +224,9 @@ const RegisterPage = (props) => {
                             </label>
                           </div>
                           <form onSubmit={handleSubmitStep2}>
-                            {/* Step 2 form fields */}
-                            <button type="submit">Continue</button>
+                            <button type="submit" className="lastBtn">
+                              Continue
+                            </button>
                           </form>
                         </div>
                       )}
@@ -293,8 +283,9 @@ const RegisterPage = (props) => {
                             </label>
                           </div>
                           <form onSubmit={handleSubmitStep3}>
-                            {/* Final step form fields */}
-                            <button type="submit">Continue</button>
+                            <button type="submit" className="lastBtn">
+                              Continue
+                            </button>
                           </form>
                         </div>
                       )}
@@ -306,19 +297,19 @@ const RegisterPage = (props) => {
                               ? "More About You!"
                               : "More About You"}
                           </h1>
-                          <div class="form-floating mb-3">
-                            <input
-                              required
-                              type="text"
-                              class="form-control"
-                              onChange={(e) => setPortfolio(e.target.value)}
-                              placeholder="Portfolio"
-                            />
+                          <div class="mb-3">
                             <label for="floatingPassword">
                               {props?.language == true
                                 ? "Portfolio"
                                 : "Portfolio"}
                             </label>
+                            <input
+                              required
+                              type="file"
+                              class="form-control"
+                              onChange={(e) => setPortfolio(e.target.value)}
+                              placeholder="Portfolio"
+                            />
                           </div>
                           <div class="form-floating mb-3">
                             <input
@@ -351,8 +342,9 @@ const RegisterPage = (props) => {
                             </label>
                           </div>
                           <form onSubmit={handleSubmitFinal}>
-                            {/* Final step form fields */}
-                            <button type="submit">Submit</button>
+                            <button type="submit" className="lastBtn">
+                              Submit
+                            </button>
                           </form>
                         </div>
                       )}
@@ -375,7 +367,6 @@ const RegisterPage = (props) => {
                     paddingRight: "120px",
                   }}
                 />{" "}
-                {/* Set width and height of the image */}{" "}
               </div>
             </div>
           </div>
