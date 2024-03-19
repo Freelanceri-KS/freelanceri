@@ -41,6 +41,7 @@ function App() {
           <Route path="/profile" element={<Profile />}/>
           <Route path="/post-controll" element={<PostControll />}/>
           <Route path="/super-admin" element={<SuperDashboard/>} />
+          {/* <Route path='/ContactUs' element={<ContactForm/>} /> */}
         </Routes>
       </BrowserRouter>
     </>
