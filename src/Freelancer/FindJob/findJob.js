@@ -14,7 +14,7 @@ const FindJob = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTable] = useState(false);
   const [jobs, setJobs] = useState([])
-  
+
 const navigate = useNavigate()
 
   const getJobs = () => {
@@ -70,6 +70,69 @@ const navigate = useNavigate()
         </div>
 
         <div className="job-post-list">
+
+        {/* MAPING SETUP */}
+        {/* {jobs?.map(el => {
+          return(
+            <>
+              <div className="job-post-container">
+            <div className="job-post-container-header">
+              <div className="jpch-left">
+                <img src={User2} alt="User" width={50} height={50} />
+                <div className="jpch-left-user">
+                  <h6 className="jpch-l-h6">Social Media</h6>
+                  <p className="jpch-l-p">By:{el?.user}</p>
+                </div>
+              </div>
+              <div className="jpch-center">
+                <div className="vert-barrier"></div>
+                <div className="jpch-center-tags">
+                  <p className="jpch-c-tag">Location</p>
+                  <h6 className="jpch-c-value">{el?.location}</h6>
+                </div>
+                <div className="vert-barrier"></div>
+                <div className="jpch-center-tags">
+                  <p className="jpch-c-tag">Type</p>
+                  <h6 className="jpch-c-value">{el?.type}</h6>
+                </div>
+                <div className="vert-barrier"></div>
+                <div className="jpch-center-tags">
+                  <p className="jpch-c-tag">Category</p>
+                  <h6 className="jpch-c-value">{el?.category}</h6>
+                </div>
+              </div>
+              <FaBookmark size={25} color="#455bef" />
+            </div>
+            <div className="job-post-container-body">
+              <p className="jpcb-p">
+              {el?.description}
+              </p>
+            </div>
+            <div className="footer-line"></div>
+            <div className="job-post-footer">
+              <div className="jp-footer-info">
+                <p className="tag">Kerkoj</p>
+                <p className="value">{el?.noFreelancer}</p>
+              </div>
+              <div className="vert-barrier"></div>
+              <div className="jp-footer-info">
+                <div className="tag">Afati</div>
+                <div className="value">3 ditë {el?.deadline}</div>
+              </div>
+              <div className="vert-barrier"></div>
+              <div className="jp-footer-info">
+                <div className="tag">Budget</div>
+                <div className="value">{el?.budget}$</div>
+              </div>
+              <button  onClick={()=>navigate('/details-page')} className="jp-apply-details">
+                <p className='a-d-p'>Apply</p>
+              </button>
+            </div>
+          </div>
+            </>
+          )
+        })} */}
+        {/* MAPING SETUP */}
           <div className="job-post-container">
             <div className="job-post-container-header">
               <div className="jpch-left">
@@ -122,7 +185,7 @@ const navigate = useNavigate()
                 <div className="tag">Budget</div>
                 <div className="value">4100$</div>
               </div>
-              <button  onClick={()=>navigate('/details-page')} className="jp-apply-details">
+              <button  onClick={()=>navigate(`/details-page/1`)} className="jp-apply-details">
                 <p className='a-d-p'>Apply</p>
               </button>
             </div>

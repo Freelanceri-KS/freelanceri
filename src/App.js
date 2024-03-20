@@ -36,7 +36,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/welcome" element={<LoginMessage />} />
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="/details-page" element={<DetailsPage />} />
+          <Route path="/details-page/:id" element={<DetailsPage />} />
           <Route path="/registerpage" element={<RegisterPage />} />
           <Route path="/profile" element={<Profile />}/>
           <Route path="/post-controll" element={<PostControll />}/>

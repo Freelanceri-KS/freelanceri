@@ -12,7 +12,7 @@ const NewHeader = (props) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light newHeader">
-        {/* <div className="container"> */}
+        <div className="container">
           <a role="button" className="navbar-brand" onClick={()=> navigate('/')}>
             <img src={HeaderLogo} alt="Logo" height="35" />
           </a>
@@ -103,7 +103,7 @@ const NewHeader = (props) => {
               </a>
             </div>
           </div>
-        {/* </div> */}
+        </div>
       </nav>
     </>
   );
