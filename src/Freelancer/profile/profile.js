@@ -5,25 +5,25 @@ import ProfilePic from "../../assets/profiles/1.png"
 const Profile = () => {
     return (
         <div className="profile">
-            <div className="left">
+            <div className="left-profile">
                 <div className="account">
                     <div className="left-side">
-                    <img src={ProfilePic} alt="profile-pic" className="profile-pic" />
-                    <div className="identity">
-                        <h5>Kujtim Gjokaj</h5>
-                        <p>Full Stack Developer</p>
+                        <img src={ProfilePic} alt="profile-pic" className="profile-pic" />
+                        <div className="identity">
+                            <h5>Kujtim Gjokaj</h5>
+                            <p>Full Stack Developer</p>
+                        </div>
                     </div>
-                    </div>
-                    <FiEdit size={25}/>
+                    <FiEdit size={25} />
                 </div>
 
                 <div className="account-details">
                     <div className="account-details-head">
                         <h5>Personal Information</h5>
-                        <FiEdit size={25}/>
+                        <FiEdit size={25} />
                     </div>
                     <div className="account-details-body">
-                        <div className="data-slot">
+                        <div className="data-slot" id="data-slot-1">
                             <p>Email</p>
                             <p className="value">gjokajkujtim9@gmail.com</p>
                         </div>
@@ -43,7 +43,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className="center-profile">
-                <div className="experience">
+                <div className="experience">    
                     <div className="label">
                         <h3>Experience</h3>
                         <FiEdit size={25} />
@@ -114,8 +114,26 @@ const Profile = () => {
                         <div className="skill-box">Wordpress</div>
                     </div>
                 </div>
+                <div className="certification mt-5">
+                    <div className="label">
+                        <h3>Certifications</h3>
+                        <FiEdit size={25} />
+                    </div>
+                    <div className="data-container">
+                        <div className="data-section">
+                            <div className="names">
+                                <p className="name-profession">Junior Geeks</p>
+                                <p className="name-company">Innovation Center of Kosova</p>
+                            </div>
+                            <div className="dates">
+                                <p className="start-date">04/03/2023</p>
+                                <p className="end-date">14/03/2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="right">
+            <div className="right-profile">
                 <div className="upload-cv">
                     <p className="upload-cv-p">Download CV</p>
                 </div>

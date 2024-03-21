@@ -154,6 +154,10 @@ function Posts() {
           <h5 className="phc-title">Consulent</h5>
           <h6 className="phc-number">31</h6>
         </div>
+        <div className="posts-header-container">
+          <h5 className="phc-title">Consulent</h5>
+          <h6 className="phc-number">31</h6>
+        </div>
 
       </div>
       <div className="posts-list">

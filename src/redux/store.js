@@ -1,13 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers, createStore } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import initialReducer from './Functions/reducer';
-import { composeWithDevTools } from '@redux-devtools/extension';
+import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, createStore } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import initialReducer from "./Functions/reducer";
+import { composeWithDevTools } from "@redux-devtools/extension";
 const persistConfig = {
-  key: 'Freelanceri-ks',
+  key: "Freelanceri-ks",
   storage,
-
 };
 
 const rootReducer = combineReducers({ data: initialReducer });
@@ -33,7 +32,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(
   persistReducer(persistConfig, rootReducer),
-  composeWithDevTools(),
-) 
+  composeWithDevTools()
+);
 
 export const persisted = persistStore(store);

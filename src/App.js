@@ -15,6 +15,7 @@ import Profile from "./Freelancer/profile/profile";
 import PostControll from "./super-admin/PostControll/postControll"
 import SuperDashboard from "./super-admin/super-admin/dashboard"
 import FreelancerDashboard from "./Freelancer/dashboard/dashboard"
+import Login from "./Auth/login/login"
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/findjobs" element={<FindJob />} />
-          {/* <Route path="/register" element={<Login />} /> */}
+          <Route path="/login" element={<Login />} />
           <Route path="/freelancer-dashboard" element={<FreelancerDashboard/>}/>
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/about-us" element={<AboutUs />} />

@@ -5,10 +5,23 @@ import User2 from "../../assets/images/user2.png"
 import Banner from "../../assets/banners/banner.png"
 import { MdOutlineBookmarkBorder } from "react-icons/md";
 import { FaBookmark } from "react-icons/fa";
+import { useState } from 'react';
 
 
 
 const DetailsPage = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false); // State variable to manage modal visibility
+
+  const openModal = () => {
+    console.log("ASDASSDASDSADSADASDSASDAS");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    console.log("ASDASSDASDSADSADASDSASDAS")
+    setIsModalOpen(false);
+  }
   return (
     <div className="details-page">
       <div className="dp-left">
@@ -105,7 +118,7 @@ const DetailsPage = () => {
               <h6 className='mainpost-footer-h6'>3500$</h6>
 
             </div>
-            <button className="apply-details">
+            <button className="apply-details" onClick={openModal}>
               <p className='a-d-p'>Apply</p>
             </button>
           </div>
@@ -115,7 +128,7 @@ const DetailsPage = () => {
           <div className="job-post-container">
             <div className="job-post-container-header">
               <div className="jpch-left">
-                <img src={User2} alt="User" width={50} height={50} className='jpch-left-img'/>
+                <img src={User2} alt="User" width={50} height={50} className='jpch-left-img' />
                 <div className="jpch-left-user">
                   <h6 className="jpch-l-h6">Social Media</h6>
                   <p className="jpch-l-p">Fjolla Berisha</p>
@@ -164,7 +177,7 @@ const DetailsPage = () => {
                 <div className="tag">Budget</div>
                 <div className="value">4100$</div>
               </div>
-              <button className="jp-apply-details">
+              <button className="jp-apply-details" onClick={openModal}>
                 <p className='a-d-p'>Apply</p>
               </button>
             </div>
@@ -179,3 +192,4 @@ const DetailsPage = () => {
 }
 
 export default DetailsPage;
+

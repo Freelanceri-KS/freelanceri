@@ -4,7 +4,7 @@
     align-items: start;
     margin-top: 6em;
 
-    .left {
+    .left-profile {
         width: 25%;
         height: 80vh;
         display: flex;
@@ -33,7 +33,7 @@
                 }
 
                 .identity {
-                    text-align: center;
+                    text-align: start;
                     margin-left: 10px;
                 }
             }
@@ -43,20 +43,28 @@
             width: 25em;
             border: 1px solid #eaeaea;
             border-radius: 10px;
-            .account-details-head{
+
+            .account-details-head {
                 display: flex;
                 justify-content: space-between;
                 padding: 15px;
             }
-            .account-details-body{
+
+            .account-details-body {
                 padding: 15px;
-                p{
+
+                p {
                     margin: 0;
                 }
-                .data-slot{
+
+                .data-slot {
                     margin-top: 1em;
                 }
-                .value{
+                #data-slot-1{
+                    margin-top: 0;
+                }
+
+                .value {
                     font-weight: 500;
                 }
             }
@@ -131,7 +139,7 @@
         }
     }
 
-    .right {
+    .right-profile{
         width: 20%;
         height: 80vh;
         display: flex;
@@ -147,7 +155,7 @@
             justify-content: center;
             align-items: center;
             color: white;
-
+            cursor: pointer;
             .upload-cv-p {
                 margin: 0;
             }
@@ -162,9 +170,67 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
 
             .portfolio-p {
                 margin: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:768px) {
+    .profile{
+        margin-top: 5em;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .left-profile{
+            width: 100%;
+            display: flex;
+            height: auto;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            .account-details-body{
+                display: none;
+            }
+        }
+        .center-profile{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            .experience{
+                width: 80%;
+            }
+            .education{
+                width: 80%;
+            }
+            .skills{
+                width: 80%;
+                #skill-container{
+                    display: grid;
+                }
+            }
+        }
+        .right-profile{
+            margin-top: 1em;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            height: auto;
+            margin-bottom: 3em;
+            .upload-cv{
+                width: 80%;
+            }
+            .portfolio{
+                width: 80%  ;
             }
         }
     }
