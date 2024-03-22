@@ -97,7 +97,7 @@ const NewHeader = (props) => {
               <a
                 className="btn btn-primary my-2 my-sm-0 free-btn"
                 type="button"
-                href="/register"
+                href="/registerpage"
               >
                 Register Now
               </a>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import maskgroup from "../../assets/images/maskgroup.png";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../redux/Functions/actions";
+import { setLoggedIn, setToken } from "../../redux/Functions/actions";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
 
@@ -33,6 +33,7 @@ const LoginPage = (props) => {
         setLoading(false);
         toast.success("Login successful!");
         dispatch(setToken(response.data.token));
+        setLoggedIn(true)
         navigate("/");
       })
       .catch((error) => {

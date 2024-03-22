@@ -1,4 +1,4 @@
-import { SET_LANG, SET_TOKEN } from "./types";
+import { SET_LANG, SET_TOKEN , SET_LOGGEDIN } from "./types";
 
 const INITIAL_STATE = {
   language: true,
@@ -10,7 +10,9 @@ const initialReducer = (state = INITIAL_STATE, action) => {
     case SET_LANG:
       return { ...state, language: action?.data };
     case SET_TOKEN:
-      return { ...state, token: action.data, isLoggedin: true };
+      return { ...state, token: action.data};
+      case SET_LOGGEDIN:
+      return{ ...state, isLoggedin: action?.data };
     default:
       return state;
   }

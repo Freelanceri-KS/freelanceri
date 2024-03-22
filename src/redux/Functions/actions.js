@@ -1,4 +1,4 @@
-import { SET_LANG, SET_TOKEN } from "./types";
+import { SET_LANG, SET_LOGGEDIN, SET_TOKEN } from "./types";
 
 export const setLang = (data) => {
   return {
@@ -13,3 +13,9 @@ export const setToken = (data) => {
     data: data,
   };
 };
+export const setLoggedIn = (data) => {
+  return{
+    type : SET_LOGGEDIN,
+    data:data
+  }
+}
