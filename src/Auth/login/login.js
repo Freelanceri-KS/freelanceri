@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoggedIn, setToken } from "../../redux/Functions/actions";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
-
+import { connect } from "react-redux";
 const LoginPage = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const LoginPage = (props) => {
         setLoading(false);
         toast.success("Login successful!");
         dispatch(setToken(response.data.token));
-        setLoggedIn(true)
+        props?.setLoggedIn(true)
         navigate("/");
       })
       .catch((error) => {
@@ -117,4 +117,18 @@ const LoginPage = (props) => {
   );
 };
 
-export default LoginPage;
+// export default LoginPage;
+const mapStateToProps = (state) => {
+  return {
+    // language: state.data.language,
+    isLoggedin : state.data.isLoggedin
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // setLang: (data) => dispatch(setLang(data)),
+    setLoggedIn: (data) => {dispatch(setLoggedIn(data))}
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

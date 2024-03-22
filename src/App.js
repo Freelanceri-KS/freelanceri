@@ -43,7 +43,7 @@ function App(props) {
           </>
           :       
           <>
-          <Route path="/findjobs" element={<FindJob />} />
+          <Route path="/" element={<FindJob />} />
           <Route path="/freelancer-dashboard" element={<FreelancerDashboard/>}/>
           <Route path="/details-page/:id" element={<DetailsPage />} />
           <Route path="/profile" element={<Profile />}/>
