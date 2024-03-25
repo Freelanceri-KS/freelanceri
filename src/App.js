@@ -44,14 +44,12 @@ function App(props) {
           ) : (
             <>
               <Route path="/" element={<FindJob />} />
-              <Route
-                path="/freelancer-dashboard"
-                element={<FreelancerDashboard />}
+              <Route path="/freelancer-dashboard" element={<FreelancerDashboard />}
               />
               <Route path="/details-page/:id" element={<DetailsPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/post-controll" element={<PostControll />} />
-              <Route path="/super-admin" element={<SuperDashboard />} />
+              <Route path="/super-admin" element={<SuperDashboard />} />s
             </>
           )}
 
@@ -62,7 +60,6 @@ function App(props) {
   );
 }
 
-// export default App;
 const mapStateToProps = (state) => {
   return {
     language: state.data.language,

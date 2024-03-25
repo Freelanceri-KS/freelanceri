@@ -39,9 +39,9 @@ const NewHeader = (props) => {
                   <li role="button" className="nav-item margin">
                     <a
                       className={`nav-link ${
-                        location.pathname == "/findjob" ? " active" : ""
+                        location.pathname == "/" ? " active" : ""
                       }`}
-                      onClick={() => navigate("/findjob")}
+                      onClick={() => navigate("/")}
                     >
                       FindJob
                     </a>
@@ -49,9 +49,9 @@ const NewHeader = (props) => {
                   <li role="button" className="nav-item margin">
                     <a
                       className={`nav-link ${
-                        location.pathname == "/dashboard" ? " active" : ""
+                        location.pathname == "/freelancer-dashboard" ? " active" : ""
                       }`}
-                      onClick={() => navigate("/dashboard")}
+                      onClick={() => navigate("/freelancer-dashboard")}
                     >
                       Dashboard
                     </a>

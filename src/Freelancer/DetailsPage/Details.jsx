@@ -5,13 +5,18 @@ import User2 from "../../assets/images/user2.png"
 import Banner from "../../assets/banners/banner.png"
 import { MdOutlineBookmarkBorder } from "react-icons/md";
 import { FaBookmark } from "react-icons/fa";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router';
+import { data } from 'jquery';
 
 
 
 const DetailsPage = () => {
-
+  const { id } = useParams()
   const [isModalOpen, setIsModalOpen] = useState(false); // State variable to manage modal visibility
+  const [jobDetail, setJobDetail] = useState([])
+  const [profileDetails, setProfileDetails] = useState([])
 
   const openModal = () => {
     console.log("ASDASSDASDSADSADASDSASDAS");
@@ -22,15 +27,85 @@ const DetailsPage = () => {
     console.log("ASDASSDASDSADSADASDSASDAS")
     setIsModalOpen(false);
   }
+
+  const getJobDetail = () => {
+    axios.get(`/${id}`).then(
+      data => {
+        console.log(data?.data)
+        setJobDetail(data.data)
+      }
+    ).catch(
+      err => {
+        console.log(err)
+      }
+    )
+  }
+  const getProfile = () => {
+    axios.get(``).then(
+      data => {
+        console.log(data.data)
+        setProfileDetails(data.data)
+      }
+    ).catch(
+      err => {
+        console.log(err)
+      }
+    )
+  }
+
+
+  useEffect(() => {
+    getJobDetail()
+  }, [])
   return (
     <div className="details-page">
       <div className="dp-left">
+        {/* {profileDetails?.map(el => {
+          return (
+            <>
+              <div className="dp-left-container">
+                <div className="dp-left-container-header">
+                  <MdOutlineArrowBackIosNew size={30} color='#455bef' />
+                  <h5>Go back</h5>
+                </div>
+                <div classNasme="horiz-barrier"></div>
+                <div className="dp-left-container-profile">
+                  <div className="dp-cp-left">
+                    <img src={User} alt="User profile picture" height={60} className='dpcp-image' />
+                    <div className="dp-cp-data">
+                      <p className='dp-cp-data-p'>Posted by:</p>
+                      <h6 className='dp-cp-data-h6'>{el.name}</h6>
+                    </div>
+                  </div>
+                  <div className="dp-cp-data-time">
+                    <p className='dp-cp-data-p'>{el.created_at}</p>
+                  </div>
+                </div>
+                <div className="horiz-barrier"></div>
+                <div className="dp-left-email">
+                  <p className='dp-cp-data-p'>Email</p>
+                  <h5>{el.email}</h5>
+                </div>
+                <div className="horiz-barrier"></div>
+                <div className="dp-left-linkedin">
+                  <p className='dp-cp-data-p'>LinkedIn</p>
+                  <h5>{el.linkedin}</h5>
+                </div>
+                <div className="horiz-barrier"></div>
+                <div className="dp-left-instagram">
+                  <p className='dp-cp-data-p'>LinkedIn</p>
+                  <h5>{el.linkedin}</h5>
+                </div>
+              </div>
+            </>
+          )
+        })} */}
         <div className="dp-left-container">
           <div className="dp-left-container-header">
             <MdOutlineArrowBackIosNew size={30} color='#455bef' />
             <h5>Go back</h5>
           </div>
-          <div className="horiz-barrier"></div>
+          <div classNasme="horiz-barrier"></div>
           <div className="dp-left-container-profile">
             <div className="dp-cp-left">
               <img src={User} alt="User profile picture" height={60} className='dpcp-image' />
@@ -62,6 +137,61 @@ const DetailsPage = () => {
         </div>
       </div>
       <div className="dp-center">
+        {/* {jobDetail.map(el =>{
+          return(
+            <>
+                 <div className="dp-center-mainpost">
+          <div className="mainpost-title">
+            <h5 className='mainpost-title-h5'>{el.proffesion}</h5>
+            <MdOutlineBookmarkBorder size={30} color='#455bef' />
+          </div>
+          <div className="mainpost-about">
+            <div className="location">
+              <p className='mainpost-about-tag'>Location</p>
+              <p className="mainpost-about-value">{el.location}</p>
+            </div>
+            <div className="vert-barrier"></div>
+            <div className="type">
+              <p className='mainpost-about-tag'>Type</p>
+              <p className="mainpost-about-value">{el.project}</p>
+            </div>
+            <div className="vert-barrier"></div>
+            <div className="category">
+              <p className='mainpost-about-tag'>Category</p>
+              <p className="mainpost-about-value">{el.category}</p>
+
+            </div>
+          </div>
+          <div className="mainpost-description">
+            <p>
+            {el.description}
+            </p>
+          </div>
+          <div className="mainpost-footer">
+            <div className="freelancers-nr">
+              <p className='mainpost-footer-p'>Kërkoj</p>
+              <h6 className='mainpost-footer-h6'>{el.number} freelancer</h6>
+            </div>
+            <div className="vert-barrier"></div>
+            <div className="deadline">
+              <p className='mainpost-footer-p'>Afati</p>
+              <h6 className='mainpost-footer-h6'>{el.deadline} muaj</h6>
+
+            </div>
+            <div className="vert-barrier"></div>
+            <div className="budget-details">
+              <p className='mainpost-footer-p'>Bugjeti</p>
+              <h6 className='mainpost-footer-h6'>{el.budget}$</h6>
+
+            </div>
+            <button className="apply-details" onClick={openModal}>
+              <p className='a-d-p'>Apply</p>
+            </button>
+          </div>
+        </div>
+            </>
+          )
+        })} */}
         <div className="dp-center-mainpost">
           <div className="mainpost-title">
             <h5 className='mainpost-title-h5'>Interior Designer</h5>
