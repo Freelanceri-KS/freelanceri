@@ -18,7 +18,7 @@ const FindJob = () => {
 const navigate = useNavigate()
 
   const getJobs = () => {
-    axios.get('').then(
+    axios.get('/posts/all').then(
       data => {
         console.log(data.data)
         setJobs(data?.data)

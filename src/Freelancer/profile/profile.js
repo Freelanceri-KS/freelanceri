@@ -5,7 +5,7 @@ import ProfilePic from "../../assets/profiles/1.png";
 import { getDataFromLocalStorage } from "../../Helpers/localStorage";
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     const storedUserData = getDataFromLocalStorage("userData");
@@ -21,12 +21,12 @@ const Profile = () => {
             <div className="identity">
               <h5>
                 {userData
-                  ? `${userData.firstName} ${userData.lastName}`
+                  ? `${userData?.firstName} ${userData?.lastName}`
                   : "First Name And Last name"}
               </h5>
               <p>
-                {userData && userData.profession
-                  ? userData.profession.join(", ")
+                {userData && userData?.profession
+                  ? userData?.profession?.join(", ")
                   : ""}
               </p>
             </div>
@@ -42,7 +42,7 @@ const Profile = () => {
           <div className="account-details-body">
             <div className="data-slot" id="data-slot-1">
               <p>Email</p>
-              <p className="value">{userData ? userData.email : ""}</p>
+              <p className="value">{userData ? userData?.email : ""}</p>
             </div>
             <div className="data-slot">
               <p>Phone</p>
@@ -50,7 +50,7 @@ const Profile = () => {
             </div>
             <div className="data-slot">
               <p>City</p>
-              <p className="value">{userData ? userData.city : ""}</p>
+              <p className="value">{userData ? userData?.city : ""}</p>
             </div>
             <div className="data-slot">
               <p>Bio</p>
@@ -66,16 +66,16 @@ const Profile = () => {
             <FiEdit size={25} />
           </div>
           <div className="data-container">
-            {userData && userData.experiences ? (
-              userData.experiences.map((experience, index) => (
+            {userData && userData?.experiences ? (
+              userData?.experiences?.map((experience, index) => (
                 <div key={index} className="data-section">
                   <div className="names">
-                    <p className="name-profession">{experience.title}</p>
-                    <p className="name-company">{experience.company}</p>
+                    <p className="name-profession">{experience?.title}</p>
+                    <p className="name-company">{experience?.company}</p>
                   </div>
                   <div className="dates">
-                    <p className="start-date">{experience.startDate}</p>
-                    <p className="end-date">{experience.endDate}</p>
+                    <p className="start-date">{experience?.startDate}</p>
+                    <p className="end-date">{experience?.endDate}</p>
                   </div>
                 </div>
               ))
@@ -90,16 +90,16 @@ const Profile = () => {
             <FiEdit size={25} />
           </div>
           <div className="data-container">
-            {userData && userData.education ? (
-              userData.education.map((education, index) => (
+            {userData && userData?.education ? (
+              userData?.education?.map((education, index) => (
                 <div key={index} className="data-section">
                   <div className="names">
-                    <p className="name-profession">{education.title}</p>
-                    <p className="name-company">{education.institution}</p>
+                    <p className="name-profession">{education?.title}</p>
+                    <p className="name-company">{education?.institution}</p>
                   </div>
                   <div className="dates">
-                    <p className="start-date">{education.startDate}</p>
-                    <p className="end-date">{education.endDate}</p>
+                    <p className="start-date">{education?.startDate}</p>
+                    <p className="end-date">{education?.endDate}</p>
                   </div>
                 </div>
               ))
@@ -115,8 +115,8 @@ const Profile = () => {
             <FiEdit size={25} />
           </div>
           <div className="data-container" id="skill-container">
-            {userData && userData.skills ? (
-              userData.skills.map((skill, index) => (
+            {userData && userData?.skills ? (
+              userData?.skills?.map((skill, index) => (
                 <div key={index} className="skill-box">
                   {skill}
                 </div>

@@ -6,7 +6,7 @@ import Banner from "../../assets/banners/banner.png"
 import { MdOutlineBookmarkBorder } from "react-icons/md";
 import { FaBookmark } from "react-icons/fa";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 import { useParams } from 'react-router';
 import { data } from 'jquery';
 
@@ -29,7 +29,7 @@ const DetailsPage = () => {
   }
 
   const getJobDetail = () => {
-    axios.get(`/${id}`).then(
+    axios.get(`/posts/${id}`).then(
       data => {
         console.log(data?.data)
         setJobDetail(data.data)
@@ -55,7 +55,8 @@ const DetailsPage = () => {
 
 
   useEffect(() => {
-    getJobDetail()
+    getJobDetail();
+    getProfile();
   }, [])
   return (
     <div className="details-page">
