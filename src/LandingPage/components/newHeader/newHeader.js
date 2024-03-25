@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { setLang } from "../../../redux/Functions/actions";
+import { setLang, setLoggedIn } from "../../../redux/Functions/actions";
 import "./newHeader.scss";
 import Albania from "../../../assets/images/alb.jpg";
 import English from "../../../assets/images/eng.png";
@@ -7,13 +7,18 @@ import HeaderLogo from "../../../assets/images/headerLogo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NewHeader = (props) => {
-  const location = useLocation('')
-  const navigate = useNavigate('')
+  const location = useLocation("");
+  const navigate = useNavigate("");
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light newHeader">
         <div className="container">
-          <a role="button" className="navbar-brand" onClick={()=> navigate('/')}>
+          <a
+            role="button"
+            className="navbar-brand"
+            onClick={() => navigate("/")}
+          >
             <img src={HeaderLogo} alt="Logo" height="35" />
           </a>
           <button
@@ -29,26 +34,93 @@ const NewHeader = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
-              <li role="button" className="nav-item margin">
-                <a className={`nav-link ${location.pathname == "/" ? ' active' : ''}`} onClick={()=> navigate('/')}>
-                  Home
-                </a>
-              </li>
-              <li role="button" className="nav-item margin">
-                <a className={`nav-link ${location.pathname == "/faqs" ? ' active' : ''}`}onClick={()=> navigate('/faqs')}>
-                  FAQ
-                </a>
-              </li>
-              <li role="button" className="nav-item margin">
-                <a className={`nav-link ${location.pathname == "/about-us" ? ' active' : ''}`}onClick={()=> navigate('/about-us')}>
-                  {props?.language == true ?'Rreth Nesh': "About Us"}
-                </a>
-              </li>
-              <li role="button" className="nav-item margin">
-                <a className={`nav-link ${location.pathname == "/contact-us" ? ' active' : ''}`}onClick={()=> navigate('/contact-us')}>
-                  {props?.language == true ?'Kontakt': "Contact"}
-                </a>
-              </li>
+              {props.isLoggedin == true ? (
+                <>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/findjob" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/findjob")}
+                    >
+                      FindJob
+                    </a>
+                  </li>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/dashboard" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/dashboard")}
+                    >
+                      Dashboard
+                    </a>
+                  </li>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/bookmarks" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/bookmarks")}
+                    >
+                      Bookmarks
+                    </a>
+                  </li>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/profile" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/profile")}
+                    >
+                      Profile
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/")}
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/faqs" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/faqs")}
+                    >
+                      FAQ
+                    </a>
+                  </li>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/about-us" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/about-us")}
+                    >
+                      {props?.language == true ? "Rreth Nesh" : "About Us"}
+                    </a>
+                  </li>
+                  <li role="button" className="nav-item margin">
+                    <a
+                      className={`nav-link ${
+                        location.pathname == "/contact-us" ? " active" : ""
+                      }`}
+                      onClick={() => navigate("/contact-us")}
+                    >
+                      {props?.language == true ? "Kontakt" : "Contact"}
+                    </a>
+                  </li>
+                </>
+              )}
             </ul>
             <div className="headerItems">
               <div role="button" className="dropdown text-center lang">
@@ -67,7 +139,13 @@ const NewHeader = (props) => {
                 </a>
                 <ul className="dropdown-menu text-small lang-dr">
                   <li>
-                    <div role="button" className="dropdown-item" onClick={() => {props.setLang(true)}}>
+                    <div
+                      role="button"
+                      className="dropdown-item"
+                      onClick={() => {
+                        props.setLang(true);
+                      }}
+                    >
                       <img
                         src={Albania}
                         alt="mdo"
@@ -79,7 +157,13 @@ const NewHeader = (props) => {
                     </div>
                   </li>
                   <li>
-                    <div role="button" className="dropdown-item" onClick={() => {props.setLang(false)}}>
+                    <div
+                      role="button"
+                      className="dropdown-item"
+                      onClick={() => {
+                        props.setLang(false);
+                      }}
+                    >
                       <img
                         src={English}
                         alt="mdo"
@@ -94,13 +178,15 @@ const NewHeader = (props) => {
               </div>
             </div>
             <div className="headerItems">
-              <a
-                className="btn btn-primary my-2 my-sm-0 free-btn"
-                type="button"
-                href="/registerpage"
-              >
-                Register Now
-              </a>
+              {props.isLoggedin === true ? null : (
+                <a
+                  className="btn btn-primary my-2 my-sm-0 free-btn"
+                  type="button"
+                  href="/registerpage"
+                >
+                  Register Now
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -109,15 +195,20 @@ const NewHeader = (props) => {
   );
 };
 
+// export default App;
 const mapStateToProps = (state) => {
   return {
     language: state.data.language,
+    isLoggedin: state.data.isLoggedin,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setLang: (data) => dispatch(setLang(data)),
+    setLoggedIn: (data) => {
+      dispatch(setLoggedIn(data));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(NewHeader);
