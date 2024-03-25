@@ -7,13 +7,15 @@ import { setLoggedIn, setToken } from "../../redux/Functions/actions";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import { connect } from "react-redux";
+// import { saveDataToLocalStorage } from "./localStorage";
+import { saveDataToLocalStorage } from "../../Helpers/localStorage";
+
 const LoginPage = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -31,9 +33,28 @@ const LoginPage = (props) => {
       })
       .then((response) => {
         setLoading(false);
+        const { freelancer, token } = response.data;
+
         toast.success("Login successful!");
         dispatch(setToken(response.data.token));
-        props?.setLoggedIn(true)
+
+        // Save user data to local storage after login
+        saveDataToLocalStorage({
+          userData: {
+            firstName: freelancer.firstName,
+            lastName: freelancer.lastName,
+            email: freelancer.email,
+            city: freelancer.city,
+            profession: freelancer.profession,
+            skills: freelancer.skills,
+            education: freelancer.education,
+            experiences: freelancer.experiences,
+          },
+        });
+
+        console.log(saveDataToLocalStorage());
+        console.log("❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️");
+        props?.setLoggedIn(true);
         navigate("/");
       })
       .catch((error) => {
@@ -121,14 +142,16 @@ const LoginPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     // language: state.data.language,
-    isLoggedin : state.data.isLoggedin
+    isLoggedin: state.data.isLoggedin,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     // setLang: (data) => dispatch(setLang(data)),
-    setLoggedIn: (data) => {dispatch(setLoggedIn(data))}
+    setLoggedIn: (data) => {
+      dispatch(setLoggedIn(data));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

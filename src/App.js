@@ -12,11 +12,11 @@ import DetailsPage from "./Freelancer/DetailsPage/Details";
 import Contact from "./LandingPage/Contact/contact";
 import RegisterPage from "./Auth/RegisterPage/registerPage";
 import Profile from "./Freelancer/profile/profile";
-import PostControll from "./super-admin/PostControll/postControll"
-import SuperDashboard from "./super-admin/super-admin/dashboard"
-import FreelancerDashboard from "./Freelancer/dashboard/dashboard"
-import Login from "./Auth/login/login"
-import { setLang , setLoggedIn } from "./redux/Functions/actions";
+import PostControll from "./super-admin/PostControll/postControll";
+import SuperDashboard from "./super-admin/super-admin/dashboard";
+import FreelancerDashboard from "./Freelancer/dashboard/dashboard";
+import Login from "./Auth/login/login";
+import { setLang, setLoggedIn } from "./redux/Functions/actions";
 import { connect } from "react-redux";
 
 function App(props) {
@@ -31,26 +31,29 @@ function App(props) {
           ""
         )}
         <Routes>
-          {props?.isLoggedin == false ?
-          <>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/faqs" element={<FAQs />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/welcome" element={<LoginMessage />} />
-          <Route path="/registerpage" element={<RegisterPage />} />
-          <Route path="/contact-us" element={<Contact />} />
-          </>
-          :       
-          <>
-          <Route path="/" element={<FindJob />} />
-          <Route path="/freelancer-dashboard" element={<FreelancerDashboard/>}/>
-          <Route path="/details-page/:id" element={<DetailsPage />} />
-          <Route path="/profile" element={<Profile />}/>
-          <Route path="/post-controll" element={<PostControll />}/>
-          <Route path="/super-admin" element={<SuperDashboard/>} />
-          </>
-        }
+          {props?.isLoggedin == false ? (
+            <>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/faqs" element={<FAQs />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/welcome" element={<LoginMessage />} />
+              <Route path="/registerpage" element={<RegisterPage />} />
+              <Route path="/contact-us" element={<Contact />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<FindJob />} />
+              <Route
+                path="/freelancer-dashboard"
+                element={<FreelancerDashboard />}
+              />
+              <Route path="/details-page/:id" element={<DetailsPage />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/post-controll" element={<PostControll />} />
+              <Route path="/super-admin" element={<SuperDashboard />} />
+            </>
+          )}
 
           {/* <Route path='/ContactUs' element={<ContactForm/>} /> */}
         </Routes>
@@ -63,14 +66,16 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     language: state.data.language,
-    isLoggedin : state.data.isLoggedin
+    isLoggedin: state.data.isLoggedin,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setLang: (data) => dispatch(setLang(data)),
-    setLoggedIn: (data) => {dispatch(setLoggedIn(data))}
+    setLoggedIn: (data) => {
+      dispatch(setLoggedIn(data));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
