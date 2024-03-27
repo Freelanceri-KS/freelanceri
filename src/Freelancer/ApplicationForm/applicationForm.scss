@@ -1,0 +1,172 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+  width: 1000px;
+  height: 600px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.vertical-box {
+  margin-top: 40px;
+}
+
+.horizontal-text-fields {
+  display: flex;
+  margin-bottom: -60px;
+}
+
+.text-field {
+  width: 250px;
+  height: 90px;
+  margin-right: 50px;
+  margin-bottom: 40px;
+}
+
+.text-field:last-child {
+  margin-right: 0;
+}
+
+.dropdown-field select {
+  height: 40px;
+}
+
+.form-control {
+  padding-top: 10px;
+}
+
+.additional-text {
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.additional-text input {
+  width: 800px;
+  padding: 10px;
+}
+
+.portfolio-text {
+  margin-top: 10px;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.apply-button {
+  position: absolute;
+  bottom: 25px;
+  right: 50px;
+}
+
+.btn-apply {
+  padding: 10px 60px;
+  font-size: 18px;
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+}
+
+/* Separator styling */
+.separator {
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.horizontal-text-fields .separator {
+  margin: 0 10px;
+}
+
+.vertical-box .separator {
+  margin: 20px 0;
+}
+
+.dropdown-field .separator {
+  margin: 20px 0;
+}
+
+.additional-text .separator {
+  margin: 20px 0;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 767px) {
+  .modal-content {
+    width: 90%;
+    height: auto; /* Adjust height to fit content */
+    max-width: none; /* Reset max-width */
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-info img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .vertical-box {
+    margin-top: 10px;
+  }
+
+  .horizontal-text-fields {
+    flex-direction: column;
+  }
+
+  .text-field {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .text-field:last-child {
+    margin-bottom: 10px;
+  }
+
+  .dropdown-field select,
+  .additional-text input {
+    width: 100%;
+  }
+}
