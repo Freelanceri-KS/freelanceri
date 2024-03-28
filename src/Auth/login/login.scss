@@ -1,14 +1,77 @@
-.forgot-password-btn {
-    float: right;
-    padding-bottom: 50px;
-    color: black;
+.login-page {
+  margin-top: 5.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .left {
+    width: 45%;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .left-wrap {
+      .left-h3 {
+        margin-bottom: 2em;
+      }
+    }
+
+    .form-control {
+      width: 30em;
+    }
   }
-  
-  .btn-primary {
-    width: 100%;
-    height: 60px;
-    border-radius: 12px;
-    border: 1px solid #455bef;
-    background-color: #455bef;
-    color: white;
-  } 
+
+  .right {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .right-img {
+      width: 85%;
+      height: 85vh;
+    }
+  }
+}
+
+@media screen and (max-width:700px) {
+    .login-page{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .right{
+        display: none;
+      }
+      .left{
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .left-wrap{
+          width: 100%;
+
+        }
+        .form-control{
+          width: 25em;
+        }
+      }
+    }
+}
+
+.forgot-password-btn {
+  float: right;
+  padding-bottom: 50px;
+  color: black;
+}
+
+.btn-primary {
+  width: 100%;
+  height: 60px;
+  border-radius: 12px;
+  border: 1px solid #455bef;
+  background-color: #455bef;
+  color: white;
+}

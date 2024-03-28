@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.scss";
 import MainImageSection1 from "../../assets/images/section1imgmain.jpg";
 import Slider from "react-slick";
@@ -30,6 +30,13 @@ import img7 from "../../assets/profiles/7.png";
 import img8 from "../../assets/profiles/8.png";
 import img9 from "../../assets/profiles/9.png";
 import img10 from "../../assets/profiles/10.png";
+import guypc from "../../assets/pcguy.png"
+import collaboration from "../../assets/icons/collaboration.png"
+import community from "../../assets/icons/community.png"
+import verified from "../../assets/icons/verified.png"
+import { FaRegArrowAltCircleLeft } from "react-icons/fa";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import quote from "../../assets/icons/quotes.png"
 
 
 
@@ -53,7 +60,7 @@ const Home = (props) => {
     autoplay: true,
     autoplaySpeed: 0,
     cssEase: 'linear',
-    swipe:false,
+    swipe: false,
     pauseOnHover: false,
     responsive: [
       {
@@ -64,6 +71,13 @@ const Home = (props) => {
       },
     ],
   };
+
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768)
+  })
   return (
     <>
       <div className="asd">
@@ -94,7 +108,7 @@ const Home = (props) => {
                 <div className="col-5">
                   <p class="card-text imageDesc text-muted">
                     {props?.language == true
-                      ? "Freelanceri është i dizajnuuar të lidh punëdhenësit me freelancerët më të mirë në Kosovë!"
+                      ? "Freelanceri është i dizajnuar të lidh punëdhenësit me freelancerët më të mirë në Kosovë!"
                       : "Freelanceri is designed to connect employers with top quality freelancers all around Kosova!"}
                   </p>
                 </div>
@@ -403,7 +417,7 @@ const Home = (props) => {
           {/* SECTION 2 */}
 
           {/* SECTION 3 */}
-          
+
           <div className="container howitworks">
             <div className="how-title">
               <h1>{props?.language == true ? "Si Funksionon" : "How It Works"}</h1>
@@ -414,33 +428,33 @@ const Home = (props) => {
                 <div className="how-card">
                   <h1 className="how-number">01</h1>
                   <h3>{props?.language == true
-                      ? "Regjistroni Llogarinë Tuaj"
-                      : "Register Your Account"}</h3>
+                    ? "Regjistroni Llogarinë Tuaj"
+                    : "Register Your Account"}</h3>
                   <p>{props?.language == true
-                      ? "Regjistrohuni në platformë si punëdhënës ose si profesionist i pavarur falas."
-                      : "Register on the platform as an employer or as a freelancer for free."}</p>
+                    ? "Regjistrohuni në platformë si punëdhënës ose si profesionist i pavarur falas."
+                    : "Register on the platform as an employer or as a freelancer for free."}</p>
                 </div>
               </div>
               <div className="col-lg-4 col-md-12">
                 <div className="how-card">
                   <h1 className="how-number">02</h1>
                   <h3>{props?.language == true
-                      ? "Ngarkoni Portofolion Tuaj"
-                      : "Upload Your Portfolio"}</h3>
+                    ? "Ngarkoni Portofolion Tuaj"
+                    : "Upload Your Portfolio"}</h3>
                   <p>{props?.language == true
-                      ? "Rregullo portfolion si freelancer apo si biznes."
-                      : "Manage your portfolio as a freelancer or as a business."}</p>
+                    ? "Rregullo portfolion si freelancer apo si biznes."
+                    : "Manage your portfolio as a freelancer or as a business."}</p>
                 </div>
               </div>
               <div className="col-lg-4 col-md-12">
                 <div className="how-card">
                   <h1 className="how-number">03</h1>
                   <h3>{props?.language == true
-                      ? "Apliko Per Punë!"
-                      : "Apply For Jobs!"}</h3>
+                    ? "Apliko Per Punë!"
+                    : "Apply For Jobs!"}</h3>
                   <p>{props?.language == true
-                      ? "Fillo të punosh!"
-                      : "Start working!"}</p>
+                    ? "Fillo të punosh!"
+                    : "Start working!"}</p>
                 </div>
               </div>
             </div>
@@ -448,229 +462,84 @@ const Home = (props) => {
           {/* SECTION 3 */}
         </div>
         {/* SECTION 4 */}
-        <div className="grayArea pb-5 pt-5">
-          <div className="d-flex justify-content-center">
-            <div className="grayArea">
-              <div className="label d-flex justify-content-center">
-                <center className="freelanceri-for">
-                  <span className="text-wrapper">
-                    Freelanceri
-                    <br />
-                  </span>
-                  <span className="span">
-                    {props?.language == true
-                      ? "per Punëdhënës"
-                      : "for Employers"}
-                  </span>
-                </center>
-              </div>
-              <br />
-              <p className="elevate-your mt-5">
-                {props?.language == true
-                  ? "Ngritni projektet tuaja me ne! Përdorni një grup profesionistësh të lirë të aftë për zgjidhje me kosto efektive, fleksibilitet dhe perspektiva novatore. Bashkohuni tani për të transformuar biznesin tuaj dhe për të zhbllokuar suksesin!"
-                  : "Elevate your projects with us! Tap into a pool of skilled freelancers for cost-effective solutions,flexibility, and innovative perspectives. Join now to transform your business and unlock success"}
-              </p>
-            </div>
-          </div>
-          <div className="container mt-5">
-            <div className="row gap-1">
-              <div class="col ">
-                <div class="card-container card-white">
-                  <div class="card-title">
-                    {props?.language == true
-                      ? "Qasje në profile të ndryshme"
-                      : "Access to Diverse Talent"}
-                  </div>
-                  <div class="card-description">
-                    {props?.language == true
-                      ? "Përdorni qasjen në një grup të madh të talenteve me ekspertizë të larmishme të përshtatura për nevojat specifike të projektit."
-                      : "Tap into a global pool of skilled freelancers with diverse expertise tailored to specific project needs."}
-                  </div>
-                </div>
-              </div>
-              <div class="col ">
-                <div class="card-container card-blue">
-                  <div class="card-title">
-                    {props?.language == true
-                      ? "Efiçenca e kostos"
-                      : "Cost-Efficiency"}
-                  </div>
-                  <div class="card-description text-light">
-                    {props?.language == true
-                      ? "Punësoni profesionistë të pavarur nga platforma jonë dhe ulni kostot tradicionale të punësimit."
-                      : "Hire freelancers from our platform and cut traditional employment costs."}
-                  </div>
-                </div>
-              </div>
-              <div class="col ">
-                <div class="card-container card-white">
-                  <div class="card-title">
-                    {props?.language == true
-                      ? "Fleksibiliteti dhe rritja"
-                      : "Flexibility and Scalability"}
-                  </div>
-                  <div class="card-description">
-                    {props?.language == true
-                      ? "Rritu lehtësisht duke punësuar freelancer kur kërkesat e projektit ndryshojnë, duke siguruar përdorimin optimal të burimeve."
-                      : "Easily scale up or down by hiring freelancers as project demands fluctuate, ensuring optimal resource utilization."}
-                  </div>
-                </div>
-              </div>
-              <div class="col mt-3">
-                <div class="card-container card-white">
-                  <div class="card-title">
-                    {props?.language == true
-                      ? "Rezulat më i shpejtë"
-                      : "Faster results"}
-                  </div>
-                  <div class="card-description">
-                    {props?.language == true
-                      ? "Përfitoni nga përfundimi i shpejtë i projektit me oraret fleksibël të punonjësve të pavarur, duke përshpejtuar kohën totale të projektit."
-                      : "Gain speedy project completion with freelancers' flexible schedules, hastening overall timelines."}
-                  </div>
-                </div>
-              </div>
-              <div class="col mt-3">
-                <div class="card-container card-white">
-                  <div class="card-title">
-                    {props?.language == true
-                      ? "Sigurimi i cilësisë"
-                      : "Quality Assurance"}
-                  </div>
-                  <div class="card-description">
-                    {props?.language == true
-                      ? "Përdorni sistemin vlerësimev në platformë për të zgjedhur punonjës të pavarur me përvojë të provuar për punë cilësore."
-                      : "Use platform feedback and ratings to select freelancers with proven records for high-quality work."}
-                  </div>
-                </div>
-              </div>
-              <div class="col mt-3">
-                <div class="card-container card-white">
-                  <div class="card-title">
-                    {props?.language == true
-                      ? "Inovacion dhe perspektiva të freskëta"
-                      : "Innovation and Fresh Perspectives"}
-                  </div>
-                  <div class="card-description">
-                    {props?.language == true
-                      ? "Hyni në inovacion me punonjës të pavarur, duke përdorur perspektivat e ndryshme për ide dhe zgjidhje të reja."
-                      : "Tap into innovation with freelancers, leveraging diverse perspectives for fresh ideas and solutions."}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-center  mt-5">
-            <button
-              className="btn btn-md text-light"
-              onClick={() => (window.location.href = "/register")}
-              style={{ backgroundColor: "#455BEF" }}
-            >
-              {props?.language == true ? "Gjeni një talent" : "Find a Talent"}
-            </button>
-          </div>
-        </div>
-        <div className="container asd pb-5">
-          <div className="row rows">
-            <div className="col-6 col-6s">
-              <div className="col cols mb-5">
-                <h1 className="TalentText TalentTexts">
-                  <span className="split" style={{ color: "#455BEF" }}>
-                    Freelanceri{" "}
-                  </span>
-                  {props?.language == true ? " per Talentët" : "for Talents"}{" "}
-                </h1>
-              </div>
-              <div className="col cols mb-5">
-                <p className="text-muted text-muteds">
-                  {props?.language == true
-                    ? "Hapni një botë mundësish dhe ngrini karrierën tuaj të pavarur – bashkohuni me platformën tonë sot për t'u lidhur me klientë të ndryshëm, për të siguruar pagesa në kohë, për të ndërtuar një rrjet të fortë profesional dhe për të hyrë në burime të vlefshme për zhvillimin e vazhdueshëm të aftësive."
-                    : "Unlock a world of opportunities and elevate your freelance career – join our platform today to connect with diverse clients, ensure timely payments, build a strong professional network, and access valuable resources for continuous skill development."}
-                </p>
-              </div>
-              <div className="col cols">
-                <button
-                  className="btn btn-md text-light"
-                  onClick={() => (window.location.href = "/register")}
-                  style={{ backgroundColor: "#455BEF" }}
-                >
-                  {props?.language == true
-                    ? "Bëhuni një Talent"
-                    : "Become a Talent"}
-                </button>
-              </div>
-            </div>
-            <div className="col-6 col-6s pt-5">
-              {props?.language == true ? (
-                <img src={DmsImgShqip} className="dmsimg" />
-              ) : (
-                <img src={DmsImg} className="dmsimg" />
-              )}
-            </div>
-          </div>
-        </div>
-        {/* <div className="grayArea">
-                    <div className="mb-5 pb-5">
-                        <div className="d-flex">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-sm-6">
-                                        <div className="TalentText">
-                                            Are You Looking <br /> For A Talent?
-                                        </div>
-                                        <div className="mt-4 responsive">
-                                            You can <span className="colorsplit" > create an application </span> so talents can see what you need. <br /> You’ll get a notification for every talent that applys.<span className="colorsplit">Find the best one.</span>
-                                        </div>
-                                        <div className="col mt-5">
-                                            <div className="sec4Btns gap-3">
-                                                <button className="FindTalentBtn">Find a Talent</button>
-                                                <button className="BecomeTalentBtn">Become a Talent</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <div className="d-flex justify-content-end">
-                                            <img src={Posts} className="PostSec4 d-flex justify-content-end" alt="posts" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+        <div className="for-talents">
 
-        {/* SECTION 4 */}
-        {/* <div className="mb-5">
-                    <div className="d-flex">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <div className="d-flex justify-content-end">
-                                        <img src={Members} className="PostSec4 d-flex justify-content-end" alt="posts" />
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="d-flex justify-content-center">
-                                        <div className="TalentText">
-                                            Most Rated <br /> Talents!
-                                        </div>
-                                    </div>
-                                    <center>
-                                        <div className="mt-4">
-                                            Here are some of our talents who have been most <br /> active and got the <span className="colorsplit" > most rated</span> profiles.
-                                        </div>
-                                    </center>
-                                    <div className="mt-5">
-                                        <div className="sec4Btns gap-3">
-                                            <button className="BecomeTalentBtn">Find a Talent</button>
-                                            <button className="FindTalentBtn">Become a Talent</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div > */}
+          <div className="for-talent-container">
+            <div className="ftc-textcontainer">
+              <div className="ftc-tag">
+                <p>For talent</p>
+              </div>
+              <div className="ftc-content">
+                <p className="ftc-content-p">Find outstanding{!isMobile && (<br />)} workmanship</p>
+                <p className="ftc-content-p2">The outstanding workmanship displayed in the intricate craftsmanship of the hand-carved wooden furniture, meticulously detailed with ornate patterns and flavess finishes, is a testament to the artisan's exceptional skill and dedication to their craft.</p>
+              </div>
+            </div>
+            <div className="ftc-image"></div>
+          </div>
+
+        </div>
+        <div className="for-businesses">
+          <p className="for-businesses-title">Why choose us?</p>
+          <p className="for-businesses-dsc">Choose us for unmatched quality, exceptional service, and a commitment to<br />exceeding your expectations every time.</p>
+          <div className="for-business-body">
+            <img src={guypc} alt="guy on pc" className="for-business-img" />
+            <div className="fbb-features">
+              <div className="fbb-feature-1">
+                <div className="feature-icon">
+                  <img src={collaboration} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
+                </div>
+                <div className="feature-text">
+                  <h4>Seamless Collaboration</h4>
+                  <p className="feature-text-p">Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly.</p>
+                </div>
+              </div>
+              <div className="fbb-feature-2">
+                <div className="feature-icon">
+                  <img src={verified} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
+                </div>
+                <div className="feature-text">
+                  <h4>Support and Community</h4>
+                  <p className="feature-text-p">Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly.</p>
+                </div>
+              </div>
+              <div className="fbb-feature-1">
+                <div className="feature-icon">
+                  <img src={verified} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
+                </div>
+                <div className="feature-text">
+                  <h4>Secure and reliable</h4>
+                  <p className="feature-text-p">Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="fb-feedbacks">
+            <div className="feedback-tag">
+              <h1 className="fb-tag-h1">What our{!isMobile && (<br />)} customers say</h1>
+              {!isMobile && (<div className="feedback-tag-arrows">
+                <div className="arrow-1">
+                  <FaRegArrowAltCircleLeft size={50} color="white" />
+                </div>
+                <div className="arrow-2">
+                  <FaRegArrowAltCircleRight size={50} color="white" />
+                </div>
+              </div>)}
+            </div>
+            <div className="feedback-content">
+              <img src={quote} alt="Quote" height={50} className="feedback-content-img" />
+              <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt." </p>
+              <div className="feedback-profile">
+                <img src={img1} alt="User" height={50} />
+                <div className="feedback-user-data">
+                  <h5>Kujtim Gjokaj</h5>
+                  <p>Freelanceri CEO</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div className="grayArealastsec">
           <div className="d-flex justify-content-center">
             <h1 className="TalentText">

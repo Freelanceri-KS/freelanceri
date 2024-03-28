@@ -422,3 +422,263 @@
         }
     }
 }
+
+@media screen and (max-width:768px) {
+    .freelancer-dashboard {
+        width: 100%;
+
+        .freelancer-dashboard-title {
+            margin-left: 2em;
+        }
+
+        .freelancer-dashboard-wrap {
+            .freelancer-dashboard-main {
+                width: 85%;
+
+                .freelancer-dashboard-main-earnings {
+                    height: auto;
+
+                    .horiz-barrier {
+                        width: 100%;
+                        height: 2px;
+                        background-color: #eaeaea;
+                        margin-top: 1.5em;
+                    }
+
+                    .fdme-title {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin: 15px;
+                        margin-top: 1.5em;
+
+                        .fdme-h6 {
+                            color: #455bef;
+                        }
+                    }
+
+                    .fdme-stats {
+                        display: flex;
+                        align-items: center;
+                        margin-left: 1em;
+                        margin-right: 1em;
+                        margin-top: 0.4em;
+                        text-align: center;
+                        justify-content: space-between;
+                        font-size: 10px;
+
+                        .fdme-stat-item {
+                            .fdme-stat-item-value {
+                                color: #455bef;
+                                margin-top: 0.5em;
+                            }
+                        }
+
+                        .vert-barrier {
+                            height: 80px;
+                            width: 2px;
+                            background-color: #eaeaea;
+                        }
+                    }
+                }
+
+                .freelancer-dashboard-main-clients {
+                    border: 1px solid #eaeaea;
+                    border-radius: 10px;
+                    margin-top: 3em;
+
+                    .fdmc-head {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin: 15px;
+                        margin-top: 1.5em;
+
+                        .fdmc-head-h6 {
+                            color: #455bef;
+                        }
+                    }
+
+                    .horiz-barrier {
+                        width: 100%;
+                        height: 1.5px;
+                        background-color: #eaeaea;
+                        margin-top: 1.5em;
+                    }
+
+                    .fdmc-options {
+                        display: flex;
+
+                        .fdmc-single-opt {
+                            margin-right: 1em;
+                            font-size: 18px;
+                            margin-top: 20px;
+                            margin-left: 15px;
+                            margin-bottom: 15px;
+                        }
+                    }
+
+                    .horiz-barrier-2 {
+                        width: 100%;
+                        height: 0.5px;
+                        background-color: #eaeaea;
+                        margin-top: 0em;
+                    }
+
+                    .clients-grid {
+                        width: 100%;
+                        display: grid;
+                        height: fit-content;
+                        grid-template-columns: auto;
+
+                        .grid-item {
+                            display: flex;
+                            border: 1px solid #eaeaea;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 20px;
+
+                            .client-info {
+                                display: flex;
+                                align-items: center;
+
+                                .client-logo {
+                                    padding: 5px;
+                                    margin: 5px;
+                                    border-radius: 50%;
+                                }
+                            }
+
+                            .message-option-client {
+                                width: 110px;
+                                height: 35px;
+                                border-radius: 10px;
+                                background: #eaeaea;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-weight: 500;
+                            }
+
+                        }
+                    }
+                }
+
+                .freelancer-dashboard-main-reviews {
+                    margin-top: 3em;
+                    border: 1px solid #eaeaea;
+                    border-radius: 10px;
+                    margin-bottom: 3em;
+
+                    .fdmr-head {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin: 15px;
+                        margin-top: 1.5em;
+
+                        .fdmr-head-h6 {
+                            color: #455bef;
+                        }
+                    }
+
+                    .horiz-barrier {
+                        width: 100%;
+                        height: 1.5px;
+                        background-color: #eaeaea;
+                        margin-top: 1.5em;
+                    }
+
+                    .reviews-list {
+                        display: flex;
+                        justify-content: space-between;
+                        flex-direction: column-reverse;
+
+                        .reviews-list-main {
+                            margin-top: 1em;
+                            width: 100%;
+                            border-right: 1px;
+
+                            .review-item {
+                                .review-item-head {
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 10px;
+
+                                    .client-logo {
+                                        border-radius: 50%;
+                                    }
+
+                                    .review-item-head-data {
+                                        margin-left: 0.5em;
+                                    }
+                                }
+
+                                .review-item-body {
+                                    padding: 10px;
+                                }
+                            }
+
+                            .horiz-barrier {
+                                height: 1px;
+                                width: 100%;
+                                background-color: #eaeaea;
+                            }
+                        }
+
+                        .reviews-list-side {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            border-left: 1px solid #eaeaea;
+
+                            .horiz-line {
+                                width: 80%;
+                                height: 2px;
+                                background-color: #eaeaea;
+                                margin-top: 1em;
+                            }
+
+                            .rls-ratings {
+                                width: 90%;
+
+                                .stars-count {
+                                    margin-top: 1em;
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                            }
+
+                            .rls-main {
+                                display: flex;
+                                align-items: center;
+                                flex-direction: column;
+                                margin-top: 1em;
+
+                                .rls-main-h5 {
+                                    font-size: 30px;
+                                    font-weight: 600;
+                                }
+                            }
+
+                            .stars {
+                                display: flex;
+
+                                .reviews-list-side-stars-star {
+                                    height: 35px;
+                                    width: 35px;
+                                    margin: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .freelancer-dashboard-side {
+                display: none;
+            }
+        }
+    }
+}

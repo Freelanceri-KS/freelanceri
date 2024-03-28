@@ -60,7 +60,8 @@
                 .data-slot {
                     margin-top: 1em;
                 }
-                #data-slot-1{
+
+                #data-slot-1 {
                     margin-top: 0;
                 }
 
@@ -139,7 +140,7 @@
         }
     }
 
-    .right-profile{
+    .right-profile {
         width: 20%;
         height: 80vh;
         display: flex;
@@ -156,6 +157,7 @@
             align-items: center;
             color: white;
             cursor: pointer;
+
             .upload-cv-p {
                 margin: 0;
             }
@@ -180,44 +182,70 @@
 }
 
 @media screen and (max-width:768px) {
-    .profile{
+    .profile {
         margin-top: 5em;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        .left-profile{
+
+        .left-profile {
             width: 100%;
             display: flex;
             height: auto;
             flex-direction: column;
             justify-content: start;
             align-items: center;
-            .account-details-body{
+            .account{
+                margin-top: 1em;
+                width: 95%;
+            }
+            .account-details-body {
                 display: none;
+
+            }
+
+            .account-details {
+                border: none;
+
+                .account-details-head {
+                    display: none;
+                }
             }
         }
-        .center-profile{
+
+        .center-profile {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: start;
-            .experience{
-                width: 80%;
+
+            .experience {
+                width: 95%;
             }
-            .education{
-                width: 80%;
+
+            .education {
+                width: 95%;
+                margin-bottom: 0;
             }
-            .skills{
-                width: 80%;
-                #skill-container{
+
+            .skills {
+                margin: 0;
+                width: 95%;
+
+                #skill-container {
                     display: grid;
                 }
             }
+
+            .certification {
+                width: 95%;
+            }
         }
-        .right-profile{
+
+        .right-profile {
             margin-top: 1em;
             width: 100%;
             display: flex;
@@ -226,11 +254,13 @@
             align-items: center;
             height: auto;
             margin-bottom: 3em;
-            .upload-cv{
-                width: 80%;
+
+            .upload-cv {
+                width: 90%;
             }
-            .portfolio{
-                width: 80%  ;
+
+            .portfolio {
+                width: 90%;
             }
         }
     }

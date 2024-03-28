@@ -18,6 +18,8 @@ import FreelancerDashboard from "./Freelancer/dashboard/dashboard";
 import Login from "./Auth/login/login";
 import { setLang, setLoggedIn } from "./redux/Functions/actions";
 import { connect } from "react-redux";
+import BusinessDashboard from "./Business/business-dashboard";
+
 
 function App(props) {
   return (
@@ -25,7 +27,7 @@ function App(props) {
       <ToastContainer />
       <BrowserRouter>
         {window.location.pathname != "/register" &&
-        window.location.pathname != "/welcome" ? (
+          window.location.pathname != "/welcome" ? (
           <NewHeader />
         ) : (
           ""
@@ -40,16 +42,19 @@ function App(props) {
               <Route path="/welcome" element={<LoginMessage />} />
               <Route path="/registerpage" element={<RegisterPage />} />
               <Route path="/contact-us" element={<Contact />} />
+              <Route path="/super-admin" element={<SuperDashboard />} />
+              <Route path="/business-dashboard" element={<BusinessDashboard />} />
+
             </>
           ) : (
             <>
               <Route path="/" element={<FindJob />} />
-              <Route path="/freelancer-dashboard" element={<FreelancerDashboard />}
-              />
+              <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
+              <Route path="/super-admin" element={<SuperDashboard />} />
               <Route path="/details-page/:id" element={<DetailsPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/post-controll" element={<PostControll />} />
-              <Route path="/super-admin" element={<SuperDashboard />} />s
+              <Route path="/business-dashboard" element={<BusinessDashboard />} />
             </>
           )}
 

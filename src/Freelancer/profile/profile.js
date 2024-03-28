@@ -22,7 +22,7 @@ const Profile = () => {
               <h5>
                 {userData
                   ? `${userData?.firstName} ${userData?.lastName}`
-                  : "First Name And Last name"}
+                  : "John Doe"}
               </h5>
               <p>
                 {userData && userData?.profession
@@ -84,7 +84,7 @@ const Profile = () => {
             )}
           </div>
         </div>
-        <div className="education mt-5">
+        <div className="education mt-2">
           <div className="label">
             <h3>Education</h3>
             <FiEdit size={25} />
@@ -109,7 +109,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="skills mt-5">
+        <div className="skills mt-2">
           <div className="label">
             <h3>Skills</h3>
             <FiEdit size={25} />
@@ -127,7 +127,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="certification mt-5">
+        <div className="certification mt-2">
           <div className="label">
             <h3>Certifications</h3>
             <FiEdit size={25} />
