@@ -3,8 +3,9 @@ import Logo from "../../assets/images/logo.png"
 import Star from "../../assets/images/star.png"
 
 
-const  FreelancerDashboard = () => {
+const FreelancerDashboard = () => {
     return (
+        <>
         <div className="freelancer-dashboard">
             <p className='freelancer-dashboard-title'>Welcome,<span style={{ fontWeight: "600" }}> Kujtim Gjokaj!</span></p>
             <div className="freelancer-dashboard-wrap">
@@ -288,6 +289,7 @@ const  FreelancerDashboard = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

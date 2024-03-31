@@ -19,7 +19,9 @@ import Login from "./Auth/login/login";
 import { setLang, setLoggedIn } from "./redux/Functions/actions";
 import { connect } from "react-redux";
 import BusinessDashboard from "./Business/business-dashboard";
-
+import Blogs from "./LandingPage/Blogs/blogs"
+import BlogDetails from "./LandingPage/Blogs/blogDetails"
+import Bookmarks from "./Freelancer/Bookmarks/bookmarks";
 
 function App(props) {
   return (
@@ -44,10 +46,13 @@ function App(props) {
               <Route path="/contact-us" element={<Contact />} />
               <Route path="/super-admin" element={<SuperDashboard />} />
               <Route path="/business-dashboard" element={<BusinessDashboard />} />
-
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog-details" element={<BlogDetails />} />
+              <Route path="/bookmarks" element={<Bookmarks />} />
             </>
           ) : (
             <>
+              <Route path="/home" element={<Home />} />
               <Route path="/" element={<FindJob />} />
               <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
               <Route path="/super-admin" element={<SuperDashboard />} />
@@ -55,6 +60,9 @@ function App(props) {
               <Route path="/profile" element={<Profile />} />
               <Route path="/post-controll" element={<PostControll />} />
               <Route path="/business-dashboard" element={<BusinessDashboard />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog-details" element={<BlogDetails />} />
+              <Route path="/bookmarks" element={<Bookmarks />} />
             </>
           )}
 

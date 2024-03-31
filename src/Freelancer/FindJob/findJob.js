@@ -4,7 +4,7 @@ import User2 from "../../assets/profiles/2.png";
 import Ads from "../../assets/banners/ads.png";
 import AdBanner from "../../assets/banners/adBanner.png"
 import axios from "../../axios";
-import SortByFilter from "../../LandingPage/components/SortByFilter/sortByFilter";
+import SortByFilter from "./SortByFilter/sortByFilter";
 import { IoSearchOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { FaBookmark } from "react-icons/fa6";
@@ -133,7 +133,7 @@ const navigate = useNavigate()
           )
         })} */}
         {/* MAPING SETUP */}
-          <div className="job-post-container">
+          <div className="job-post-container" onClick={()=>navigate("/details-page/1")}>
             <div className="job-post-container-header">
               <div className="jpch-left">
                 <img src={User2} alt="User" width={50} height={50} />

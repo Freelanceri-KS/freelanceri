@@ -467,11 +467,11 @@ const Home = (props) => {
           <div className="for-talent-container">
             <div className="ftc-textcontainer">
               <div className="ftc-tag">
-                <p>For talent</p>
+                <p>{props?.language == true ? "Për talentet" : "For talents"}</p>
               </div>
               <div className="ftc-content">
-                <p className="ftc-content-p">Find outstanding{!isMobile && (<br />)} workmanship</p>
-                <p className="ftc-content-p2">The outstanding workmanship displayed in the intricate craftsmanship of the hand-carved wooden furniture, meticulously detailed with ornate patterns and flavess finishes, is a testament to the artisan's exceptional skill and dedication to their craft.</p>
+                <p className="ftc-content-p">{props?.language == true ? "Gjeni projektin" : "Find your perfect"}{!isMobile && (<br />)} {props?.language == true ? "tuaj ideal" : "project"}</p>
+                <p className="ftc-content-p2">{props?.language == true ? "Zbulo shumë mundësi për të shfaqur aftësitë dhe ekspertizën tënde në platformën tonë. Pavarësisht nëse je një profesionist i përvojësuar apo sapo ke filluar, platforma jonë ofron një gamë të gjerë të projekteve që presin për prekjen unike tënde." : "Unlock endless opportunities to showcase your skills and expertise on our platform. Whether you're a seasoned professional or just starting out, our platform offers a diverse range of projects waiting for your unique touch."}</p>
               </div>
             </div>
             <div className="ftc-image"></div>
@@ -479,8 +479,19 @@ const Home = (props) => {
 
         </div>
         <div className="for-businesses">
-          <p className="for-businesses-title">Why choose us?</p>
-          <p className="for-businesses-dsc">Choose us for unmatched quality, exceptional service, and a commitment to<br />exceeding your expectations every time.</p>
+          <p className="for-businesses-title">{props?.language == true ? "Pse të na zgjidhni ne?" : "Why choose us?"}</p>
+          <p className="for-businesses-dsc">
+            {props?.language ? (
+              <>
+                Zgjidhni ne për cilësi të pashembullt, shërbim të jashtëzakonshëm dhe një përkushtim për të<br />kaluar pritshmëritë tuaja çdo herë.
+              </>
+            ) : (
+              <>
+                Choose us for unmatched quality, exceptional service, and a commitment to <br /> exceeding your expectations every time.
+              </>
+            )}
+          </p>
+
           <div className="for-business-body">
             <img src={guypc} alt="guy on pc" className="for-business-img" />
             <div className="fbb-features">
@@ -489,17 +500,17 @@ const Home = (props) => {
                   <img src={collaboration} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
                 </div>
                 <div className="feature-text">
-                  <h4>Seamless Collaboration</h4>
-                  <p className="feature-text-p">Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly.</p>
+                  <h4>{props?.language == true ? "Bashkëpunim i shkëlqyeshëm" : "Seamless Collaboration"}</h4>
+                  <p className="feature-text-p">{props?.language == true ? "Platforma jonë e thjeshtë për t'u përdorur garanton një përvojë të paqëndrueshme të bashkëpunimit. Komunikoni me freelanceret, ndani dosjet dhe ndjekni përparimin e projektit." : "Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly."}</p>
                 </div>
               </div>
               <div className="fbb-feature-2">
                 <div className="feature-icon">
-                  <img src={verified} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
+                  <img src={community} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
                 </div>
                 <div className="feature-text">
-                  <h4>Support and Community</h4>
-                  <p className="feature-text-p">Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly.</p>
+                  <h4>{props?.language == true ? "Përkrahje dhe komunitet" : "Support and Community"}</h4>
+                  <p className="feature-text-p">{props?.language == true ? "Bashkohuni me një komunitet të gjallë të freelancereve dhe klientëve që janë të pasionuar për punën e tyre. Ekipi ynë është në dispozicion për të ju ndihmuar kurdo që të keni paqartësi" : "Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly."}</p>
                 </div>
               </div>
               <div className="fbb-feature-1">
@@ -507,15 +518,15 @@ const Home = (props) => {
                   <img src={verified} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
                 </div>
                 <div className="feature-text">
-                  <h4>Secure and reliable</h4>
-                  <p className="feature-text-p">Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly.</p>
+                  <h4>{props?.language == true ? "Sigurt dhe besueshëm" : "Secure and reliable"}</h4>
+                  <p className="feature-text-p">{props?.language == true ? "Siguria dhe mbrojtja juaj janë prioritetet tona kryesore. Ne zbatohemi masat e forta për të mbrojtur të dhënat dhe transaksionet financiare." : "Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly."}</p>
                 </div>
               </div>
             </div>
           </div>
           <div className="fb-feedbacks">
             <div className="feedback-tag">
-              <h1 className="fb-tag-h1">What our{!isMobile && (<br />)} customers say</h1>
+              <h1 className="fb-tag-h1">{props?.language == true ? (<>Çfarë thonë{!isMobile && (<br />)} klientët tanë</>) : (<>What our{!isMobile && (<br />)} customers say</>)}</h1>
               {!isMobile && (<div className="feedback-tag-arrows">
                 <div className="arrow-1">
                   <FaRegArrowAltCircleLeft size={50} color="white" />

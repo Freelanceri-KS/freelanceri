@@ -43,7 +43,7 @@ const NewHeader = (props) => {
                       }`}
                       onClick={() => navigate("/")}
                     >
-                      FindJob
+                      Find Job
                     </a>
                   </li>
                   <li role="button" className="nav-item margin">
@@ -211,4 +211,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(NewHeader);
+  export default connect(mapStateToProps, mapDispatchToProps)(NewHeader);

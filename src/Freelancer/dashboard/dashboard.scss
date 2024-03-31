@@ -127,7 +127,6 @@
                         margin-top: 10px;
                         border-radius: 10px;
                         background-color: #455bef;
-                        opacity: 0.7;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -361,6 +360,7 @@
                     .fdsc-article-link {
                         color: #455bef;
                         margin-top: 1em;
+                        cursor: pointer;
                     }
 
                     .fdsc-article-nr {

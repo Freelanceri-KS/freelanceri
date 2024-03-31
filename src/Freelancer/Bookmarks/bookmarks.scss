@@ -1,0 +1,526 @@
+.bookmarks {
+    margin-top: 5em;
+
+    .container {
+        .active-posts {
+            margin-top: 1.5em;
+
+
+            .active-posts-grid {
+                display: grid;
+                grid-template-columns: auto auto;
+                margin-bottom: 2em;
+
+                .bookmark-post-container {
+                    border: 1px solid #eaeaea;
+                    border-radius: 15px;
+                    margin-bottom: 1em;
+                    cursor: pointer;
+                    width: 90%;
+
+                    .bookmark-post-container-header {
+                        padding: 0.8em;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .bpch-left {
+                            display: flex;
+                            text-align: start;
+
+                            .bpch-left-user {
+                                margin-left: 1em;
+
+                                .bpch-l-p {
+                                    margin: 0;
+                                }
+                            }
+
+                            .bpch-l-h6 {
+                                margin: 0;
+                            }
+
+                            .bpch-l-p {
+                                margin: 0;
+                            }
+                        }
+
+                        .bpch-center {
+                            display: none;
+
+                            .vert-barrier {
+                                height: 40px;
+                                width: 2px;
+                                margin-left: 10px;
+                                margin-right: 10px;
+                                background: #eaeaea;
+                                display: none;
+                            }
+
+                            .bpch-center-tags {
+                                display: none;
+
+                                .bpch-c-tag {
+                                    font-size: 14px;
+                                    color: #363636;
+                                    font-weight: 400;
+                                }
+
+                                .bpch-c-value {
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    color: #455bef;
+                                }
+                            }
+                        }
+                    }
+
+                    .footer-line {
+                        width: 100%;
+                        height: 2px;
+                        background-color: #eaeaea;
+                    }
+
+                    .bookmark-post-container-body {
+                        padding: 0.8em;
+                    }
+
+                    .bookmark-post-footer {
+                        display: flex;
+                        text-align: center;
+                        justify-content: space-between;
+
+                        .vert-barrier {
+                            height: 60px;
+                            width: 2px;
+                            margin-left: 20px;
+                            margin-right: 20px;
+                            background-color: #eaeaea;
+                        }
+
+                        .bp-footer-info {
+                            margin-left: 2em;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            align-items: center;
+
+                            .value {
+                                color: #455bef;
+                                font-weight: 700;
+                                font-size: 18px;
+                            }
+                        }
+
+                        .bp-apply-details {
+                            height: 60px;
+                            width: 140px;
+                            background-color: #455bef;
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-bottom-right-radius: 10px;
+                            border: none;
+
+                            .a-d-p {
+                                margin: 0;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .expired-posts {
+            margin-top: 1.5em;
+
+            .expired-posts-grid {
+                display: grid;
+                grid-template-columns: auto auto;
+
+                .bookmark-post-container {
+                    border: 1px solid #eaeaea;
+                    border-radius: 15px;
+                    margin-bottom: 1em;
+                    cursor: pointer;
+                    width: 90%;
+
+                    .bookmark-post-container-header {
+                        padding: 0.8em;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .bpch-left {
+                            display: flex;
+                            text-align: start;
+
+                            .bpch-left-user {
+                                margin-left: 1em;
+
+                                .bpch-l-p {
+                                    margin: 0;
+                                }
+                            }
+
+                            .bpch-l-h6 {
+                                margin: 0;
+                            }
+
+                            .bpch-l-p {
+                                margin: 0;
+                            }
+                        }
+
+                        .bpch-center {
+                            display: flex;
+
+                            .vert-barrier {
+                                height: 40px;
+                                width: 2px;
+                                margin-left: 10px;
+                                margin-right: 10px;
+                                background: #eaeaea;
+                                display: none;
+
+                            }
+
+                            .bpch-center-tags {
+                                display: none;
+
+                                .bpch-c-tag {
+                                    font-size: 14px;
+                                    color: #363636;
+                                    font-weight: 400;
+                                }
+
+                                .bpch-c-value {
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    color: #909090;
+                                }
+                            }
+                        }
+                    }
+
+                    .footer-line {
+                        width: 100%;
+                        height: 2px;
+                        background-color: #eaeaea;
+                    }
+
+                    .bookmark-post-container-body {
+                        padding: 0.8em;
+                    }
+
+                    .bookmark-post-footer {
+                        display: flex;
+                        text-align: center;
+                        justify-content: space-between;
+
+                        .vert-barrier {
+                            height: 60px;
+                            width: 2px;
+                            margin-left: 20px;
+                            margin-right: 20px;
+                            background-color: #eaeaea;
+                        }
+
+                        .bp-footer-info {
+                            margin-left: 2em;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            align-items: center;
+
+                            .value {
+                                color: #909090;
+                                font-weight: 700;
+                                font-size: 18px;
+                            }
+                        }
+
+                        .bp-apply-details {
+                            height: 60px;
+                            width: 140px;
+                            background-color: #909090;
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-bottom-right-radius: 10px;
+                            border: none;
+
+                            .a-d-p {
+                                margin: 0;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .bookmarks {
+        margin-top: 5em;
+
+        .container {
+            .active-posts {
+                margin-top: 1.5em;
+                width: 100%;
+
+                .active-posts-grid {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-bottom: 2em;
+
+                    .bookmark-post-container {
+                        border: 1px solid #eaeaea;
+                        border-radius: 15px;
+                        margin-bottom: 1em;
+                        cursor: pointer;
+                        width: 100%;
+
+                        .bookmark-post-container-header {
+                            padding: 0.8em;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            .bpch-left {
+                                display: flex;
+                                text-align: start;
+
+                                .bpch-left-user {
+                                    margin-left: 1em;
+                                }
+
+                                .bpch-l-h6 {
+                                    margin: 0;
+                                }
+
+                                .bpch-l-p {
+                                    margin: 0;
+                                }
+                            }
+
+                            .bpch-center {
+                                display: flex;
+
+                                .vert-barrier {
+                                    height: 60px;
+                                    width: 2px;
+                                    margin-left: 10px;
+                                    margin-right: 10px;
+                                    background-color: #eaeaea;
+                                }
+
+                                .bpch-center-tags {
+                                    .bpch-c-tag {
+                                        font-size: 14px;
+                                        color: #363636;
+                                        font-weight: 400;
+                                    }
+
+                                    .bpch-c-value {
+                                        font-size: 15px;
+                                        font-weight: 600;
+                                        color: #455bef;
+                                    }
+                                }
+                            }
+                        }
+
+                        .footer-line {
+                            width: 100%;
+                            height: 2px;
+                            background-color: #eaeaea;
+                        }
+
+                        .bookmark-post-container-body {
+                            padding: 0.8em;
+                        }
+
+                        .bookmark-post-footer {
+                            display: flex;
+                            text-align: center;
+                            justify-content: space-between;
+
+                            .vert-barrier {
+                                height: 60px;
+                                width: 2px;
+                                margin-left: 10px;
+                                margin-right: 10px;
+                                background-color: #eaeaea;
+                            }
+
+                            .bp-footer-info {
+                                margin-left: 2em;
+                                display: flex;
+                                justify-content: center;
+                                flex-direction: column;
+                                align-items: center;
+
+                                .value {
+                                    color: #455bef;
+                                    font-weight: 700;
+                                    font-size: 15px;
+                                }
+                            }
+
+                            .bp-apply-details {
+                                height: auto;
+                                width: 140px;
+                                background-color: #455bef;
+                                color: white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-bottom-right-radius: 10px;
+                                border: none;
+
+                                .a-d-p {
+                                    margin: 0;
+                                    font-size: 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .expired-posts {
+                margin-top: 1.5em;
+
+                .expired-posts-grid {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-bottom: 2em;
+
+                    .bookmark-post-container {
+                        border: 1px solid #eaeaea;
+                        border-radius: 15px;
+                        margin-bottom: 1em;
+                        cursor: pointer;
+                        width: 100%;
+
+                        .bookmark-post-container-header {
+                            padding: 0.8em;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            .bpch-left {
+                                display: flex;
+                                text-align: start;
+
+                                .bpch-left-user {
+                                    margin-left: 0.5em;
+                                }
+
+                                .bpch-l-h6 {
+                                    margin: 0;
+                                }
+
+                                .bpch-l-p {
+                                    margin: 0;
+                                }
+                            }
+
+                            .bpch-center {
+                                display: flex;
+
+                                .vert-barrier {
+                                    height: 40px;
+                                    width: 2px;
+                                    margin-left: 5px;
+                                    margin-right: 5px;
+                                    background: #eaeaea;
+                                }
+
+                                .bpch-center-tags {
+                                    .bpch-c-tag {
+                                        font-size: 12px;
+                                        color: #363636;
+                                        font-weight: 400;
+                                    }
+
+                                    .bpch-c-value {
+                                        font-size: 13px;
+                                        font-weight: 600;
+                                        color: #909090;
+                                    }
+                                }
+                            }
+                        }
+
+                        .footer-line {
+                            width: 100%;
+                            height: 2px;
+                            background-color: #eaeaea;
+                        }
+
+                        .bookmark-post-container-body {
+                            padding: 0.7em;
+                        }
+
+                        .bookmark-post-footer {
+                            display: flex;
+                            text-align: center;
+                            justify-content: space-between;
+
+                            .vert-barrier {
+                                height: 60px;
+                                width: 2px;
+                                margin-left: 10px;
+                                margin-right: 10px;
+                                background-color: #eaeaea;
+                            }
+
+                            .bp-footer-info {
+                                margin-left: 2em;
+                                display: flex;
+                                justify-content: center;
+                                flex-direction: column;
+                                align-items: center;
+
+                                .value {
+                                    color: #909090;
+                                    font-weight: 700;
+                                    font-size: 13px;
+                                }
+                            }
+
+                            .bp-apply-details {
+                                height: auto;
+                                width: 140px;
+                                background-color: #909090;
+                                color: white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-bottom-right-radius: 10px;
+                                border: none;
+
+                                .a-d-p {
+                                    margin: 0;
+                                    font-size: 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

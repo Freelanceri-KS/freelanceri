@@ -1,0 +1,19 @@
+.blog-details{
+    margin-top: 6em;
+    .container{
+        .blog-details-title{
+            margin-top:3em;
+        }
+        .blog-img{
+            width: 100%;
+            height: 32em;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 2em;
+        }
+        .blog-details-content{
+            margin-top: 2em;
+            margin-bottom: 3em;
+        } 
+    }
+}

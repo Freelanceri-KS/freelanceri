@@ -1,4 +1,3 @@
-import { useState } from "react";
 import './business-dashboard.scss'
 import Graph from "../assets/graph.png"
 import { FiPlusCircle } from "react-icons/fi";
@@ -6,15 +5,17 @@ import Ads from "../assets/banners/ads.png";
 import { FaBookmark } from "react-icons/fa6";
 import User2 from "../assets/profiles/2.png";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 
 const BusinessDashboard = () => {
-
     const [selectedOption, setSelectedOption] = useState('Overview');
 
-    // Function to handle option selection
     const handleOptionClick = (option) => {
         setSelectedOption(option);
     };
+
 
     return (
         <>
@@ -62,17 +63,17 @@ const BusinessDashboard = () => {
                                         ? 'selected-text'
                                         : 'unselected-text'
                                 } onClick={() => handleOptionClick('Find talents')}>
-                                    Find talents
+                                    Find
                                 </a>
                             </li>
                             <div className="barrier"></div>
                             <li>
                                 <a href="#" className={
-                                    selectedOption === 'Contracts'
+                                    selectedOption === 'Profile'
                                         ? 'selected-text'
                                         : 'unselected-text'
-                                } onClick={() => handleOptionClick('Contracts')}>
-                                    Contracts
+                                } onClick={() => handleOptionClick('Profile')}>
+                                    Profile
                                 </a>
                             </li>
 
@@ -118,36 +119,36 @@ function Overview() {
                         <div className="content-body-title">
                             <h4 className="container-title-dsc">Recent post</h4>
                         </div>
-                        <div className="job-post-container">
-                            <div className="job-post-container-header">
-                                <div className="jpch-left">
+                        <div className="db-post-container">
+                            <div className="db-post-container-header">
+                                <div className="dbpch-left">
                                     <img src={User2} alt="User" width={50} height={50} />
-                                    <div className="jpch-left-user">
-                                        <h6 className="jpch-l-h6">Social Media</h6>
-                                        <p className="jpch-l-p">By:Fjolla Berisha</p>
+                                    <div className="dbpch-left-user">
+                                        <h6 className="dbpch-l-h6">Social Media</h6>
+                                        <p className="dbpch-l-p">Fjolla Berisha</p>
                                     </div>
                                 </div>
-                                <div className="jpch-center">
+                                <div className="dbpch-center">
                                     <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Location</p>
-                                        <h6 className="jpch-c-value">Prishtina</h6>
+                                    <div className="dbpch-center-tags">
+                                        <p className="dbpch-c-tag">Location</p>
+                                        <h6 className="dbpch-c-value">Prishtina</h6>
                                     </div>
                                     <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Type</p>
-                                        <h6 className="jpch-c-value">Full-Time</h6>
+                                    <div className="dbpch-center-tags">
+                                        <p className="dbpch-c-tag">Type</p>
+                                        <h6 className="dbpch-c-value">Full-Time</h6>
                                     </div>
                                     <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Category</p>
-                                        <h6 className="jpch-c-value">Graphic Designer</h6>
+                                    <div className="dbpch-center-tags">
+                                        <p className="dbpch-c-tag">Category</p>
+                                        <h6 className="dbpch-c-value">Graphic Designer</h6>
                                     </div>
                                 </div>
                                 <FaBookmark size={25} color="#455bef" />
                             </div>
-                            <div className="job-post-container-body">
-                                <p className="jpcb-p">
+                            <div className="db-post-container-body">
+                                <p className="dbpcb-p">
                                     Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
                                     <br />
                                     <br />
@@ -159,22 +160,22 @@ function Overview() {
                                 </p>
                             </div>
                             <div className="footer-line"></div>
-                            <div className="job-post-footer">
-                                <div className="jp-footer-info">
+                            <div className="db-post-footer">
+                                <div className="dbp-footer-info">
                                     <p className="tag">Kerkoj</p>
                                     <p className="value">1 freelancer</p>
                                 </div>
                                 <div className="vert-barrier"></div>
-                                <div className="jp-footer-info">
+                                <div className="dbp-footer-info">
                                     <div className="tag">Afati</div>
                                     <div className="value">3 ditë</div>
                                 </div>
                                 <div className="vert-barrier"></div>
-                                <div className="jp-footer-info">
+                                <div className="dbp-footer-info">
                                     <div className="tag">Budget</div>
                                     <div className="value">4100$</div>
                                 </div>
-                                <button onClick={() => navigate(`/details-page/1`)} className="jp-apply-details">
+                                <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
                                     <p className='a-d-p'>Apply</p>
                                 </button>
                             </div>
@@ -213,36 +214,36 @@ function Overview() {
                         <div className="content-body-title">
                             <h4 className="container-title-dsc">Most viewed post</h4>
                         </div>
-                        <div className="job-post-container">
-                            <div className="job-post-container-header">
-                                <div className="jpch-left">
+                        <div className="db-post-container">
+                            <div className="db-post-container-header">
+                                <div className="dbpch-left">
                                     <img src={User2} alt="User" width={50} height={50} />
-                                    <div className="jpch-left-user">
-                                        <h6 className="jpch-l-h6">Social Media</h6>
-                                        <p className="jpch-l-p">By:Fjolla Berisha</p>
+                                    <div className="dbpch-left-user">
+                                        <h6 className="dbpch-l-h6">Social Media</h6>
+                                        <p className="dbpch-l-p">Fjolla Berisha</p>
                                     </div>
                                 </div>
-                                <div className="jpch-center">
+                                <div className="dbpch-center">
                                     <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Location</p>
-                                        <h6 className="jpch-c-value">Prishtina</h6>
+                                    <div className="dbpch-center-tags">
+                                        <p className="dbpch-c-tag">Location</p>
+                                        <h6 className="dbpch-c-value">Prishtina</h6>
                                     </div>
                                     <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Type</p>
-                                        <h6 className="jpch-c-value">Full-Time</h6>
+                                    <div className="dbpch-center-tags">
+                                        <p className="dbpch-c-tag">Type</p>
+                                        <h6 className="dbpch-c-value">Full-Time</h6>
                                     </div>
                                     <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Category</p>
-                                        <h6 className="jpch-c-value">Graphic Designer</h6>
+                                    <div className="dbpch-center-tags">
+                                        <p className="dbpch-c-tag">Category</p>
+                                        <h6 className="dbpch-c-value">Graphic Designer</h6>
                                     </div>
                                 </div>
                                 <FaBookmark size={25} color="#455bef" />
                             </div>
-                            <div className="job-post-container-body">
-                                <p className="jpcb-p">
+                            <div className="db-post-container-body">
+                                <p className="dbpcb-p">
                                     Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
                                     <br />
                                     <br />
@@ -254,22 +255,22 @@ function Overview() {
                                 </p>
                             </div>
                             <div className="footer-line"></div>
-                            <div className="job-post-footer">
-                                <div className="jp-footer-info">
+                            <div className="db-post-footer">
+                                <div className="dbp-footer-info">
                                     <p className="tag">Kerkoj</p>
                                     <p className="value">1 freelancer</p>
                                 </div>
                                 <div className="vert-barrier"></div>
-                                <div className="jp-footer-info">
+                                <div className="dbp-footer-info">
                                     <div className="tag">Afati</div>
                                     <div className="value">3 ditë</div>
                                 </div>
                                 <div className="vert-barrier"></div>
-                                <div className="jp-footer-info">
+                                <div className="dbp-footer-info">
                                     <div className="tag">Budget</div>
                                     <div className="value">4100$</div>
                                 </div>
-                                <button onClick={() => navigate(`/details-page/1`)} className="jp-apply-details">
+                                <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
                                     <p className='a-d-p'>Apply</p>
                                 </button>
                             </div>
@@ -279,11 +280,13 @@ function Overview() {
                         <div className="content-body-title">
                             <h4 className="container-title-dsc">Suggested</h4>
                         </div>
+                        <div className="cbsa-wrap">
 
-                        <div className="cbsa-card2">
-                            <img src={User2} alt="" className="cbsa-card-img2" />
-                            <h6 className="cbsa-card-h62">Malena Buchholz</h6>
-                            <p className="cbsa-card-p2">Graphic Designer</p>
+                            <div className="cbsa-card2">
+                                <img src={User2} alt="" className="cbsa-card-img2" />
+                                <h6 className="cbsa-card-h62">Malena Buchholz</h6>
+                                <p className="cbsa-card-p2">Graphic Designer</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -297,100 +300,253 @@ function Posts() {
     const navigate = useNavigate()
     return (
         <div className="posts-business">
-            <div className="content-body">
-                <div className="content-body-sec1">
-                    <div className="content-body-sec1-recentpost">
-                        <div className="content-body-title">
-                            <h4 className="container-title-dsc">Recent post</h4>
-                        </div>
-                        <div className="job-post-container">
-                            <div className="job-post-container-header">
-                                <div className="jpch-left">
-                                    <img src={User2} alt="User" width={50} height={50} />
-                                    <div className="jpch-left-user">
-                                        <h6 className="jpch-l-h6">Social Media</h6>
-                                        <p className="jpch-l-p">By:Fjolla Berisha</p>
-                                    </div>
-                                </div>
-                                <div className="jpch-center">
-                                    <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Location</p>
-                                        <h6 className="jpch-c-value">Prishtina</h6>
-                                    </div>
-                                    <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Type</p>
-                                        <h6 className="jpch-c-value">Full-Time</h6>
-                                    </div>
-                                    <div className="vert-barrier"></div>
-                                    <div className="jpch-center-tags">
-                                        <p className="jpch-c-tag">Category</p>
-                                        <h6 className="jpch-c-value">Graphic Designer</h6>
-                                    </div>
-                                </div>
-                                <FaBookmark size={25} color="#455bef" />
-                            </div>
-                            <div className="job-post-container-body">
-                                <p className="jpcb-p">
-                                    Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
-                                    <br />
-                                    <br />
-                                    We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate
-                                    <br />
-                                    <br />
-
-                                    We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you! ..... Show more
-                                </p>
-                            </div>
-                            <div className="footer-line"></div>
-                            <div className="job-post-footer">
-                                <div className="jp-footer-info">
-                                    <p className="tag">Kerkoj</p>
-                                    <p className="value">1 freelancer</p>
-                                </div>
-                                <div className="vert-barrier"></div>
-                                <div className="jp-footer-info">
-                                    <div className="tag">Afati</div>
-                                    <div className="value">3 ditë</div>
-                                </div>
-                                <div className="vert-barrier"></div>
-                                <div className="jp-footer-info">
-                                    <div className="tag">Budget</div>
-                                    <div className="value">4100$</div>
-                                </div>
-                                <button onClick={() => navigate(`/details-page/1`)} className="jp-apply-details">
-                                    <p className='a-d-p'>Apply</p>
-                                </button>
+            <h4>Ongoing posts</h4>
+            <div className="ongoing-posts">
+                <div className="db-post-container">
+                    <div className="db-post-container-header">
+                        <div className="dbpch-left">
+                            <img src={User2} alt="User" width={50} height={50} />
+                            <div className="dbpch-left-user">
+                                <h6 className="dbpch-l-h6">Social Media</h6>
+                                <p className="dbpch-l-p">Fjolla Berisha</p>
                             </div>
                         </div>
+                        <div className="dbpch-center">
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Location</p>
+                                <h6 className="dbpch-c-value">Prishtina</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Type</p>
+                                <h6 className="dbpch-c-value">Full-Time</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Category</p>
+                                <h6 className="dbpch-c-value">Graphic Designer</h6>
+                            </div>
+                        </div>
+                        <FaBookmark size={25} color="#455bef" />
                     </div>
-                    <div className="content-body-sec1-appls">
-                        <div className="content-body-title">
-                            <h4 className="container-title-dsc">Applications</h4>
+                    <div className="db-post-container-body">
+                        <p className="dbpcb-p">
+                            Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
+                            <br />
+                            <br />
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate
+                            <br />
+                            <br />
+
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you! ..... Show more
+                        </p>
+                    </div>
+                    <div className="footer-line"></div>
+                    <div className="db-post-footer">
+                        <div className="dbp-footer-info">
+                            <p className="tag">Kerkoj</p>
+                            <p className="value">1 freelancer</p>
                         </div>
-                        <div className="cbsa-grid">
-                            <div className="cbsa-card">
-                                <img src={User2} alt="" className="cbsa-card-img" />
-                                <h6 className="cbsa-card-h6">Malena Buchholz</h6>
-                                <p className="cbsa-card-p">Graphic Designer</p>
-                            </div>
-                            <div className="cbsa-card">
-                                <img src={User2} alt="" className="cbsa-card-img" />
-                                <h6 className="cbsa-card-h6">Malena Buchholz</h6>
-                                <p className="cbsa-card-p">Graphic Designer</p>
-                            </div>
-                            <div className="cbsa-card">
-                                <img src={User2} alt="" className="cbsa-card-img" />
-                                <h6 className="cbsa-card-h6">Malena Buchholz</h6>
-                                <p className="cbsa-card-p">Graphic Designer</p>
-                            </div>
-                            <div className="cbsa-card">
-                                <img src={User2} alt="" className="cbsa-card-img" />
-                                <h6 className="cbsa-card-h6">Malena Buchholz</h6>
-                                <p className="cbsa-card-p">Graphic Designer</p>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Afati</div>
+                            <div className="value">3 ditë</div>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Budget</div>
+                            <div className="value">4100$</div>
+                        </div>
+                        <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
+                            <p className='a-d-p'>Apply</p>
+                        </button>
+                    </div>
+                </div>
+                <div className="db-post-container">
+                    <div className="db-post-container-header">
+                        <div className="dbpch-left">
+                            <img src={User2} alt="User" width={50} height={50} />
+                            <div className="dbpch-left-user">
+                                <h6 className="dbpch-l-h6">Social Media</h6>
+                                <p className="dbpch-l-p">Fjolla Berisha</p>
                             </div>
                         </div>
+                        <div className="dbpch-center">
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Location</p>
+                                <h6 className="dbpch-c-value">Prishtina</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Type</p>
+                                <h6 className="dbpch-c-value">Full-Time</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Category</p>
+                                <h6 className="dbpch-c-value">Graphic Designer</h6>
+                            </div>
+                        </div>
+                        <FaBookmark size={25} color="#455bef" />
+                    </div>
+                    <div className="db-post-container-body">
+                        <p className="dbpcb-p">
+                            Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
+                            <br />
+                            <br />
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate
+                            <br />
+                            <br />
+
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you! ..... Show more
+                        </p>
+                    </div>
+                    <div className="footer-line"></div>
+                    <div className="db-post-footer">
+                        <div className="dbp-footer-info">
+                            <p className="tag">Kerkoj</p>
+                            <p className="value">1 freelancer</p>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Afati</div>
+                            <div className="value">3 ditë</div>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Budget</div>
+                            <div className="value">4100$</div>
+                        </div>
+                        <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
+                            <p className='a-d-p'>Apply</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <h4>All posts</h4>
+            <div className="ongoing-posts">
+                <div className="db-post-container">
+                    <div className="db-post-container-header">
+                        <div className="dbpch-left">
+                            <img src={User2} alt="User" width={50} height={50} />
+                            <div className="dbpch-left-user">
+                                <h6 className="dbpch-l-h6">Social Media</h6>
+                                <p className="dbpch-l-p">Fjolla Berisha</p>
+                            </div>
+                        </div>
+                        <div className="dbpch-center">
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Location</p>
+                                <h6 className="dbpch-c-value">Prishtina</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Type</p>
+                                <h6 className="dbpch-c-value">Full-Time</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Category</p>
+                                <h6 className="dbpch-c-value">Graphic Designer</h6>
+                            </div>
+                        </div>
+                        <FaBookmark size={25} color="#455bef" />
+                    </div>
+                    <div className="db-post-container-body">
+                        <p className="dbpcb-p">
+                            Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
+                            <br />
+                            <br />
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate
+                            <br />
+                            <br />
+
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you! ..... Show more
+                        </p>
+                    </div>
+                    <div className="footer-line"></div>
+                    <div className="db-post-footer">
+                        <div className="dbp-footer-info">
+                            <p className="tag">Kerkoj</p>
+                            <p className="value">1 freelancer</p>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Afati</div>
+                            <div className="value">3 ditë</div>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Budget</div>
+                            <div className="value">4100$</div>
+                        </div>
+                        <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
+                            <p className='a-d-p'>Apply</p>
+                        </button>
+                    </div>
+                </div>
+                <div className="db-post-container">
+                    <div className="db-post-container-header">
+                        <div className="dbpch-left">
+                            <img src={User2} alt="User" width={50} height={50} />
+                            <div className="dbpch-left-user">
+                                <h6 className="dbpch-l-h6">Social Media</h6>
+                                <p className="dbpch-l-p">Fjolla Berisha</p>
+                            </div>
+                        </div>
+                        <div className="dbpch-center">
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Location</p>
+                                <h6 className="dbpch-c-value">Prishtina</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Type</p>
+                                <h6 className="dbpch-c-value">Full-Time</h6>
+                            </div>
+                            <div className="vert-barrier"></div>
+                            <div className="dbpch-center-tags">
+                                <p className="dbpch-c-tag">Category</p>
+                                <h6 className="dbpch-c-value">Graphic Designer</h6>
+                            </div>
+                        </div>
+                        <FaBookmark size={25} color="#455bef" />
+                    </div>
+                    <div className="db-post-container-body">
+                        <p className="dbpcb-p">
+                            Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
+                            <br />
+                            <br />
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate
+                            <br />
+                            <br />
+
+                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you! ..... Show more
+                        </p>
+                    </div>
+                    <div className="footer-line"></div>
+                    <div className="db-post-footer">
+                        <div className="dbp-footer-info">
+                            <p className="tag">Kerkoj</p>
+                            <p className="value">1 freelancer</p>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Afati</div>
+                            <div className="value">3 ditë</div>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="dbp-footer-info">
+                            <div className="tag">Budget</div>
+                            <div className="value">4100$</div>
+                        </div>
+                        <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
+                            <p className='a-d-p'>Apply</p>
+                        </button>
                     </div>
                 </div>
             </div>

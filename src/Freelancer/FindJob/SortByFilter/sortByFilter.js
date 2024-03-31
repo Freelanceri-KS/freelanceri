@@ -31,21 +31,20 @@ const SortBy = (props) => {
     <>
       <div className="filter">
         <ul className="list-group expandable-list ">
-          <li className="list-group-item">
+          <li className="list-group-item lgi-title">
             <h2 className="lgi-h2">Sort By Filter</h2>
-            <CiFilter size={30} color="#455bef"/>
+            <CiFilter size={30} color="#455bef" />
           </li>
           <li
             onClick={() => handleItemClick("category")}
-            className={`list-group-item ${
-              expandedItem === "category" ? <IoIosArrowUp/> : <IoIosArrowDown />
+            className={`list-group-item ${expandedItem === "category" ? <IoIosArrowUp /> : <IoIosArrowDown />
 
-            }`}
+              }`}
           >
             <div className="d-flex justify-content-between align-items-center single-item">
               <h5>Category</h5>
               <span className="icon" role="button">
-                {expandedItem === "category" ? <IoIosArrowUp/> : <IoIosArrowDown />}
+                {expandedItem === "category" ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </span>
             </div>
             {expandedItem === "category" && (
@@ -54,7 +53,7 @@ const SortBy = (props) => {
                   {category?.map((el) => {
                     return (
                       <>
-                        <button className="btn btn-md btn-secondary">
+                        <button className="category-item-btn">
                           {el?.category}
                         </button>
                       </>
@@ -71,7 +70,7 @@ const SortBy = (props) => {
             <div className="d-flex align-items-center single-item">
               <h5>Location</h5>
               <span className="icon" role="button">
-                {expandedItem == "item2" ? <IoIosArrowUp/> : <IoIosArrowDown />}
+                {expandedItem == "item2" ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </span>
             </div>
             {expandedItem == "item2" && (
