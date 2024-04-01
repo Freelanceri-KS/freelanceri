@@ -7,7 +7,9 @@ import User2 from "../assets/profiles/2.png";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { IoSearchOutline } from 'react-icons/io5';
+import { CiLocationOn } from 'react-icons/ci';
+import { FaEdit } from "react-icons/fa";
 
 const BusinessDashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Overview');
@@ -86,13 +88,316 @@ const BusinessDashboard = () => {
                         {selectedOption === 'Posts' && (
                             <Posts />
                         )}
+                        {selectedOption === 'Applications' && (
+                            <Applications />
+                        )}
+                        {selectedOption === 'Find talents' && (
+                            <Find />
+                        )}
+                        {selectedOption === 'Profile' && (
+                            <Profile />
+                        )}
                     </div>
                 </div>
             </div>
         </>
     );
 }
+const Profile = () => {
+    return (
+        <>
+            <div className="row align-items-center">
+                {/* <div className="col-md-3"> */}
+                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="profile-picture rounded-circle"></img>
+                {/* </div> */}
+                <div className="col-md-7">
+                    <h4 className='p-1'>Filan Fisteku</h4>
+                    <h5 className='p-1'>Company Name</h5>
+                    <strong className='p-1'>Freelanceri</strong>
+                </div>
+                <div className="col-md-2 text-end">
+                    <FaEdit className='editIcon' />
+                </div>
+            </div>
+            <hr />
+            <div class="container">
+                <div class="row gap-5">
+                    <div class="col-sm">
+                        <strong>Role</strong>
+                        <p>Individ</p>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Phone</strong>
+                        <p>+38344123123</p>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Country</strong>
+                        <p>Kosova</p>
+                    </div>
+                    <div class="col-sm">
+                        <strong>City</strong>
+                        <p>Pristina</p>
+                    </div>
+                    <div class="col-sm ">
+                        <strong>Email</strong>
+                        <p>Email@gmail.com</p>
+                    </div>
+                    <div class="col-sm ">
+                        <strong>Website</strong>
+                        <p>www.website.com</p>
+                    </div>
+                </div>
+            </div>
+            <hr />
 
+
+            <h3 className='mb-4 mt-3'>Money invested</h3>
+
+
+            <div className="content">
+                <div className="content-header">
+                    <div className="stat">
+                        <h6 className="stat-name">This week</h6>
+                        <h1 className="stat-nr">40€</h1>
+                    </div>
+                    <div className="header-barrier"></div>
+                    <div className="stat">
+                        <h6 className="stat-name">This month</h6>
+                        <h1 className="stat-nr">120€</h1>
+                    </div>
+                    <div className="header-barrier"></div>
+                    <div className="stat">
+                        <h6 className="stat-name">This Year</h6>
+                        <h1 className="stat-nr">230€</h1>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+const Find = () => {
+
+    return (
+        <>
+            <div className="search-filter-bar">
+                <div class="input-with-icon">
+                    <input type="text" class="form-control" placeholder=" Emri Mbiemri" />
+                    <span class="icon-prefix"><IoSearchOutline size={20} />
+                    </span>
+                </div>
+                <div className="vert-barrier"></div>
+                <div class="input-with-icon">
+                    <input type="text" class="form-control" placeholder="Profesioni..." />
+                    <span class="icon-prefix"><CiLocationOn size={20} />
+                    </span>
+                </div>
+                <div className="vert-barrier"></div>
+                <div className="search-button">Search</div>
+            </div>
+            <div class="container">
+                <div class="row mt-3">
+                    <div class="col-sm">
+                        <div class="card" style={{ width: "20rem" }}>
+                            <div className="d-flex justify-content-center mt-3">
+                                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="d-flex justify-content-center">Filan Fisteku</h5>
+                                <h5 class="d-flex justify-content-center text-muted mt-3 mb-3">Graphics Designer</h5>
+                                <button class="btn btn-primary">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card" style={{ width: "20rem" }}>
+                            <div className="d-flex justify-content-center mt-3">
+                                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="d-flex justify-content-center">Filan Fisteku</h5>
+                                <h5 class="d-flex justify-content-center text-muted mt-3 mb-3">Graphics Designer</h5>
+                                <button class="btn btn-primary">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card" style={{ width: "20rem" }}>
+                            <div className="d-flex justify-content-center mt-3">
+                                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="d-flex justify-content-center">Filan Fisteku</h5>
+                                <h5 class="d-flex justify-content-center text-muted mt-3 mb-3">Graphics Designer</h5>
+                                <button class="btn btn-primary">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+const Applications = () => {
+    return (
+        <>
+            <div className="content">
+                <div className="content-header">
+                    <div className="stat">
+                        <h6 className="stat-name">Number of users</h6>
+                        <h1 className="stat-nr">320</h1>
+                    </div>
+                    <div className="header-barrier"></div>
+                    <div className="stat">
+                        <h6 className="stat-name">Number of posts</h6>
+                        <h1 className="stat-nr">120</h1>
+                    </div>
+                    <div className="header-barrier"></div>
+                    <div className="stat">
+                        <h6 className="stat-name">Number of applications</h6>
+                        <h1 className="stat-nr">230</h1>
+                    </div>
+                </div>
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div className='d-flex align-items-center gap-1'>
+                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                                        <ul className='text-start'>
+                                            <li class="list-group-item">
+                                                <h4>Malena Buchholz</h4>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p className='text-muted'>Grapgic Design</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p className='mx-auto mt-3 mb-3'>
+                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
+                                    </p>
+                                    <p class="card-text"></p>
+                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div className='d-flex align-items-center gap-1'>
+                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                                        <ul className='text-start'>
+                                            <li class="list-group-item">
+                                                <h4>Malena Buchholz</h4>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p className='text-muted'>Grapgic Design</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p className='mx-auto mt-3 mb-3'>
+                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
+                                    </p>
+                                    <p class="card-text"></p>
+                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div className='d-flex align-items-center gap-1'>
+                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                                        <ul className='text-start'>
+                                            <li class="list-group-item">
+                                                <h4>Malena Buchholz</h4>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p className='text-muted'>Grapgic Design</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p className='mx-auto mt-3 mb-3'>
+                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
+                                    </p>
+                                    <p class="card-text"></p>
+                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div className='d-flex align-items-center gap-1'>
+                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                                        <ul className='text-start'>
+                                            <li class="list-group-item">
+                                                <h4>Malena Buchholz</h4>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p className='text-muted'>Grapgic Design</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p className='mx-auto mt-3 mb-3'>
+                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
+                                    </p>
+                                    <p class="card-text"></p>
+                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div className='d-flex align-items-center gap-1'>
+                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                                        <ul className='text-start'>
+                                            <li class="list-group-item">
+                                                <h4>Malena Buchholz</h4>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p className='text-muted'>Grapgic Design</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p className='mx-auto mt-3 mb-3'>
+                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
+                                    </p>
+                                    <p class="card-text"></p>
+                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div className='d-flex align-items-center gap-1'>
+                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
+                                        <ul className='text-start'>
+                                            <li class="list-group-item">
+                                                <h4>Malena Buchholz</h4>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <p className='text-muted'>Grapgic Design</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p className='mx-auto mt-3 mb-3'>
+                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
+                                    </p>
+                                    <p class="card-text"></p>
+                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </>
+    )
+}
 function Overview() {
     const navigate = useNavigate()
     return (

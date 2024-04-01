@@ -178,15 +178,21 @@ const NewHeader = (props) => {
               </div>
             </div>
             <div className="headerItems">
-              {props.isLoggedin === true ? null : (
+              {props.isLoggedin === false ?
+              <>
                 <a
                   className="btn btn-primary my-2 my-sm-0 free-btn"
                   type="button"
                   href="/registerpage"
-                >
+                  >
                   Register Now
                 </a>
-              )}
+                  </>
+                :
+                <>
+              <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="pfp"></img>
+                </>
+              }
             </div>
           </div>
         </div>

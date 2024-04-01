@@ -1,4 +1,47 @@
 .business-dashboard {
+    .editIcon{
+        font-size: 25px;
+    }
+    .profile-picture{
+        width: 150px;
+    }
+    .search-filter-bar {
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+  
+        .input-with-icon {
+          position: relative;
+          flex: 2;
+        }
+        .vert-barrier{
+          height: auto;
+          width: 1px;
+          background-color: #eaeaea ;
+        }
+        .input-with-icon input {
+          padding-left: 30px;
+          border: none;
+        }
+  
+        .input-with-icon .icon-prefix {
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        .search-button{
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #455bef;
+          font-weight: 500;
+        }
+  
+      }
     .wrap {
         margin-top: 6em;
         display: flex;
