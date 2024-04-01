@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import axios from '../../axios';
 import { useParams } from 'react-router';
 import { data } from 'jquery';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -58,7 +59,10 @@ const DetailsPage = () => {
     getJobDetail();
     getProfile();
   }, [])
+  const navigate = useNavigate();
+
   return (
+
     <div className="details-page">
       <div className="dp-left">
         {/* {profileDetails?.map(el => {
@@ -308,7 +312,7 @@ const DetailsPage = () => {
                 <div className="tag">Budget</div>
                 <div className="value">4100$</div>
               </div>
-              <button className="jp-apply-details" onClick={openModal}>
+              <button className="jp-apply-details" onClick={() => navigate('/appform')}>
                 <p className='a-d-p'>Apply</p>
               </button>
             </div>

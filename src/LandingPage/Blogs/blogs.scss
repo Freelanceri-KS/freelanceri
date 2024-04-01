@@ -19,7 +19,15 @@
                 height: 28em;
                 object-fit: cover;
             }
-
+            .article-tags{
+                .first-tag{
+                    padding: 13px;
+                    width: 5em;
+                    background-color: rgb(69, 91,239, 0.7);
+                    border-radius: 5px;
+                    margin: 5px;
+                }
+            }
             .article-preview {
                 .article-preview-title {
                     font-size: 30px;

@@ -22,6 +22,7 @@ import BusinessDashboard from "./Business/business-dashboard";
 import Blogs from "./LandingPage/Blogs/blogs"
 import BlogDetails from "./LandingPage/Blogs/blogDetails"
 import Bookmarks from "./Freelancer/Bookmarks/bookmarks";
+import ApplicationForm from "./Freelancer/ApplicationForm/applicationForm"
 
 function App(props) {
   return (
@@ -49,6 +50,7 @@ function App(props) {
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blog-details" element={<BlogDetails />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/appform" element={<ApplicationForm/>}/>
             </>
           ) : (
             <>
@@ -63,6 +65,8 @@ function App(props) {
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blog-details" element={<BlogDetails />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/appform" element={<ApplicationForm/>}/>
+
             </>
           )}
 
