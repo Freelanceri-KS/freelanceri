@@ -20,12 +20,17 @@
                 object-fit: cover;
             }
             .article-tags{
+                display: flex;
+                align-items: center ;
                 .first-tag{
-                    padding: 13px;
-                    width: 5em;
+                    padding: 10px;
                     background-color: rgb(69, 91,239, 0.7);
                     border-radius: 5px;
                     margin: 5px;
+                    color: #eaeaea;
+                }
+                .first-tag-p{
+                    color: #909090;
                 }
             }
             .article-preview {

@@ -176,7 +176,6 @@ const Profile = () => {
     )
 }
 const Find = () => {
-
     return (
         <>
             <div className="search-filter-bar">
@@ -194,42 +193,193 @@ const Find = () => {
                 <div className="vert-barrier"></div>
                 <div className="search-button">Search</div>
             </div>
-            <div class="container">
-                <div class="row mt-3">
-                    <div class="col-sm">
-                        <div class="card" style={{ width: "20rem" }}>
-                            <div className="d-flex justify-content-center mt-3">
-                                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="d-flex justify-content-center">Filan Fisteku</h5>
-                                <h5 class="d-flex justify-content-center text-muted mt-3 mb-3">Graphics Designer</h5>
-                                <button class="btn btn-primary">View Profile</button>
-                            </div>
+            <div className="business-find">
+                <h4 className='business-find-title'>Best of Developers</h4>
+                <div className="business-find-bestof-grid">
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
                         </div>
                     </div>
-                    <div class="col-sm">
-                        <div class="card" style={{ width: "20rem" }}>
-                            <div className="d-flex justify-content-center mt-3">
-                                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="d-flex justify-content-center">Filan Fisteku</h5>
-                                <h5 class="d-flex justify-content-center text-muted mt-3 mb-3">Graphics Designer</h5>
-                                <button class="btn btn-primary">View Profile</button>
-                            </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
                         </div>
                     </div>
-                    <div class="col-sm">
-                        <div class="card" style={{ width: "20rem" }}>
-                            <div className="d-flex justify-content-center mt-3">
-                                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="d-flex justify-content-center">Filan Fisteku</h5>
-                                <h5 class="d-flex justify-content-center text-muted mt-3 mb-3">Graphics Designer</h5>
-                                <button class="btn btn-primary">View Profile</button>
-                            </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                </div>
+                <h4 className='business-find-title'>Best of Graphic Designers</h4>
+                <div className="business-find-bestof-grid">
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                </div>
+                <h4 className='business-find-title'>Best of Graphic Designers</h4>
+                <div className="business-find-bestof-grid">
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
+                        </div>
+                    </div>
+                    <div className="business-find-bestof-grid-item">
+                        <div className="bfbgi-img">
+                            <img src={User2} alt="User" width={80} height={80} />
+                        </div>
+                        <div className="bfbgi-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                        <div className="bfbgi-footer">
+                            <p>View profile</p>
                         </div>
                     </div>
                 </div>
@@ -257,138 +407,176 @@ const Applications = () => {
                         <h1 className="stat-nr">230</h1>
                     </div>
                 </div>
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <div className='d-flex align-items-center gap-1'>
-                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                                        <ul className='text-start'>
-                                            <li class="list-group-item">
-                                                <h4>Malena Buchholz</h4>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <p className='text-muted'>Graphic Design</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <p className='mx-auto mt-3 mb-3'>
-                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
-                                    </p>
-                                    <p class="card-text"></p>
-                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                <div className="business-applications">
+                    <h4 className='business-applications-title'>Applications</h4>
+                    <div className="search-filter-bar" id='business-sfb'>
+                        <div class="input-with-icon">
+                            <input type="text" class="form-control" placeholder=" Job title..." />
+                            <span class="icon-prefix"><IoSearchOutline size={20} />
+                            </span>
+                        </div>
+
+                        <div className="search-button">Search</div>
+                    </div>
+                    <h4 className='business-applications-title'>Ongoing applications</h4>
+                    <div className="business-applications-grid">
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <div className='d-flex align-items-center gap-1'>
-                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                                        <ul className='text-start'>
-                                            <li class="list-group-item">
-                                                <h4>Malena Buchholz</h4>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <p className='text-muted'>Grapgic Design</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <p className='mx-auto mt-3 mb-3'>
-                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
-                                    </p>
-                                    <p class="card-text"></p>
-                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
-                                </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer">
+                                <p>View profile</p>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <div className='d-flex align-items-center gap-1'>
-                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                                        <ul className='text-start'>
-                                            <li class="list-group-item">
-                                                <h4>Malena Buchholz</h4>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <p className='text-muted'>Grapgic Design</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <p className='mx-auto mt-3 mb-3'>
-                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
-                                    </p>
-                                    <p class="card-text"></p>
-                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <div className='d-flex align-items-center gap-1'>
-                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                                        <ul className='text-start'>
-                                            <li class="list-group-item">
-                                                <h4>Malena Buchholz</h4>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <p className='text-muted'>Grapgic Design</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <p className='mx-auto mt-3 mb-3'>
-                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
-                                    </p>
-                                    <p class="card-text"></p>
-                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
-                                </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer">
+                                <p>View profile</p>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <div className='d-flex align-items-center gap-1'>
-                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                                        <ul className='text-start'>
-                                            <li class="list-group-item">
-                                                <h4>Malena Buchholz</h4>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <p className='text-muted'>Grapgic Design</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <p className='mx-auto mt-3 mb-3'>
-                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
-                                    </p>
-                                    <p class="card-text"></p>
-                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
                                 </div>
                             </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer">
+                                <p>View profile</p>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <div className='d-flex align-items-center gap-1'>
-                                        <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="w-25 rounded-circle"></img>
-                                        <ul className='text-start'>
-                                            <li class="list-group-item">
-                                                <h4>Malena Buchholz</h4>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <p className='text-muted'>Grapgic Design</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <p className='mx-auto mt-3 mb-3'>
-                                        <h4 className='text-muted'>Position: Mobile App Developer</h4>
-                                    </p>
-                                    <p class="card-text"></p>
-                                    <button class="btn btn-primary btn-sm"><h5>View Profile</h5></button>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
                                 </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 className='business-applications-title-exp'>Expired applications</h4>
+                    <div className="business-applications-grid">
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer-exp">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer-exp">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer-exp">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer-exp">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer-exp">
+                                <p>View profile</p>
+                            </div>
+                        </div>
+                        <div className="business-applications-grid-item">
+                            <div className="bagi-head">
+                                <img src={User2} alt="User" width={80} height={80} />
+                                <div className="bagi-head-identity">
+                                    <h5>Name Surname</h5>
+                                    <p>Job title</p>
+                                </div>
+                            </div>
+                            <p className='bagi-position'>Position: Mobile App Developer</p>
+                            <div className="bagi-footer-exp">
+                                <p>View profile</p>
                             </div>
                         </div>
                     </div>
@@ -599,8 +787,6 @@ function Overview() {
         </div>
     )
 }
-
-
 function Posts() {
     const navigate = useNavigate()
     return (
