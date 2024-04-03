@@ -158,17 +158,17 @@ const Profile = () => {
                 <div className="content-header">
                     <div className="stat">
                         <h6 className="stat-name">This week</h6>
-                        <h1 className="stat-nr">40€</h1>
+                        <h1 className="stat-nr">/</h1>
                     </div>
                     <div className="header-barrier"></div>
                     <div className="stat">
                         <h6 className="stat-name">This month</h6>
-                        <h1 className="stat-nr">120€</h1>
+                        <h1 className="stat-nr">/</h1>
                     </div>
                     <div className="header-barrier"></div>
                     <div className="stat">
                         <h6 className="stat-name">This Year</h6>
-                        <h1 className="stat-nr">230€</h1>
+                        <h1 className="stat-nr">/</h1>
                     </div>
                 </div>
             </div>
@@ -269,7 +269,7 @@ const Applications = () => {
                                                 <h4>Malena Buchholz</h4>
                                             </li>
                                             <li class="list-group-item">
-                                                <p className='text-muted'>Grapgic Design</p>
+                                                <p className='text-muted'>Graphic Design</p>
                                             </li>
                                         </ul>
                                     </div>

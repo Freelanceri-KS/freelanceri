@@ -9,13 +9,15 @@ import { IoSearchOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { FaBookmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 const FindJob = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTable] = useState(false);
   const [jobs, setJobs] = useState([])
 
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const getJobs = () => {
     axios.get('/posts/all').then(
@@ -71,127 +73,71 @@ const navigate = useNavigate()
 
         <div className="job-post-list">
 
-        {/* MAPING SETUP */}
-        {/* {jobs?.map(el => {
-          return(
-            <>
-              <div className="job-post-container">
-            <div className="job-post-container-header">
-              <div className="jpch-left">
-                <img src={User2} alt="User" width={50} height={50} />
-                <div className="jpch-left-user">
-                  <h6 className="jpch-l-h6">Social Media</h6>
-                  <p className="jpch-l-p">By:{el?.user}</p>
-                </div>
-              </div>
-              <div className="jpch-center">
-                <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Location</p>
-                  <h6 className="jpch-c-value">{el?.location}</h6>
-                </div>
-                <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Type</p>
-                  <h6 className="jpch-c-value">{el?.type}</h6>
-                </div>
-                <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Category</p>
-                  <h6 className="jpch-c-value">{el?.category}</h6>
-                </div>
-              </div>
-              <FaBookmark size={25} color="#455bef" />
-            </div>
-            <div className="job-post-container-body">
-              <p className="jpcb-p">
-              {el?.description}
-              </p>
-            </div>
-            <div className="footer-line"></div>
-            <div className="job-post-footer">
-              <div className="jp-footer-info">
-                <p className="tag">Kerkoj</p>
-                <p className="value">{el?.noFreelancer}</p>
-              </div>
-              <div className="vert-barrier"></div>
-              <div className="jp-footer-info">
-                <div className="tag">Afati</div>
-                <div className="value">3 ditë {el?.deadline}</div>
-              </div>
-              <div className="vert-barrier"></div>
-              <div className="jp-footer-info">
-                <div className="tag">Budget</div>
-                <div className="value">{el?.budget}$</div>
-              </div>
-              <button  onClick={()=>navigate('/details-page')} className="jp-apply-details">
-                <p className='a-d-p'>Apply</p>
-              </button>
-            </div>
-          </div>
-            </>
-          )
-        })} */}
-        {/* MAPING SETUP */}
-          <div className="job-post-container" onClick={()=>navigate("/details-page/1")}>
-            <div className="job-post-container-header">
-              <div className="jpch-left">
-                <img src={User2} alt="User" width={50} height={50} />
-                <div className="jpch-left-user">
-                  <h6 className="jpch-l-h6">Social Media</h6>
-                  <p className="jpch-l-p">By:Fjolla Berisha</p>
-                </div>
-              </div>
-              <div className="jpch-center">
-                <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Location</p>
-                  <h6 className="jpch-c-value">Prishtina</h6>
-                </div>
-                <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Type</p>
-                  <h6 className="jpch-c-value">Full-Time</h6>
-                </div>
-                <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Category</p>
-                  <h6 className="jpch-c-value">Graphic Designer</h6>
-                </div>
-              </div>
-              <FaBookmark size={25} color="#455bef" />
-            </div>
-            <div className="job-post-container-body">
-              <p className="jpcb-p">
-                I'm on a mission to transform my room into a cozy sanctuary, and I'm reaching out to the creative minds out there for some inspiration!
-                <br />
-                <br />
-                We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're.... Show more
-              </p>
-            </div>
-            <div className="footer-line"></div>
-            <div className="job-post-footer">
-              <div className="jp-footer-info">
-                <p className="tag">Kerkoj</p>
-                <p className="value">1 freelancer</p>
-              </div>
-              <div className="vert-barrier"></div>
-              <div className="jp-footer-info">
-                <div className="tag">Afati</div>
-                <div className="value">3 ditë</div>
-              </div>
-              <div className="vert-barrier"></div>
-              <div className="jp-footer-info">
-                <div className="tag">Budget</div>
-                <div className="value">4100$</div>
-              </div>
-              <button  onClick={()=>navigate(`/details-page/1`)} className="jp-apply-details">
-                <p className='a-d-p'>Apply</p>
-              </button>
-            </div>
-          </div>
-          <img src={Ads} alt="Banner" className="job-list-banner" />
-      </div>
+          {/* MAPING SETUP */}
+          {jobs?.map(el => {
+            return (
+              <>
+                <Link to={`/details-page/${el._id}`} key={el._id} style={{ textDecoration: 'none' }}>
+                  <div className="job-post-container">
+                    <div className="job-post-container-header">
+                      <div className="jpch-left">
+                        <img src={User2} alt="User" width={50} height={50} />
+                        <div className="jpch-left-user">
+                          <h6 className="jpch-l-h6">{el?.title}</h6>
+                          <p className="jpch-l-p">{el?.userId.firstName} {el?.userId.lastName}</p>
+                        </div>
+                      </div>
+                      <div className="jpch-center">
+                        <div className="vert-barrier"></div>
+                        <div className="jpch-center-tags">
+                          <p className="jpch-c-tag">Location</p>
+                          <h6 className="jpch-c-value">{el?.city.city}</h6>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="jpch-center-tags">
+                          <p className="jpch-c-tag">Experience</p>
+                          <h6 className="jpch-c-value">{el?.experienceLevel}</h6>
+                        </div>
+                        <div className="vert-barrier"></div>
+                        <div className="jpch-center-tags">
+                          <p className="jpch-c-tag">Category</p>
+                          <h6 className="jpch-c-value">{el?.profession.category}</h6>
+                        </div>
+                      </div>
+                      <FaBookmark size={25} color="#455bef" />
+                    </div>
+                    <div className="job-post-container-body">
+                      <p className="jpcb-p">
+                        {el?.description}
+                      </p>
+                    </div>
+                    <div className="footer-line"></div>
+                    <div className="job-post-footer">
+                      <div className="jp-footer-info">
+                        <p className="tag">Kerkoj</p>
+                        <p className="value">{el?.neededWorkers} freelancer</p>
+                      </div>
+                      <div className="vert-barrier"></div>
+                      <div className="jp-footer-info">
+                        <div className="tag">Afati</div>
+                        <div className="value">{el?.duration} ditë</div>
+                      </div>
+                      <div className="vert-barrier"></div>
+                      <div className="jp-footer-info">
+                        <div className="tag">Budget</div>
+                        <div className="value">{el?.budget}$</div>
+                      </div>
+                      <button onClick={() => navigate('/details-page')} className="jp-apply-details">
+                        <p className='a-d-p'>Apply</p>
+                      </button>
+                    </div>
+                  </div></Link>
+              </>
+            )
+          })}
+
+          {/* <img src={Ads} alt="Banner" className="job-list-banner" /> */}
+        </div>
       </div>
       <div className="find-job-right">
         <img src={AdBanner} alt="Advertising" className="find-job-right-banner" />

@@ -5,8 +5,6 @@ let token = window.localStorage.getItem("token");
 const defaultInstance = axios.create({
   baseURL: process.env.REACT_APP_API,
   headers: {
-    Authorization: `Bearer ${token}`,
-    
   },
 });
 // defaultInstance.interceptors.request.use(function (config) {
