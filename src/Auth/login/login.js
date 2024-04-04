@@ -7,7 +7,6 @@ import { setLoggedIn, setToken } from "../../redux/Functions/actions";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import { connect } from "react-redux";
-// import { saveDataToLocalStorage } from "./localStorage";
 import { saveDataToLocalStorage } from "../../Helpers/localStorage";
 
 const LoginPage = (props) => {
@@ -16,14 +15,31 @@ const LoginPage = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loginEndpoint, setLoginEndpoint] = useState(null);
+  const [isFreelancerSelected, setIsFreelancerSelected] = useState(false);
+  const [isBusinessSelected, setIsBusinessSelected] = useState(false);
+
+  const handleFreelancerClick = () => {
+    setLoginEndpoint("https://weak-lime-squid-fez.cyclic.app/freelancer/login");
+    setIsFreelancerSelected(true);
+    setIsBusinessSelected(false);
+  };
+
+  const handleBusinessClick = () => {
+    setLoginEndpoint("https://weak-lime-squid-fez.cyclic.app/business/login");
+    setIsFreelancerSelected(false);
+    setIsBusinessSelected(true);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!loginEndpoint) {
+      toast.error("Please select Freelancer or Business.");
+      return;
+    }
     setLoading(true);
     axios
-      .post("https://weak-lime-squid-fez.cyclic.app/freelancer/login", {
-        email,
-        password,
-      })
+      .post(loginEndpoint, { email, password })
       .then((response) => {
         setLoading(false);
         const { freelancer, token } = response.data;
@@ -31,7 +47,6 @@ const LoginPage = (props) => {
         toast.success("Login successful!");
         dispatch(setToken(response.data.token));
 
-        // Save user data to local storage after login
         saveDataToLocalStorage({
           userData: {
             firstName: freelancer.firstName,
@@ -45,10 +60,15 @@ const LoginPage = (props) => {
           },
         });
 
-        console.log(saveDataToLocalStorage());
-        console.log("❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️");
         props?.setLoggedIn(true);
-        navigate("/");
+        if (
+          loginEndpoint ===
+          "https://weak-lime-squid-fez.cyclic.app/business/login"
+        ) {
+          navigate("/business-dashboard");
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         setLoading(false);
@@ -60,8 +80,30 @@ const LoginPage = (props) => {
     <div className="login-page">
       <div className="left">
         <div className="left-wrap">
-          <h3 className="left-h3">Log in</h3>
-          <form onSubmit={handleSubmit}>
+          <h3 className="left-h3">Log in as</h3>
+          <div className="button-group">
+            <button
+              onClick={handleFreelancerClick}
+              style={{
+                backgroundColor: isFreelancerSelected ? "#455bef" : "white",
+                color: isFreelancerSelected ? "white" : "#455bef",
+              }}
+              className="btn btn-primary left-btn"
+            >
+              Freelancer
+            </button>
+            <button
+              onClick={handleBusinessClick}
+              style={{
+                backgroundColor: isBusinessSelected ? "#455bef" : "white",
+                color: isBusinessSelected ? "white" : "#455bef",
+              }}
+              className="btn btn-primary right-btn"
+            >
+              Business
+            </button>
+          </div>
+          <form onSubmit={handleSubmit} className="login-form">
             <div className="form-floating mb-3">
               <input
                 required
@@ -83,8 +125,9 @@ const LoginPage = (props) => {
                 placeholder="Password"
               />
               <label htmlFor="floatingPassword">Password</label>
-
-              <p style={{float:"right",marginBottom:"3em"}}>Forgot password?</p>
+              <p style={{ float: "right", marginBottom: "3em" }}>
+                Forgot password?
+              </p>
             </div>
             <button type="submit" className="btn btn-primary">
               {loading ? "Logging in..." : "Continue"}
@@ -93,30 +136,24 @@ const LoginPage = (props) => {
         </div>
       </div>
       <div className="right">
-        <img
-          className="right-img"
-          src={maskgroup}
-          alt="maskgroup"
-        />
+        <img className="right-img" src={maskgroup} alt="maskgroup" />
       </div>
     </div>
   );
 };
 
-// export default LoginPage;
 const mapStateToProps = (state) => {
   return {
-    // language: state.data.language,
     isLoggedin: state.data.isLoggedin,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // setLang: (data) => dispatch(setLang(data)),
     setLoggedIn: (data) => {
       dispatch(setLoggedIn(data));
     },
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
