@@ -1,9 +1,10 @@
-import { SET_LANG, SET_TOKEN , SET_LOGGEDIN } from "./types";
+import { SET_LANG, SET_TOKEN , SET_LOGGEDINFreelancer,SET_LOGGEDINBusiness } from "./types";
 
 const INITIAL_STATE = {
   language: true,
   token: "",
-  isLoggedin: false
+  isLoggedinFreelancer: false,
+  isLoggedinBusiness:false,
 };
 const initialReducer = (state = INITIAL_STATE, action) => {
   switch (action?.type) {
@@ -11,10 +12,13 @@ const initialReducer = (state = INITIAL_STATE, action) => {
       return { ...state, language: action?.data };
     case SET_TOKEN:
       return { ...state, token: action.data};
-      case SET_LOGGEDIN:
-      return{ ...state, isLoggedin: action?.data };
+      case SET_LOGGEDINFreelancer:
+      return{ ...state, isLoggedinFreelancer: action?.data };
+      case SET_LOGGEDINBusiness:
+        return {...state,isLoggedinBusiness:action?.data}
     default:
       return state;
   }
 };
+
 export default initialReducer;

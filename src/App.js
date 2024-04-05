@@ -16,7 +16,7 @@ import PostControll from "./super-admin/PostControll/postControll";
 import SuperDashboard from "./super-admin/super-admin/dashboard";
 import FreelancerDashboard from "./Freelancer/dashboard/dashboard";
 import Login from "./Auth/login/login";
-import { setLang, setLoggedIn } from "./redux/Functions/actions";
+import { setLang, setLoggedInBusiness, setLoggedInFreelancer } from "./redux/Functions/actions";
 import { connect } from "react-redux";
 import BusinessDashboard from "./Business/business-dashboard";
 import Blogs from "./LandingPage/Blogs/blogs"
@@ -36,41 +36,39 @@ function App(props) {
           ""
         )}
         <Routes>
-          {props?.isLoggedin == false ? (
+          {(!props.isLoggedinFreelancer && !props.isLoggedinBusiness) && (
             <>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<Home />} />
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/welcome" element={<LoginMessage />} />
               <Route path="/registerpage" element={<RegisterPage />} />
               <Route path="/contact-us" element={<Contact />} />
-              <Route path="/super-admin" element={<SuperDashboard />} />
-              <Route path="/business-dashboard" element={<BusinessDashboard />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blog-details" element={<BlogDetails />} />
-              <Route path="/bookmarks" element={<Bookmarks />} />
-              <Route path="/appform" element={<ApplicationForm/>}/>
-            </>
-          ) : (
-            <>
-              <Route path="/home" element={<Home />} />
-              <Route path="/" element={<FindJob />} />
-              <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
-              <Route path="/super-admin" element={<SuperDashboard />} />
-              <Route path="/details-page/:id" element={<DetailsPage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/post-controll" element={<PostControll />} />
-              <Route path="/business-dashboard" element={<BusinessDashboard />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blog-details" element={<BlogDetails />} />
-              <Route path="/bookmarks" element={<Bookmarks />} />
-              <Route path="/appform" element={<ApplicationForm/>}/>
-
             </>
           )}
 
-          {/* <Route path='/ContactUs' element={<ContactForm/>} /> */}
+          {props.isLoggedinBusiness && (
+            <>
+              <Route path="/business-dashboard" element={<BusinessDashboard />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog-details" element={<BlogDetails />} />
+            </>
+          )}
+
+          {props.isLoggedinFreelancer && (
+            <>
+              <Route path="/" element={<FindJob />} />
+              <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
+              <Route path="/details-page/:id" element={<DetailsPage />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog-details" element={<BlogDetails />} />
+              <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/appform" element={<ApplicationForm />} />
+            </>
+          )}
         </Routes>
       </BrowserRouter>
     </>
@@ -87,9 +85,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setLang: (data) => dispatch(setLang(data)),
-    setLoggedIn: (data) => {
-      dispatch(setLoggedIn(data));
+    setLoggedInFreelancer: (data) => {
+      dispatch(setLoggedInFreelancer(data));
     },
+    setLoggedInBusiness: (data) => {
+      dispatch(setLoggedInBusiness(data))
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -23,8 +23,11 @@
                 display: flex;
                 align-items: center ;
                 .first-tag{
-                    padding: 10px;
-                    background-color: rgb(69, 91,239, 0.7);
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    background-color: rgba(25, 125, 255, 0.7);
                     border-radius: 5px;
                     margin: 5px;
                     color: #eaeaea;

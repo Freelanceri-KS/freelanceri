@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import maskgroup from "../../assets/images/maskgroup.png";
 import { useDispatch } from "react-redux";
-import { setLoggedIn, setToken } from "../../redux/Functions/actions";
+import { setLoggedInFreelancer, setLoggedInBusiness, setToken } from "../../redux/Functions/actions";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import { connect } from "react-redux";
@@ -16,7 +16,7 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [loginEndpoint, setLoginEndpoint] = useState(null);
-  const [isFreelancerSelected, setIsFreelancerSelected] = useState(false);
+  const [isFreelancerSelected, setIsFreelancerSelected] = useState(true);
   const [isBusinessSelected, setIsBusinessSelected] = useState(false);
 
   const handleFreelancerClick = () => {
@@ -42,37 +42,52 @@ const LoginPage = (props) => {
       .post(loginEndpoint, { email, password })
       .then((response) => {
         setLoading(false);
-        const { freelancer, token } = response.data;
-
+        const { freelancer } = response.data;
+        const { business } = response.data;
         toast.success("Login successful!");
         dispatch(setToken(response.data.token));
-
-        saveDataToLocalStorage({
-          userData: {
-            firstName: freelancer.firstName,
-            lastName: freelancer.lastName,
-            email: freelancer.email,
-            city: freelancer.city,
-            profession: freelancer.profession,
-            skills: freelancer.skills,
-            education: freelancer.education,
-            experiences: freelancer.experiences,
-          },
-        });
-
-        props?.setLoggedIn(true);
-        if (
-          loginEndpoint ===
-          "https://weak-lime-squid-fez.cyclic.app/business/login"
-        ) {
-          navigate("/business-dashboard");
-        } else {
+        if (loginEndpoint === "https://weak-lime-squid-fez.cyclic.app/freelancer/login") {
+          saveDataToLocalStorage({
+            userData: {
+              firstName: freelancer?.firstName,
+              lastName: freelancer?.lastName,
+              email: freelancer?.email,
+              city: freelancer?.city,
+              profession: freelancer?.profession,
+              skills: freelancer?.skills,
+              education: freelancer?.education,
+              experiences: freelancer?.experiences,
+              token: response.data.token
+            },
+          });
+          props?.setLoggedInFreelancer(true);
+          console.log(props.isLoggedinBusiness); // Add this line
           navigate("/");
+
+        } else {
+          saveDataToLocalStorage({
+            userData: {
+              firstName: business?.firstName,
+              lastName: business?.lastName,
+              email: business?.email,
+              city: business?.city,
+              companyName: business?.companyName,
+              companyType: business?.companyType,
+              role: business?.role,
+              phone: business?.phone,
+              website: business?.website,
+              token: response.data.token,
+            }
+          });
+          props?.setLoggedInBusiness(true);
+          console.log(props.setLoggedInBusiness())
+          navigate("/business-dashboard");
+
         }
       })
       .catch((error) => {
         setLoading(false);
-        toast.error("Login failed. Please try again later.");
+        toast.error(error);
       });
   };
 
@@ -125,7 +140,7 @@ const LoginPage = (props) => {
                 placeholder="Password"
               />
               <label htmlFor="floatingPassword">Password</label>
-              <p style={{ float: "right", marginBottom: "3em" }}>
+              <p style={{ float: "right", marginBottom: "3em", color: "#363636", fontWeight: "500" }}>
                 Forgot password?
               </p>
             </div>
@@ -144,15 +159,22 @@ const LoginPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedin: state.data.isLoggedin,
+    isLoggedinFreelancer: state.data.isLoggedinFreelancer,
+    isLoggedInBusiness: state.data.isLoggedinBusiness
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setLoggedIn: (data) => {
-      dispatch(setLoggedIn(data));
+    setToken: (data) => {
+      dispatch(setToken(data))
     },
+    setLoggedInFreelancer: (data) => {
+      dispatch(setLoggedInFreelancer(data));
+    },
+    setLoggedInBusiness: (data) => {
+      dispatch(setLoggedInBusiness(data))
+    }
   };
 };
 

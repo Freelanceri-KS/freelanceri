@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { setLang, setLoggedIn } from "../../../redux/Functions/actions";
+import { setLang, setLoggedInFreelancer, setLoggedInBusiness } from "../../../redux/Functions/actions";
 import "./newHeader.scss";
 import Albania from "../../../assets/images/alb.jpg";
 import English from "../../../assets/images/eng.png";
@@ -34,13 +34,12 @@ const NewHeader = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
-              {props.isLoggedin == true ? (
+              {props.isLoggedinFreelancer || props.isLoggedinBusiness == true ? (
                 <>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/")}
                     >
                       Find Job
@@ -48,9 +47,8 @@ const NewHeader = (props) => {
                   </li>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/freelancer-dashboard" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/freelancer-dashboard" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/freelancer-dashboard")}
                     >
                       Dashboard
@@ -58,9 +56,8 @@ const NewHeader = (props) => {
                   </li>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/bookmarks" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/bookmarks" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/bookmarks")}
                     >
                       Bookmarks
@@ -68,9 +65,8 @@ const NewHeader = (props) => {
                   </li>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/profile" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/profile" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/profile")}
                     >
                       Profile
@@ -81,9 +77,8 @@ const NewHeader = (props) => {
                 <>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/")}
                     >
                       Home
@@ -91,9 +86,8 @@ const NewHeader = (props) => {
                   </li>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/faqs" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/faqs" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/faqs")}
                     >
                       FAQ
@@ -101,9 +95,8 @@ const NewHeader = (props) => {
                   </li>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/about-us" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/about-us" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/about-us")}
                     >
                       {props?.language == true ? "Rreth Nesh" : "About Us"}
@@ -111,9 +104,8 @@ const NewHeader = (props) => {
                   </li>
                   <li role="button" className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname == "/contact-us" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname == "/contact-us" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/contact-us")}
                     >
                       {props?.language == true ? "Kontakt" : "Contact"}
@@ -179,18 +171,18 @@ const NewHeader = (props) => {
             </div>
             <div className="headerItems">
               {props.isLoggedin === false ?
-              <>
-                <a
-                  className="btn btn-primary my-2 my-sm-0 free-btn"
-                  type="button"
-                  href="/registerpage"
+                <>
+                  <a
+                    className="btn btn-primary my-2 my-sm-0 free-btn"
+                    type="button"
+                    href="/registerpage"
                   >
-                  Register Now
-                </a>
-                  </>
+                    Register Now
+                  </a>
+                </>
                 :
                 <>
-              <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="pfp"></img>
+                  <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="pfp"></img>
                 </>
               }
             </div>
@@ -205,16 +197,18 @@ const NewHeader = (props) => {
 const mapStateToProps = (state) => {
   return {
     language: state.data.language,
-    isLoggedin: state.data.isLoggedin,
+    isLoggedinFreelancer: state.data.isLoggedinFreelancer,
+    isLoggedinBusiness: state.data.isLoggedinBusiness
   };
 };
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setLang: (data) => dispatch(setLang(data)),
-    setLoggedIn: (data) => {
-      dispatch(setLoggedIn(data));
-    },
+    setLoggedInFreelancer: (data) => dispatch(setLoggedInFreelancer(data)), // Corrected
+    setLoggedInBusiness: (data) => dispatch(setLoggedInBusiness(data)) // Corrected
   };
 };
-  export default connect(mapStateToProps, mapDispatchToProps)(NewHeader);
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewHeader);

@@ -5,7 +5,9 @@ import { BrowserRouter as Routes, Router, Route, Link } from 'react-router-dom';
 import ProfilePic from "../../assets/images/single-profile.png"
 import { AiOutlineExport } from "react-icons/ai";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-
+import { IoSearchOutline } from 'react-icons/io5';
+import { CiLocationOn } from 'react-icons/ci';
+import User2 from "../../assets/profiles/2.png";
 
 
 
@@ -83,6 +85,11 @@ function SuperDashboard() {
           )}
           {selectedOption === "Employers" && (
             <Employers />
+          )}
+          {(
+            selectedOption === "Freelancers" && (
+              <Freelancers />
+            )
           )}
         </div>
       </div>
@@ -276,6 +283,83 @@ function Employers() {
       </div>
     </div>
   )
+}
+
+function Freelancers() {
+  return (
+    <div className="freelancers">
+      <h4 className="freelancers-title">Freelancers</h4>
+      <div className="search-filter-bar">
+        <div class="input-with-icon">
+          <input type="text" class="form-control" placeholder=" Emri Mbiemri" />
+          <span class="icon-prefix"><IoSearchOutline size={20} />
+          </span>
+        </div>
+        <div className="vert-barrier"></div>
+        <div class="input-with-icon">
+          <input type="text" class="form-control" placeholder="Profesioni..." />
+          <span class="icon-prefix"><CiLocationOn size={20} />
+          </span>
+        </div>
+        <div className="vert-barrier"></div>
+        <div className="search-button">Search</div>
+      </div>
+
+      <h4 className="freelancers-profession-h4">Developers</h4>
+      <div className="freelancers-grid">
+        <div className="freelancers-grid-item">
+          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
+          <div className="fgi-identity">
+            <h5>Full name</h5>
+            <p>Profession</p>
+          </div>
+          <div className="fgi-footer">
+            <p>View profile</p>
+          </div>
+        </div>
+        <div className="freelancers-grid-item">
+          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
+          <div className="fgi-identity">
+            <h5>Full name</h5>
+            <p>Profession</p>
+          </div>
+          <div className="fgi-footer">
+            <p>View profile</p>
+          </div>
+        </div>
+        <div className="freelancers-grid-item">
+          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
+          <div className="fgi-identity">
+            <h5>Full name</h5>
+            <p>Profession</p>
+          </div>
+          <div className="fgi-footer">
+            <p>View profile</p>
+          </div>
+        </div>
+        <div className="freelancers-grid-item">
+          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
+          <div className="fgi-identity">
+            <h5>Full name</h5>
+            <p>Profession</p>
+          </div>
+          <div className="fgi-footer">
+            <p>View profile</p>
+          </div>
+        </div>
+        <div className="freelancers-grid-item">
+          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
+          <div className="fgi-identity">
+            <h5>Full name</h5>
+            <p>Profession</p>
+          </div>
+          <div className="fgi-footer">
+            <p>View profile</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 
