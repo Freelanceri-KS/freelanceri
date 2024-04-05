@@ -36,39 +36,10 @@ function App(props) {
           ""
         )}
         <Routes>
-          {(!props.isLoggedinFreelancer && !props.isLoggedinBusiness) && (
-            <>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<Home />} />
-              <Route path="/faqs" element={<FAQs />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/registerpage" element={<RegisterPage />} />
-              <Route path="/contact-us" element={<Contact />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blog-details" element={<BlogDetails />} />
-            </>
-          )}
-
-          {props.isLoggedinBusiness && (
-            <>
-              <Route path="/business-dashboard" element={<BusinessDashboard />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blog-details" element={<BlogDetails />} />
-            </>
-          )}
-
-          {props.isLoggedinFreelancer && (
-            <>
-              <Route path="/" element={<FindJob />} />
-              <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
-              <Route path="/details-page/:id" element={<DetailsPage />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blog-details" element={<BlogDetails />} />
-              <Route path="/bookmarks" element={<Bookmarks />} />
-              <Route path="/appform" element={<ApplicationForm />} />
-            </>
-          )}
+                <Route path="/find-jobs" element={<FindJob />} />
+                <Route path="/business-dashboard" element={<BusinessDashboard />} />
         </Routes>
       </BrowserRouter>
     </>
@@ -77,8 +48,8 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    language: state.data.language,
-    isLoggedin: state.data.isLoggedin,
+    isLoggedinFreelancer: state.data.isLoggedinFreelancer,
+    isLoggedInBusiness: state.data.isLoggedinBusiness
   };
 };
 

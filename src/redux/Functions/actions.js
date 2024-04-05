@@ -1,4 +1,4 @@
-import { SET_LANG, SET_LOGGEDINFreelancer,SET_LOGGEDINBusiness, SET_TOKEN } from "./types";
+import { SET_LANG, SET_LOGGEDINFreelancer, SET_LOGGEDINBusiness, SET_TOKEN } from "./types";
 
 export const setLang = (data) => {
   return {
@@ -14,14 +14,14 @@ export const setToken = (data) => {
   };
 };
 export const setLoggedInFreelancer = (data) => {
-  return{
-    type : SET_LOGGEDINFreelancer,
-    data:data
+  return {
+    type: SET_LOGGEDINFreelancer,
+    data: data
   }
 }
-export const setLoggedInBusiness = (data)=>{
-  return{
-    type:SET_LOGGEDINBusiness,
-    data:data
+export const setLoggedInBusiness = (data) => {
+  return {
+    type: SET_LOGGEDINBusiness,
+    data: data
   }
 }

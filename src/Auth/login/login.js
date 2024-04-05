@@ -61,8 +61,8 @@ const LoginPage = (props) => {
             },
           });
           props?.setLoggedInFreelancer(true);
-          console.log(props.isLoggedinBusiness); // Add this line
-          navigate("/");
+          console.log(props.isLoggedinFreelancer);
+          navigate("/find-jobs");
 
         } else {
           saveDataToLocalStorage({
@@ -80,7 +80,6 @@ const LoginPage = (props) => {
             }
           });
           props?.setLoggedInBusiness(true);
-          console.log(props.setLoggedInBusiness())
           navigate("/business-dashboard");
 
         }
