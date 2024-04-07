@@ -9,7 +9,7 @@ import { CiFilter } from "react-icons/ci";
 
 
 const SortBy = (props) => {
-  const [expandedItem, setExpandedItem] = useState(null);
+  const [expandedItem, setExpandedItem] = useState('category');
   const [category, setCategory] = useState([]);
   const getCategory = () => {
     axios
@@ -49,7 +49,7 @@ const SortBy = (props) => {
             </div>
             {expandedItem === "category" && (
               <div className="expanded-content mt-3">
-                <div className="row gap-2">
+                <div className="rowi gap-2">
                   {category?.map((el) => {
                     return (
                       <>
@@ -63,7 +63,7 @@ const SortBy = (props) => {
               </div>
             )}
           </li>
-          <li
+          {/* <li
             onClick={() => handleItemClick("item2")}
             className={`list-group-item ${expandedItem == "item2" ? "" : ""}`}
           >
@@ -78,7 +78,7 @@ const SortBy = (props) => {
                 <p>Expanded content for Item 2</p>
               </div>
             )}
-          </li>
+          </li> */}
         </ul>
       </div>
     </>

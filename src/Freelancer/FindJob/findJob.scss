@@ -155,7 +155,9 @@
             justify-content: center;
             flex-direction: column;
             align-items: center;
-
+            .tag{
+              color: #363636;
+            }
             .value {
               color: #455bef;
               font-weight: 700;

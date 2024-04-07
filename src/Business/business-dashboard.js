@@ -13,18 +13,15 @@ import { FaEdit } from "react-icons/fa";
 
 const BusinessDashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Overview');
-
     const handleOptionClick = (option) => {
         setSelectedOption(option);
     };
-
-
     return (
         <>
             <div className="business-dashboard">
                 <div className="wrap">
                     <div className="options">
-                        <div className="create-post">
+                        <div className="create-post" onClick={() => handleOptionClick("CreatePost")}>
                             <p>Create post <FiPlusCircle color="white" size={25} />
                             </p>
                         </div>
@@ -96,6 +93,9 @@ const BusinessDashboard = () => {
                         )}
                         {selectedOption === 'Profile' && (
                             <Profile />
+                        )}
+                        {selectedOption === "CreatePost" && (
+                            <CreatePost />
                         )}
                     </div>
                 </div>
@@ -1044,5 +1044,65 @@ function Posts() {
         </div>
     );
 }
+
+function CreatePost() {
+    return (
+        <div className="create-post">
+            <h4>Create a post</h4>
+            <h6 className='cp-title'>Title</h6>
+            <input type="text" placeholder='Title' className='title-input' />
+            <h6 className='cp-title'>Requirements</h6>
+            <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+            <h6 className='cp-title'>Description</h6>
+            <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+
+            {/* 3 grid view fields */}
+
+            <div className="cp-first-grid">
+                <div className="cp-first-grid-item">
+                    <h6>Duration</h6>
+                    <input type="text" placeholder='7 days' className='grid-item-input' />
+                </div> <div className="cp-first-grid-item">
+                    <h6>No. of Freelancers</h6>
+                    <input type="text" placeholder='7 days' className='grid-item-input' />
+                </div>
+                <div className="cp-first-grid-item">
+                    <h6>Budget</h6>
+                    <input type="text" placeholder='7 days' className='grid-item-input' />
+                </div>
+            </div>
+            <div className="cp-first-grid" id='secgrid'>
+                <div className="cp-first-grid-item">
+                    <h6>City</h6>
+                    <select className="grid-item-input">
+                        <option value="Option 1">Prishtina</option>
+                        <option value="Option 2">1 muaj</option>
+                        <option value="Option 3">3 muaj</option>
+                    </select>
+                </div>
+                <div className="cp-first-grid-item">
+                    <h6>Profession</h6>
+                    <select className="grid-item-input">
+                        <option value="Option 1">1 javë</option>
+                        <option value="Option 2">1 muaj</option>
+                        <option value="Option 3">3 muaj</option>
+                    </select>
+                </div>
+                <div className="cp-first-grid-item">
+                    <h6>Experience needed</h6>
+                    <select className="grid-item-input">
+                        <option value="Option 1">Beginner</option>
+                        <option value="Option 2">Intermediate</option>
+                        <option value="Option 3">Expert</option>
+                    </select>
+                </div>
+            </div>
+            <div className="cp-btn">
+                <p>Create post</p>
+            </div>
+        </div>
+    )
+}
+
 
 export default BusinessDashboard

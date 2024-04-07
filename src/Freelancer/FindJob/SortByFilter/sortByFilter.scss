@@ -6,16 +6,17 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-    .row {
+    .rowi {
       .category-item-btn {
         border: 1px solid #eaeaea;
         background-color: transparent;
-        padding: 10px;
+        padding: 8px;
+        margin: 5px;
       }
     }
 
     .gap-2 {
-      padding: 12px;
+      padding: 0px;
 
       /* width */
 

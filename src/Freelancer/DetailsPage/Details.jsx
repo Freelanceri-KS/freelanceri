@@ -14,16 +14,16 @@ import { Link } from 'react-router-dom';
 
 
 const DetailsPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    console.log("ASDASSDASDSADSADASDSASDAS");
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    console.log("ASDASSDASDSADSADASDSASDAS")
-    setIsModalOpen(false);
-  }
+  // const openModal = () => {
+  //   console.log("ASDASSDASDSADSADASDSASDAS");
+  //   setIsModalOpen(true);
+  // };
+  // const closeModal = () => {
+  //   console.log("ASDASSDASDSADSADASDSASDAS")
+  //   setIsModalOpen(false);
+  // }
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
   useEffect(() => {
@@ -45,13 +45,13 @@ const DetailsPage = () => {
     <div className="details-page">
       <div className="dp-left">
         <div className="dp-left-container">
-          <Link to={`/`} style={{ textDecoration: 'none', color:"#363636"}}>
+          <Link to={`/`} style={{ textDecoration: 'none', color: "#363636" }}>
             <div className="dp-left-container-header">
               <MdOutlineArrowBackIosNew size={30} color='#455bef' />
               <h5>Go back</h5>
             </div>
           </Link>
-          
+
           <div classNasme="horiz-barrier"></div>
           <div className="dp-left-container-profile">
             <div className="dp-cp-left">
@@ -128,7 +128,7 @@ const DetailsPage = () => {
               <h6 className='mainpost-footer-h6'>{jobDetail?.budget}$</h6>
 
             </div>
-            <button className="apply-details" onClick={openModal}>
+            <button className="apply-details" onClick={() => navigate("/apply-form")}>
               <p className='a-d-p'>Apply</p>
             </button>
           </div>

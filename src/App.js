@@ -36,10 +36,16 @@ function App(props) {
           ""
         )}
         <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/" element={<Home />} />
-                <Route path="/find-jobs" element={<FindJob />} />
-                <Route path="/business-dashboard" element={<BusinessDashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/find-jobs" element={<FindJob />} />
+          <Route path="/details-page/:id" element={<DetailsPage />} />
+          <Route path="/apply-form" element={<ApplicationForm />} />
+          <Route path="/business-dashboard" element={<BusinessDashboard />} />
+          <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/business-dashboard" element={<BusinessDashboard />} />
         </Routes>
       </BrowserRouter>
     </>

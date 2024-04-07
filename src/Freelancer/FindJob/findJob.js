@@ -127,7 +127,7 @@ const FindJob = () => {
                         <div className="tag">Budget</div>
                         <div className="value">{el?.budget}$</div>
                       </div>
-                      <button onClick={() => navigate('/details-page')} className="jp-apply-details">
+                      <button onClick={() => navigate('/details-page/:id')} className="jp-apply-details">
                         <p className='a-d-p'>Apply</p>
                       </button>
                     </div>
@@ -145,5 +145,8 @@ const FindJob = () => {
     </div>
   );
 };
+
+
+
 
 export default FindJob;
