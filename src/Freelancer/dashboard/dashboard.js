@@ -1,9 +1,32 @@
 import './dashboard.scss'
 import Logo from "../../assets/images/logo.png"
 import Star from "../../assets/images/star.png"
-
+import axios from "../../axios"
+import { useState, useEffect } from 'react'
+import { FaBookmark } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import User2 from "../../assets/profiles/2.png";
 
 const FreelancerDashboard = () => {
+
+    const [applications, setApplications] = useState([])
+
+    const getMyApplications = () => {
+        axios.get('application/myApplications/65fe34989056da0f016b5404')
+            .then((response) => {
+                setApplications(response.data);
+            })
+            .catch((error) => {
+                console.log('Error fetching applications:', error);
+            });
+    }
+
+    useEffect(() => {
+        getMyApplications();
+    }, []);
+
+
+    const navigate = useNavigate();
     return (
         <>
             <div className="freelancer-dashboard">
@@ -50,17 +73,62 @@ const FreelancerDashboard = () => {
                                 <h6 className='fdmp-single-opt'>Closed</h6>
                             </div>
                             <div className="horiz-barrier-2"></div>
-                            <div className="single-proposal">
-                                <div className="single-proposal-data">
-                                    <h6 className='spd-h6'>E-commerce - Wordpress Developer</h6>
-                                    <p className='spd-p'>Started on: April 20, 2024</p>
-                                    <p className='spd-p'>Open-Ticket:#44503</p>
-                                    <div className="proposal-status">
-                                        <p>Submitted</p>
+                            {applications.map((application) => (
+                                <div className="bookmark-post-container" >
+                                    <div className="bookmark-post-container-header">
+                                        <div className="bpch-left">
+                                            <img src={User2} alt="User" width={50} height={50} />
+                                            <div className="bpch-left-user">
+                                                <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
+                                                <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
+                                            </div>
+                                        </div>
+                                        <div className="bpch-center">
+                                            <div className="vert-barrier"></div>
+                                            <div className="bpch-center-tags">
+                                                <p className="bpch-c-tag">Location</p>
+                                                <h6 className="bpch-c-value">{application?.postId?.city.city}</h6>
+                                            </div>
+                                            <div className="vert-barrier"></div>
+                                            <div className="bpch-center-tags">
+                                                <p className="bpch-c-tag">Experience</p>
+                                                <h6 className="bpch-c-value">{application?.postId?.experienceLevel}</h6>
+                                            </div>
+                                            <div className="vert-barrier"></div>
+                                            <div className="bpch-center-tags">
+                                                <p className="bpch-c-tag">Category</p>
+                                                <h6 className="bpch-c-value">{application?.postId?.profession?.category}</h6>
+                                            </div>
+                                        </div>
+                                        <FaBookmark size={25} color="#455bef" />
+                                    </div>
+                                    <div className="bookmark-post-container-body">
+                                        <p className="jpcb-p">
+                                            {application?.postId?.description}
+                                        </p>
+                                    </div>
+                                    <div className="footer-line"></div>
+                                    <div className="bookmark-post-footer">
+                                        <div className="bp-footer-info">
+                                            <p className="tag">Kerkoj</p>
+                                            <p className="value">{application?.postId?.neededWorkers} freelancer</p>
+                                        </div>
+                                        <div className="vert-barrier"></div>
+                                        <div className="bp-footer-info">
+                                            <div className="tag">Afati</div>
+                                            <div className="value">{application?.postId?.duration} ditë</div>
+                                        </div>
+                                        <div className="vert-barrier"></div>
+                                        <div className="bp-footer-info">
+                                            <div className="tag">Budget</div>
+                                            <div className="value">{application?.postId?.budget}$</div>
+                                        </div>
+                                        <button onClick={() => navigate(`/details-page/1`)} className="bp-apply-details">
+                                            <p className='a-d-p'>Applied</p>
+                                        </button>
                                     </div>
                                 </div>
-
-                            </div>
+                            ))}
 
                         </div>
                         <div className="freelancer-dashboard-main-clients">

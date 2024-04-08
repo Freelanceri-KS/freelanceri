@@ -160,7 +160,10 @@
     width: 100%;
     margin-right: 0;
   }
-
+  .modal-header-title{
+    display: flex;
+    flex-direction: column;
+  }
   .text-field:last-child {
     margin-bottom: 10px;
   }

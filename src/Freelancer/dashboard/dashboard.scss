@@ -70,7 +70,6 @@
                 border: 1px solid #eaeaea;
                 border-radius: 10px;
                 margin-top: 3em;
-                height: 40vh;
 
                 .fdmp-head {
                     display: flex;
@@ -110,27 +109,117 @@
                     }
                 }
 
-                .single-proposal {
-                    margin: 15px;
+                .bookmark-post-container {
+                    border: 1px solid #eaeaea;
+                    border-radius: 15px;
+                    margin-bottom: 1em;
+                    cursor: pointer;
+                    width: 90%;
+                    margin: 10px;
 
-                    .spd-h6 {
-                        font-size: 20px;
-                    }
-
-                    .spd-p {
-                        margin-top: 5px;
-                    }
-
-                    .proposal-status {
-                        width: 120px;
-                        height: 40px;
-                        margin-top: 10px;
-                        border-radius: 10px;
-                        background-color: #455bef;
+                    .bookmark-post-container-header {
+                        padding: 0.8em;
                         display: flex;
-                        justify-content: center;
+                        justify-content: space-between;
                         align-items: center;
-                        color: white;
+
+                        .bpch-left {
+                            display: flex;
+                            text-align: start;
+
+                            .bpch-left-user {
+                                margin-left: 1em;
+                            }
+
+                            .bpch-l-h6 {
+                                margin: 0;
+                            }
+
+                            .bpch-l-p {
+                                margin: 0;
+                            }
+                        }
+
+                        .bpch-center {
+                            display: flex;
+
+                            .vert-barrier {
+                                height: 60px;
+                                width: 2px;
+                                margin-left: 10px;
+                                margin-right: 10px;
+                                background-color: #eaeaea;
+                            }
+
+                            .bpch-center-tags {
+                                .bpch-c-tag {
+                                    font-size: 14px;
+                                    color: #363636;
+                                    font-weight: 400;
+                                }
+
+                                .bpch-c-value {
+                                    font-size: 15px;
+                                    font-weight: 600;
+                                    color: #455bef;
+                                }
+                            }
+                        }
+                    }
+
+                    .footer-line {
+                        width: 100%;
+                        height: 2px;
+                        background-color: #eaeaea;
+                    }
+
+                    .bookmark-post-container-body {
+                        padding: 0.8em;
+                    }
+
+                    .bookmark-post-footer {
+                        display: flex;
+                        text-align: center;
+                        justify-content: space-between;
+
+                        .vert-barrier {
+                            height: 60px;
+                            width: 2px;
+                            margin-left: 10px;
+                            margin-right: 10px;
+                            background-color: #eaeaea;
+                        }
+
+                        .bp-footer-info {
+                            margin-left: 2em;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            align-items: center;
+
+                            .value {
+                                color: #455bef;
+                                font-weight: 700;
+                                font-size: 15px;
+                            }
+                        }
+
+                        .bp-apply-details {
+                            height: auto;
+                            width: 140px;
+                            background-color: #455bef;
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-bottom-right-radius: 10px;
+                            border: none;
+
+                            .a-d-p {
+                                margin: 0;
+                                font-size: 15px;
+                            }
+                        }
                     }
                 }
             }
@@ -434,6 +523,124 @@
         .freelancer-dashboard-wrap {
             .freelancer-dashboard-main {
                 width: 95%;
+
+                .freelancer-dashboard-main-proposals {
+                    width: 100%;
+
+                    .bookmark-post-container {
+                        border: 1px solid #eaeaea;
+                        border-radius: 15px;
+                        margin-bottom: 1em;
+                        cursor: pointer;
+                        width: 95%;
+                        margin: 10px;
+
+                        .bookmark-post-container-header {
+                            padding: 0.8em;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            .bpch-left {
+                                display: flex;
+                                text-align: start;
+
+                                .bpch-left-user {
+                                    margin-left: 1em;
+                                }
+
+                                .bpch-l-h6 {
+                                    margin: 0;
+                                }
+
+                                .bpch-l-p {
+                                    margin: 0;
+                                }
+                            }
+
+                            .bpch-center {
+                                display: none;
+
+                                .vert-barrier {
+                                    height: 60px;
+                                    width: 2px;
+                                    margin-left: 10px;
+                                    margin-right: 10px;
+                                    background-color: #eaeaea;
+                                }
+
+                                .bpch-center-tags {
+                                    .bpch-c-tag {
+                                        font-size: 14px;
+                                        color: #363636;
+                                        font-weight: 400;
+                                    }
+
+                                    .bpch-c-value {
+                                        font-size: 15px;
+                                        font-weight: 600;
+                                        color: #455bef;
+                                    }
+                                }
+                            }
+                        }
+
+                        .footer-line {
+                            width: 100%;
+                            height: 2px;
+                            background-color: #eaeaea;
+                        }
+
+                        .bookmark-post-container-body {
+                            padding: 0.8em;
+                        }
+
+                        .bookmark-post-footer {
+                            display: flex;
+                            text-align: center;
+                            justify-content: space-around;
+                            width: 100%;
+
+                            .vert-barrier {
+                                height: 60px;
+                                width: 2px;
+                                margin-left: 5px;
+                                margin-right: 5px;
+                                background-color: #eaeaea;
+                            }
+
+                            .bp-footer-info {
+                                margin-left: 2em;
+                                display: flex;
+                                justify-content: center;
+                                flex-direction: column;
+                                align-items: center;
+
+                                .value {
+                                    color: #455bef;
+                                    font-weight: 700;
+                                    font-size: 12px;
+                                }
+                            }
+
+                            .bp-apply-details {
+                                height: auto;
+                                background-color: #455bef;
+                                color: white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-bottom-right-radius: 10px;
+                                border: none;
+
+                                .a-d-p {
+                                    margin: 0;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 .freelancer-dashboard-main-earnings {
                     height: auto;

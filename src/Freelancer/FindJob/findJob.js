@@ -22,18 +22,24 @@ const FindJob = () => {
   const getJobs = () => {
     axios.get('/posts/all').then(
       data => {
-        console.log(data.data)
-        setJobs(data?.data)
+        console.log(data.data);
+        setJobs(data?.data);
+        localStorage.setItem('jobs', JSON.stringify(data?.data)); // Save jobs list to localStorage
       }
     ).catch(
       err => {
-        console.log(err)
+        console.log(err);
       }
-    )
-  }
+    );
+  };
 
   useEffect(() => {
-    getJobs()
+    const savedJobs = localStorage.getItem('jobs');
+    if (savedJobs) {
+      setJobs(JSON.parse(savedJobs));
+    } else {
+      getJobs();
+    }
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       setIsTable(window.innerWidth > 768 && window.innerWidth <= 1024);

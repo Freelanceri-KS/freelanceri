@@ -23,6 +23,7 @@ import Blogs from "./LandingPage/Blogs/blogs"
 import BlogDetails from "./LandingPage/Blogs/blogDetails"
 import Bookmarks from "./Freelancer/Bookmarks/bookmarks";
 import ApplicationForm from "./Freelancer/ApplicationForm/applicationForm"
+import ViewProfile from "./Business/view-profile/view-profile"
 
 function App(props) {
   return (
@@ -40,12 +41,13 @@ function App(props) {
           <Route path="/" element={<Home />} />
           <Route path="/find-jobs" element={<FindJob />} />
           <Route path="/details-page/:id" element={<DetailsPage />} />
-          <Route path="/apply-form" element={<ApplicationForm />} />
+          <Route path="/apply-form/:id" element={<ApplicationForm />} />
           <Route path="/business-dashboard" element={<BusinessDashboard />} />
           <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/business-dashboard" element={<BusinessDashboard />} />
+          <Route path="/view-profile" element={<ViewProfile />} />
         </Routes>
       </BrowserRouter>
     </>

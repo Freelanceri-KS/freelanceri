@@ -146,6 +146,10 @@
                     .content-body-sec1 {
                         display: flex;
 
+                        .content-body-sec1-recentpost {
+                            width: 70%;
+                        }
+
                         .content-body-sec1-appls {
                             margin-left: 10px;
                             display: flex;
@@ -188,6 +192,10 @@
 
                     .content-body-sec2 {
                         display: flex;
+
+                        .content-body-sec2-recentpost {
+                            width: 70%;
+                        }
 
                         .cbsa-card2 {
                             border: 1px solid #eaeaea;
@@ -384,9 +392,9 @@
                 align-items: start;
 
                 .ongoing-posts {
-                    overflow-x: auto;
-                    display: flex;
+                    display: grid;
                     width: 100%;
+                    grid-template-columns: auto auto;
 
                     .db-post-container {
                         flex: 0 0 auto;
@@ -395,7 +403,7 @@
                         margin-top: 1em;
                         margin-bottom: 1em;
                         margin-right: 10px;
-                        width: 60%;
+                        width: 90%;
 
                         .db-post-container-header {
                             padding: 0.8em;
@@ -480,12 +488,12 @@
                                 .value {
                                     color: #455bef;
                                     font-weight: 700;
-                                    font-size: 18px;
+                                    font-size: 12px;
                                 }
                             }
 
                             .dbp-apply-details {
-                                height: 60px;
+                                height: auto;
                                 width: 140px;
                                 background-color: #455bef;
                                 color: white;
@@ -497,7 +505,7 @@
 
                                 .a-d-p {
                                     margin: 0;
-                                    font-size: 18px;
+                                    font-size: 12px;
                                 }
                             }
                         }
@@ -698,6 +706,20 @@
                     border: 1px solid #eaeaea;
                     border-radius: 5px;
                     margin-top: 1em;
+                    padding: 10px;
+
+                    :active {
+                        border: 1px solid #eaeaea;
+                    }
+
+                    :focus {
+                        border: 1px solid #eaeaea;
+                    }
+
+                    :focus-visible {
+                        border: 1px solid #eaeaea;
+
+                    }
                 }
 
                 #secgrid {
@@ -711,6 +733,10 @@
                     grid-template-columns: auto auto auto;
 
                     .cp-first-grid-item {
+                        select {
+                            color: #363636;
+                        }
+
                         .grid-item-input {
                             border: 1px solid #eaeaea;
                             border-radius: 10px;
@@ -718,9 +744,15 @@
                             margin-top: 1em;
                             width: 20em;
                         }
+
+                        .select-option {
+                            color: black;
+                        }
                     }
                 }
-                .cp-btn{
+
+                .cp-btn {
+                    cursor: pointer;
                     margin-top: 2em;
                     margin-bottom: 5em;
                     background-color: #455bef;
@@ -811,6 +843,8 @@
                             width: 100%;
 
                             .content-body-sec1-recentpost {
+                                width: 100%;
+
                                 .db-post-container {
                                     width: 100%;
                                     border: 1px solid #eaeaea;
@@ -938,116 +972,124 @@
                         .content-body-sec2 {
                             display: flex;
                             flex-direction: column;
+                            width: 100%;
 
-                            .db-post-container {
-                                border: 1px solid #eaeaea;
-                                border-radius: 15px;
-                                margin-bottom: 1em;
-                                cursor: pointer;
+                            .content-body-sec2-recentpost {
+                                width: 100%;
 
-                                .db-post-container-header {
-                                    padding: 0.8em;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
+                                .db-post-container {
+                                    border: 1px solid #eaeaea;
+                                    border-radius: 15px;
+                                    margin-bottom: 1em;
+                                    cursor: pointer;
+                                    width: 100%;
 
-                                    .dbpch-left {
+                                    .db-post-container-header {
+                                        padding: 0.8em;
                                         display: flex;
-                                        text-align: start;
+                                        justify-content: space-between;
+                                        align-items: center;
 
-                                        .dbpch-left-user {
-                                            margin-left: 1em;
+                                        .dbpch-left {
+                                            display: flex;
+                                            text-align: start;
+
+                                            .dbpch-left-user {
+                                                margin-left: 1em;
+                                            }
+
+                                            .dbpch-l-h6 {
+                                                margin: 0;
+                                            }
+
+                                            .dbpch-l-p {
+                                                margin: 0;
+                                            }
                                         }
 
-                                        .dbpch-l-h6 {
-                                            margin: 0;
-                                        }
-
-                                        .dbpch-l-p {
-                                            margin: 0;
-                                        }
-                                    }
-
-                                    .dbpch-center {
-                                        display: none;
-
-                                        .vert-barrier {
-                                            height: 40px;
-                                            width: 2px;
-                                            margin-left: 10px;
-                                            margin-right: 10px;
-                                            background: #eaeaea;
-                                        }
-
-                                        .dbpch-center-tags {
+                                        .dbpch-center {
                                             display: none;
 
-                                            .dbpch-c-tag {
-                                                font-size: 14px;
-                                                color: #363636;
-                                                font-weight: 400;
+                                            .vert-barrier {
+                                                height: 40px;
+                                                width: 2px;
+                                                margin-left: 10px;
+                                                margin-right: 10px;
+                                                background: #eaeaea;
                                             }
 
-                                            .dbpch-c-value {
-                                                font-size: 18px;
-                                                font-weight: 600;
-                                                color: #455bef;
+                                            .dbpch-center-tags {
+                                                display: none;
+
+                                                .dbpch-c-tag {
+                                                    font-size: 14px;
+                                                    color: #363636;
+                                                    font-weight: 400;
+                                                }
+
+                                                .dbpch-c-value {
+                                                    font-size: 18px;
+                                                    font-weight: 600;
+                                                    color: #455bef;
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                .footer-line {
-                                    width: 100%;
-                                    height: 2px;
-                                    background-color: #eaeaea;
-                                }
-
-                                .db-post-container-body {
-                                    padding: 0.8em;
-                                }
-
-                                .db-post-footer {
-                                    display: flex;
-                                    text-align: center;
-                                    justify-content: space-between;
-
-                                    .vert-barrier {
-                                        height: 60px;
-                                        width: 2px;
-                                        margin-left: 10px;
-                                        margin-right: 10px;
+                                    .footer-line {
+                                        width: 100%;
+                                        height: 2px;
                                         background-color: #eaeaea;
                                     }
 
-                                    .db-footer-info {
-                                        margin-left: 2em;
-                                        display: flex;
-                                        justify-content: center;
-                                        flex-direction: column;
-                                        align-items: center;
-
-                                        .value {
-                                            color: #455bef;
-                                            font-weight: 700;
-                                            font-size: 14px;
-                                        }
+                                    .db-post-container-body {
+                                        padding: 0.8em;
                                     }
 
-                                    .dbp-apply-details {
-                                        height: auto;
-                                        width: 140px;
-                                        background-color: #455bef;
-                                        color: white;
+                                    .db-post-footer {
                                         display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        border-bottom-right-radius: 10px;
-                                        border: none;
+                                        text-align: center;
+                                        justify-content: space-between;
 
-                                        .a-d-p {
-                                            margin: 0;
-                                            font-size: 18px;
+                                        .vert-barrier {
+                                            height: 60px;
+                                            width: 2px;
+                                            margin-left: 5px;
+                                            margin-right: 5px;
+                                            background-color: #eaeaea;
+                                        }
+
+                                        .dbp-footer {
+                                            .db-footer-info {
+                                                margin-left: 2em;
+                                                display: flex;
+                                                justify-content: center;
+                                                flex-direction: column;
+                                                align-items: center;
+
+                                                .value {
+                                                    color: #455bef;
+                                                    font-weight: 700;
+                                                    font-size: 12px;
+                                                }
+                                            }
+                                        }
+
+                                        .dbp-apply-details {
+                                            height: auto;
+                                            width: 140px;
+                                            background-color: #455bef;
+                                            color: white;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            border-bottom-right-radius: 10px;
+                                            border: none;
+
+                                            .a-d-p {
+                                                margin: 0;
+                                                font-size: 13px;
+                                            }
                                         }
                                     }
                                 }
@@ -1163,7 +1205,7 @@
                                         }
 
                                         .dbpch-c-value {
-                                            font-size: 18px;
+                                            font-size: 12px;
                                             font-weight: 600;
                                             color: #455bef;
                                         }

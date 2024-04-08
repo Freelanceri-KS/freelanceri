@@ -128,9 +128,11 @@ const DetailsPage = () => {
               <h6 className='mainpost-footer-h6'>{jobDetail?.budget}$</h6>
 
             </div>
-            <button className="apply-details" onClick={() => navigate("/apply-form")}>
-              <p className='a-d-p'>Apply</p>
-            </button>
+            <Link to={`/apply-form/${jobDetail?._id}`} key={jobDetail?._id} style={{ textDecoration: 'none' }}>
+              <button className="apply-details">
+                <p className='a-d-p'>Apply</p>
+              </button>
+            </Link>
           </div>
         </div>
         <div className="dp-center-related">
