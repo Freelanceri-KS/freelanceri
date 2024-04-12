@@ -1,5 +1,11 @@
+import React from "react";
 import { connect } from "react-redux";
-import { setLang, setLoggedInFreelancer, setLoggedInBusiness } from "../../../redux/Functions/actions";
+import {
+  setLang,
+  setLoggedInFreelancer,
+  setLoggedInBusiness,
+  setToken,
+} from "../../../redux/Functions/actions";
 import "./newHeader.scss";
 import Albania from "../../../assets/images/alb.jpg";
 import English from "../../../assets/images/eng.png";
@@ -7,8 +13,33 @@ import HeaderLogo from "../../../assets/images/headerLogo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NewHeader = (props) => {
-  const location = useLocation("");
-  const navigate = useNavigate("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleFindJobClick = () => {
+    navigate("/find-jobs");
+  };
+
+  const handleBookmarksClick = () => {
+    navigate("/bookmarks");
+  };
+
+  const handleProfileClick = () => {
+    navigate("/profile");
+  };
+
+  const handleLogout = () => {
+    // Clear token and related state
+    props.setToken(null);
+    props.setLoggedInFreelancer(false);
+    props.setLoggedInBusiness(false);
+
+    // Clear token from localStorage
+    localStorage.removeItem("userData");
+
+    // Navigate to the login page
+    navigate("/login");
+  };
 
   return (
     <>
@@ -34,81 +65,41 @@ const NewHeader = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
-              {props.isLoggedinFreelancer || props.isLoggedinBusiness == true ? (
+              {props.isLoggedinFreelancer && (
                 <>
-                  <li role="button" className="nav-item margin">
+                  <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname == "/" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/")}
+                      className={`nav-link ${
+                        location.pathname === "/find-jobs" ? " active" : ""
+                      }`}
+                      onClick={handleFindJobClick}
                     >
                       Find Job
                     </a>
                   </li>
-                  <li role="button" className="nav-item margin">
+                  <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname == "/freelancer-dashboard" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/freelancer-dashboard")}
-                    >
-                      Dashboard
-                    </a>
-                  </li>
-                  <li role="button" className="nav-item margin">
-                    <a
-                      className={`nav-link ${location.pathname == "/bookmarks" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/bookmarks")}
+                      className={`nav-link ${
+                        location.pathname === "/bookmarks" ? " active" : ""
+                      }`}
+                      onClick={handleBookmarksClick}
                     >
                       Bookmarks
                     </a>
                   </li>
-                  <li role="button" className="nav-item margin">
+                  <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname == "/profile" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/profile")}
+                      className={`nav-link ${
+                        location.pathname === "/profile" ? " active" : ""
+                      }`}
+                      onClick={handleProfileClick}
                     >
                       Profile
                     </a>
                   </li>
-                </>
-              ) : (
-                <>
-                  <li role="button" className="nav-item margin">
-                    <a
-                      className={`nav-link ${location.pathname == "/" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/")}
-                    >
-                      Home
-                    </a>
-                  </li>
-                  <li role="button" className="nav-item margin">
-                    <a
-                      className={`nav-link ${location.pathname == "/faqs" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/faqs")}
-                    >
-                      FAQ
-                    </a>
-                  </li>
-                  <li role="button" className="nav-item margin">
-                    <a
-                      className={`nav-link ${location.pathname == "/about-us" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/about-us")}
-                    >
-                      {props?.language == true ? "Rreth Nesh" : "About Us"}
-                    </a>
-                  </li>
-                  <li role="button" className="nav-item margin">
-                    <a
-                      className={`nav-link ${location.pathname == "/contact-us" ? " active" : ""
-                        }`}
-                      onClick={() => navigate("/contact-us")}
-                    >
-                      {props?.language == true ? "Kontakt" : "Contact"}
+                  <li className="nav-item margin">
+                    <a className="nav-link" onClick={handleLogout}>
+                      Logout
                     </a>
                   </li>
                 </>
@@ -122,7 +113,7 @@ const NewHeader = (props) => {
                   aria-expanded="false"
                 >
                   <img
-                    src={props.language == true ? Albania : English}
+                    src={props.language ? Albania : English}
                     alt="mdo"
                     width="32"
                     height="32"
@@ -169,23 +160,6 @@ const NewHeader = (props) => {
                 </ul>
               </div>
             </div>
-            <div className="headerItems">
-              {props.isLoggedin === false ?
-                <>
-                  <a
-                    className="btn btn-primary my-2 my-sm-0 free-btn"
-                    type="button"
-                    href="/registerpage"
-                  >
-                    Register Now
-                  </a>
-                </>
-                :
-                <>
-                  <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="pfp"></img>
-                </>
-              }
-            </div>
           </div>
         </div>
       </nav>
@@ -193,21 +167,20 @@ const NewHeader = (props) => {
   );
 };
 
-// export default App;
 const mapStateToProps = (state) => {
   return {
     language: state.data.language,
     isLoggedinFreelancer: state.data.isLoggedinFreelancer,
-    isLoggedinBusiness: state.data.isLoggedinBusiness
+    isLoggedinBusiness: state.data.isLoggedinBusiness,
   };
 };
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setLang: (data) => dispatch(setLang(data)),
-    setLoggedInFreelancer: (data) => dispatch(setLoggedInFreelancer(data)), // Corrected
-    setLoggedInBusiness: (data) => dispatch(setLoggedInBusiness(data)) // Corrected
+    setLoggedInFreelancer: (data) => dispatch(setLoggedInFreelancer(data)),
+    setLoggedInBusiness: (data) => dispatch(setLoggedInBusiness(data)),
+    setToken: (data) => dispatch(setToken(data)),
   };
 };
 
