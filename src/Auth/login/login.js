@@ -3,7 +3,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import maskgroup from "../../assets/images/maskgroup.png";
 import { useDispatch } from "react-redux";
-import { setLoggedInFreelancer, setLoggedInBusiness, setToken } from "../../redux/Functions/actions";
+import {
+  setLoggedInFreelancer,
+  setLoggedInBusiness,
+  setToken,
+} from "../../redux/Functions/actions";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import { connect } from "react-redux";
@@ -15,79 +19,51 @@ const LoginPage = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [loginEndpoint, setLoginEndpoint] = useState(null);
-  const [isFreelancerSelected, setIsFreelancerSelected] = useState(true);
-  const [isBusinessSelected, setIsBusinessSelected] = useState(false);
+  const [selectedUserType, setSelectedUserType] = useState("freelancer");
 
-  const handleFreelancerClick = () => {
-    setLoginEndpoint("https://weak-lime-squid-fez.cyclic.app/freelancer/login");
-    setIsFreelancerSelected(true);
-    setIsBusinessSelected(false);
+  const handleUserTypeSelect = (userType) => {
+    setSelectedUserType(userType);
   };
 
-  const handleBusinessClick = () => {
-    setLoginEndpoint("https://weak-lime-squid-fez.cyclic.app/business/login");
-    setIsFreelancerSelected(false);
-    setIsBusinessSelected(true);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!loginEndpoint) {
-      toast.error("Please select Freelancer or Business.");
-      return;
-    }
-    setLoading(true);
-    axios
-      .post(loginEndpoint, { email, password })
-      .then((response) => {
-        setLoading(false);
-        const { freelancer } = response.data;
-        const { business } = response.data;
-        toast.success("Login successful!");
-        dispatch(setToken(response.data.token));
-        if (loginEndpoint === "https://weak-lime-squid-fez.cyclic.app/freelancer/login") {
-          saveDataToLocalStorage({
-            userData: {
-              firstName: freelancer?.firstName,
-              lastName: freelancer?.lastName,
-              email: freelancer?.email,
-              city: freelancer?.city,
-              profession: freelancer?.profession,
-              skills: freelancer?.skills,
-              education: freelancer?.education,
-              experiences: freelancer?.experiences,
-              token: response.data.token
-            },
-          });
-          props?.setLoggedInFreelancer(true);
-          console.log(props.isLoggedinFreelancer);
-          navigate("/find-jobs");
 
-        } else {
-          saveDataToLocalStorage({
-            userData: {
-              firstName: business?.firstName,
-              lastName: business?.lastName,
-              email: business?.email,
-              city: business?.city,
-              companyName: business?.companyName,
-              companyType: business?.companyType,
-              role: business?.role,
-              phone: business?.phone,
-              website: business?.website,
-              token: response.data.token,
-            }
-          });
-          props?.setLoggedInBusiness(true);
-          navigate("/business-dashboard");
+    const endpoint =
+      selectedUserType === "freelancer"
+        ? "https://weak-lime-squid-fez.cyclic.app/freelancer/login"
+        : "https://weak-lime-squid-fez.cyclic.app/business/login";
 
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-        toast.error(error);
+    try {
+      setLoading(true);
+      const response = await axios.post(endpoint, { email, password });
+      setLoading(false);
+
+      const userData =
+        selectedUserType === "freelancer"
+          ? response.data.freelancer
+          : response.data.business;
+
+      toast.success("Login successful!");
+      dispatch(setToken(response.data.token));
+
+      saveDataToLocalStorage({
+        userData: {
+          ...userData,
+          token: response.data.token,
+        },
       });
+
+      if (selectedUserType === "freelancer") {
+        props.setLoggedInFreelancer(true);
+        navigate("/find-jobs");
+      } else {
+        props.setLoggedInBusiness(true);
+        navigate("/business-dashboard");
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message || "An error occurred during login.");
+    }
   };
 
   return (
@@ -97,20 +73,22 @@ const LoginPage = (props) => {
           <h3 className="left-h3">Log in as</h3>
           <div className="button-group">
             <button
-              onClick={handleFreelancerClick}
+              onClick={() => handleUserTypeSelect("freelancer")}
               style={{
-                backgroundColor: isFreelancerSelected ? "#455bef" : "white",
-                color: isFreelancerSelected ? "white" : "#455bef",
+                backgroundColor:
+                  selectedUserType === "freelancer" ? "#455bef" : "white",
+                color: selectedUserType === "freelancer" ? "white" : "#455bef",
               }}
               className="btn btn-primary left-btn"
             >
               Freelancer
             </button>
             <button
-              onClick={handleBusinessClick}
+              onClick={() => handleUserTypeSelect("business")}
               style={{
-                backgroundColor: isBusinessSelected ? "#455bef" : "white",
-                color: isBusinessSelected ? "white" : "#455bef",
+                backgroundColor:
+                  selectedUserType === "business" ? "#455bef" : "white",
+                color: selectedUserType === "business" ? "white" : "#455bef",
               }}
               className="btn btn-primary right-btn"
             >
@@ -139,7 +117,14 @@ const LoginPage = (props) => {
                 placeholder="Password"
               />
               <label htmlFor="floatingPassword">Password</label>
-              <p style={{ float: "right", marginBottom: "3em", color: "#363636", fontWeight: "500" }}>
+              <p
+                style={{
+                  float: "right",
+                  marginBottom: "3em",
+                  color: "#363636",
+                  fontWeight: "500",
+                }}
+              >
                 Forgot password?
               </p>
             </div>
@@ -159,21 +144,21 @@ const LoginPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     isLoggedinFreelancer: state.data.isLoggedinFreelancer,
-    isLoggedInBusiness: state.data.isLoggedinBusiness
+    isLoggedInBusiness: state.data.isLoggedinBusiness,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setToken: (data) => {
-      dispatch(setToken(data))
+      dispatch(setToken(data));
     },
     setLoggedInFreelancer: (data) => {
       dispatch(setLoggedInFreelancer(data));
     },
     setLoggedInBusiness: (data) => {
-      dispatch(setLoggedInBusiness(data))
-    }
+      dispatch(setLoggedInBusiness(data));
+    },
   };
 };
 
