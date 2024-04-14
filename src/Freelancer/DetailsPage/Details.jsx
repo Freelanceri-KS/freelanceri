@@ -14,16 +14,6 @@ import { Link } from 'react-router-dom';
 
 
 const DetailsPage = () => {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const openModal = () => {
-  //   console.log("ASDASSDASDSADSADASDSASDAS");
-  //   setIsModalOpen(true);
-  // };
-  // const closeModal = () => {
-  //   console.log("ASDASSDASDSADSADASDSASDAS")
-  //   setIsModalOpen(false);
-  // }
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
   useEffect(() => {

@@ -244,6 +244,7 @@
                         border: 1px solid #eaeaea;
                         border-radius: 15px;
                         margin-bottom: 1em;
+                        cursor: pointer;
 
                         .db-post-container-header {
                             padding: 0.8em;
@@ -764,6 +765,57 @@
                     align-items: center;
                     width: 10em;
 
+                }
+            }
+
+            .contract-db {
+                width: 100%;
+
+                .ongoing-contracts {
+                    margin-top: 0.5em;
+                    display: grid;
+                    grid-template-columns: auto auto auto auto;
+                    column-gap: 10px;
+                    row-gap: 10px;
+
+                    .ongoing-contract-item {
+                        border: 1px solid #eaeaea;
+                        border-radius: 10px;
+
+                        .oci-head {
+                            display: flex;
+                            align-items: center;
+
+                            .oci-head-img {
+                                margin: 10px;
+                            }
+
+                            .oci-head-identity {
+                                margin-left: 0.5em;
+                            }
+                        }
+
+                        .oci-body {
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            margin-left: 1em;
+                            color: #909090;
+                        }
+
+                        .oci-footer {
+                            width: 100%;
+                            height: auto;
+                            padding: 10px;
+                            background-color: #455bef;
+                            border-bottom-left-radius: 10px;
+                            border-bottom-right-radius: 10px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+                            color: white;
+                        }
+                    }
                 }
             }
         }
@@ -1438,6 +1490,59 @@
                                 align-items: center;
                                 justify-content: center;
                                 padding: 10px;
+                            }
+                        }
+                    }
+                }
+
+                .contract-db {
+                    width: 100%;
+
+                    .ongoing-contracts {
+                        margin-top: 0.5em;
+                        margin-right: 5px;
+                        margin-left: 5px;
+                        margin-bottom: 1em;
+                        display: grid;
+                        grid-template-columns: auto;
+                        column-gap: 10px;
+                        row-gap: 10px;
+
+                        .ongoing-contract-item {
+                            border: 1px solid #eaeaea;
+                            border-radius: 10px;
+
+                            .oci-head {
+                                display: flex;
+                                align-items: center;
+
+                                .oci-head-img {
+                                    margin: 10px;
+                                }
+
+                                .oci-head-identity {
+                                    margin-left: 0.5em;
+                                }
+                            }
+
+                            .oci-body {
+                                margin-top: 10px;
+                                margin-bottom: 10px;
+                                margin-left: 1em;
+                                color: #909090;
+                            }
+
+                            .oci-footer {
+                                width: 100%;
+                                height: auto;
+                                padding: 10px;
+                                background-color: #455bef;
+                                border-bottom-left-radius: 10px;
+                                border-bottom-right-radius: 10px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                color: white;
                             }
                         }
                     }

@@ -1,0 +1,638 @@
+.profile-check {
+    color: #363636;
+    margin-top: 5.5em;
+    display: flex;
+
+    .profile-check-side {
+        width: 25%;
+
+        .vp-left {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+
+            .vp-left-container {
+                border: 1px solid #eaeaea;
+                width: 90%;
+                border-radius: 10px;
+
+                .vp-left-container-header {
+                    margin-top: 1em;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .vp-left-container-profile {
+                    display: flex;
+                    align-items: center;
+                    margin: 1em;
+                    justify-content: space-between;
+
+                    .vp-cp-left {
+                        display: flex;
+                        align-items: center;
+
+                        .vp-cp-data {
+                            margin-left: 1em;
+                        }
+                    }
+
+                    .vp-cp-data-time {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+
+                    .vp-cp-data-p {
+                        margin: 0;
+                        color: grey;
+                        font-weight: 300;
+                    }
+
+                    .vp-cp-data-h6 {
+                        margin: 0;
+                    }
+
+                    .pccp-image {
+                        border-radius: 50%;
+                    }
+                }
+
+                .vp-left-email {
+                    margin: 1em;
+
+                    .vp-cp-data-p {
+                        margin: 0;
+                        color: grey;
+                        font-weight: 300;
+                    }
+                }
+
+                .vp-left-linkedin {
+                    margin: 1em;
+
+                    .pc-cp-data-p {
+                        margin: 0;
+                        color: grey;
+                        font-weight: 300;
+                    }
+                }
+
+                .vp-left-instagram {
+                    margin: 1em;
+
+                    .pc-cp-data-p {
+                        margin: 0;
+                        color: grey;
+                        font-weight: 300;
+                    }
+                }
+
+                .horiz-barrier {
+                    width: 100%;
+                    height: 2px;
+                    background-color: #eaeaea;
+                    margin-top: 1em;
+                }
+            }
+        }
+    }
+
+    .profile-check-main {
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+        width: 70%;
+
+        .pcm-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+
+            .pcmh-left {
+                display: flex;
+                align-items: center;
+
+                .pcmh-left-id {
+                    margin-left: 1em;
+                }
+            }
+
+            .pcmh-right {
+                .post-controll-options {
+                    display: flex;
+                    align-items: center;
+
+                    .pc-accept {
+                        margin-right: 10px;
+                        border: none;
+                        height: 2.5em;
+                        width: 10em;
+                        border-radius: 10px;
+                        color: white;
+                        background-color: #455bef;
+                    }
+
+                    .pc-reject {
+                        margin-right: 10px;
+                        border: none;
+                        height: 2.5em;
+                        width: 10em;
+                        border-radius: 10px;
+                        color: white;
+                        background-color: #FF2A2A;
+
+                    }
+                }
+            }
+        }
+
+        .pcm-subhead {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1em;
+
+            .pcm-subhead-content {
+                border: 1px solid #eaeaea;
+                border-radius: 10px;
+                display: flex;
+                justify-content: space-around;
+                width: 95%;
+                padding: 15px;
+
+                .vert-barrier {
+                    height: auto;
+                    width: 1px;
+                    background-color: #eaeaea;
+                }
+
+                .psc-item {
+                    text-align: center;
+
+                    .psc-item-h4 {
+                        text-align: center;
+                        font-weight: 600;
+                        color: #455bef;
+                    }
+                }
+            }
+        }
+
+        .pcm-user-data {
+            width: 95%;
+            margin-left: 2em;
+            margin-top: 1em;
+
+            .pcm-user-data-p {
+                margin-top: 1em;
+                margin-bottom: 1em;
+            }
+
+            .pcm-user-data-cv-button {
+                border: 1px solid #455bef;
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                border-radius: 5px;
+                background-color: transparent;
+                margin-top: 1em;
+            }
+        }
+
+        .pcm-body {
+            display: flex;
+            justify-content: center;
+
+            .pcm-center-profile {
+                width: 95%;
+
+                .rating {
+                    .rating-list {
+                        width: 95%;
+                        display: grid;
+                        grid-template-columns: auto auto auto;
+
+                        .rating-list-item {
+                            border: 1px solid #eaeaea;
+                            border-radius: 10px;
+                            padding: 10px;
+                            width: 20em;
+                            margin: 10px;
+
+                            .rli-head {
+                                display: flex;
+                                align-items: center;
+
+                                .rli-head-id {
+                                    margin-left: 1em;
+                                }
+                            }
+
+                            .rli-body {
+                                margin-top: 10px;
+                                margin-bottom: 10px;
+                            }
+                        }
+                    }
+                }
+
+                .skill-section {
+                    display: grid;
+                    flex-direction: row;
+                }
+
+                .data-container {
+                    border: 1px solid #eaeaea;
+                    padding: 1em;
+                    margin: 10px;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    .skill-box {
+                        border: 1px solid #eaeaea;
+                        border-radius: 10px;
+                        padding: 10px;
+                        margin: 10px;
+                    }
+
+                    .data-section {
+                        display: flex;
+                        justify-content: space-between;
+
+                        #skill-container {
+                            display: grid;
+                        }
+
+                        .names {
+                            .name-profession {
+                                font-size: 16px;
+                                margin: 0;
+                            }
+
+                            .name-company {
+                                font-size: 16px;
+                                font-weight: 600;
+                            }
+                        }
+
+                        .dates {
+                            text-align: start;
+
+                            p {
+                                margin: 0;
+                            }
+
+                            .end-date {
+                                font-weight: 600;
+                            }
+                        }
+                    }
+
+                    .barrier {
+                        width: 100%;
+                        height: 1px;
+                        background-color: #eaeaea;
+                        margin-bottom: 1em;
+                    }
+                }
+
+                #skill-container {
+                    display: grid;
+                    flex-direction: row;
+                }
+
+                .label {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 1em;
+                }
+            }
+
+        }
+    }
+
+}
+
+
+@media screen and (max-width:768px) {
+    .profile-check {
+        margin-top: 6em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .profile-check-side {
+            width: 95%;
+
+            .vp-left {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                justify-content: center;
+
+                .vp-left-container {
+                    border: 1px solid #eaeaea;
+                    width: 100%;
+                    border-radius: 10px;
+
+                    .vp-left-container-header {
+                        margin-top: 1em;
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .vp-left-container-profile {
+                        display: flex;
+                        align-items: center;
+                        margin: 1em;
+                        justify-content: space-between;
+
+                        .vp-cp-left {
+                            display: flex;
+                            align-items: center;
+
+                            .vp-cp-data {
+                                margin-left: 1em;
+                            }
+                        }
+
+                        .vp-cp-data-time {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                        }
+
+                        .vp-cp-data-p {
+                            margin: 0;
+                            color: grey;
+                            font-weight: 300;
+                        }
+
+                        .vp-cp-data-h6 {
+                            margin: 0;
+                        }
+
+                        .pccp-image {
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .vp-left-email {
+                        margin: 1em;
+                        display: none;
+
+                        .vp-cp-data-p {
+                            margin: 0;
+                            color: grey;
+                            font-weight: 300;
+                        }
+                    }
+
+                    .vp-left-linkedin {
+                        margin: 1em;
+                        display: none;
+
+                        .pc-cp-data-p {
+                            margin: 0;
+                            color: grey;
+                            font-weight: 300;
+                        }
+                    }
+
+                    .vp-left-instagram {
+                        margin: 1em;
+                        display: none;
+
+                        .pc-cp-data-p {
+                            margin: 0;
+                            color: grey;
+                            font-weight: 300;
+                        }
+                    }
+
+                    .horiz-barrier {
+                        width: 100%;
+                        height: 2px;
+                        background-color: #eaeaea;
+                        margin-top: 1em;
+                    }
+                }
+            }
+        }
+
+        .profile-check-main {
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            width: 95%;
+            margin-top: 1em;
+
+            .pcm-header {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                align-items: start;
+                padding: 15px;
+
+                .pcmh-left {
+                    display: flex;
+                    align-items: center;
+
+                    .pcmh-left-id {
+                        margin-left: 1em;
+                    }
+                }
+
+                .pcmh-right {
+                    margin-top: 1em;
+
+                    .post-controll-options {
+                        display: flex;
+                        align-items: center;
+
+                        .pc-accept {
+                            margin-right: 10px;
+                            border: none;
+                            height: 2.5em;
+                            width: 10em;
+                            border-radius: 10px;
+                            color: white;
+                            background-color: #455bef;
+                        }
+
+                        .pc-reject {
+                            margin-right: 10px;
+                            border: none;
+                            height: 2.5em;
+                            width: 10em;
+                            border-radius: 10px;
+                            color: white;
+                            background-color: #FF2A2A;
+
+                        }
+                    }
+                }
+            }
+
+            .pcm-subhead {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 1em;
+
+                .pcm-subhead-content {
+                    border: 1px solid #eaeaea;
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: space-around;
+                    width: 95%;
+                    padding: 15px;
+
+                    .vert-barrier {
+                        height: auto;
+                        width: 1px;
+                        background-color: #eaeaea;
+                    }
+
+                    .psc-item {
+                        .psc-item-h4 {
+                            font-weight: 600;
+                            color: #455bef;
+                        }
+                    }
+                }
+            }
+
+            .pcm-user-data {
+                width: 90%;
+                margin-left: 1em;
+                margin-top: 1em;
+
+                .pcm-user-data-p {
+                    margin-top: 1em;
+                    margin-bottom: 1em;
+                }
+
+                .pcm-user-data-cv-button {
+                    border: 1px solid #455bef;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    border-radius: 5px;
+                    background-color: transparent;
+                    margin-top: 1em;
+                }
+            }
+
+            .pcm-body {
+                display: flex;
+                justify-content: center;
+
+                .pcm-center-profile {
+                    width: 95%;
+
+                    .rating {
+                        .rating-list {
+                            width: 95%;
+                            display: grid;
+                            grid-template-columns: auto;
+
+                            .rating-list-item {
+                                border: 1px solid #eaeaea;
+                                border-radius: 10px;
+                                padding: 10px;
+                                width: 20em;
+                                margin: 10px;
+
+                                .rli-head {
+                                    display: flex;
+                                    align-items: center;
+
+                                    .rli-head-id {
+                                        margin-left: 1em;
+                                    }
+                                }
+
+                                .rli-body {
+                                    margin-top: 10px;
+                                    margin-bottom: 10px;
+                                }
+                            }
+                        }
+                    }
+
+                    .data-container {
+                        border: 1px solid #eaeaea;
+                        padding: 1em;
+                        margin: 10px;
+                        border-radius: 10px;
+                        display: flex;
+                        flex-direction: column;
+
+                        .skill-box {
+                            border: 1px solid #eaeaea;
+                            border-radius: 10px;
+                            padding: 10px;
+                            margin: 10px;
+                        }
+
+                        .data-section {
+                            display: flex;
+                            justify-content: space-between;
+
+                            .names {
+                                .name-profession {
+                                    font-size: 16px;
+                                    margin: 0;
+                                }
+
+                                .name-company {
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                }
+                            }
+
+                            .dates {
+                                text-align: start;
+
+                                p {
+                                    margin: 0;
+                                }
+
+                                .end-date {
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+
+                        .barrier {
+                            width: 100%;
+                            height: 1px;
+                            background-color: #eaeaea;
+                            margin-bottom: 1em;
+                        }
+                    }
+
+                    #skill-container {
+                        display: flex;
+                        flex-direction: row;
+                    }
+
+                    .label {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-top: 1em;
+                    }
+                }
+
+            }
+        }
+    }
+}

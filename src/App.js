@@ -24,7 +24,9 @@ import BlogDetails from "./LandingPage/Blogs/blogDetails"
 import Bookmarks from "./Freelancer/Bookmarks/bookmarks";
 import ApplicationForm from "./Freelancer/ApplicationForm/applicationForm"
 import ViewProfile from "./Business/view-profile/view-profile"
-
+import PostDetail from "./Business/post-details/post-details";
+import ProfileCheck from "./Business/post-details/profile-check/profile-check";
+import Contract from "./Business/contracts/offer_contract/contract"
 function App(props) {
   return (
     <>
@@ -48,6 +50,14 @@ function App(props) {
           <Route path="/profile" element={<Profile />} />
           <Route path="/business-dashboard" element={<BusinessDashboard />} />
           <Route path="/view-profile" element={<ViewProfile />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<Contact />} />
+          <Route path="/post-detail/:id" element={<PostDetail />} />
+          <Route path="/post-controll" element={<PostControll />} />
+          <Route path="/profile-check/:id" element={<ProfileCheck />} />
+          <Route path="/view-profile/:id" element={<ViewProfile />} />
+          <Route path="/contract" element={<Contract />} />
         </Routes>
       </BrowserRouter>
     </>

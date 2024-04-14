@@ -47,7 +47,7 @@ const ApplicationForm = ({ closeModal }) => {
   const [cv, setCv] = useState("CV Example");
   const [postId, setPostId] = useState("6613e2627558f486c65154cd")
   const [businessId, setBusinessId] = useState("660b170df00fffca9933298a");
-  const [freelancerId, setFreelancerId] = useState("65fe34989056da0f016b5404")
+  const [freelancerId, setFreelancerId] = useState("66195b30074c981da043a206")
 
   const handleSubmit = () => {
     const applData = {
@@ -56,6 +56,7 @@ const ApplicationForm = ({ closeModal }) => {
       businessId: jobDetail?.userId._id,
       freelancerPrice: projectPrice,
       coverLetter: coverLetter,
+      duration:durationOffer,
       cv: cv
     }
     axios.post("/application", applData)

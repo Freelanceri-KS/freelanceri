@@ -12,7 +12,7 @@ import { CiLocationOn } from 'react-icons/ci';
 import { FaEdit } from "react-icons/fa";
 
 const BusinessDashboard = () => {
-    const [selectedOption, setSelectedOption] = useState('Overview');
+    const [selectedOption, setSelectedOption] = useState('Posts');
     const handleOptionClick = (option) => {
         setSelectedOption(option);
     };
@@ -27,21 +27,11 @@ const BusinessDashboard = () => {
                         </div>
                         <ul>
                             <li>
-                                <a href="" onClick={() => handleOptionClick('Overview')} className={
-                                    selectedOption === 'Overview'
-                                        ? 'selected-text'
-                                        : 'unselected-text'
-                                }>
-                                    Overview
-                                </a>
-                            </li>
-                            <div className="barrier"></div>
-                            <li>
-                                <a href="#" className={
+                                <a href="" onClick={() => handleOptionClick('Posts')} className={
                                     selectedOption === 'Posts'
                                         ? 'selected-text'
                                         : 'unselected-text'
-                                } onClick={() => handleOptionClick('Posts')}>
+                                }>
                                     Posts
                                 </a>
                             </li>
@@ -58,11 +48,21 @@ const BusinessDashboard = () => {
                             <div className="barrier"></div>
                             <li>
                                 <a href="#" className={
-                                    selectedOption === 'Find talents'
+                                    selectedOption === 'Find'
                                         ? 'selected-text'
                                         : 'unselected-text'
-                                } onClick={() => handleOptionClick('Find talents')}>
+                                } onClick={() => handleOptionClick('Find')}>
                                     Find
+                                </a>
+                            </li>
+                            <div className="barrier"></div>
+                            <li>
+                                <a href="#" className={
+                                    selectedOption === 'Contracts'
+                                        ? 'selected-text'
+                                        : 'unselected-text'
+                                } onClick={() => handleOptionClick('Contracts')}>
+                                    Contracts
                                 </a>
                             </li>
                             <div className="barrier"></div>
@@ -88,11 +88,14 @@ const BusinessDashboard = () => {
                         {selectedOption === 'Applications' && (
                             <Applications />
                         )}
-                        {selectedOption === 'Find talents' && (
+                        {selectedOption === 'Find' && (
                             <Find />
                         )}
                         {selectedOption === 'Profile' && (
                             <Profile />
+                        )}
+                        {selectedOption === "Contracts" && (
+                            <Contracts />
                         )}
                         {selectedOption === "CreatePost" && (
                             <CreatePost />
@@ -101,6 +104,115 @@ const BusinessDashboard = () => {
                 </div>
             </div>
         </>
+    );
+}
+
+
+function Contracts() {
+    const navigate = useNavigate();
+
+    return (
+        <div className="contract-db">
+            <h4>Ongoing Contract</h4>
+            <div className="ongoing-contracts">
+                <div className="ongoing-contract-item">
+                    <div className="oci-head">
+                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                        <div className="oci-head-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                    </div>
+                    <div className="oci-body">
+                        <p>Start date: 10/04/2024</p>
+                        <p>End date: 10/04/2024</p>
+                    </div>
+                    <div className="oci-footer" onClick={() => navigate("/contract")}>
+                        <p>View contract</p>
+                    </div>
+                </div>
+                <div className="ongoing-contract-item">
+                    <div className="oci-head">
+                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                        <div className="oci-head-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                    </div>
+                    <div className="oci-body">
+                        <p>Start date: 10/04/2024</p>
+                        <p>End date: 10/04/2024</p>
+                    </div>
+                    <div className="oci-footer" onClick={() => navigate("/contract")}>
+                        <p>View contract</p>
+                    </div>
+                </div>
+                <div className="ongoing-contract-item">
+                    <div className="oci-head">
+                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                        <div className="oci-head-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                    </div>
+                    <div className="oci-body">
+                        <p>Start date: 10/04/2024</p>
+                        <p>End date: 10/04/2024</p>
+                    </div>
+                    <div className="oci-footer" onClick={() => navigate("/contract")}>
+                        <p>View contract</p>
+                    </div>
+                </div>
+                <div className="ongoing-contract-item">
+                    <div className="oci-head">
+                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                        <div className="oci-head-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                    </div>
+                    <div className="oci-body">
+                        <p>Start date: 10/04/2024</p>
+                        <p>End date: 10/04/2024</p>
+                    </div>
+                    <div className="oci-footer" onClick={() => navigate("/contract")}>
+                        <p>View contract</p>
+                    </div>
+                </div>
+                <div className="ongoing-contract-item">
+                    <div className="oci-head">
+                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                        <div className="oci-head-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                    </div>
+                    <div className="oci-body">
+                        <p>Start date: 10/04/2024</p>
+                        <p>End date: 10/04/2024</p>
+                    </div>
+                    <div className="oci-footer" onClick={() => navigate("/contract")}>
+                        <p>View contract</p>
+                    </div>
+                </div>
+                <div className="ongoing-contract-item">
+                    <div className="oci-head">
+                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                        <div className="oci-head-identity">
+                            <h5>Full name</h5>
+                            <p>Profession</p>
+                        </div>
+                    </div>
+                    <div className="oci-body">
+                        <p>Start date: 10/04/2024</p>
+                        <p>End date: 10/04/2024</p>
+                    </div>
+                    <div className="oci-footer" onClick={() => navigate("/contract")}>
+                        <p>View contract</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
@@ -164,7 +276,7 @@ function Overview() {
                             <h4 className="container-title-dsc">Recent post</h4>
                         </div>
                         {firstPost && (
-                            <div key={firstPost._id} className="db-post-container">
+                            <div key={firstPost._id} className="db-post-container" onClick={() => navigate(`/post-detail/${firstPost._id}`)}>
                                 <div className="db-post-container-header">
                                     <div className="dbpch-left">
                                         <img src={User2} alt="User" width={50} height={50} />
@@ -213,7 +325,7 @@ function Overview() {
                                         <div className="tag">Budget</div>
                                         <div className="value">{firstPost.budget}$</div>
                                     </div>
-                                    <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
+                                    <button className="dbp-apply-details">
                                         <p className='a-d-p'>Apply</p>
                                     </button>
                                 </div>
@@ -242,7 +354,7 @@ function Overview() {
                             <h4 className="container-title-dsc">Most viewed post</h4>
                         </div>
                         {firstPost && (
-                            <div key={firstPost._id} className="db-post-container">
+                            <div key={firstPost._id} className="db-post-container" onClick={() => navigate("/post-detail")}>
                                 <div className="db-post-container-header">
                                     <div className="dbpch-left">
                                         <img src={User2} alt="User" width={50} height={50} />
@@ -291,7 +403,7 @@ function Overview() {
                                         <div className="tag">Budget</div>
                                         <div className="value">{firstPost.budget}$</div>
                                     </div>
-                                    <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
+                                    <button className="dbp-apply-details">
                                         <p className='a-d-p'>Apply</p>
                                     </button>
                                 </div>
@@ -596,7 +708,7 @@ const Applications = () => {
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
-                                <div className="bagi-footer" onClick={() => navigate("/view-profile")}>
+                                <div className="bagi-footer" onClick={() => navigate("/profile-check/123")}>
                                     <p>View profile</p>
                                 </div>
                             </div>
@@ -679,7 +791,7 @@ const Applications = () => {
                                 </div>
                             </div>
                             <p className='bagi-position'>Position: Mobile App Developer</p>
-                            <div className="bagi-footer-exp">
+                            <div className="bagi-footer-exp" onClick={() => navigate("/profile-check/1")}>
                                 <p>View profile</p>
                             </div>
                         </div>
@@ -989,7 +1101,6 @@ const Profile = () => {
         </>
     )
 }
-
 
 function CreatePost() {
     const [professions, setProfessions] = useState([]);

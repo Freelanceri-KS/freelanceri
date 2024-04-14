@@ -34,11 +34,8 @@ const FreelancerDashboard = () => {
                 <div className="freelancer-dashboard-wrap">
                     <div className="freelancer-dashboard-main">
                         <div className="freelancer-dashboard-main-earnings">
-                            <div className="fdme-title">
-                                <h4 className='fdme-h3'>Total Net Earnings</h4>
-                                <h6 className='fdme-h6'>View all</h6>
-                            </div>
-                            <div className="horiz-barrier"></div>
+                            <h4 className='fdme-h3'>Total Net Earnings</h4>
+
                             <div className="fdme-stats">
                                 <div className="fdme-stat-item">
                                     <h6>This week</h6>
@@ -148,12 +145,11 @@ const FreelancerDashboard = () => {
                                         <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
                                         <div className="client-info-data">
                                             <h5>Freelanceri</h5>
-                                            <p>Kujtim Gjokaj</p>
-                                            <p>Prishtina, Kosova</p>
+                                            <p>Employment</p>
                                         </div>
                                     </div>
                                     <div className="message-option-client">
-                                        <p>Message</p>
+                                        <p>View</p>
                                     </div>
                                 </div>
                                 <div class="grid-item">
@@ -161,12 +157,11 @@ const FreelancerDashboard = () => {
                                         <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
                                         <div className="client-info-data">
                                             <h5>Freelanceri</h5>
-                                            <p>Kujtim Gjokaj</p>
-                                            <p>Prishtina, Kosova</p>
+                                            <p>Employment</p>
                                         </div>
                                     </div>
                                     <div className="message-option-client">
-                                        <p>Message</p>
+                                        <p>View</p>
                                     </div>
                                 </div>
                                 <div class="grid-item">
@@ -174,12 +169,11 @@ const FreelancerDashboard = () => {
                                         <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
                                         <div className="client-info-data">
                                             <h5>Freelanceri</h5>
-                                            <p>Kujtim Gjokaj</p>
-                                            <p>Prishtina, Kosova</p>
+                                            <p>Employment</p>
                                         </div>
                                     </div>
                                     <div className="message-option-client">
-                                        <p>Message</p>
+                                        <p>View</p>
                                     </div>
                                 </div>
                                 <div class="grid-item">
@@ -187,36 +181,33 @@ const FreelancerDashboard = () => {
                                         <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
                                         <div className="client-info-data">
                                             <h5>Freelanceri</h5>
-                                            <p>Kujtim Gjokaj</p>
-                                            <p>Prishtina, Kosova</p>
+                                            <p>Employment</p>
                                         </div>
                                     </div>
                                     <div className="message-option-client">
-                                        <p>Message</p>
+                                        <p>View</p>
                                     </div>
                                 </div>
                                 <div class="grid-item">  <div className="client-info">
                                     <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
                                     <div className="client-info-data">
                                         <h5>Freelanceri</h5>
-                                        <p>Kujtim Gjokaj</p>
-                                        <p>Prishtina, Kosova</p>
+                                        <p>Employment</p>
                                     </div>
                                 </div>
                                     <div className="message-option-client">
-                                        <p>Message</p>
+                                        <p>View</p>
                                     </div></div>
                                 <div class="grid-item">
                                     <div className="client-info">
                                         <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
                                         <div className="client-info-data">
                                             <h5>Freelanceri</h5>
-                                            <p>Kujtim Gjokaj</p>
-                                            <p>Prishtina, Kosova</p>
+                                            <p>Employment</p>
                                         </div>
                                     </div>
                                     <div className="message-option-client">
-                                        <p>Message</p>
+                                        <p>View</p>
                                     </div>
                                 </div>
                             </div>

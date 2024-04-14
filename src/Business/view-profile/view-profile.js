@@ -16,12 +16,11 @@ const ViewProfile = () => {
                             <MdOutlineArrowBackIosNew size={30} color='#455bef' />
                             <h5>Go back</h5>
                         </div>
-                        <div className="horiz-barrier"></div>
+                        {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-container-profile">
                             <div className="vp-cp-left">
                                 <img src={User} alt="User profile picture" height={60} className='dccp-image' />
                                 <div className="vp-cp-data">
-                                    <p className='vp-cp-data-p'>Posted by:</p>
                                     <h6 className='vp-cp-data-h6'>Malena Buchholz</h6>
                                 </div>
                             </div>
@@ -30,17 +29,17 @@ const ViewProfile = () => {
                                 <p className='vp-cp-data-p'>04:32pm</p>
                             </div>
                         </div>
-                        <div className="horiz-barrier"></div>
+                        {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-email">
                             <p className='vp-cp-data-p'>Email</p>
                             <h5>+383 45 296 605</h5>
                         </div>
-                        <div className="horiz-barrier"></div>
+                        {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-linkedin">
                             <p className='vp-cp-data-p'>LinkedIn</p>
                             <h5>MalenaBuccholz</h5>
                         </div>
-                        <div className="horiz-barrier"></div>
+                        {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-instagram">
                             <p className='vp-cp-data-p'>LinkedIn</p>
                             <h5>MalenaBuccholz</h5>
@@ -69,12 +68,12 @@ const ViewProfile = () => {
                                 <div className="data-container">
                                     <div className="data-section">
                                         <div className="names">
-                                            <p className="name-profession">experience?.title</p>
-                                            <p className="name-company">experience?.company</p>
+                                            <p className="name-profession">Dev</p>
+                                            <p className="name-company">Freelanceri</p>
                                         </div>
                                         <div className="dates">
-                                            <p className="start-date">experience?.startDate</p>
-                                            <p className="end-date">experience?.endDate</p>
+                                            <p className="start-date">10/1/2024</p>
+                                            <p className="end-date">10/02/2024</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,15 +86,14 @@ const ViewProfile = () => {
 
                                     <div className="data-section">
                                         <div className="names">
-                                            <p className="name-profession">education?.title</p>
-                                            <p className="name-company">education?.institution</p>
+                                            <p className="name-profession">educationtitle</p>
+                                            <p className="name-company">institution</p>
                                         </div>
                                         <div className="dates">
-                                            <p className="start-date">education?.startDate</p>
-                                            <p className="end-date">education?.endDate</p>
+                                            <p className="start-date">startDate</p>
+                                            <p className="end-date">endDate</p>
                                         </div>
                                     </div>
-                                    <p>No education available</p>
                                 </div>
                             </div>
                             <div className="certification mt-2">
@@ -193,10 +191,6 @@ const ViewProfile = () => {
                     <div className="vpmp-post-controll-main">
                         <div className="post-controll-main-head">
                             <p className="post-controll-title">Interior Designer</p>
-                            <div className="post-controll-options">
-                                <button className="pc-accept">Accept</button>
-                                <button className="pc-reject">Reject</button>
-                            </div>
                         </div>
                         <div className="post-controll-main-details">
                             <div className="pcmd-item">

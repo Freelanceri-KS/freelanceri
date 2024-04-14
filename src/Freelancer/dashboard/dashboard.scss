@@ -19,9 +19,7 @@
             margin-right: 5px;
 
             .freelancer-dashboard-main-earnings {
-                border: 1px solid #eaeaea;
                 border-radius: 10px;
-                height: 20vh;
 
                 .horiz-barrier {
                     width: 100%;
@@ -45,12 +43,12 @@
                 .fdme-stats {
                     display: flex;
                     align-items: center;
-                    margin-left: 3em;
-                    margin-right: 3em;
                     margin-top: 0.4em;
                     text-align: center;
-                    justify-content: space-between;
-
+                    justify-content: space-evenly;
+                    border: 1px solid #eaeaea;
+                    border-radius: 10px;
+                    padding: 20px;
                     .fdme-stat-item {
                         .fdme-stat-item-value {
                             color: #455bef;
@@ -59,7 +57,7 @@
                     }
 
                     .vert-barrier {
-                        height: 80px;
+                        height: 60px;
                         width: 2px;
                         background-color: #eaeaea;
                     }
@@ -114,7 +112,7 @@
                     border-radius: 15px;
                     margin-bottom: 1em;
                     cursor: pointer;
-                    width: 90%;
+                    width: 95%;
                     margin: 10px;
 
                     .bookmark-post-container-header {

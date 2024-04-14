@@ -69,9 +69,8 @@ const NewHeader = (props) => {
                 <>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/find-jobs" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/find-jobs" ? " active" : ""
+                        }`}
                       onClick={handleFindJobClick}
                     >
                       Find Job
@@ -79,9 +78,8 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/bookmarks" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
+                        }`}
                       onClick={handleBookmarksClick}
                     >
                       Bookmarks
@@ -89,9 +87,8 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/profile" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/profile" ? " active" : ""
+                        }`}
                       onClick={handleProfileClick}
                     >
                       Profile
