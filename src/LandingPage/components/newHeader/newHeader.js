@@ -77,6 +77,11 @@ const NewHeader = (props) => {
                     </a>
                   </li>
                   <li className="nav-item margin">
+                    <a className="nav-link" onClick={handleLogout}>
+                      Dashboard
+                    </a>
+                  </li>
+                  <li className="nav-item margin">
                     <a
                       className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
                         }`}
@@ -94,68 +99,117 @@ const NewHeader = (props) => {
                       Profile
                     </a>
                   </li>
+                </>
+              )}
+              {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
+                <>
+                  <li className="nav-item margin">
+                    <a
+                      className={`nav-link ${location.pathname === "/find-jobs" ? " active" : ""
+                        }`}
+                      onClick={() => navigate("/")}
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li className="nav-item margin">
+                    <a
+                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
+                        }`}
+                      onClick={handleBookmarksClick}
+                    >
+                      Find Job
+                    </a>
+                  </li>
+                  <li className="nav-item margin">
+                    <a
+                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
+                        }`}
+                      onClick={handleBookmarksClick}
+                    >
+                      Find Talents
+                    </a>
+                  </li>
+                  <li className="nav-item margin">
+                    <a
+                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
+                        }`}
+                      onClick={handleBookmarksClick}
+                    >
+                      About us
+                    </a>
+                  </li>
+
                   <li className="nav-item margin">
                     <a className="nav-link" onClick={handleLogout}>
-                      Logout
+                      Contact
                     </a>
                   </li>
                 </>
               )}
             </ul>
             <div className="headerItems">
-              <div role="button" className="dropdown text-center lang">
-                <a
-                  className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <img
-                    src={props.language ? Albania : English}
-                    alt="mdo"
-                    width="32"
-                    height="32"
-                    className="rounded-circle"
-                  />
-                </a>
-                <ul className="dropdown-menu text-small lang-dr">
-                  <li>
-                    <div
-                      role="button"
-                      className="dropdown-item"
-                      onClick={() => {
-                        props.setLang(true);
-                      }}
-                    >
-                      <img
-                        src={Albania}
-                        alt="mdo"
-                        width="25"
-                        height="25"
-                        className="rounded-circle"
-                      />{" "}
-                      Alb
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      role="button"
-                      className="dropdown-item"
-                      onClick={() => {
-                        props.setLang(false);
-                      }}
-                    >
-                      <img
-                        src={English}
-                        alt="mdo"
-                        width="25"
-                        height="25"
-                        className="rounded-circle"
-                      />{" "}
-                      Eng
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
+                <div className="auth-buttons">
+                  <button className="loginbtn" onClick={()=>navigate("/login")}>Log In</button>
+                  <button className="regbtn" onClick={()=>navigate("/register")}>Register</button>
+                </div>
+              )}
+              {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
+                <div role="button" className="dropdown text-center lang">
+                  <a
+                    className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src={props.language ? Albania : English}
+                      alt="mdo"
+                      width="32"
+                      height="32"
+                      className="lang-btn"
+                    />
+                  </a>
+                  <ul className="dropdown-menu text-small lang-dr">
+                    <li>
+                      <div
+                        role="button"
+                        className="dropdown-item"
+                        onClick={() => {
+                          props.setLang(true);
+                        }}
+                      >
+                        <img
+                          src={Albania}
+                          alt="mdo"
+                          width="25"
+                          height="25"
+                          className="lang-btn"
+                        />{" "}
+                        Alb
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        role="button"
+                        className="dropdown-item"
+                        onClick={() => {
+                          props.setLang(false);
+                        }}
+                      >
+                        <img
+                          src={English}
+                          alt="mdo"
+                          width="25"
+                          height="25"
+                          className="lang-btn"
+                        />{" "}
+                        Eng
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>

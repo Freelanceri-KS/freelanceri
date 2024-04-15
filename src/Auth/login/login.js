@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import maskgroup from "../../assets/images/maskgroup.png";
+import maskgroup from "../../assets/images/register.png";
 import { useDispatch } from "react-redux";
 import {
   setLoggedInFreelancer,

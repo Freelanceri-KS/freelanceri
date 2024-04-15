@@ -53,6 +53,34 @@
 .lang-dr a {
     padding: 10px 20px!important;
 } 
+.headerItems{
+    display: flex;
+    align-items: center;
+}
+.auth-buttons{
+    display: flex;
+    .loginbtn{
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-right: 15px;
+        padding-left: 15px;
+        border: 1px solid #455bef;
+        border-radius: 5px;
+        background-color: transparent;
+    }
+    .regbtn{
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-right: 15px;
+        padding-left: 15px;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        background-color: #455bef;  
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
 @media only screen and (max-width: 600px) {
     .newHeader ul {
         padding-top: 20px!important;
