@@ -9,6 +9,7 @@ import {
 import "./newHeader.scss";
 import Albania from "../../../assets/images/alb.jpg";
 import English from "../../../assets/images/eng.png";
+import User from "../../../assets/images/user1.png";
 import HeaderLogo from "../../../assets/images/headerLogo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -38,7 +39,7 @@ const NewHeader = (props) => {
     localStorage.removeItem("userData");
 
     // Navigate to the login page
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -151,8 +152,8 @@ const NewHeader = (props) => {
             <div className="headerItems">
               {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
                 <div className="auth-buttons">
-                  <button className="loginbtn" onClick={()=>navigate("/login")}>Log In</button>
-                  <button className="regbtn" onClick={()=>navigate("/register")}>Register</button>
+                  <button className="loginbtn" onClick={() => navigate("/login")}>Log In</button>
+                  <button className="regbtn" onClick={() => navigate("/register")}>Register</button>
                 </div>
               )}
               {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
@@ -205,6 +206,34 @@ const NewHeader = (props) => {
                           className="lang-btn"
                         />{" "}
                         Eng
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )}
+              {props.isLoggedinFreelancer && (
+                <div role="button" className="dropdown text-center lang">
+                  <a
+                    className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src={User}
+                      alt="mdo"
+                      width="32"
+                      height="32"
+                      className="rounded-circle"
+                    />
+                  </a>
+                  <ul className="dropdown-menu text-small lang-dr">
+                    <li>
+                      <div
+                        role="button"
+                        className="dropdown-item"
+                        onClick={handleLogout}
+                      >
+                        <p>Log out</p>
                       </div>
                     </li>
                   </ul>

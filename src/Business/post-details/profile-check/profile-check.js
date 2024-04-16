@@ -82,7 +82,7 @@ const ProfileCheck = () => {
                     <div className="pcmh-right">
                         <p>Rating: 4.5</p>
                         <div className="post-controll-options">
-                            <button className="pc-accept" onClick={() => navigate("/contract")}>Accept</button>
+                            <button className="pc-accept" onClick={() => navigate(`/contract/${id}`)}>Accept</button>
                             <button className="pc-reject">Reject</button>
                         </div>
                     </div>

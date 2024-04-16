@@ -11,11 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { setLang, setLoggedInBusiness, setLoggedInFreelancer } from "../../redux/Functions/actions";
 
 
 const DetailsPage = () => {
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
+  // const [jobApps,setJobApps] = useState();
   useEffect(() => {
     const getJobDetail = async () => {
       try {
@@ -25,8 +27,15 @@ const DetailsPage = () => {
         console.error('Error fetching job detail:', error);
       }
     };
-
-
+    // const getJobApplication = async()=>{
+    //   try {
+    //     const response = await axios.get(`/application/byPost/${id}`);
+    //     setJobApps(response.data);
+    //   } catch (error) {
+    //     console.error("Error fetching applications for job:",error);
+    //   }
+    // }
+    // getJobApplication();
     getJobDetail();
   }, [id]);
 
@@ -35,7 +44,7 @@ const DetailsPage = () => {
     <div className="details-page">
       <div className="dp-left">
         <div className="dp-left-container">
-          <Link to={`/`} style={{ textDecoration: 'none', color: "#363636" }}>
+          <Link to={-1} style={{ textDecoration: 'none', color: "#363636" }}>
             <div className="dp-left-container-header">
               <MdOutlineArrowBackIosNew size={30} color='#455bef' />
               <h5>Go back</h5>
@@ -185,6 +194,15 @@ const DetailsPage = () => {
             </div>
           </div>
         </div>
+        {/* {setLoggedInBusiness && (
+          <>
+            {jobApps.map((jobApp)=>(
+              <div className="asd">
+                {jobApp.}
+              </div>
+            ))}
+          </>
+        )} */}
       </div>
       <div className="dp-right">
         <img src={Banner} alt="Banner" className='dp-right-banner' />

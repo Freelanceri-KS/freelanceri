@@ -13,26 +13,26 @@ const rootReducer = combineReducers({ data: initialReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// export const store = configureStore({
-//   reducer: persistedReducer,
-//   devTools: composeWithDevTools(),
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       thunk: false,
-//       immutableCheck: true,
-//       // serializableCheck: {
-//       //   ignoredActions: ['persist/PERSIST'],
-//       // },
-//       serializableCheck: false,
-//     }),
-//     devTools: process.env.NODE_ENV !== 'production'
-// });
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: composeWithDevTools(),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: false,
+      immutableCheck: true,
+      // serializableCheck: {
+      //   ignoredActions: ['persist/PERSIST'],
+      // },
+      serializableCheck: false,
+    }),
+    devTools: process.env.NODE_ENV !== 'production'
+});
 
 // const rootReducer = combineReducers({data: initialReducer})
 
-export const store = createStore(
-  persistReducer(persistConfig, rootReducer),
-  composeWithDevTools()
-);
+// export const store = createStore(
+//   persistReducer(persistConfig, rootReducer),
+//   composeWithDevTools()
+// );
 
 export const persisted = persistStore(store);

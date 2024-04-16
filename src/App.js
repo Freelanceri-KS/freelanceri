@@ -58,7 +58,7 @@ function App(props) {
               <Route path="/post-detail/:id" element={<PostDetail />} />
               <Route path="/profile-check/:id" element={<ProfileCheck />} />
               <Route path="/view-profile/:id" element={<ViewProfile />} />
-              <Route path="/contract" element={<Contract />} /> */
+              <Route path="/contract/:id" element={<Contract />} /> */
               <Route path="*" element={<NotFound />} />
             </>
           )}
@@ -66,7 +66,7 @@ function App(props) {
           {props.isLoggedinFreelancer && (
 
             <>
-              <Route path="/find-jobs" element={<FindJob />} />
+              <Route path="/" element={<FindJob />} />
               <Route path="/details-page/:id" element={<DetailsPage />} />
               <Route path="/apply-form/:id" element={<ApplicationForm />} />
               <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />

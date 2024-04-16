@@ -10,6 +10,8 @@ import axios from "../axios"
 import { IoSearchOutline } from 'react-icons/io5';
 import { CiLocationOn } from 'react-icons/ci';
 import { FaEdit } from "react-icons/fa";
+import { setLang, setLoggedInBusiness, setLoggedInFreelancer } from "../redux/Functions/actions";
+
 
 const BusinessDashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Posts');
@@ -457,7 +459,7 @@ function Posts() {
             <h4>All posts</h4>
             <div className="ongoing-posts">
                 {posts.map((post) => (
-                    <div className="db-post-container">
+                    <div className="db-post-container" onClick={() => navigate(`/details-page/${post._id}`)}>
                         <div className="db-post-container-header">
                             <div className="dbpch-left">
                                 <img src={User2} alt="User" width={50} height={50} />
@@ -506,7 +508,7 @@ function Posts() {
                                 <div className="tag">Budget</div>
                                 <div className="value">{post.budget}$</div>
                             </div>
-                            <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
+                            <button className="dbp-apply-details">
                                 <p className='a-d-p'>Apply</p>
                             </button>
                         </div>
@@ -708,7 +710,7 @@ const Applications = () => {
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
-                                <div className="bagi-footer" onClick={() => navigate("/profile-check/123")}>
+                                <div className="bagi-footer" onClick={() => navigate(`/profile-check/${apl?._id}`)}>
                                     <p>View profile</p>
                                 </div>
                             </div>
