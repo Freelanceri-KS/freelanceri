@@ -6,27 +6,70 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from "../../../axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProfileCheck = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const { id } = useParams();
-    const [profileDetail, setProfileDetail] = useState(null);
 
+    const [profileDetail, setProfileDetail] = useState(null);
+    const [freelancerRating, setFreelancerRating] = useState(null);
+    const [dataFetched, setDataFetched] = useState(false);
 
     useEffect(() => {
-        const getProfileDetail = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get(`/application/${id}`);
-                setProfileDetail(response.data);
-                console.log(response.data);
+                // Fetch profile detail only if it hasn't been fetched yet
+                if (!dataFetched) {
+                    const profileResponse = await axios.get(`/application/${id}`);
+                    setProfileDetail(profileResponse.data);
+                    setDataFetched(true); // Set dataFetched to true to indicate that profile detail has been fetched
+                }
+
+                // Fetch freelancer rating only if profile detail is available
+                if (profileDetail) {
+                    const freelancerId = profileDetail.freelancerId._id;
+                    const ratingResponse = await axios.get(`/rating/freelancer/${freelancerId}`);
+                    setFreelancerRating(ratingResponse.data);
+                    console.log(profileDetail);
+                }
             } catch (error) {
-                console.error('Error fetching job detail:', error);
+                console.error('Error fetching data:', error);
             }
         };
 
+        fetchData();
+    }, [id, profileDetail, dataFetched]);
 
-        getProfileDetail();
-    }, [id]);
+    const rejectProfile = () => {
+        const payload = {
+            state: "Rejected"
+        };
+        axios.patch(`/application/${id}`, payload)
+            .then((response) => {
+                console.log(response.data);
+                toast.success("Freelancer's offer has been rejected")
+                navigate(-1);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    const acceptProfile = () => {
+        const payload = {
+            state: "Accepted"
+        };
+        axios.patch(`/application/${id}`, payload)
+            .then((response) => {
+                console.log(response.data);
+                toast.success("Freelancer's offer has been accepted")
+                navigate(`/contract/${id}`);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
     const navigate = useNavigate();
 
@@ -35,7 +78,7 @@ const ProfileCheck = () => {
             <div className="profile-check-side">
                 <div className="vp-left">
                     <div className="vp-left-container">
-                        <div className="vp-left-container-header">
+                        <div className="vp-left-container-header" onClick={() => navigate(-1)}>
                             <MdOutlineArrowBackIosNew size={30} color='#455bef' />
                             <h5>Go back</h5>
                         </div>
@@ -80,11 +123,13 @@ const ProfileCheck = () => {
                         </div>
                     </div>
                     <div className="pcmh-right">
-                        <p>Rating: 4.5</p>
-                        <div className="post-controll-options">
-                            <button className="pc-accept" onClick={() => navigate(`/contract/${id}`)}>Accept</button>
-                            <button className="pc-reject">Reject</button>
-                        </div>
+                        <p>Rating: {freelancerRating?.averageRating}</p>
+                        {!profileDetail?.state === "Contracted" && (
+                            <div className="post-controll-options">
+                                <button className="pc-accept" onClick={acceptProfile}>Accept</button>
+                                <button className="pc-reject" onClick={rejectProfile}>Reject</button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="pcm-subhead">
@@ -167,72 +212,20 @@ const ProfileCheck = () => {
                         <div className="rating">
                             <h6>Ratings</h6>
                             <div className="rating-list">
-                                <div className="rating-list-item">
-                                    <div className="rli-head">
-                                        <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} className="pccp-image" />
-                                        <div className="rli-head-id">
-                                            <h5>Full name</h5>
-                                            <p>Rating</p>
+                                {freelancerRating?.ratings.map((fr) => (
+                                    <div className="rating-list-item">
+                                        <div className="rli-head">
+                                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} className="pccp-image" />
+                                            <div className="rli-head-id">
+                                                <h5>{fr?.businessId?.companyName}</h5>
+                                                <p>{fr?.rating}.0</p>
+                                            </div>
+                                        </div>
+                                        <div className="rli-body">
+                                            <p>{fr?.comment}</p>
                                         </div>
                                     </div>
-                                    <div className="rli-body">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="rating-list-item">
-                                    <div className="rli-head">
-                                        <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                        <div className="rli-head-id">
-                                            <h5>Full name</h5>
-                                            <p>Rating</p>
-                                        </div>
-                                    </div>
-                                    <div className="rli-body">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                        </p>
-                                    </div>
-                                </div><div className="rating-list-item">
-                                    <div className="rli-head">
-                                        <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                        <div className="rli-head-id">
-                                            <h5>Full name</h5>
-                                            <p>Rating</p>
-                                        </div>
-                                    </div>
-                                    <div className="rli-body">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="rating-list-item">
-                                    <div className="rli-head">
-                                        <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                        <div className="rli-head-id">
-                                            <h5>Full name</h5>
-                                            <p>Rating</p>
-                                        </div>
-                                    </div>
-                                    <div className="rli-body">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="rating-list-item">
-                                    <div className="rli-head">
-                                        <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                        <div className="rli-head-id">
-                                            <h5>Full name</h5>
-                                            <p>Rating</p>
-                                        </div>
-                                    </div>
-                                    <div className="rli-body">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                        </p>
-                                    </div>
-                                </div>
-
-
+                                ))}
                             </div>
                         </div>
                     </div>

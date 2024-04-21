@@ -46,25 +46,26 @@ const LoginPage = (props) => {
       toast.success("Login successful!");
       dispatch(setToken(response.data.token));
 
-      saveDataToLocalStorage({
-        userData: {
-          ...userData,
-          token: response.data.token,
-        },
-      });
+      // Save the userData to localStorage
+      localStorage.setItem("userData", JSON.stringify({
+        ...userData,
+        token: response.data.token,
+      }));
 
       if (selectedUserType === "freelancer") {
         props.setLoggedInFreelancer(true);
-        navigate("/find-jobs");
+        navigate("/");
       } else {
         props.setLoggedInBusiness(true);
-        navigate("/business-dashboard");
+        navigate("/");
       }
     } catch (error) {
       setLoading(false);
       toast.error(error.message || "An error occurred during login.");
     }
   };
+
+
 
   return (
     <div className="login-page">

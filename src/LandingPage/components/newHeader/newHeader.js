@@ -17,13 +17,6 @@ const NewHeader = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleFindJobClick = () => {
-    navigate("/find-jobs");
-  };
-
-  const handleBookmarksClick = () => {
-    navigate("/bookmarks");
-  };
 
   const handleProfileClick = () => {
     navigate("/profile");
@@ -70,15 +63,16 @@ const NewHeader = (props) => {
                 <>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname === "/find-jobs" ? " active" : ""
+                      className={`nav-link ${location.pathname === "/" ? " active" : ""
                         }`}
-                      onClick={handleFindJobClick}
+                      onClick={() => navigate("/")}
+                      style={{ cursor: "pointer" }}
                     >
                       Find Job
                     </a>
                   </li>
                   <li className="nav-item margin">
-                    <a className="nav-link" onClick={handleLogout}>
+                    <a className={`nav-link ${location.pathname === "/freelancer-dashboard" ? "active" : ""}`} onClick={() => navigate("/freelancer-dashboard")} style={{ cursor: "pointer" }}>
                       Dashboard
                     </a>
                   </li>
@@ -86,7 +80,8 @@ const NewHeader = (props) => {
                     <a
                       className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
                         }`}
-                      onClick={handleBookmarksClick}
+                      onClick={() => navigate("/bookmarks")}
+                      style={{ cursor: "pointer" }}
                     >
                       Bookmarks
                     </a>
@@ -95,7 +90,8 @@ const NewHeader = (props) => {
                     <a
                       className={`nav-link ${location.pathname === "/profile" ? " active" : ""
                         }`}
-                      onClick={handleProfileClick}
+                      onClick={() => navigate("/profile")}
+                      style={{ cursor: "pointer" }}
                     >
                       Profile
                     </a>
@@ -114,35 +110,21 @@ const NewHeader = (props) => {
                     </a>
                   </li>
                   <li className="nav-item margin">
-                    <a
-                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
-                        }`}
-                      onClick={handleBookmarksClick}
-                    >
-                      Find Job
+                    <a className="nav-link" onClick={() => navigate("/faqs")}>
+                      FAQs
                     </a>
                   </li>
                   <li className="nav-item margin">
                     <a
                       className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
                         }`}
-                      onClick={handleBookmarksClick}
-                    >
-                      Find Talents
-                    </a>
-                  </li>
-                  <li className="nav-item margin">
-                    <a
-                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
-                        }`}
-                      onClick={handleBookmarksClick}
+                      onClick={() => navigate("/about-us")}
                     >
                       About us
                     </a>
                   </li>
-
                   <li className="nav-item margin">
-                    <a className="nav-link" onClick={handleLogout}>
+                    <a className="nav-link" onClick={() => navigate("/contact-us")}>
                       Contact
                     </a>
                   </li>
@@ -212,6 +194,34 @@ const NewHeader = (props) => {
                 </div>
               )}
               {props.isLoggedinFreelancer && (
+                <div role="button" className="dropdown text-center lang">
+                  <a
+                    className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src={User}
+                      alt="mdo"
+                      width="32"
+                      height="32"
+                      className="rounded-circle"
+                    />
+                  </a>
+                  <ul className="dropdown-menu text-small lang-dr">
+                    <li>
+                      <div
+                        role="button"
+                        className="dropdown-item"
+                        onClick={handleLogout}
+                      >
+                        <p>Log out</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              )}
+              {props.isLoggedinBusiness && (
                 <div role="button" className="dropdown text-center lang">
                   <a
                     className="d-block link-body-emphasis text-decoration-none dropdown-toggle"

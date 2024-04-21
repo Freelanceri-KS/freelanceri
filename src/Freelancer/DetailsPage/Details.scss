@@ -99,7 +99,17 @@
   .dp-center {
     width: 50%;
     margin: 10px;
-
+    .delete-post-btn{
+      margin-top: 3em;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      background-color: rgb(216, 29, 29);
+      padding: 0.5em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .dp-center-mainpost {
       border: 1px solid #eaeaea;
       width: 100%;

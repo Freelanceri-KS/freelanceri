@@ -12,9 +12,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { setLang, setLoggedInBusiness, setLoggedInFreelancer } from "../../redux/Functions/actions";
+import { connect } from "react-redux";
+import { MdDeleteOutline } from "react-icons/md";
 
 
-const DetailsPage = () => {
+
+const DetailsPage = (props) => {
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
   // const [jobApps,setJobApps] = useState();
@@ -38,6 +41,23 @@ const DetailsPage = () => {
     // getJobApplication();
     getJobDetail();
   }, [id]);
+
+
+  const handlePostDelte = () => {
+    const payload = {
+      state: "Expired"
+    }
+    try {
+      axios.patch(`/posts/${jobDetail._id}`, payload)
+        .then((response) => {
+          console.log(response.data);
+          navigate(-1);
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   const navigate = useNavigate();
   return (
@@ -86,7 +106,13 @@ const DetailsPage = () => {
         <div className="dp-center-mainpost">
           <div className="mainpost-title">
             <h5 className='mainpost-title-h5'>{jobDetail?.title}</h5>
-            <MdOutlineBookmarkBorder size={30} color='#455bef' />
+            {props.isLoggedInBusiness ? (
+              <MdDeleteOutline size={25} color='red' style={{ cursor: "pointer" }} onClick={handlePostDelte} />
+
+            ) : (
+              <FaBookmark size={25} color='#455bef' />
+            )
+            }
           </div>
           <div className="mainpost-about">
             <div className="location">
@@ -134,75 +160,68 @@ const DetailsPage = () => {
             </Link>
           </div>
         </div>
-        <div className="dp-center-related">
-          <h2 className='related-title'>Related</h2>
-          <div className="job-post-container">
-            <div className="job-post-container-header">
-              <div className="jpch-left">
-                <img src={User2} alt="User" width={50} height={50} className='jpch-left-img' />
-                <div className="jpch-left-user">
-                  <h6 className="jpch-l-h6">Social Media</h6>
-                  <p className="jpch-l-p">Fjolla Berisha</p>
+        {!props.isLoggedInBusiness && (
+          <div className="dp-center-related">
+            <h2 className='related-title'>Related</h2>
+            <div className="job-post-container">
+              <div className="job-post-container-header">
+                <div className="jpch-left">
+                  <img src={User2} alt="User" width={50} height={50} className='jpch-left-img' />
+                  <div className="jpch-left-user">
+                    <h6 className="jpch-l-h6">Social Media</h6>
+                    <p className="jpch-l-p">Fjolla Berisha</p>
+                  </div>
                 </div>
+                <div className="jpch-center">
+                  <div className="vert-barrier" id='jpch-barrier'></div>
+                  <div className="jpch-center-tags">
+                    <p className="jpch-c-tag">Location</p>
+                    <h6 className="jpch-c-value">Prishtina</h6>
+                  </div>
+                  <div className="vert-barrier"></div>
+                  <div className="jpch-center-tags">
+                    <p className="jpch-c-tag">Type</p>
+                    <h6 className="jpch-c-value">Full-Time</h6>
+                  </div>
+                  <div className="vert-barrier"></div>
+                  <div className="jpch-center-tags">
+                    <p className="jpch-c-tag">Category</p>
+                    <h6 className="jpch-c-value">Graphic Designer</h6>
+                  </div>
+                </div>
+                <FaBookmark size={25} color="#455bef" className='jpch-bookmark' />
               </div>
-              <div className="jpch-center">
-                <div className="vert-barrier" id='jpch-barrier'></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Location</p>
-                  <h6 className="jpch-c-value">Prishtina</h6>
+              <div className="job-post-container-body">
+                <p className="jpcb-p">
+                  I'm on a mission to transform my room into a cozy sanctuary, and I'm reaching out to the creative minds out there for some inspiration!
+                  <br />
+                  <br />
+                  We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're.... Show more
+                </p>
+              </div>
+              <div className="footer-line"></div>
+              <div className="job-post-footer">
+                <div className="jp-footer-info">
+                  <p className="tag">Kerkoj</p>
+                  <p className="value">1 freelancer</p>
                 </div>
                 <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Type</p>
-                  <h6 className="jpch-c-value">Full-Time</h6>
+                <div className="jp-footer-info">
+                  <div className="tag">Afati</div>
+                  <div className="value">3 ditë</div>
                 </div>
                 <div className="vert-barrier"></div>
-                <div className="jpch-center-tags">
-                  <p className="jpch-c-tag">Category</p>
-                  <h6 className="jpch-c-value">Graphic Designer</h6>
+                <div className="jp-footer-info">
+                  <div className="tag">Budget</div>
+                  <div className="value">4100$</div>
                 </div>
+                <button className="jp-apply-details" onClick={() => navigate('/appform')}>
+                  <p className='a-d-p'>Apply</p>
+                </button>
               </div>
-              <FaBookmark size={25} color="#455bef" className='jpch-bookmark' />
-            </div>
-            <div className="job-post-container-body">
-              <p className="jpcb-p">
-                I'm on a mission to transform my room into a cozy sanctuary, and I'm reaching out to the creative minds out there for some inspiration!
-                <br />
-                <br />
-                We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're.... Show more
-              </p>
-            </div>
-            <div className="footer-line"></div>
-            <div className="job-post-footer">
-              <div className="jp-footer-info">
-                <p className="tag">Kerkoj</p>
-                <p className="value">1 freelancer</p>
-              </div>
-              <div className="vert-barrier"></div>
-              <div className="jp-footer-info">
-                <div className="tag">Afati</div>
-                <div className="value">3 ditë</div>
-              </div>
-              <div className="vert-barrier"></div>
-              <div className="jp-footer-info">
-                <div className="tag">Budget</div>
-                <div className="value">4100$</div>
-              </div>
-              <button className="jp-apply-details" onClick={() => navigate('/appform')}>
-                <p className='a-d-p'>Apply</p>
-              </button>
             </div>
           </div>
-        </div>
-        {/* {setLoggedInBusiness && (
-          <>
-            {jobApps.map((jobApp)=>(
-              <div className="asd">
-                {jobApp.}
-              </div>
-            ))}
-          </>
-        )} */}
+        )}
       </div>
       <div className="dp-right">
         <img src={Banner} alt="Banner" className='dp-right-banner' />
@@ -211,5 +230,22 @@ const DetailsPage = () => {
   );
 }
 
-export default DetailsPage;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedinFreelancer: state.data.isLoggedinFreelancer,
+    isLoggedInBusiness: state.data.isLoggedinBusiness
+  };
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLang: (data) => dispatch(setLang(data)),
+    setLoggedInFreelancer: (data) => {
+      dispatch(setLoggedInFreelancer(data));
+    },
+    setLoggedInBusiness: (data) => {
+      dispatch(setLoggedInBusiness(data))
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

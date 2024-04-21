@@ -4,13 +4,10 @@
     .container {
         .active-posts {
             margin-top: 1.5em;
-
-
             .active-posts-grid {
                 display: grid;
                 grid-template-columns: auto auto;
                 margin-bottom: 2em;
-
                 .bookmark-post-container {
                     border: 1px solid #eaeaea;
                     border-radius: 15px;

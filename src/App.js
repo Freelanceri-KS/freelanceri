@@ -28,6 +28,7 @@ import PostDetail from "./Business/post-details/post-details";
 import ProfileCheck from "./Business/post-details/profile-check/profile-check";
 import Contract from "./Business/contracts/offer_contract/contract"
 import NotFound from "./LandingPage/404/404"
+import ViewContract from "./Business/contracts/view_contract/viewContract";
 function App(props) {
   return (
     <>
@@ -46,20 +47,22 @@ function App(props) {
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/contact-us" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
-              <Route path="/login" element={<Login/>}/>
-              <Route path="/register" element={<RegisterPage/>}/>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/faqs" element={<FAQs />} />
 
             </>
           )}
           {props.isLoggedInBusiness && (
             <>
               <Route path="/details-page/:id" element={<DetailsPage />} />
-              <Route path="/business-dashboard" element={<BusinessDashboard />} />
+              <Route path="/" element={<BusinessDashboard />} />
               <Route path="/post-detail/:id" element={<PostDetail />} />
               <Route path="/profile-check/:id" element={<ProfileCheck />} />
               <Route path="/view-profile/:id" element={<ViewProfile />} />
               <Route path="/contract/:id" element={<Contract />} /> */
               <Route path="*" element={<NotFound />} />
+              <Route path="/view-contract/:id" element={<ViewContract />} />
             </>
           )}
 
@@ -71,8 +74,8 @@ function App(props) {
               <Route path="/apply-form/:id" element={<ApplicationForm />} />
               <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
               <Route path="*" element={<NotFound />} />
-
-
+              <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/profile" element={<Profile />} />
             </>
 
           )}

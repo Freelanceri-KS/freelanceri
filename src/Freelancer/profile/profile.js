@@ -70,12 +70,12 @@ const Profile = () => {
               userData?.experiences?.map((experience, index) => (
                 <div key={index} className="data-section">
                   <div className="names">
-                    <p className="name-profession">{experience?.title}</p>
-                    <p className="name-company">{experience?.company}</p>
+                    <p className="name-profession">{experience?.titull}</p>
+                    <p className="name-company">{experience?.cmp}</p>
                   </div>
                   <div className="dates">
-                    <p className="start-date">{experience?.startDate}</p>
-                    <p className="end-date">{experience?.endDate}</p>
+                    <p className="start-date">{experience?.startDate.substring(0, 10)}</p>
+                    <p className="end-date">{experience?.endDate.substring(0, 10)}</p>
                   </div>
                 </div>
               ))
@@ -94,12 +94,12 @@ const Profile = () => {
               userData?.education?.map((education, index) => (
                 <div key={index} className="data-section">
                   <div className="names">
-                    <p className="name-profession">{education?.title}</p>
-                    <p className="name-company">{education?.institution}</p>
+                    <p className="name-profession">{education?.titull}</p>
+                    <p className="name-company">{education?.uni}</p>
                   </div>
                   <div className="dates">
-                    <p className="start-date">{education?.startDate}</p>
-                    <p className="end-date">{education?.endDate}</p>
+                    <p className="start-date">{education?.startDate.substring(0, 10)}</p>
+                    <p className="end-date">{education?.endDate.substring(0, 10)}</p>
                   </div>
                 </div>
               ))

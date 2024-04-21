@@ -7,11 +7,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import "./contract.scss"
 import axios from "../../../axios"
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 const Contract = () => {
     const { id } = useParams();
     const [contractDetail, setContractDetail] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const getContractDetail = async () => {
             try {
@@ -34,15 +37,11 @@ const Contract = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Split the date string into day, month, and year parts
         const [day, month, year] = projectDate.split('-').map(Number);
 
-        // Create a new Date object with the parsed day, month, and year
         const projectDateAsDate = new Date(year, month - 1, day);
 
-        // Check if the Date object is valid
         if (!isNaN(projectDateAsDate.getTime())) {
-            // Format projectDate as ISO string
             const formattedProjectDate = projectDateAsDate.toISOString();
 
             const payload = {
@@ -54,20 +53,30 @@ const Contract = () => {
                 description: contractDetail?.postId?.description,
                 projectDescription,
                 projectOffer,
-                projectDate: formattedProjectDate, // Include the formatted projectDate
+                projectDate: formattedProjectDate,
+                state: "Active"
             };
-
-            axios.post("/contract", payload)
+            axios.patch(`/application/${id}`)
                 .then((response) => {
                     console.log(response.data);
                 })
                 .catch((error) => {
+                    console.log(error)
+                })
+
+
+            axios.post("/contract", payload)
+                .then((response) => {
+                    console.log(response.data);
+                    toast.success("Contract has been created!")
+                    navigate("/")
+                })
+                .catch((error) => {
                     console.log(error);
-                    console.log("Pejllodi", payload);
+                    toast.error(error.message)
                 });
         } else {
             console.error("Invalid date value:", projectDate);
-            // Handle the case where projectDate is not a valid date
         }
     };
 
@@ -103,26 +112,14 @@ const Contract = () => {
                                     name="option"
                                     value={projectType}
                                     className="radio-button"
+                                    checked
                                 />
                                 <div className="terms-project-description">
                                     <h6> By project</h6>
                                     <p>Receive your full payment at the end, when all work has been submitted.</p>
                                 </div>
                             </div>
-                            <div className="terms-milestone">
-                                <input
-                                    type="radio"
-                                    name="option"
-                                    value={projectType}
-                                    onChange={() => setProjectType("By Milestone")}
-                                />
-                                <div className="terms-milestone-description">
-                                    <h6> By milestone</h6>
-                                    <p>Get your full payment based on the tasks you complete during the project.</p>
-                                </div>
-                            </div>
                         </div>
-                        {/* By project shit */}
                         <h6 className="paper-body-h6">Set your payment terms</h6>
                         <div className="payment-term-project">
                             <div className="pt-search-filter-bar">

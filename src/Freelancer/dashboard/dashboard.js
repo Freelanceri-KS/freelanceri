@@ -6,13 +6,19 @@ import { useState, useEffect } from 'react'
 import { FaBookmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import User2 from "../../assets/profiles/2.png";
+import StarRatings from 'react-star-ratings';
 
 const FreelancerDashboard = () => {
 
     const [applications, setApplications] = useState([])
+    const [proposalState, setProposalState] = useState("Active");
+    const [contractState, setContractState] = useState("Active");
+    const [activeContract, setActiveContract] = useState([]);
+    const [finishedContract, setFinishedContract] = useState([]);
+
 
     const getMyApplications = () => {
-        axios.get('application/myApplications/65fe34989056da0f016b5404')
+        axios.get('application/myApplications/66195b30074c981da043a206')
             .then((response) => {
                 setApplications(response.data);
             })
@@ -21,8 +27,69 @@ const FreelancerDashboard = () => {
             });
     }
 
+    const getActiveContracts = () => {
+        axios.get("/contract/freelancer/active/66195b30074c981da043a206")
+            .then((response) => {
+                setActiveContract(response.data);
+                console.log("Active contracts:", response.data);
+            })
+            .then((error) => {
+                console.log(error);
+            })
+    }
+
+    const getFinishedContracts = () => {
+        axios.get("/contract/freelancer/finished/66195b30074c981da043a206")
+            .then((response) => {
+                setFinishedContract(response.data)
+                console.log("Finished contracts", response.data);
+            })
+            .then((error) => {
+                console.log(error);
+            })
+    }
+
+    const handleActiveProposal = () => {
+        setProposalState("Active");
+        console.log(proposalState);
+    }
+
+    const handleClosedProposal = () => {
+        setProposalState("Closed");
+        console.log(proposalState);
+    }
+
+
+    const handleActiveContract = () => {
+        setContractState("Active");
+    }
+
+    const [reviewsList, setReviewList] = useState([]);
+    const [averageRating, setAverageRating] = useState(null);
+    const [fullReview, setFullReview] = useState();
+
+    const getReviews = () => {
+        axios.get("/rating/freelancer/66195b30074c981da043a206")
+            .then((response) => {
+                console.log(response.data);
+                setFullReview(response.data);
+                setReviewList(response.data.ratings);
+                setAverageRating(response.data.averageRating)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    const handleFinishedContract = () => {
+        setContractState("Finished");
+        getFinishedContracts();
+    }
+
     useEffect(() => {
         getMyApplications();
+        getActiveContracts();
+        getReviews();
     }, []);
 
 
@@ -66,8 +133,11 @@ const FreelancerDashboard = () => {
                             </div>
                             <div className="horiz-barrier"></div>
                             <div className="fdmp-options">
-                                <h6 className='fdmp-single-opt'>Active</h6>
-                                <h6 className='fdmp-single-opt'>Closed</h6>
+                                <div className="fdmp-options">
+                                    <h6 className={`fdmp-single-opt ${proposalState === "Active" ? "fdmp-active" : "fdmp-closed"}`} onClick={handleActiveProposal} style={{ cursor: "pointer" }}>Active</h6>
+                                    <h6 className={`fdmp-single-opt ${proposalState === "Closed" ? "fdmp-active" : "fdmp-closed"}`} onClick={handleClosedProposal} style={{ cursor: "pointer" }}>Closed</h6>
+                                </div>
+
                             </div>
                             <div className="horiz-barrier-2"></div>
                             {applications.map((application) => (
@@ -135,81 +205,55 @@ const FreelancerDashboard = () => {
                             </div>
                             <div className="horiz-barrier"></div>
                             <div className="fdmc-options">
-                                <h6 className='fdmc-single-opt'>Active</h6>
-                                <h6 className='fdmc-single-opt'>Closed</h6>
+                                <h6 className={`fdmc-single-opt ${contractState === "Active" ? "fdmc-active" : "fdmc-closed"}`} onClick={handleActiveContract} style={{ cursor: "pointer" }}>Active</h6>
+                                <h6 className={`fdmc-single-opt ${contractState === "Finished" ? "fdmc-active" : "fdmc-closed"}`} onClick={handleFinishedContract} style={{ cursor: "pointer" }}>Closed</h6>
                             </div>
                             <div className="horiz-barrier-2"></div>
                             <div className="clients-grid">
-                                <div class="grid-item">
-                                    <div className="client-info">
-                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                        <div className="client-info-data">
-                                            <h5>Freelanceri</h5>
-                                            <p>Employment</p>
-                                        </div>
-                                    </div>
-                                    <div className="message-option-client">
-                                        <p>View</p>
-                                    </div>
-                                </div>
-                                <div class="grid-item">
-                                    <div className="client-info">
-                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                        <div className="client-info-data">
-                                            <h5>Freelanceri</h5>
-                                            <p>Employment</p>
-                                        </div>
-                                    </div>
-                                    <div className="message-option-client">
-                                        <p>View</p>
-                                    </div>
-                                </div>
-                                <div class="grid-item">
-                                    <div className="client-info">
-                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                        <div className="client-info-data">
-                                            <h5>Freelanceri</h5>
-                                            <p>Employment</p>
-                                        </div>
-                                    </div>
-                                    <div className="message-option-client">
-                                        <p>View</p>
-                                    </div>
-                                </div>
-                                <div class="grid-item">
-                                    <div className="client-info">
-                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                        <div className="client-info-data">
-                                            <h5>Freelanceri</h5>
-                                            <p>Employment</p>
-                                        </div>
-                                    </div>
-                                    <div className="message-option-client">
-                                        <p>View</p>
-                                    </div>
-                                </div>
-                                <div class="grid-item">  <div className="client-info">
-                                    <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                    <div className="client-info-data">
-                                        <h5>Freelanceri</h5>
-                                        <p>Employment</p>
-                                    </div>
-                                </div>
-                                    <div className="message-option-client">
-                                        <p>View</p>
-                                    </div></div>
-                                <div class="grid-item">
-                                    <div className="client-info">
-                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                        <div className="client-info-data">
-                                            <h5>Freelanceri</h5>
-                                            <p>Employment</p>
-                                        </div>
-                                    </div>
-                                    <div className="message-option-client">
-                                        <p>View</p>
-                                    </div>
-                                </div>
+                                {contractState === "Active" ? (
+                                    <>
+                                        {activeContract.length > 0 ? (
+                                            activeContract.map((ac) => (
+                                                <div class="grid-item">
+                                                    <div className="client-info">
+                                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
+                                                        <div className="client-info-data">
+                                                            <h5>{ac?.business?.companyName}</h5>
+                                                            <p>{ac?.post?.title}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="message-option-client">
+                                                        <p>View</p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className='null-message'>No active contracts found</div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <>
+                                        {finishedContract.length > 0 ? (
+                                            finishedContract.map((fc) => (
+                                                <div class="grid-item">
+                                                    <div className="client-info">
+                                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
+                                                        <div className="client-info-data">
+                                                            <h5>{fc?.business?.companyName}</h5>
+                                                            <p>{fc?.post?.title}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="message-option-client">
+                                                        <p>View</p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className='null-message'>No finished contracts found</div>
+                                        )}
+                                    </>
+                                )}
+
                             </div>
                         </div>
                         <div className="freelancer-dashboard-main-reviews">
@@ -220,68 +264,66 @@ const FreelancerDashboard = () => {
                             <div className="horiz-barrier"></div>
                             <div className="reviews-list">
                                 <div className="reviews-list-main">
-                                    <div className="review-item">
-                                        <div className="review-item-head">
-                                            <img src={Logo} alt='company-image' height={60} width={60} className='client-logo' />
-                                            <div className="review-item-head-data">
-                                                <h6>Freelanceri</h6>
-                                                <p>Kujtim Gjokaj • Prishtina, Kosovo</p>
+                                    {reviewsList.map((review, index) => (
+                                        <>
+                                            <div className="review-item">
+                                                <div className="review-item-head">
+                                                    <img src={Logo} alt='company-image' height={60} width={60} className='client-logo' />
+                                                    <div className="review-item-head-data">
+                                                        <h6>{review?.businessId?.companyName}</h6>
+                                                        <p>{review?.businessId?.companyType} • {review?.rating} stars</p>
+                                                    </div>
+                                                </div>
+                                                <div className="review-item-body">
+                                                    <p>
+                                                        {review?.comment}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="review-item-body">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="horiz-barrier"></div>
-                                    <div className="review-item">
-                                        <div className="review-item-head">
-                                            <img src={Logo} alt='company-image' height={60} width={60} className='client-logo' />
-                                            <div className="review-item-head-data">
-                                                <h6>Freelanceri</h6>
-                                                <p>Kujtim Gjokaj • Prishtina, Kosovo</p>
-                                            </div>
-                                        </div>
-                                        <div className="review-item-body">
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
-                                            </p>
-                                        </div>
-                                    </div>
+                                            {index !== reviewsList.length - 1 && <div className="horiz-barrier"></div>}
+                                        </>
+                                    ))}
                                 </div>
                                 <div className="reviews-list-side">
                                     <div className="rls-main">
-                                        <h5 className='rls-main-h5'>5.0</h5>
-                                        <div className="stars">
-                                            <img src={Star} alt="star" className='reviews-list-side-stars-star' />
-                                            <img src={Star} alt="star" className='reviews-list-side-stars-star' />
-                                            <img src={Star} alt="star" className='reviews-list-side-stars-star' />
-                                            <img src={Star} alt="star" className='reviews-list-side-stars-star' />
-                                            <img src={Star} alt="star" className='reviews-list-side-stars-star' />
-                                        </div>
+                                        {averageRating !== null ? (
+                                            <>
+                                                <h5 className='rls-main-h5'>{averageRating.toFixed(2)}</h5>
+                                                <div className="stars">
+                                                    <StarRatings
+                                                        rating={averageRating}
+                                                        starDimension="30px"
+                                                        starSpacing="5px"
+                                                        starRatedColor="#455bef"
+                                                        starHoverColor="#455bef"
+                                                    />
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <p>Loading...</p>
+                                        )}
                                     </div>
                                     <div className="horiz-line"></div>
                                     <div className="rls-ratings">
                                         <div className="stars-count">
                                             <p>5 stars</p>
-                                            <p>32</p>
+                                            <p>{fullReview?.five}</p>
                                         </div>
                                         <div className="stars-count">
                                             <p>4 stars</p>
-                                            <p>2</p>
+                                            <p>{fullReview?.four}</p>
                                         </div>
                                         <div className="stars-count">
                                             <p>3 stars</p>
-                                            <p>0</p>
+                                            <p>{fullReview?.three}</p>
                                         </div>
                                         <div className="stars-count">
                                             <p>2 stars</p>
-                                            <p>0</p>
+                                            <p>{fullReview?.two}</p>
                                         </div>
                                         <div className="stars-count">
                                             <p>1 Star</p>
-                                            <p>0</p>
+                                            <p>{fullReview?.one}</p>
                                         </div>
                                     </div>
                                 </div>

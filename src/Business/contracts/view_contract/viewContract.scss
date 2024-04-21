@@ -1,0 +1,373 @@
+.contracts {
+    margin-top: 5.5em;
+    margin-bottom: 4em;
+
+    .paper {
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+
+        .paper-head {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+
+            .vert-barrier {
+                height: auto;
+                width: 1px;
+                background-color: #eaeaea;
+            }
+        }
+
+        .paper-horiz-barrier {
+            width: 100%;
+            height: 1px;
+            background-color: #eaeaea;
+        }
+
+        .paper-body {
+            padding: 10px;
+
+            .contract-details-h6 {
+                margin-top: 1em;
+            }
+
+            .paper-body-h6 {
+                margin-top: 2em;
+            }
+
+            .paper-body-input {
+                border: 1px solid #eaeaea;
+                border-radius: 5px;
+                width: 98%;
+                margin-top: 1em;
+                height: 40px;
+            }
+
+            .paper-body-textarea {
+                width: 98%;
+                border: 1px solid #eaeaea;
+                border-radius: 5px;
+                margin-top: 1em;
+
+                &:focus {
+                    border: 1px solid #eaeaea;
+                }
+
+                &:active {
+                    border: 1px solid #eaeaea;
+                }
+            }
+
+            .attachment {
+                width: 98%;
+                height: 8em;
+                background-color: #eaeaea;
+                border: 2px dashed #909090;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .terms {
+                margin-top: 1em;
+
+                .terms-project {
+                    display: flex;
+                    align-items: start;
+
+                    .terms-project-description {
+                        margin-left: 1em;
+                    }
+
+
+                }
+
+                .terms-milestone {
+                    margin-top: 1em;
+                    display: flex;
+                    align-items: start;
+
+                    .terms-milestone-description {
+                        margin-left: 1em;
+                    }
+                }
+            }
+
+            .payment-term-project {
+                width: 98%;
+                display: flex;
+
+                .pt-search-filter-bar {
+                    border-radius: 10px;
+                    padding: 5px;
+                    display: flex;
+                    justify-content: space-between;
+                    width: 98%;
+
+                    .input-with-icon {
+                        position: relative;
+                        flex: 3;
+                        margin: 10px;
+                        border: 1px solid #eaeaea;
+                        border-radius: 5px;
+                    }
+
+
+                    .input-with-icon input {
+                        padding-left: 30px;
+                        border: none;
+                    }
+
+                    .input-with-icon .icon-prefix {
+                        position: absolute;
+                        right: 10px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+
+
+                }
+
+                #project-dsc {
+                    height: 50px;
+                }
+
+                #project-date {
+                    width: 40%;
+                    margin-left: 5px;
+                    height: 50px;
+                }
+
+                #project-budget {
+                    margin-left: 5px;
+                    width: 40%;
+                    height: 50px;
+                }
+            }
+        }
+
+        .paper-footer {
+            padding: 10px;
+            margin-top: 1em;
+            margin-bottom: 2em;
+
+            .paper-footer-p {
+                color: #909090;
+            }
+            .paper-rating{
+                #rating-title{
+                    margin-top: 2em;
+                    margin-bottom: 1em;
+                }
+                .rating-dsc{
+                    border: 1px solid #eaeaea;
+                    border-radius: 5px;
+                    padding: 10px;
+                }
+            }
+            .paper-footer-buttons {
+                display: flex;
+                align-items: center;
+
+                .pfb-1 {
+                    padding: 15px;
+                    width: 13em;
+                    border-radius: 10px;
+                    margin-top: 1em;
+                    background-color: #455bef;
+                    border: none;
+                    color: white;
+                }
+
+                .pfb-cancel {
+                    margin-left: 1em;
+                    color: #455bef;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .contracts {
+        margin-top: 5.5em;
+        margin-bottom: 4em;
+
+        .paper {
+            border: 1px solid #eaeaea;
+            border-radius: 10px;
+
+            .paper-head {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                padding: 15px;
+
+
+            }
+
+            .paper-horiz-barrier {
+                width: 100%;
+                height: 1px;
+                background-color: #eaeaea;
+            }
+
+            .paper-body {
+                padding: 10px;
+
+                .contract-details-h6 {
+                    margin-top: 1em;
+                }
+
+                .paper-body-h6 {
+                    margin-top: 2em;
+                }
+
+                .paper-body-input {
+                    border: 1px solid #eaeaea;
+                    border-radius: 5px;
+                    width: 98%;
+                    margin-top: 1em;
+                    height: 40px;
+                }
+
+                .paper-body-textarea {
+                    width: 98%;
+                    border: 1px solid #eaeaea;
+                    border-radius: 5px;
+                    margin-top: 1em;
+
+                    &:focus {
+                        border: 1px solid #eaeaea;
+                    }
+
+                    &:active {
+                        border: 1px solid #eaeaea;
+                    }
+                }
+
+                .attachment {
+                    width: 98%;
+                    height: 8em;
+                    background-color: #eaeaea;
+                    border: 2px dashed #909090;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .terms {
+                    margin-top: 1em;
+
+                    .terms-project {
+                        display: flex;
+                        align-items: start;
+
+                        .terms-project-description {
+                            margin-left: 1em;
+                        }
+
+
+                    }
+
+                    .terms-milestone {
+                        margin-top: 1em;
+                        display: flex;
+                        align-items: start;
+
+                        .terms-milestone-description {
+                            margin-left: 1em;
+                        }
+                    }
+                }
+
+                .payment-term-project {
+                    width: 98%;
+                    display: flex;
+
+                    .pt-search-filter-bar {
+                        border-radius: 10px;
+                        padding: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        width: 98%;
+
+                        .input-with-icon {
+                            position: relative;
+                            flex: 3;
+                            border: 1px solid #eaeaea;
+                            border-radius: 5px;
+                        }
+
+
+                        .input-with-icon input {
+                            padding-left: 30px;
+                            border: none;
+                        }
+
+                        .input-with-icon .icon-prefix {
+                            position: absolute;
+                            right: 10px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+
+
+                    }
+
+                    #project-dsc {
+                        height: 50px;
+                    }
+
+                    #project-date {
+                        width: 40%;
+                        margin-left: 5px;
+                        height: 50px;
+                    }
+
+                    #project-budget {
+                        margin-left: 5px;
+                        width: 40%;
+                        height: 50px;
+                    }
+                }
+            }
+
+            .paper-footer {
+                padding: 10px;
+                margin-top: 1em;
+                margin-bottom: 2em;
+
+                .paper-footer-p {
+                    color: #909090;
+                }
+
+                .paper-footer-buttons {
+                    display: flex;
+                    align-items: center;
+
+                    .pfb-1 {
+                        padding: 15px;
+                        width: 13em;
+                        border-radius: 10px;
+                        margin-top: 1em;
+                        background-color: #455bef;
+                        border: none;
+                        color: white;
+                    }
+
+                    .pfb-cancel {
+                        margin-left: 1em;
+                        color: #455bef;
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}

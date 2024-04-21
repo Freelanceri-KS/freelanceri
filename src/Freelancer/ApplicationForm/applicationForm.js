@@ -57,6 +57,7 @@ const ApplicationForm = ({ closeModal }) => {
       freelancerPrice: projectPrice,
       coverLetter: coverLetter,
       duration:durationOffer,
+      state:"Under Review",
       cv: cv
     }
     axios.post("/application", applData)
@@ -70,7 +71,7 @@ const ApplicationForm = ({ closeModal }) => {
         setProjectPrice("");
         setDurationOffer("")
         console.log("===============",{applData})
-        navigate("/find-jobs");
+        navigate("/");
       })
       .catch((error) => {
         console.log("Error creating application", error)

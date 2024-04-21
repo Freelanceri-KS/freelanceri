@@ -113,106 +113,79 @@ const BusinessDashboard = () => {
 function Contracts() {
     const navigate = useNavigate();
 
+
+    const [activeContracts, setActiveContracts] = useState([]);
+    const [finishedContracts, setFinishedContracts] = useState([]);
+
+    const getActiveContracts = () => {
+        axios.get("/contract/active")
+            .then((response) => {
+                console.log(response.data);
+                setActiveContracts(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    const getFinishedContracts = () => {
+        axios.get("/contract/finished")
+            .then((response) => {
+                console.log(response.data);
+                setFinishedContracts(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        getActiveContracts();
+        getFinishedContracts();
+    }, []);
+
     return (
         <div className="contract-db">
-            <h4>Ongoing Contract</h4>
+            <h4>Active Contracts</h4>
             <div className="ongoing-contracts">
-                <div className="ongoing-contract-item">
-                    <div className="oci-head">
-                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                        <div className="oci-head-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
+                {activeContracts.map((contract) => (
+                    <div className="ongoing-contract-item" onClick={() => navigate(`/view-contract/${contract?._id}`)}>
+                        <div className="oci-head">
+                            <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                            <div className="oci-head-identity">
+                                <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
+                                <p>{contract?.freelancer?.profession.join(", ")}</p>
+                            </div>
+                        </div>
+                        <div className="oci-body">
+                            <p>Project offer: {contract?.projectOffer}</p>
+                            <p>Deadline: {contract?.projectDate.substring(0, 10)}</p>
+                        </div>
+                        <div className="oci-footer">
+                            <p>View contract</p>
                         </div>
                     </div>
-                    <div className="oci-body">
-                        <p>Start date: 10/04/2024</p>
-                        <p>End date: 10/04/2024</p>
-                    </div>
-                    <div className="oci-footer" onClick={() => navigate("/contract")}>
-                        <p>View contract</p>
-                    </div>
-                </div>
-                <div className="ongoing-contract-item">
-                    <div className="oci-head">
-                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                        <div className="oci-head-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
+                ))}
+            </div>
+            <h4 className="finished">Finished Contracts</h4>
+            <div className="ongoing-contracts">
+                {finishedContracts.map((contract) => (
+                    <div className="ongoing-contract-item" onClick={() => navigate(`/view-contract/${contract?._id}`)}>
+                        <div className="oci-head">
+                            <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                            <div className="oci-head-identity">
+                                <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
+                                <p>{contract?.freelancer?.profession.join(", ")}</p>
+                            </div>
+                        </div>
+                        <div className="oci-body">
+                            <p>Project offer: {contract?.projectOffer}</p>
+                            <p>Deadline: {contract?.projectDate.substring(0, 10)}</p>
+                        </div>
+                        <div className="oci-footer">
+                            <p>View contract</p>
                         </div>
                     </div>
-                    <div className="oci-body">
-                        <p>Start date: 10/04/2024</p>
-                        <p>End date: 10/04/2024</p>
-                    </div>
-                    <div className="oci-footer" onClick={() => navigate("/contract")}>
-                        <p>View contract</p>
-                    </div>
-                </div>
-                <div className="ongoing-contract-item">
-                    <div className="oci-head">
-                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                        <div className="oci-head-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                    </div>
-                    <div className="oci-body">
-                        <p>Start date: 10/04/2024</p>
-                        <p>End date: 10/04/2024</p>
-                    </div>
-                    <div className="oci-footer" onClick={() => navigate("/contract")}>
-                        <p>View contract</p>
-                    </div>
-                </div>
-                <div className="ongoing-contract-item">
-                    <div className="oci-head">
-                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                        <div className="oci-head-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                    </div>
-                    <div className="oci-body">
-                        <p>Start date: 10/04/2024</p>
-                        <p>End date: 10/04/2024</p>
-                    </div>
-                    <div className="oci-footer" onClick={() => navigate("/contract")}>
-                        <p>View contract</p>
-                    </div>
-                </div>
-                <div className="ongoing-contract-item">
-                    <div className="oci-head">
-                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                        <div className="oci-head-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                    </div>
-                    <div className="oci-body">
-                        <p>Start date: 10/04/2024</p>
-                        <p>End date: 10/04/2024</p>
-                    </div>
-                    <div className="oci-footer" onClick={() => navigate("/contract")}>
-                        <p>View contract</p>
-                    </div>
-                </div>
-                <div className="ongoing-contract-item">
-                    <div className="oci-head">
-                        <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                        <div className="oci-head-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                    </div>
-                    <div className="oci-body">
-                        <p>Start date: 10/04/2024</p>
-                        <p>End date: 10/04/2024</p>
-                    </div>
-                    <div className="oci-footer" onClick={() => navigate("/contract")}>
-                        <p>View contract</p>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     );
@@ -436,12 +409,7 @@ function Posts() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        const storedPosts = JSON.parse(localStorage.getItem('posts'));
-        if (storedPosts) {
-            setPosts(storedPosts);
-        } else {
-            getPosts();
-        }
+        getPosts();
     }, []);
 
     const getPosts = () => {
@@ -459,8 +427,8 @@ function Posts() {
             <h4>All posts</h4>
             <div className="ongoing-posts">
                 {posts.map((post) => (
-                    <div className="db-post-container" onClick={() => navigate(`/details-page/${post._id}`)}>
-                        <div className="db-post-container-header">
+                    <div className="db-post-container-2" onClick={() => navigate(`/details-page/${post._id}`)} key={post._id}>
+                        <div className="db-post-container-header-2">
                             <div className="dbpch-left">
                                 <img src={User2} alt="User" width={50} height={50} />
                                 <div className="dbpch-left-user">
@@ -468,7 +436,7 @@ function Posts() {
                                     <p className="dbpch-l-p">{post.userId.firstName} {post.userId.lastName}</p>
                                 </div>
                             </div>
-                            <div className="dbpch-center">
+                            <div className="dbpch-center-2">
                                 <div className="vert-barrier"></div>
                                 <div className="dbpch-center-tags">
                                     <p className="dbpch-c-tag">Location</p>
@@ -487,13 +455,13 @@ function Posts() {
                             </div>
                             <FaBookmark size={25} color="#455bef" />
                         </div>
-                        <div className="db-post-container-body">
+                        <div className="db-post-container-body-2">
                             <p className="dbpcb-p">
                                 {post.description}
                             </p>
                         </div>
-                        <div className="footer-line"></div>
-                        <div className="db-post-footer">
+                        <div className="footer-line-2"></div>
+                        <div className="db-post-footer-2">
                             <div className="dbp-footer-info">
                                 <p className="tag">Kerkoj</p>
                                 <p className="value">{post.neededWorkers} freelancer</p>
@@ -508,7 +476,7 @@ function Posts() {
                                 <div className="tag">Budget</div>
                                 <div className="value">{post.budget}$</div>
                             </div>
-                            <button className="dbp-apply-details">
+                            <button className="dbp-apply-details-2">
                                 <p className='a-d-p'>Apply</p>
                             </button>
                         </div>
@@ -516,155 +484,76 @@ function Posts() {
 
                 ))}
             </div>
-            {/* <h4>All posts</h4>
-            <div className="ongoing-posts">
-                <div className="db-post-container">
-                    <div className="db-post-container-header">
-                        <div className="dbpch-left">
-                            <img src={User2} alt="User" width={50} height={50} />
-                            <div className="dbpch-left-user">
-                                <h6 className="dbpch-l-h6">Social Media</h6>
-                                <p className="dbpch-l-p">Fjolla Berisha</p>
-                            </div>
-                        </div>
-                        <div className="dbpch-center">
-                            <div className="vert-barrier"></div>
-                            <div className="dbpch-center-tags">
-                                <p className="dbpch-c-tag">Location</p>
-                                <h6 className="dbpch-c-value">Prishtina</h6>
-                            </div>
-                            <div className="vert-barrier"></div>
-                            <div className="dbpch-center-tags">
-                                <p className="dbpch-c-tag">Type</p>
-                                <h6 className="dbpch-c-value">Full-Time</h6>
-                            </div>
-                            <div className="vert-barrier"></div>
-                            <div className="dbpch-center-tags">
-                                <p className="dbpch-c-tag">Category</p>
-                                <h6 className="dbpch-c-value">Graphic Designer</h6>
-                            </div>
-                        </div>
-                        <FaBookmark size={25} color="#455bef" />
-                    </div>
-                    <div className="db-post-container-body">
-                        <p className="dbpcb-p">
-                            Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
-                            <br />
-                            <br />
-                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate
-                            <br />
-                            <br />
-
-                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you! ..... Show more
-                        </p>
-                    </div>
-                    <div className="footer-line"></div>
-                    <div className="db-post-footer">
-                        <div className="dbp-footer-info">
-                            <p className="tag">Kerkoj</p>
-                            <p className="value">1 freelancer</p>
-                        </div>
-                        <div className="vert-barrier"></div>
-                        <div className="dbp-footer-info">
-                            <div className="tag">Afati</div>
-                            <div className="value">3 ditë</div>
-                        </div>
-                        <div className="vert-barrier"></div>
-                        <div className="dbp-footer-info">
-                            <div className="tag">Budget</div>
-                            <div className="value">4100$</div>
-                        </div>
-                        <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
-                            <p className='a-d-p'>Apply</p>
-                        </button>
-                    </div>
-                </div>
-                <div className="db-post-container">
-                    <div className="db-post-container-header">
-                        <div className="dbpch-left">
-                            <img src={User2} alt="User" width={50} height={50} />
-                            <div className="dbpch-left-user">
-                                <h6 className="dbpch-l-h6">Social Media</h6>
-                                <p className="dbpch-l-p">Fjolla Berisha</p>
-                            </div>
-                        </div>
-                        <div className="dbpch-center">
-                            <div className="vert-barrier"></div>
-                            <div className="dbpch-center-tags">
-                                <p className="dbpch-c-tag">Location</p>
-                                <h6 className="dbpch-c-value">Prishtina</h6>
-                            </div>
-                            <div className="vert-barrier"></div>
-                            <div className="dbpch-center-tags">
-                                <p className="dbpch-c-tag">Type</p>
-                                <h6 className="dbpch-c-value">Full-Time</h6>
-                            </div>
-                            <div className="vert-barrier"></div>
-                            <div className="dbpch-center-tags">
-                                <p className="dbpch-c-tag">Category</p>
-                                <h6 className="dbpch-c-value">Graphic Designer</h6>
-                            </div>
-                        </div>
-                        <FaBookmark size={25} color="#455bef" />
-                    </div>
-                    <div className="db-post-container-body">
-                        <p className="dbpcb-p">
-                            Hey talented photographers! My fiancé and I are on the lookout for an amazing photographer to capture the magic of our wedding day!
-                            <br />
-                            <br />
-                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate
-                            <br />
-                            <br />
-
-                            We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you! ..... Show more
-                        </p>
-                    </div>
-                    <div className="footer-line"></div>
-                    <div className="db-post-footer">
-                        <div className="dbp-footer-info">
-                            <p className="tag">Kerkoj</p>
-                            <p className="value">1 freelancer</p>
-                        </div>
-                        <div className="vert-barrier"></div>
-                        <div className="dbp-footer-info">
-                            <div className="tag">Afati</div>
-                            <div className="value">3 ditë</div>
-                        </div>
-                        <div className="vert-barrier"></div>
-                        <div className="dbp-footer-info">
-                            <div className="tag">Budget</div>
-                            <div className="value">4100$</div>
-                        </div>
-                        <button onClick={() => navigate(`/details-page/1`)} className="dbp-apply-details">
-                            <p className='a-d-p'>Apply</p>
-                        </button>
-                    </div>
-                </div>
-            </div> */}
         </div>
     );
 }
 
 const Applications = () => {
 
-    useEffect(() => {
-        getBusinessAplication();
-    }, []);
 
     const [businessAppls, setBusinessAppls] = useState([]);
-    const [appCount, setAppCount] = useState(0); // Initialize appCount state
+    const [appCount, setAppCount] = useState(0);
 
-    const getBusinessAplication = () => {
-        axios.get("application/business/660b170df00fffca9933298a")
+    const getURApplication = () => {
+        axios.get("application/under-review/660b170df00fffca9933298a")
             .then((response) => {
                 setBusinessAppls(response.data);
-                setAppCount(response.data.length); // Update appCount state
+                setAppCount(response.data.length);
                 console.log("Response: ", response.data);
             })
             .catch((error) => {
                 console.log("Error fetching applications: ", error);
             });
     };
+
+
+    const [rejectedApplications, setRejectedApps] = useState([]);
+
+    const getRejectedApplications = () => {
+        axios.get("/application/rejected/660b170df00fffca9933298a")
+            .then((response) => {
+                console.log("rejected apps:", response.data)
+                setRejectedApps(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const [accpetedApps, setAcceptedAps] = useState([]);
+
+    const getAcceptedApps = () => {
+        axios.get("/application/accepted/660b170df00fffca9933298a")
+            .then((response) => {
+                console.log("Accepted apps:", response.data)
+                setAcceptedAps(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+
+    const [contractedApl, setContractedApl] = useState([]);
+
+    const getContractedApls = () => {
+        axios.get("/application/contracted/660b170df00fffca9933298a")
+            .then((response) => {
+                console.log(response.data);
+                setContractedApl(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+
+    useEffect(() => {
+        getURApplication();
+        getRejectedApplications();
+        getAcceptedApps();
+        getContractedApls();
+    }, []);
 
     const navigate = useNavigate();
 
@@ -673,18 +562,18 @@ const Applications = () => {
             <div className="content">
                 <div className="content-header">
                     <div className="stat">
-                        <h6 className="stat-name">Number of users</h6>
-                        <h1 className="stat-nr">320</h1>
+                        <h6 className="stat-name">Active applications</h6>
+                        <h1 className="stat-nr">{accpetedApps.length + rejectedApplications.length + appCount}</h1>
                     </div>
                     <div className="header-barrier"></div>
                     <div className="stat">
-                        <h6 className="stat-name">Number of posts</h6>
-                        <h1 className="stat-nr">120</h1>
+                        <h6 className="stat-name">Rejected Applications</h6>
+                        <h1 className="stat-nr">{rejectedApplications.length}</h1>
                     </div>
                     <div className="header-barrier"></div>
                     <div className="stat">
-                        <h6 className="stat-name">Number of applications</h6>
-                        <h1 className="stat-nr">{appCount}</h1>
+                        <h6 className="stat-name">Accepted Freelancers</h6>
+                        <h1 className="stat-nr">{accpetedApps.length}</h1>
                     </div>
                 </div>
                 <div className="business-applications">
@@ -715,88 +604,61 @@ const Applications = () => {
                                 </div>
                             </div>
                         ))}
-
                     </div>
-                    <h4 className='business-applications-title-exp'>Expired applications</h4>
+                    <h4 className='business-applications-title-exp'>Accepted applications</h4>
                     <div className="business-applications-grid">
-                        <div className="business-applications-grid-item">
-                            <div className="bagi-head">
-                                <img src={User2} alt="User" width={80} height={80} />
-                                <div className="bagi-head-identity">
-                                    <h5>Name Surname</h5>
-                                    <p>Job title</p>
+
+                        {accpetedApps.map((apl) => (
+                            <div className="business-applications-grid-item">
+                                <div className="bagi-head">
+                                    <img src={User2} alt="User" width={80} height={80} />
+                                    <div className="bagi-head-identity">
+                                        <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
+                                        <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>
+                                    </div>
+                                </div>
+                                <p className='bagi-position'>Position: {apl?.postId?.title}</p>
+                                <div className="bagi-footer" onClick={() => navigate(`/profile-check/${apl?._id}`)}>
+                                    <p>View profile</p>
                                 </div>
                             </div>
-                            <p className='bagi-position'>Position: Mobile App Developer</p>
-                            <div className="bagi-footer-exp">
-                                <p>View profile</p>
-                            </div>
-                        </div>
-                        <div className="business-applications-grid-item">
-                            <div className="bagi-head">
-                                <img src={User2} alt="User" width={80} height={80} />
-                                <div className="bagi-head-identity">
-                                    <h5>Name Surname</h5>
-                                    <p>Job title</p>
+                        ))}
+                    </div>
+                    <h4 className='business-applications-title-exp'>Rejected applications</h4>
+                    <div className="business-applications-grid">
+                        {rejectedApplications.map((apl) => (
+                            <div className="business-applications-grid-item">
+                                <div className="bagi-head">
+                                    <img src={User2} alt="User" width={80} height={80} />
+                                    <div className="bagi-head-identity">
+                                        <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
+                                        <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>
+                                    </div>
+                                </div>
+                                <p className='bagi-position'>Position: {apl?.postId?.title}</p>
+                                <div className="bagi-footer" onClick={() => navigate(`/profile-check/${apl?._id}`)}>
+                                    <p>View profile</p>
                                 </div>
                             </div>
-                            <p className='bagi-position'>Position: Mobile App Developer</p>
-                            <div className="bagi-footer-exp">
-                                <p>View profile</p>
-                            </div>
-                        </div>
-                        <div className="business-applications-grid-item">
-                            <div className="bagi-head">
-                                <img src={User2} alt="User" width={80} height={80} />
-                                <div className="bagi-head-identity">
-                                    <h5>Name Surname</h5>
-                                    <p>Job title</p>
+                        ))}
+                    </div>
+                    <h4 className='business-applications-title-exp'>Contracted applications</h4>
+                    <div className="business-applications-grid">
+                        {contractedApl.map((apl) => (
+                            <div className="business-applications-grid-item">
+                                <div className="bagi-head">
+                                    <img src={User2} alt="User" width={80} height={80} />
+                                    <div className="bagi-head-identity">
+                                        <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
+                                        <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>
+                                    </div>
+                                </div>
+                                <p className='bagi-position'>Position: {apl?.postId?.title}</p>
+                                <div className="bagi-footer" onClick={() => navigate(`/profile-check/${apl?._id}`)}>
+                                    <p>View profile</p>
                                 </div>
                             </div>
-                            <p className='bagi-position'>Position: Mobile App Developer</p>
-                            <div className="bagi-footer-exp">
-                                <p>View profile</p>
-                            </div>
-                        </div>
-                        <div className="business-applications-grid-item">
-                            <div className="bagi-head">
-                                <img src={User2} alt="User" width={80} height={80} />
-                                <div className="bagi-head-identity">
-                                    <h5>Name Surname</h5>
-                                    <p>Job title</p>
-                                </div>
-                            </div>
-                            <p className='bagi-position'>Position: Mobile App Developer</p>
-                            <div className="bagi-footer-exp">
-                                <p>View profile</p>
-                            </div>
-                        </div>
-                        <div className="business-applications-grid-item">
-                            <div className="bagi-head">
-                                <img src={User2} alt="User" width={80} height={80} />
-                                <div className="bagi-head-identity">
-                                    <h5>Name Surname</h5>
-                                    <p>Job title</p>
-                                </div>
-                            </div>
-                            <p className='bagi-position'>Position: Mobile App Developer</p>
-                            <div className="bagi-footer-exp">
-                                <p>View profile</p>
-                            </div>
-                        </div>
-                        <div className="business-applications-grid-item">
-                            <div className="bagi-head">
-                                <img src={User2} alt="User" width={80} height={80} />
-                                <div className="bagi-head-identity">
-                                    <h5>Name Surname</h5>
-                                    <p>Job title</p>
-                                </div>
-                            </div>
-                            <p className='bagi-position'>Position: Mobile App Developer</p>
-                            <div className="bagi-footer-exp" onClick={() => navigate("/profile-check/1")}>
-                                <p>View profile</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -1025,7 +887,7 @@ const Profile = () => {
     }, []);
 
     const getUser = () => {
-        axios.get('/business/660b170df00fffca9933298a')
+        axios.get('/business/summary/660b170df00fffca9933298a')
             .then((response) => {
                 setUser(response.data);
                 console.log(response.data)
@@ -1037,11 +899,13 @@ const Profile = () => {
     return (
         <>
             <div className="row align-items-center">
-                <img src="https://preview.redd.it/for-anyone-that-wanted-to-have-the-aang-picture-on-this-v0-rwy8095bx8ba1.jpg?width=640&crop=smart&auto=webp&s=d09057e988597782c9f38ce6bbfe8f59bcdf8ea9" alt="Avatar" className="profile-picture rounded-circle"></img>
+                <div className="profile-pic rounded-circle">
+                    <p>{user?.business?.companyName[0]}</p>
+                </div>
                 <div className="col-md-7">
-                    <h4 className='p-1'>{user?.firstName} {user?.lastName}</h4>
-                    <h5 className='p-1'>{user?.companyName}</h5>
-                    <strong className='p-1'>{user?.companyType}</strong>
+                    <h4 className='p-1'>{user?.business?.firstName} {user?.business?.lastName}</h4>
+                    <h5 className='p-1'>{user?.business?.companyName}</h5>
+                    <strong className='p-1'>{user?.business?.companyType}</strong>
                 </div>
                 <div className="col-md-2 text-end">
                     <FaEdit className='editIcon' />
@@ -1056,47 +920,39 @@ const Profile = () => {
                     </div>
                     <div class="col-sm">
                         <strong>Phone</strong>
-                        <p>+{user?.phone}</p>
+                        <p>+{user?.business?.phone}</p>
                     </div>
-                    {/* <div class="col-sm">
-                        <strong>Country</strong>
-                        <p>Kosova</p>
-                    </div> */}
                     <div class="col-sm">
                         <strong>City</strong>
-                        <p>{user?.city}</p>
+                        <p>{user?.business?.city}</p>
                     </div>
                     <div class="col-sm ">
                         <strong>Email</strong>
-                        <p>{user?.email}</p>
+                        <p>{user?.business?.email}</p>
                     </div>
                     <div class="col-sm ">
                         <strong>Website</strong>
-                        <p>{user?.website}</p>
+                        <p>{user?.business?.website}</p>
                     </div>
                 </div>
             </div>
             <hr />
-
-
-            <h3 className='mb-4 mt-3'>Money invested</h3>
-
-
+            <h3 className='mb-4 mt-3'>Statistics</h3>
             <div className="content">
                 <div className="content-header">
                     <div className="stat">
-                        <h6 className="stat-name">This week</h6>
-                        <h1 className="stat-nr">/</h1>
+                        <h6 className="stat-name">Applications</h6>
+                        <h1 className="stat-nr">{user?.applications?.length}</h1>
                     </div>
                     <div className="header-barrier"></div>
                     <div className="stat">
-                        <h6 className="stat-name">This month</h6>
-                        <h1 className="stat-nr">/</h1>
+                        <h6 className="stat-name">Contracts</h6>
+                        <h1 className="stat-nr">{user?.contracts?.length}</h1>
                     </div>
                     <div className="header-barrier"></div>
                     <div className="stat">
-                        <h6 className="stat-name">This Year</h6>
-                        <h1 className="stat-nr">/</h1>
+                        <h6 className="stat-name">Posts</h6>
+                        <h1 className="stat-nr">{user?.postime?.length}</h1>
                     </div>
                 </div>
             </div>
