@@ -9,7 +9,8 @@ import {
 import "./newHeader.scss";
 import Albania from "../../../assets/images/alb.jpg";
 import English from "../../../assets/images/eng.png";
-import User from "../../../assets/images/user1.png";
+import User from "../../../assets/profiles/freelancer.png";
+import Business from "../../../assets/profiles/business.png";
 import HeaderLogo from "../../../assets/images/headerLogo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -21,6 +22,11 @@ const NewHeader = (props) => {
   const handleProfileClick = () => {
     navigate("/profile");
   };
+
+
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+
 
   const handleLogout = () => {
     // Clear token and related state
@@ -138,63 +144,64 @@ const NewHeader = (props) => {
                   <button className="regbtn" onClick={() => navigate("/register")}>Register</button>
                 </div>
               )}
-              {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
-                <div role="button" className="dropdown text-center lang">
-                  <a
-                    className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <img
-                      src={props.language ? Albania : English}
-                      alt="mdo"
-                      width="32"
-                      height="32"
-                      className="lang-btn"
-                    />
-                  </a>
-                  <ul className="dropdown-menu text-small lang-dr">
-                    <li>
-                      <div
-                        role="button"
-                        className="dropdown-item"
-                        onClick={() => {
-                          props.setLang(true);
-                        }}
-                      >
-                        <img
-                          src={Albania}
-                          alt="mdo"
-                          width="25"
-                          height="25"
-                          className="lang-btn"
-                        />{" "}
-                        Alb
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        role="button"
-                        className="dropdown-item"
-                        onClick={() => {
-                          props.setLang(false);
-                        }}
-                      >
-                        <img
-                          src={English}
-                          alt="mdo"
-                          width="25"
-                          height="25"
-                          className="lang-btn"
-                        />{" "}
-                        Eng
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              )}
+              {/* {props.isLoggedinBusiness || props.isLoggedinFreelancer && (
+                // <div role="button" className="dropdown text-center lang">
+                //   <a
+                //     className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                //     data-bs-toggle="dropdown"
+                //     aria-expanded="false"
+                //   >
+                //     <img
+                //       src={props.language ? Albania : English}
+                //       alt="mdo"
+                //       width="32"
+                //       height="32"
+                //       className="lang-btn"
+                //     />
+                //   </a>
+                //   <ul className="dropdown-menu text-small lang-dr">
+                //     <li>
+                //       <div
+                //         role="button"
+                //         className="dropdown-item"
+                //         onClick={() => {
+                //           props.setLang(true);
+                //         }}
+                //       >
+                //         <img
+                //           src={Albania}
+                //           alt="mdo"
+                //           width="25"
+                //           height="25"
+                //           className="lang-btn"
+                //         />{" "}
+                //         Alb
+                //       </div>
+                //     </li>
+                //     <li>
+                //       <div
+                //         role="button"
+                //         className="dropdown-item"
+                //         onClick={() => {
+                //           props.setLang(false);
+                //         }}
+                //       >
+                //         <img
+                //           src={English}
+                //           alt="mdo"
+                //           width="25"
+                //           height="25"
+                //           className="lang-btn"
+                //         />{" "}
+                //         Eng
+                //       </div>
+                //     </li>
+                //   </ul>
+                // </div>
+              )} */}
               {props.isLoggedinFreelancer && (
-                <div role="button" className="dropdown text-center lang">
+                <div role="button" className="dropdown text-center lang profile-logout">
+                  <p>{userData?.firstName} {userData?.lastName}</p>
                   <a
                     className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                     data-bs-toggle="dropdown"
@@ -203,8 +210,8 @@ const NewHeader = (props) => {
                     <img
                       src={User}
                       alt="mdo"
-                      width="32"
-                      height="32"
+                      width="50"
+                      height="50"
                       className="rounded-circle"
                     />
                   </a>
@@ -222,32 +229,88 @@ const NewHeader = (props) => {
                 </div>
               )}
               {props.isLoggedinBusiness && (
-                <div role="button" className="dropdown text-center lang">
-                  <a
-                    className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <img
-                      src={User}
-                      alt="mdo"
-                      width="32"
-                      height="32"
-                      className="rounded-circle"
-                    />
-                  </a>
-                  <ul className="dropdown-menu text-small lang-dr">
-                    <li>
-                      <div
-                        role="button"
-                        className="dropdown-item"
-                        onClick={handleLogout}
-                      >
-                        <p>Log out</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                <>
+                  <div role="button" className="dropdown text-center lang profile-logout">
+                    <p>{userData?.companyName}</p>
+                    <a
+                      className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src={Business}
+                        alt="mdo"
+                        width="50"
+                        height="50"
+                        className="rounded-circle"
+                      />
+                    </a>
+                    <ul className="dropdown-menu text-small lang-dr">
+                      <li>
+                        <div
+                          role="button"
+                          className="dropdown-item"
+                          onClick={handleLogout}
+                        >
+                          <p>Log out</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div role="button" className="dropdown text-center lang">
+                    <a
+                      className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src={props.language ? Albania : English}
+                        alt="mdo"
+                        width="32"
+                        height="32"
+                        className="lang-btn"
+                      />
+                    </a>
+                    <ul className="dropdown-menu text-small lang-dr">
+                      <li>
+                        <div
+                          role="button"
+                          className="dropdown-item"
+                          onClick={() => {
+                            props.setLang(true);
+                          }}
+                        >
+                          <img
+                            src={Albania}
+                            alt="mdo"
+                            width="25"
+                            height="25"
+                            className="lang-btn"
+                          />{" "}
+                          Alb
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          role="button"
+                          className="dropdown-item"
+                          onClick={() => {
+                            props.setLang(false);
+                          }}
+                        >
+                          <img
+                            src={English}
+                            alt="mdo"
+                            width="25"
+                            height="25"
+                            className="lang-btn"
+                          />{" "}
+                          Eng
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </>
               )}
             </div>
           </div>

@@ -38,7 +38,7 @@ const FindJob = () => {
   const handleBookmark = (postId) => {
     const payload = {
       postId: postId,
-      freelancerId: "66195b30074c981da043a206"
+      freelancerId: userData._id
     }
     axios.post("/bookmark", payload)
       .then((response) => {
@@ -60,6 +60,22 @@ const FindJob = () => {
         console.log(error);
       })
   }
+
+  const [userData, setUserData] = useState(null);
+
+
+
+  useEffect(() => {
+    const userDataString = window.localStorage.getItem("userData");
+    if (userDataString) {
+      try {
+        const parsedUserData = JSON.parse(userDataString);
+        setUserData(parsedUserData);
+      } catch (error) {
+        console.error("Error parsing userData:", error);
+      }
+    }
+  }, [userData]);
 
   useEffect(() => {
     const savedJobs = localStorage.getItem('jobs');

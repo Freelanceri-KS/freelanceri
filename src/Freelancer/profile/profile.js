@@ -46,16 +46,16 @@ const Profile = () => {
             </div>
             <div className="data-slot">
               <p>Phone</p>
-              <p className="value">+383 45 296 605</p>
+              <p className="value">{userData ? userData?.phone : ""}</p>
             </div>
             <div className="data-slot">
               <p>City</p>
               <p className="value">{userData ? userData?.city : ""}</p>
             </div>
-            <div className="data-slot">
+            {/* <div className="data-slot">
               <p>Bio</p>
               <p className="value">Prishtina, Kosova.</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -148,11 +148,11 @@ const Profile = () => {
       </div>
       <div className="right-profile">
         <div className="upload-cv">
-          <p className="upload-cv-p">Download CV</p>
+          <p className="upload-cv-p">Share profile</p>
         </div>
-        <div className="portfolio">
+        {/* <div className="portfolio">
           <p className="portfolio-p">Portfolio</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

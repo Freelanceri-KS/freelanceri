@@ -10,7 +10,10 @@ import axios from "../axios"
 import { IoSearchOutline } from 'react-icons/io5';
 import { CiLocationOn } from 'react-icons/ci';
 import { FaEdit } from "react-icons/fa";
-import { setLang, setLoggedInBusiness, setLoggedInFreelancer } from "../redux/Functions/actions";
+import { setLang, } from "../redux/Functions/actions";
+import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 
 const BusinessDashboard = () => {
@@ -110,7 +113,7 @@ const BusinessDashboard = () => {
 }
 
 
-function Contracts() {
+function Contracts(props) {
     const navigate = useNavigate();
 
 
@@ -145,7 +148,7 @@ function Contracts() {
 
     return (
         <div className="contract-db">
-            <h4>Active Contracts</h4>
+            <h4>{props.language === true ? "Kontratat aktive" : "Active Contracts"}</h4>
             <div className="ongoing-contracts">
                 {activeContracts.map((contract) => (
                     <div className="ongoing-contract-item" onClick={() => navigate(`/view-contract/${contract?._id}`)}>
@@ -668,214 +671,67 @@ const Applications = () => {
 }
 
 const Find = () => {
+    const [profiles, setProfiles] = useState(null);
+
+    const findProfiles = async () => {
+        try {
+            const professionIds = [
+                "65a3de3efbf475afad8ca791",
+                "65a3de4afbf475afad8ca793",
+                "65a3de54fbf475afad8ca795",
+                "65a3de5ffbf475afad8ca797"
+            ]; // Example profession IDs
+            const response = await axios.post('/business/profiles', { professionIds });
+            setProfiles(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    useEffect(() => {
+        findProfiles();
+    }, []);
+
+    const navigate = useNavigate();
+
+
     return (
         <>
             <div className="search-filter-bar">
-                <div class="input-with-icon">
-                    <input type="text" class="form-control" placeholder=" Emri Mbiemri" />
-                    <span class="icon-prefix"><IoSearchOutline size={20} />
-                    </span>
+                <div className="input-with-icon">
+                    <input type="text" className="form-control" placeholder=" Emri Mbiemri" />
+                    <span className="icon-prefix"><IoSearchOutline size={20} /></span>
                 </div>
                 <div className="vert-barrier"></div>
-                <div class="input-with-icon">
-                    <input type="text" class="form-control" placeholder="Profesioni..." />
-                    <span class="icon-prefix"><CiLocationOn size={20} />
-                    </span>
+                <div className="input-with-icon">
+                    <input type="text" className="form-control" placeholder="Profesioni..." />
+                    <span className="icon-prefix"><CiLocationOn size={20} /></span>
                 </div>
                 <div className="vert-barrier"></div>
                 <div className="search-button">Search</div>
             </div>
-            <div className="business-find">
-                <h4 className='business-find-title'>Best of Developers</h4>
-                <div className="business-find-bestof-grid">
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
+            {profiles && profiles.map((profile, index) => (
+                <div key={index} className="business-find">
+                    <h4 className='business-find-title'>{profile?.freelancers[0]?.profession[0]?.category}</h4>
+                    <div className="business-find-bestof-grid">
+                        {profile.freelancers.map((freelancer, idx) => (
+                            <div key={idx} className="business-find-bestof-grid-item">
+                                <div className="bfbgi-img">
+                                    <img src={User2} alt="User" width={80} height={80} />
+                                </div>
+                                <div className="bfbgi-identity">
+                                    <h5>{freelancer?.firstName} {freelancer?.lastName}</h5>
+                                    <p>{freelancer?.profession[0]?.category}</p>
+                                </div>
+                                <div className="bfbgi-footer">
+                                    <p onClick={() => navigate(`/view-profile/${freelancer._id}`)}>View profile</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-                <h4 className='business-find-title'>Best of Graphic Designers</h4>
-                <div className="business-find-bestof-grid">
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                </div>
-                <h4 className='business-find-title'>Best of Graphic Designers</h4>
-                <div className="business-find-bestof-grid">
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                    <div className="business-find-bestof-grid-item">
-                        <div className="bfbgi-img">
-                            <img src={User2} alt="User" width={80} height={80} />
-                        </div>
-                        <div className="bfbgi-identity">
-                            <h5>Full name</h5>
-                            <p>Profession</p>
-                        </div>
-                        <div className="bfbgi-footer">
-                            <p>View profile</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            ))}
         </>
     )
 }
@@ -1110,4 +966,18 @@ function CreatePost() {
     )
 }
 
-export default BusinessDashboard;
+
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.data.language,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setLang: (data) => dispatch(setLang(data)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BusinessDashboard);

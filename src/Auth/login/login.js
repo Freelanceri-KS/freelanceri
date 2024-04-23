@@ -7,6 +7,7 @@ import {
   setLoggedInFreelancer,
   setLoggedInBusiness,
   setToken,
+  setLang
 } from "../../redux/Functions/actions";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
@@ -71,7 +72,7 @@ const LoginPage = (props) => {
     <div className="login-page">
       <div className="left">
         <div className="left-wrap">
-          <h3 className="left-h3">Log in as</h3>
+          <h3 className="left-h3">{props?.language == true ? "Kyçu si" : "Log in as"}</h3>
           <div className="button-group">
             <button
               onClick={() => handleUserTypeSelect("freelancer")}
@@ -82,7 +83,7 @@ const LoginPage = (props) => {
               }}
               className="btn btn-primary left-btn"
             >
-              Freelancer
+              {props?.language == true ? "Freelancer" : "Freelancer"}
             </button>
             <button
               onClick={() => handleUserTypeSelect("business")}
@@ -93,7 +94,8 @@ const LoginPage = (props) => {
               }}
               className="btn btn-primary right-btn"
             >
-              Business
+              {props?.language == true ? "Biznes" : "Business"}
+
             </button>
           </div>
           <form onSubmit={handleSubmit} className="login-form">
@@ -126,7 +128,8 @@ const LoginPage = (props) => {
                   fontWeight: "500",
                 }}
               >
-                Forgot password?
+                {props?.language == true ? "Keni harruar fjalëkalimin?" : "Forgot password?"}
+
               </p>
             </div>
             <button type="submit" className="btn btn-primary">
@@ -146,6 +149,8 @@ const mapStateToProps = (state) => {
   return {
     isLoggedinFreelancer: state.data.isLoggedinFreelancer,
     isLoggedInBusiness: state.data.isLoggedinBusiness,
+    language: state.data.language,
+
   };
 };
 
@@ -160,6 +165,8 @@ const mapDispatchToProps = (dispatch) => {
     setLoggedInBusiness: (data) => {
       dispatch(setLoggedInBusiness(data));
     },
+    setLang: (data) => dispatch(setLang(data)),
+
   };
 };
 

@@ -19,12 +19,24 @@
 }
 
 .card-title-line1 {
-    font-size: 80px;
+    font-size: 40px;
     font-weight: 400;
     color: #363636;
+    margin: 0;
 }
 
+.card-img-overlay{
+    top: 100px;
+}
 .card-title-line2 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 80px;
+    color: #363636;
+    margin: 0;
+}
+
+.card-title-line3 {
     font-size: 64px;
     font-weight: 700;
     line-height: 80px;
@@ -694,21 +706,25 @@
                 }
             }
         }
-        .fb-feedbacks{
+
+        .fb-feedbacks {
             height: auto;
             width: 95%;
             margin-top: 1em;
             display: flex;
             flex-direction: column;
             align-items: center;
-            .feedback-tag{
+
+            .feedback-tag {
                 margin-top: 1em;
                 width: 100%;
-                .fb-tag-h1{
+
+                .fb-tag-h1 {
                     font-size: 25px;
                 }
             }
-            .feedback-content{
+
+            .feedback-content {
                 width: 100%;
                 font-size: 15px;
             }

@@ -21,26 +21,6 @@ const DetailsPage = (props) => {
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
   // const [jobApps,setJobApps] = useState();
-  useEffect(() => {
-    const getJobDetail = async () => {
-      try {
-        const response = await axios.get(`/posts/${id}`);
-        setJobDetail(response.data);
-      } catch (error) {
-        console.error('Error fetching job detail:', error);
-      }
-    };
-    // const getJobApplication = async()=>{
-    //   try {
-    //     const response = await axios.get(`/application/byPost/${id}`);
-    //     setJobApps(response.data);
-    //   } catch (error) {
-    //     console.error("Error fetching applications for job:",error);
-    //   }
-    // }
-    // getJobApplication();
-    getJobDetail();
-  }, [id]);
 
 
   const handlePostDelte = () => {
@@ -57,6 +37,45 @@ const DetailsPage = (props) => {
       console.log(error)
     }
   }
+
+  const [similarPosts, setSimilarPosts] = useState([]);
+
+
+
+
+  useEffect(() => {
+    const getJobDetail = async () => {
+      try {
+        const response = await axios.get(`/posts/${id}`);
+        setJobDetail(response.data);
+      } catch (error) {
+        console.error('Error fetching job detail:', error);
+      }
+    };
+
+    getJobDetail();
+  }, [id]);
+
+  useEffect(() => {
+    const getSimilarPosts = () => {
+      if (jobDetail && jobDetail._id) {
+        axios.get(`/posts/similarPost/${jobDetail._id}`)
+          .then((response) => {
+            setSimilarPosts(response.data)
+            console.log("Similar posts:", response.data)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        console.log("jobDetail is not yet available.");
+      }
+    }
+
+    if (jobDetail) {
+      getSimilarPosts();
+    }
+  }, [jobDetail]);
 
 
   const navigate = useNavigate();
@@ -163,63 +182,66 @@ const DetailsPage = (props) => {
         {!props.isLoggedInBusiness && (
           <div className="dp-center-related">
             <h2 className='related-title'>Related</h2>
-            <div className="job-post-container">
-              <div className="job-post-container-header">
-                <div className="jpch-left">
-                  <img src={User2} alt="User" width={50} height={50} className='jpch-left-img' />
-                  <div className="jpch-left-user">
-                    <h6 className="jpch-l-h6">Social Media</h6>
-                    <p className="jpch-l-p">Fjolla Berisha</p>
+            {similarPosts.length === 0 ? (
+              <><p>No similar posts</p></>
+            ) : (
+              similarPosts.map((sp) => (
+                <div className="job-post-container">
+                  <div className="job-post-container-header">
+                    <div className="jpch-left">
+                      <img src={User2} alt="User" width={50} height={50} className='jpch-left-img' />
+                      <div className="jpch-left-user">
+                        <h6 className="jpch-l-h6">{sp?.title}</h6>
+                        <p className="jpch-l-p">{sp?.userId?.firstName} {sp?.userId?.lastName}</p>
+                      </div>
+                    </div>
+                    <div className="jpch-center">
+                      <div className="vert-barrier" id='jpch-barrier'></div>
+                      <div className="jpch-center-tags">
+                        <p className="jpch-c-tag">Location</p>
+                        <h6 className="jpch-c-value">{sp?.city.city}</h6>
+                      </div>
+                      <div className="vert-barrier"></div>
+                      <div className="jpch-center-tags">
+                        <p className="jpch-c-tag">Experience</p>
+                        <h6 className="jpch-c-value">{sp?.experienceLevel}</h6>
+                      </div>
+                      <div className="vert-barrier"></div>
+                      <div className="jpch-center-tags">
+                        <p className="jpch-c-tag">Category</p>
+                        <h6 className="jpch-c-value">{sp?.profession?.category}</h6>
+                      </div>
+                    </div>
+                    <FaBookmark size={25} color="#455bef" className='jpch-bookmark' />
+                  </div>
+                  <div className="job-post-container-body" onClick={() => navigate(`/details-page/${sp?._id}`)}>
+                    <p className="jpcb-p">
+                      {sp?.description}
+                    </p>
+                  </div>
+                  <div className="footer-line"></div>
+                  <div className="job-post-footer" onClick={() => navigate(`/details-page/${sp?._id}`)}>
+                    <div className="jp-footer-info">
+                      <p className="tag">Kerkoj</p>
+                      <p className="value">{sp?.neededWorkers}freelancer</p>
+                    </div>
+                    <div className="vert-barrier"></div>
+                    <div className="jp-footer-info">
+                      <div className="tag">Afati</div>
+                      <div className="value">{sp?.duration}ditë</div>
+                    </div>
+                    <div className="vert-barrier"></div>
+                    <div className="jp-footer-info">
+                      <div className="tag">Budget</div>
+                      <div className="value">{sp?.budget}$</div>
+                    </div>
+                    <button className="jp-apply-details" onClick={() => navigate(`/apply-form/${sp._id}`)}>
+                      <p className='a-d-p'>Apply</p>
+                    </button>
                   </div>
                 </div>
-                <div className="jpch-center">
-                  <div className="vert-barrier" id='jpch-barrier'></div>
-                  <div className="jpch-center-tags">
-                    <p className="jpch-c-tag">Location</p>
-                    <h6 className="jpch-c-value">Prishtina</h6>
-                  </div>
-                  <div className="vert-barrier"></div>
-                  <div className="jpch-center-tags">
-                    <p className="jpch-c-tag">Type</p>
-                    <h6 className="jpch-c-value">Full-Time</h6>
-                  </div>
-                  <div className="vert-barrier"></div>
-                  <div className="jpch-center-tags">
-                    <p className="jpch-c-tag">Category</p>
-                    <h6 className="jpch-c-value">Graphic Designer</h6>
-                  </div>
-                </div>
-                <FaBookmark size={25} color="#455bef" className='jpch-bookmark' />
-              </div>
-              <div className="job-post-container-body">
-                <p className="jpcb-p">
-                  I'm on a mission to transform my room into a cozy sanctuary, and I'm reaching out to the creative minds out there for some inspiration!
-                  <br />
-                  <br />
-                  We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're.... Show more
-                </p>
-              </div>
-              <div className="footer-line"></div>
-              <div className="job-post-footer">
-                <div className="jp-footer-info">
-                  <p className="tag">Kerkoj</p>
-                  <p className="value">1 freelancer</p>
-                </div>
-                <div className="vert-barrier"></div>
-                <div className="jp-footer-info">
-                  <div className="tag">Afati</div>
-                  <div className="value">3 ditë</div>
-                </div>
-                <div className="vert-barrier"></div>
-                <div className="jp-footer-info">
-                  <div className="tag">Budget</div>
-                  <div className="value">4100$</div>
-                </div>
-                <button className="jp-apply-details" onClick={() => navigate('/appform')}>
-                  <p className='a-d-p'>Apply</p>
-                </button>
-              </div>
-            </div>
+              ))
+            )}
           </div>
         )}
       </div>

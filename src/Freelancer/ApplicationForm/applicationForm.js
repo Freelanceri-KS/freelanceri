@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "../../axios"
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const ApplicationForm = ({ closeModal }) => {
   const [portfolioFile, setPortfolioFile] = useState(null);
@@ -47,17 +48,18 @@ const ApplicationForm = ({ closeModal }) => {
   const [cv, setCv] = useState("CV Example");
   const [postId, setPostId] = useState("6613e2627558f486c65154cd")
   const [businessId, setBusinessId] = useState("660b170df00fffca9933298a");
-  const [freelancerId, setFreelancerId] = useState("66195b30074c981da043a206")
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
 
   const handleSubmit = () => {
     const applData = {
       postId: jobDetail?._id,
-      freelancerId: freelancerId,
+      freelancerId: userData._id,
       businessId: jobDetail?.userId._id,
       freelancerPrice: projectPrice,
       coverLetter: coverLetter,
-      duration:durationOffer,
-      state:"Under Review",
+      duration: durationOffer,
+      state: "Under Review",
       cv: cv
     }
     axios.post("/application", applData)
@@ -67,16 +69,32 @@ const ApplicationForm = ({ closeModal }) => {
         setCoverLetter("");
         setCv("");
         setPostId("");
-        setFreelancerId("");
         setProjectPrice("");
         setDurationOffer("")
-        console.log("===============",{applData})
+        console.log("===============", { applData })
         navigate("/");
       })
       .catch((error) => {
         console.log("Error creating application", error)
+        if (error.response && error.response.data.error === "Application already exists") {
+          return toast.error("Application already exists")
+        } else {
+          return toast.error("An error occurred while creating the application")
+        }
       })
   }
+
+
+
+  useEffect(() => {
+    console.log("User data:", userData);
+    console.log("User ID:", userData._id);
+    console.log("First Name:", userData.firstName);
+    console.log("Email:", userData.email);
+
+  }, []);
+
+
   return (
     <div className="modal">
       <div className="modal-content">

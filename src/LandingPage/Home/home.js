@@ -96,21 +96,14 @@ const Home = (props) => {
                 <div className="col">
                   <h1 class="card-title-line1">
                     {props?.language == true
-                      ? "Gjeni projektin"
+                      ? "Freelanceri lidh bizneset me"
                       : "Find your next"}
                   </h1>
                   <h1 class="card-title-line2">
                     {props?.language == true
-                      ? "tuaj emocionues!"
+                      ? "freelancerët më të mirë në Kosovë!"
                       : "exciting project!"}
                   </h1>
-                </div>
-                <div className="col-5">
-                  <p class="card-text imageDesc text-muted">
-                    {props?.language == true
-                      ? "Freelanceri është i dizajnuar të lidh punëdhenësit me freelancerët më të mirë në Kosovë!"
-                      : "Freelanceri is designed to connect employers with top quality freelancers all around Kosova!"}
-                  </p>
                 </div>
               </div>
             </div>
@@ -158,7 +151,7 @@ const Home = (props) => {
           <div className="mt-5 mb-5">
             <div className="row">
               <div className="col-sm-4">
-                <div className="card-title-line2">
+                <div className="card-title-line3">
                   {props?.language == true
                     ? "Kategoritë e Njohura"
                     : "Popular Categories"}
@@ -491,7 +484,6 @@ const Home = (props) => {
               </>
             )}
           </p>
-
           <div className="for-business-body">
             <img src={guypc} alt="guy on pc" className="for-business-img" />
             <div className="fbb-features">

@@ -7,9 +7,11 @@ import { FaBookmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import User2 from "../../assets/profiles/2.png";
 import StarRatings from 'react-star-ratings';
+import { setLang } from '../../redux/Functions/actions'
+import { connect } from 'react-redux'
 
-const FreelancerDashboard = () => {
 
+const FreelancerDashboard = (props) => {
     const [applications, setApplications] = useState([])
     const [proposalState, setProposalState] = useState("Active");
     const [contractState, setContractState] = useState("Active");
@@ -18,7 +20,7 @@ const FreelancerDashboard = () => {
 
 
     const getMyApplications = () => {
-        axios.get('application/myApplications/66195b30074c981da043a206')
+        axios.get(`application/myApplications/${userData._id}`)
             .then((response) => {
                 setApplications(response.data);
             })
@@ -28,7 +30,7 @@ const FreelancerDashboard = () => {
     }
 
     const getActiveContracts = () => {
-        axios.get("/contract/freelancer/active/66195b30074c981da043a206")
+        axios.get(`/contract/freelancer/active/${userData._id}`)
             .then((response) => {
                 setActiveContract(response.data);
                 console.log("Active contracts:", response.data);
@@ -39,7 +41,7 @@ const FreelancerDashboard = () => {
     }
 
     const getFinishedContracts = () => {
-        axios.get("/contract/freelancer/finished/66195b30074c981da043a206")
+        axios.get(`/contract/freelancer/finished/${userData._id}`)
             .then((response) => {
                 setFinishedContract(response.data)
                 console.log("Finished contracts", response.data);
@@ -48,6 +50,8 @@ const FreelancerDashboard = () => {
                 console.log(error);
             })
     }
+
+
 
     const handleActiveProposal = () => {
         setProposalState("Active");
@@ -68,36 +72,50 @@ const FreelancerDashboard = () => {
     const [averageRating, setAverageRating] = useState(null);
     const [fullReview, setFullReview] = useState();
 
-    const getReviews = () => {
-        axios.get("/rating/freelancer/66195b30074c981da043a206")
-            .then((response) => {
-                console.log(response.data);
-                setFullReview(response.data);
-                setReviewList(response.data.ratings);
-                setAverageRating(response.data.averageRating)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
+    // const getReviews = () => {
+    //     axios.get(`/rating/freelancer/${userData._id}`)
+    //         .then((response) => {
+    //             console.log(response.data);
+    //             setFullReview(response?.data);
+    //             setReviewList(response?.data.ratings);
+    //             setAverageRating(response?.data.averageRating)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         })
+    // }
 
     const handleFinishedContract = () => {
         setContractState("Finished");
         getFinishedContracts();
     }
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        getMyApplications();
-        getActiveContracts();
-        getReviews();
+        const userDataString = window.localStorage.getItem("userData");
+        if (userDataString) {
+            try {
+                const parsedUserData = JSON.parse(userDataString);
+                setUserData(parsedUserData);
+            } catch (error) {
+                console.error("Error parsing userData:", error);
+            }
+        }
     }, []);
+    useEffect(() => {
+        if (userData && userData._id) {
+            getMyApplications();
+            getActiveContracts();
+            // getReviews();
+        }
+    }, [userData]);
 
 
     const navigate = useNavigate();
     return (
         <>
             <div className="freelancer-dashboard">
-                <p className='freelancer-dashboard-title'>Welcome,<span style={{ fontWeight: "600" }}> Kujtim Gjokaj!</span></p>
+                <p className='freelancer-dashboard-title'>{props.language == true ? "Mirë se vini" : "Welcome"},<span style={{ fontWeight: "600" }}> Kujtim Gjokaj!</span></p>
                 <div className="freelancer-dashboard-wrap">
                     <div className="freelancer-dashboard-main">
                         <div className="freelancer-dashboard-main-earnings">
@@ -140,62 +158,67 @@ const FreelancerDashboard = () => {
 
                             </div>
                             <div className="horiz-barrier-2"></div>
-                            {applications.map((application) => (
-                                <div className="bookmark-post-container" >
-                                    <div className="bookmark-post-container-header">
-                                        <div className="bpch-left">
-                                            <img src={User2} alt="User" width={50} height={50} />
-                                            <div className="bpch-left-user">
-                                                <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
-                                                <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
+                            {applications.length === 0 ? (
+                                <><p className='null-message'>No applications found</p></>
+                            ) : (
+                                <>
+                                    {applications.map((application) => (
+                                        <div className="bookmark-post-container" >
+                                            <div className="bookmark-post-container-header">
+                                                <div className="bpch-left">
+                                                    <img src={User2} alt="User" width={50} height={50} />
+                                                    <div className="bpch-left-user">
+                                                        <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
+                                                        <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="bpch-center">
+                                                    <div className="vert-barrier"></div>
+                                                    <div className="bpch-center-tags">
+                                                        <p className="bpch-c-tag">Location</p>
+                                                        <h6 className="bpch-c-value">{application?.postId?.city.city}</h6>
+                                                    </div>
+                                                    <div className="vert-barrier"></div>
+                                                    <div className="bpch-center-tags">
+                                                        <p className="bpch-c-tag">Experience</p>
+                                                        <h6 className="bpch-c-value">{application?.postId?.experienceLevel}</h6>
+                                                    </div>
+                                                    <div className="vert-barrier"></div>
+                                                    <div className="bpch-center-tags">
+                                                        <p className="bpch-c-tag">Category</p>
+                                                        <h6 className="bpch-c-value">{application?.postId?.profession?.category}</h6>
+                                                    </div>
+                                                </div>
+                                                <FaBookmark size={25} color="#455bef" />
+                                            </div>
+                                            <div className="bookmark-post-container-body">
+                                                <p className="jpcb-p">
+                                                    {application?.postId?.description}
+                                                </p>
+                                            </div>
+                                            <div className="footer-line"></div>
+                                            <div className="bookmark-post-footer">
+                                                <div className="bp-footer-info">
+                                                    <p className="tag">Kerkoj</p>
+                                                    <p className="value">{application?.postId?.neededWorkers} freelancer</p>
+                                                </div>
+                                                <div className="vert-barrier"></div>
+                                                <div className="bp-footer-info">
+                                                    <div className="tag">Afati</div>
+                                                    <div className="value">{application?.postId?.duration} ditë</div>
+                                                </div>
+                                                <div className="vert-barrier"></div>
+                                                <div className="bp-footer-info">
+                                                    <div className="tag">Budget</div>
+                                                    <div className="value">{application?.postId?.budget}$</div>
+                                                </div>
+                                                <button onClick={() => navigate(`/details-page/1`)} className="bp-apply-details">
+                                                    <p className='a-d-p'>Applied</p>
+                                                </button>
                                             </div>
                                         </div>
-                                        <div className="bpch-center">
-                                            <div className="vert-barrier"></div>
-                                            <div className="bpch-center-tags">
-                                                <p className="bpch-c-tag">Location</p>
-                                                <h6 className="bpch-c-value">{application?.postId?.city.city}</h6>
-                                            </div>
-                                            <div className="vert-barrier"></div>
-                                            <div className="bpch-center-tags">
-                                                <p className="bpch-c-tag">Experience</p>
-                                                <h6 className="bpch-c-value">{application?.postId?.experienceLevel}</h6>
-                                            </div>
-                                            <div className="vert-barrier"></div>
-                                            <div className="bpch-center-tags">
-                                                <p className="bpch-c-tag">Category</p>
-                                                <h6 className="bpch-c-value">{application?.postId?.profession?.category}</h6>
-                                            </div>
-                                        </div>
-                                        <FaBookmark size={25} color="#455bef" />
-                                    </div>
-                                    <div className="bookmark-post-container-body">
-                                        <p className="jpcb-p">
-                                            {application?.postId?.description}
-                                        </p>
-                                    </div>
-                                    <div className="footer-line"></div>
-                                    <div className="bookmark-post-footer">
-                                        <div className="bp-footer-info">
-                                            <p className="tag">Kerkoj</p>
-                                            <p className="value">{application?.postId?.neededWorkers} freelancer</p>
-                                        </div>
-                                        <div className="vert-barrier"></div>
-                                        <div className="bp-footer-info">
-                                            <div className="tag">Afati</div>
-                                            <div className="value">{application?.postId?.duration} ditë</div>
-                                        </div>
-                                        <div className="vert-barrier"></div>
-                                        <div className="bp-footer-info">
-                                            <div className="tag">Budget</div>
-                                            <div className="value">{application?.postId?.budget}$</div>
-                                        </div>
-                                        <button onClick={() => navigate(`/details-page/1`)} className="bp-apply-details">
-                                            <p className='a-d-p'>Applied</p>
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
+                                    ))}</>
+                            )}
 
                         </div>
                         <div className="freelancer-dashboard-main-clients">
@@ -264,7 +287,7 @@ const FreelancerDashboard = () => {
                             <div className="horiz-barrier"></div>
                             <div className="reviews-list">
                                 <div className="reviews-list-main">
-                                    {reviewsList.map((review, index) => (
+                                    {reviewsList?.map((review, index) => (
                                         <>
                                             <div className="review-item">
                                                 <div className="review-item-head">
@@ -280,7 +303,7 @@ const FreelancerDashboard = () => {
                                                     </p>
                                                 </div>
                                             </div>
-                                            {index !== reviewsList.length - 1 && <div className="horiz-barrier"></div>}
+                                            {index !== reviewsList?.length - 1 && <div className="horiz-barrier"></div>}
                                         </>
                                     ))}
                                 </div>
@@ -300,7 +323,7 @@ const FreelancerDashboard = () => {
                                                 </div>
                                             </>
                                         ) : (
-                                            <p>Loading...</p>
+                                            <p>Ratings not found yet..</p>
                                         )}
                                     </div>
                                     <div className="horiz-line"></div>
@@ -394,4 +417,19 @@ const FreelancerDashboard = () => {
     );
 }
 
-export default FreelancerDashboard;
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.data.language,
+
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setLang: (data) => dispatch(setLang(data)),
+
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FreelancerDashboard);

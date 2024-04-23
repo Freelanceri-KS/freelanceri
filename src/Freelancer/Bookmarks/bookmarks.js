@@ -12,10 +12,24 @@ import { useState, useEffect } from "react";
 
 const Bookmarks = () => {
     const [bookmarks, setBookmarks] = useState([]);
-    const [expiredBookmarks, setExpiredBookmarks]=useState([]);
+    const [expiredBookmarks, setExpiredBookmarks] = useState([]);
+    const [userData, setUserData] = useState(null);
 
+
+
+    useEffect(() => {
+        const userDataString = window.localStorage.getItem("userData");
+        if (userDataString) {
+            try {
+                const parsedUserData = JSON.parse(userDataString);
+                setUserData(parsedUserData);
+            } catch (error) {
+                console.error("Error parsing userData:", error);
+            }
+        }
+    }, []);
     const getMyBookmarks = () => {
-        axios.get("/bookmark/freelancer/66195b30074c981da043a206")
+        axios.get(`/bookmark/freelancer/${userData._id}`)
             .then((response) => {
                 console.log(response.data)
                 setBookmarks(response.data)
@@ -25,8 +39,10 @@ const Bookmarks = () => {
             })
     }
     useEffect(() => {
-        getMyBookmarks()
-    }, [])
+        if (userData && userData._id) {
+            getMyBookmarks();
+        }
+    }, [userData])
 
 
     const [bookmarkedPosts, setBookmarkedPosts] = useState([]);

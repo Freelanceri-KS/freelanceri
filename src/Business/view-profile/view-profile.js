@@ -2,47 +2,79 @@ import "./view-profile.scss"
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import User from "../../assets/images/user1.png"
 import { FiEdit } from "react-icons/fi";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import axios from "../../axios";
+import { useNavigate, useParams } from "react-router-dom";
 const ViewProfile = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+
+    const { id } = useParams();
+
+    const [profile, setProfile] = useState(null);
+
+
+    const getProfile = async () => {
+        axios.get(`/freelancer/${id}`)
+            .then((response) => {
+                console.log(response.data)
+                setProfile(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const [profileRating, setProfileRating] = useState(null);
+    const getFreelancerRatings = async () => {
+        axios.get(`/rating/freelancer/${id}`)
+            .then((response) => {
+                console.log(response.data)
+                setProfileRating(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        getFreelancerRatings();
+        getProfile();
+    }, [])
+    const navigate = useNavigate();
     return (
         <div className="view-profile">
             <div className="view-profile-side">
                 <div className="vp-left">
                     <div className="vp-left-container">
-                        <div className="vp-left-container-header">
+                        <div className="vp-left-container-header" onClick={() => navigate(-1)} style={{ "cursor": "pointer" }}>
                             <MdOutlineArrowBackIosNew size={30} color='#455bef' />
                             <h5>Go back</h5>
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-container-profile">
                             <div className="vp-cp-left">
-                                <img src={User} alt="User profile picture" height={60} className='dccp-image' />
+                                <img src={User} alt="User profile picture rounded-circle" height={60} className='dccp-image' />
                                 <div className="vp-cp-data">
-                                    <h6 className='vp-cp-data-h6'>Malena Buchholz</h6>
+                                    <h6 className='vp-cp-data-h6'>{profile?.firstName + " " + profile?.lastName}</h6>
                                 </div>
                             </div>
-                            <div className="vp-cp-data-time">
-                                <p className='vp-cp-data-p'>12/04/2024</p>
-                                <p className='vp-cp-data-p'>04:32pm</p>
-                            </div>
+
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-email">
                             <p className='vp-cp-data-p'>Email</p>
-                            <h5>+383 45 296 605</h5>
+                            <h5>{profile?.email}</h5>
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-linkedin">
                             <p className='vp-cp-data-p'>LinkedIn</p>
-                            <h5>MalenaBuccholz</h5>
+                            <h5>{profile?.socials?.linkedIn}</h5>
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-instagram">
-                            <p className='vp-cp-data-p'>LinkedIn</p>
-                            <h5>MalenaBuccholz</h5>
+                            <p className='vp-cp-data-p'>Facebook</p>
+                            <h5>{profile?.socials?.facebook}</h5>
                         </div>
                     </div>
                 </div>
@@ -53,11 +85,11 @@ const ViewProfile = () => {
                         <div className="vpmh-left">
                             <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
                             <div className="vpmh-left-id">
-                                <h5>Full name</h5>
-                                <p>Profession</p>
+                                <h5>{profile?.firstName} {profile?.lastName}</h5>
+                                <p>{profile?.profession[0].category}</p>
                             </div>
                         </div>
-                        <p>Rating: 4.5</p>
+                        <p>Rating: {profileRating?.averageRating}</p>
                     </div>
                     <div className="vpm-body">
                         <div className="vpm-center-profile">
@@ -66,16 +98,19 @@ const ViewProfile = () => {
                                     <h6>Experience</h6>
                                 </div>
                                 <div className="data-container">
-                                    <div className="data-section">
-                                        <div className="names">
-                                            <p className="name-profession">Dev</p>
-                                            <p className="name-company">Freelanceri</p>
+                                    {profile?.experiences.map((prf) => (
+                                        <div className="data-section" key={prf?.freelancerId?.experiences[0]?.title}>
+                                            <div className="names">
+                                                <p className="name-profession">{prf?.titull}</p>
+                                                <p className="name-company">{prf?.cmp}</p>
+                                            </div>
+                                            <div className="dates">
+                                                <p className="start-date">{prf?.startDate.substring(0, 10)}</p>
+                                                <p className="end-date">{prf?.endDate ? prf.endDate.substring(0, 10) : ""}</p>
+
+                                            </div>
                                         </div>
-                                        <div className="dates">
-                                            <p className="start-date">10/1/2024</p>
-                                            <p className="end-date">10/02/2024</p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                             <div className="education mt-2">
@@ -84,110 +119,60 @@ const ViewProfile = () => {
                                 </div>
                                 <div className="data-container">
 
-                                    <div className="data-section">
-                                        <div className="names">
-                                            <p className="name-profession">educationtitle</p>
-                                            <p className="name-company">institution</p>
+                                    {profile?.education.map((prf) => (
+                                        <div className="data-section">
+                                            <div className="names">
+                                                <p className="name-profession">{prf?.titull}</p>
+                                                <p className="name-company">{prf?.uni}</p>
+                                            </div>
+                                            <div className="dates">
+                                                <p className="start-date">{prf?.startDate.substring(0, 10)}</p>
+                                                <p className="end-date">{prf?.endDate.substring(0, 10)}</p>
+                                            </div>
                                         </div>
-                                        <div className="dates">
-                                            <p className="start-date">startDate</p>
-                                            <p className="end-date">endDate</p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                             <div className="certification mt-2">
                                 <div className="label">
-                                    <h6>Certifications</h6>
+                                    <h6>Skills</h6>
                                 </div>
                                 <div className="data-container">
-                                    <div className="data-section">
-                                        <div className="names">
-                                            <p className="name-profession">Junior Geeks</p>
-                                            <p className="name-company">Innovation Center of Kosova</p>
-                                        </div>
-                                        <div className="dates">
-                                            <p className="start-date">04/03/2023</p>
-                                            <p className="end-date">14/03/2023</p>
-                                        </div>
+                                    <div className="skill-section" id="skill-box">
+                                        {profile?.skills.map((skill) => (
+                                            <div className="skill-box">{skill}</div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                             <div className="rating">
                                 <h6>Ratings</h6>
                                 <div className="rating-list">
-                                    <div className="rating-list-item">
-                                        <div className="rli-head">
-                                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                            <div className="rli-head-id">
-                                                <h5>Full name</h5>
-                                                <p>Rating</p>
+                                    {profileRating && profileRating.length > 0 ? (
+                                        profileRating.map((fr) => (
+                                            <div className="rating-list-item" key={fr._id}>
+                                                <div className="rli-head">
+                                                    <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} className="pccp-image" />
+                                                    <div className="rli-head-id">
+                                                        <h5>{fr.businessId?.companyName}</h5>
+                                                        <p>{fr.rating}.0</p>
+                                                    </div>
+                                                </div>
+                                                <div className="rli-body">
+                                                    <p>{fr.comment}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="rli-body">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="rating-list-item">
-                                        <div className="rli-head">
-                                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                            <div className="rli-head-id">
-                                                <h5>Full name</h5>
-                                                <p>Rating</p>
-                                            </div>
-                                        </div>
-                                        <div className="rli-body">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                            </p>
-                                        </div>
-                                    </div><div className="rating-list-item">
-                                        <div className="rli-head">
-                                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                            <div className="rli-head-id">
-                                                <h5>Full name</h5>
-                                                <p>Rating</p>
-                                            </div>
-                                        </div>
-                                        <div className="rli-body">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="rating-list-item">
-                                        <div className="rli-head">
-                                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                            <div className="rli-head-id">
-                                                <h5>Full name</h5>
-                                                <p>Rating</p>
-                                            </div>
-                                        </div>
-                                        <div className="rli-body">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="rating-list-item">
-                                        <div className="rli-head">
-                                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
-                                            <div className="rli-head-id">
-                                                <h5>Full name</h5>
-                                                <p>Rating</p>
-                                            </div>
-                                        </div>
-                                        <div className="rli-body">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus minima placeat rerum, tenetur dolore soluta vel fugiat aut aspernatur nemo.
-                                            </p>
-                                        </div>
-                                    </div>
-
+                                        ))
+                                    ) : (
+                                        <p className="no-rating">No ratings available.</p>
+                                    )}
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="view-profile-main-post">
+                {/* <div className="view-profile-main-post">
                     <div className="vpmp-post-controll-main">
                         <div className="post-controll-main-head">
                             <p className="post-controll-title">Interior Designer</p>
@@ -254,7 +239,7 @@ const ViewProfile = () => {
                                 We're seeking someone with a keen eye for candid moments and a knack for turning them into timeless memories. If you're passionate about your craft and can freeze-frame the love, laughter, and all the special details, we want to hear from you!</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

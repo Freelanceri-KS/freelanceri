@@ -19,14 +19,12 @@ const ProfileCheck = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch profile detail only if it hasn't been fetched yet
                 if (!dataFetched) {
                     const profileResponse = await axios.get(`/application/${id}`);
                     setProfileDetail(profileResponse.data);
-                    setDataFetched(true); // Set dataFetched to true to indicate that profile detail has been fetched
+                    setDataFetched(true);
                 }
 
-                // Fetch freelancer rating only if profile detail is available
                 if (profileDetail) {
                     const freelancerId = profileDetail.freelancerId._id;
                     const ratingResponse = await axios.get(`/rating/freelancer/${freelancerId}`);
@@ -124,7 +122,7 @@ const ProfileCheck = () => {
                     </div>
                     <div className="pcmh-right">
                         <p>Rating: {freelancerRating?.averageRating}</p>
-                        {!profileDetail?.state === "Contracted" && (
+                        {profileDetail && profileDetail.state !== "Contracted" && (
                             <div className="post-controll-options">
                                 <button className="pc-accept" onClick={acceptProfile}>Accept</button>
                                 <button className="pc-reject" onClick={rejectProfile}>Reject</button>
