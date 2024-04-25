@@ -1,6 +1,11 @@
 .footeri {
     background-color: #f7f7f7;
     padding-top: 100px;
+    ul{
+        li{
+            list-style-type: none;
+        }
+    }
 }
 @media screen and (max-width: 768px) {
     .footeri {

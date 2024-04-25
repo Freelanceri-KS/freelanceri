@@ -68,9 +68,8 @@ const NewHeader = (props) => {
                 <>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/")}
                       style={{ cursor: "pointer" }}
                     >
@@ -79,11 +78,10 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/freelancer-dashboard"
-                          ? "active"
-                          : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/freelancer-dashboard"
+                        ? "active"
+                        : ""
+                        }`}
                       onClick={() => navigate("/freelancer-dashboard")}
                       style={{ cursor: "pointer" }}
                     >
@@ -92,9 +90,8 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/bookmarks" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/bookmarks")}
                       style={{ cursor: "pointer" }}
                     >
@@ -103,9 +100,8 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/profile" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/profile" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/profile")}
                       style={{ cursor: "pointer" }}
                     >
@@ -118,9 +114,8 @@ const NewHeader = (props) => {
                 <>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/find-jobs" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/find-jobs" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/")}
                     >
                       Home
@@ -133,9 +128,8 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${
-                        location.pathname === "/bookmarks" ? " active" : ""
-                      }`}
+                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
+                        }`}
                       onClick={() => navigate("/about-us")}
                     >
                       About us
@@ -154,76 +148,78 @@ const NewHeader = (props) => {
             </ul>
             <div className="headerItems">
               {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
-                <div className="auth-buttons">
-                  <button
-                    className="loginbtn"
-                    onClick={() => navigate("/login")}
-                  >
-                    Log In
-                  </button>
-                  <button
-                    className="regbtn"
-                    onClick={() => navigate("/register")}
-                  >
-                    Register
-                  </button>
-                </div>
+                <>
+                  <div className="auth-buttons">
+                    <button
+                      className="loginbtn"
+                      onClick={() => navigate("/login")}
+                    >
+                      Log In
+                    </button>
+                    <button
+                      className="regbtn"
+                      onClick={() => navigate("/register")}
+                    >
+                      Register
+                    </button>
+                  </div>
+                  <div role="button" className="dropdown text-center lang">
+                    <a
+                      className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        src={props.language ? Albania : English}
+                        alt="mdo"
+                        width="32"
+                        height="32"
+                        className="lang-btn"
+                      />
+                    </a>
+                    <ul className="dropdown-menu text-small lang-dr">
+                      <li>
+                        <div
+                          role="button"
+                          className="dropdown-item"
+                          onClick={() => {
+                            props.setLang(true);
+                          }}
+                        >
+                          <img
+                            src={Albania}
+                            alt="mdo"
+                            width="25"
+                            height="25"
+                            className="lang-btn"
+                          />{" "}
+                          Alb
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          role="button"
+                          className="dropdown-item"
+                          onClick={() => {
+                            props.setLang(false);
+                          }}
+                        >
+                          <img
+                            src={English}
+                            alt="mdo"
+                            width="25"
+                            height="25"
+                            className="lang-btn"
+                          />{" "}
+                          Eng
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                </>
               )}
-              {/* {props.isLoggedinBusiness || props.isLoggedinFreelancer && (
-                // <div role="button" className="dropdown text-center lang">
-                //   <a
-                //     className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                //     data-bs-toggle="dropdown"
-                //     aria-expanded="false"
-                //   >
-                //     <img
-                //       src={props.language ? Albania : English}
-                //       alt="mdo"
-                //       width="32"
-                //       height="32"
-                //       className="lang-btn"
-                //     />
-                //   </a>
-                //   <ul className="dropdown-menu text-small lang-dr">
-                //     <li>
-                //       <div
-                //         role="button"
-                //         className="dropdown-item"
-                //         onClick={() => {
-                //           props.setLang(true);
-                //         }}
-                //       >
-                //         <img
-                //           src={Albania}
-                //           alt="mdo"
-                //           width="25"
-                //           height="25"
-                //           className="lang-btn"
-                //         />{" "}
-                //         Alb
-                //       </div>
-                //     </li>
-                //     <li>
-                //       <div
-                //         role="button"
-                //         className="dropdown-item"
-                //         onClick={() => {
-                //           props.setLang(false);
-                //         }}
-                //       >
-                //         <img
-                //           src={English}
-                //           alt="mdo"
-                //           width="25"
-                //           height="25"
-                //           className="lang-btn"
-                //         />{" "}
-                //         Eng
-                //       </div>
-                //     </li>
-                //   </ul>
-                // </div>
-              )} */}
+
               {props.isLoggedinFreelancer && (
                 <div role="button" className="dropdown text-center lang profile-logout">
                   <p>{userData?.firstName} {userData?.lastName}</p>

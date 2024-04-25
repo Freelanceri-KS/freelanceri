@@ -37,6 +37,7 @@ import verified from "../../assets/icons/verified.png"
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import quote from "../../assets/icons/quotes.png"
+import Success from "../../assets/drini.jpg"
 
 
 
@@ -492,8 +493,8 @@ const Home = (props) => {
                   <img src={collaboration} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
                 </div>
                 <div className="feature-text">
-                  <h4>{props?.language == true ? "Bashkëpunim i shkëlqyeshëm" : "Seamless Collaboration"}</h4>
-                  <p className="feature-text-p">{props?.language == true ? "Platforma jonë e thjeshtë për t'u përdorur garanton një përvojë të paqëndrueshme të bashkëpunimit. Komunikoni me freelanceret, ndani dosjet dhe ndjekni përparimin e projektit." : "Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly."}</p>
+                  <h4>{props?.language == true ? "Rekrutim" : "Recruiting"}</h4>
+                  <p className="feature-text-p">{props?.language == true ? "Platforma jonë ofron sherbime rekrutuese për kompanitë e regjistruara, duke pasur një databazë të pasuruar më freelancer që na mundëson gjetjën e profilit adekuat për nëvojat e biznesit." : "Our platform offers recruiting services for registered companies, having an enriched database of freelancers that enables us to find the profile adequate for business needs."}</p>
                 </div>
               </div>
               <div className="fbb-feature-2">
@@ -510,8 +511,8 @@ const Home = (props) => {
                   <img src={verified} alt="Collaboration" height={50} width={50} className="feature-icon-img" />
                 </div>
                 <div className="feature-text">
-                  <h4>{props?.language == true ? "Sigurt dhe besueshëm" : "Secure and reliable"}</h4>
-                  <p className="feature-text-p">{props?.language == true ? "Siguria dhe mbrojtja juaj janë prioritetet tona kryesore. Ne zbatohemi masat e forta për të mbrojtur të dhënat dhe transaksionet financiare." : "Our user-friendly platform ensures a seamless collaberation experience. Communicate with freelancers, share files and track project progress effortlessly."}</p>
+                  <h4>{props?.language == true ? "Menaxhim Projekti" : "Project Management"}</h4>
+                  <p className="feature-text-p">{props?.language == true ? "Ndër shërbimet e shumta që ofron Freelancer për bizneset, veçoria më unike që mund të shërbejë dhe të plotësojë nevojat e shumta të kompanive që kanë nevojë është menaxhimi i projekteve." : "Among the many services that Freelancer offers for businesses, the most unique feature that can serve and meet the many needs of companies that need it is project management."}</p>
                 </div>
               </div>
             </div>
@@ -530,12 +531,12 @@ const Home = (props) => {
             </div>
             <div className="feedback-content">
               <img src={quote} alt="Quote" height={50} className="feedback-content-img" />
-              <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt." </p>
+              <p>{props?.language == true ? "Freelanceri e bënë kërkimin tim për punë! Platforma e tyre ofron një gamë të gjerë të listave të vendeve të punës, duke përfshirë mundësi prestigjioze si Zyra e Presidentit. Ajo që i veçon është mbështetja e tyre e personalizuar - ata më ndihmuan të krijoj një CV të spikatur dhe më udhëhoqën gjatë gjithë procesit. Falë Freelancerit, gjeta punën time të ëndrrave! Nëse jeni serioz për gjetjen e pozicioneve të nivelit të lartë, mos kërkoni më larg se Freelanceri. Ata janë 'Real Deal'!" : "Freelanceri made my job search a breeze! Their platform offers a wide range of job listings, including prestigious opportunities like The President's Office. What sets them apart is their personalized support - they helped me craft a standout resume and guided me through the entire process. Thanks to Freelanceri, I landed my dream job! If you're serious about finding top-tier positions, look no further than Freelanceri. They're the real deal!"}</p>
               <div className="feedback-profile">
-                <img src={img1} alt="User" height={50} />
+                <img src={Success} alt="User" height={60} width={65} className="rounded-circle" />
                 <div className="feedback-user-data">
-                  <h5>Kujtim Gjokaj</h5>
-                  <p>Freelanceri CEO</p>
+                  <h5>Drin Bajgora</h5>
+                  <p>Employed at President's Office by Freelanceri</p>
                 </div>
               </div>
             </div>
