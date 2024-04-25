@@ -16,18 +16,23 @@ import PostControll from "./super-admin/PostControll/postControll";
 import SuperDashboard from "./super-admin/super-admin/dashboard";
 import FreelancerDashboard from "./Freelancer/dashboard/dashboard";
 import Login from "./Auth/login/login";
-import { setLang, setLoggedInBusiness, setLoggedInFreelancer } from "./redux/Functions/actions";
+import {
+  setLang,
+  setLoggedInBusiness,
+  setLoggedInFreelancer,
+} from "./redux/Functions/actions";
 import { connect } from "react-redux";
 import BusinessDashboard from "./Business/business-dashboard";
-import Blogs from "./LandingPage/Blogs/blogs"
-import BlogDetails from "./LandingPage/Blogs/blogDetails"
+import Blogs from "./LandingPage/Blogs/blogs";
+import BlogDetails from "./LandingPage/Blogs/blogDetails";
 import Bookmarks from "./Freelancer/Bookmarks/bookmarks";
-import ApplicationForm from "./Freelancer/ApplicationForm/applicationForm"
-import ViewProfile from "./Business/view-profile/view-profile"
+import ApplicationForm from "./Freelancer/ApplicationForm/applicationForm";
+import ViewProfile from "./Business/view-profile/view-profile";
 import PostDetail from "./Business/post-details/post-details";
 import ProfileCheck from "./Business/post-details/profile-check/profile-check";
-import Contract from "./Business/contracts/offer_contract/contract"
-import NotFound from "./LandingPage/404/404"
+import Contract from "./Business/contracts/offer_contract/contract";
+import NotFound from "./LandingPage/404/404";
+import TestShit from "./LandingPage/AboutUs/Test/testshit";
 import ViewContract from "./Business/contracts/view_contract/viewContract";
 function App(props) {
   return (
@@ -35,7 +40,7 @@ function App(props) {
       <ToastContainer />
       <BrowserRouter>
         {window.location.pathname != "/register" &&
-          window.location.pathname != "/welcome" ? (
+        window.location.pathname != "/welcome" ? (
           <NewHeader />
         ) : (
           ""
@@ -50,7 +55,7 @@ function App(props) {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/faqs" element={<FAQs />} />
-
+              <Route path="/testshit" element={<TestShit />} />
             </>
           )}
           {props.isLoggedInBusiness && (
@@ -67,17 +72,18 @@ function App(props) {
           )}
 
           {props.isLoggedinFreelancer && (
-
             <>
               <Route path="/" element={<FindJob />} />
               <Route path="/details-page/:id" element={<DetailsPage />} />
               <Route path="/apply-form/:id" element={<ApplicationForm />} />
-              <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
+              <Route
+                path="/freelancer-dashboard"
+                element={<FreelancerDashboard />}
+              />
               <Route path="*" element={<NotFound />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/profile" element={<Profile />} />
             </>
-
           )}
           {/* <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
@@ -97,9 +103,7 @@ function App(props) {
           <Route path="/post-controll" element={<PostControll />} />
           <Route path="/profile-check/:id" element={<ProfileCheck />} />
           <Route path="/view-profile/:id" element={<ViewProfile />} />
-          <Route path="/contract" element={<Contract />} /> */
-
-          }
+          <Route path="/contract" element={<Contract />} /> */}
         </Routes>
       </BrowserRouter>
     </>
@@ -109,7 +113,7 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     isLoggedinFreelancer: state.data.isLoggedinFreelancer,
-    isLoggedInBusiness: state.data.isLoggedinBusiness
+    isLoggedInBusiness: state.data.isLoggedinBusiness,
   };
 };
 
@@ -120,8 +124,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setLoggedInFreelancer(data));
     },
     setLoggedInBusiness: (data) => {
-      dispatch(setLoggedInBusiness(data))
-    }
+      dispatch(setLoggedInBusiness(data));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
