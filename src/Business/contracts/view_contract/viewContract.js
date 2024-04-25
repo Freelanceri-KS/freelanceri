@@ -14,14 +14,19 @@ import { toast } from "react-toastify";
 
 const ViewContract = () => {
     const { id } = useParams();
-    const [contractDetail, setContractDetail] = useState(null);
     const navigate = useNavigate();
 
+    const [contractDetail, setContractDetail] = useState(null);
+    const [rating, setRating] = useState(2.5);
+    const [comment, setComment] = useState("");
+    const [check, setCheck] = useState(false); // Initialize to false
 
+    const userDataString = localStorage.getItem("userData");
+    const userData = userDataString ? JSON.parse(userDataString) : null;
 
     const payload = {
         state: "Finished"
-    }
+    };
 
     const updateState = () => {
         axios.patch(`/contract/${id}`, payload)
@@ -30,58 +35,53 @@ const ViewContract = () => {
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
 
-        navigate(-1)
-    }
-
-
-    const [rating, setRating] = useState(2.5);
-    const [freelancerId, setFreelancerId] = useState("66195b30074c981da043a206");
-    const [businessId, setBusinessId] = useState("660b170df00fffca9933298a");
-    const [comment, setComment] = useState("");
-    const [check, setCheck] = useState();
+        navigate(-1);
+    };
 
     const handleRatingChange = (newRating) => {
         setRating(newRating);
     };
 
-    const checkRating = () => {
-        const payload = {
-            freelancerId,
-            businessId,
-        }
-        axios.post("/rating/check", payload)
-            .then((response) => {
-                console.log(response.data);
-                setCheck(response.data.rated)
-            })
-            .catch((error) => {
+    const checkRating = async () => {
+        if (contractDetail && userData) {
+            const payload = {
+                freelancerId: contractDetail.freelancer?._id,
+                businessId: userData._id,
+            };
+
+            try {
+                const response = await axios.post("/rating/check", payload);
+                setCheck(response.data.rated);
+                console.log("Check state:", response.data.rated);
+            } catch (error) {
                 console.log(error);
-            })
-    }
+            }
+        }
+    };
 
-
-    const sendRating = () => {
+    const sendRating = async () => {
         const payload = {
-            freelancerId,
-            businessId,
+            freelancerId: contractDetail?.freelancer?._id,
+            businessId: userData?._id,
             comment,
             rating
+        };
+
+        try {
+            const response = await axios.post("/rating", payload);
+            console.log(response.data);
+            setComment("");
+            setRating(0);
+            toast.success("Freelancer has been rated!");
+            checkRating();
+            console.log("Is rated:", check);
+        } catch (error) {
+            console.log("Freelancer ID: ", contractDetail?.freelancer?._id);
+            console.log(error);
         }
-        axios.post("/rating", payload)
-            .then((response) => {
-                console.log(response.data);
-                setBusinessId("");
-                setComment("");
-                setRating(0);
-                toast.success("Freelancer has been rated!")
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        checkRating();
-    }
+    };
 
     useEffect(() => {
         const getContractDetail = async () => {
@@ -93,9 +93,16 @@ const ViewContract = () => {
                 console.error('Error fetching contract detail:', error);
             }
         };
+
         getContractDetail();
-        checkRating()
+        checkRating(); // Call checkRating immediately after fetching contract details
     }, [id]);
+
+    useEffect(() => {
+        checkRating(); // Call checkRating whenever contractDetail or userData changes
+    }, [contractDetail, userData]);
+
+
     return (
         <div className="contracts">
             <div className="container">
@@ -159,7 +166,7 @@ const ViewContract = () => {
                         {!check && (
                             <>
                                 <div className="paper-rating">
-                                    <h6 className="paper-body-h6" id="rating-title">Describe freelancer</h6>
+                                    <h6 className="paper-body-h6" id="rating-title">Rate freelancer</h6>
                                     <textarea className="rating-dsc" id="" cols="70" rows="6" placeholder="I loved working with them..." value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
                                 </div>
                                 <StarRatings

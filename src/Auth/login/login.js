@@ -59,10 +59,17 @@ const LoginPage = (props) => {
       } else {
         props.setLoggedInBusiness(true);
         navigate("/");
+
       }
     } catch (error) {
-      setLoading(false);
-      toast.error(error.message || "An error occurred during login.");
+      console.log(error);
+      if (error.response && error.response.data.error === "Incorrect password") {
+        setLoading(false);
+        return toast.error("Incorrect password!")
+      } else {
+        setLoading(false);
+        return toast.error("An error occurred while logging in!")
+      }
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./sortByFilter.scss";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { connect } from "react-redux";
@@ -14,8 +14,9 @@ const SortBy = (props) => {
   const getCategory = () => {
     axios
       .get("/profession")
-      .then((data) => {
-        setCategory(data.data);
+      .then((response) => {
+        console.log(response.data)
+        setCategory(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -27,6 +28,11 @@ const SortBy = (props) => {
     }
     setExpandedItem((prevItem) => (prevItem == itemId ? null : itemId));
   };
+
+
+  useEffect(() => {
+    getCategory();
+  }, [])
   return (
     <>
       <div className="filter">
@@ -47,22 +53,24 @@ const SortBy = (props) => {
                 {expandedItem === "category" ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </span>
             </div>
-            {expandedItem === "category" && (
-              <div className="expanded-content mt-3">
-                <div className="rowi gap-2">
-                  {category?.map((el) => {
-                    return (
-                      <>
-                        <button className="category-item-btn">
-                          {el?.category}
-                        </button>
-                      </>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+
           </li>
+          <li className="list-group-item">{expandedItem === "category" && (
+            <div className="expanded-content mt-3">
+              <div className="rowi gap-2">
+                {category?.map((el) => {
+                  return (
+                    <>
+                      <button className="category-item-btn">
+                        {el?.category}
+                      </button>
+                    </>
+                  );
+                })}
+              </div>
+            </div>
+          )}</li>
+
           {/* <li
             onClick={() => handleItemClick("item2")}
             className={`list-group-item ${expandedItem == "item2" ? "" : ""}`}

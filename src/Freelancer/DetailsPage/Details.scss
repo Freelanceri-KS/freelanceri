@@ -158,6 +158,13 @@
       .mainpost-description {
         padding-left: 1em;
         padding-right: 1em;
+        .mainpost-description-body{
+          margin-top: 2em;
+          margin-bottom: 2em;
+          .requirements{
+            margin-top: 1em;
+          }
+        }
       }
 
       .mainpost-footer {

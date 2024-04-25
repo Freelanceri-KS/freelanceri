@@ -465,6 +465,14 @@
 
                         .db-post-container-body-2 {
                             padding: 0.8em;
+
+                            .dbpcb-p {
+                                display: -webkit-box;
+                                -webkit-line-clamp: 3;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                            }
+
                         }
 
                         .db-post-footer-2 {
@@ -498,6 +506,23 @@
                                 height: auto;
                                 width: 140px;
                                 background-color: #455bef;
+                                color: white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-bottom-right-radius: 10px;
+                                border: none;
+
+                                .a-d-p {
+                                    margin: 0;
+                                    font-size: 12px;
+                                }
+                            }
+
+                            .dbp-apply-details-3 {
+                                height: auto;
+                                width: 140px;
+                                background-color: #909090;
                                 color: white;
                                 display: flex;
                                 align-items: center;
@@ -1010,10 +1035,27 @@
                                             }
                                         }
 
-                                        .dbp-apply-details {
+                                        .dbp-apply-details-2 {
                                             height: auto;
                                             width: 140px;
                                             background-color: #455bef;
+                                            color: white;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            border-bottom-right-radius: 10px;
+                                            border: none;
+
+                                            .a-d-p {
+                                                margin: 0;
+                                                font-size: 14px;
+                                            }
+                                        }
+
+                                        .dbp-apply-details-3 {
+                                            height: auto;
+                                            width: 140px;
+                                            background-color: #909090;
                                             color: white;
                                             display: flex;
                                             align-items: center;

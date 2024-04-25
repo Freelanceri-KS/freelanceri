@@ -11,7 +11,8 @@ import { FaBookmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { FaRegBookmark } from "react-icons/fa";
-
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { CiFilter } from "react-icons/ci";
 
 const FindJob = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -21,13 +22,10 @@ const FindJob = () => {
   const navigate = useNavigate()
 
   const getJobs = () => {
-    axios.get('/posts/all').then(
-      data => {
-        console.log(data.data);
-        setJobs(data?.data);
-        localStorage.setItem('jobs', JSON.stringify(data?.data)); // Save jobs list to localStorage
-      }
-    ).catch(
+    axios.get('/posts/approved').then((response) => {
+      console.log(response.data);
+      setJobs(response.data);
+    }).catch(
       err => {
         console.log(err);
       }
@@ -75,15 +73,35 @@ const FindJob = () => {
         console.error("Error parsing userData:", error);
       }
     }
-  }, [userData]);
+  }, []);
+
+  const [expandedItem, setExpandedItem] = useState('category');
+  const [category, setCategory] = useState([]);
+  const getCategory = () => {
+    axios
+      .get("/profession")
+      .then((response) => {
+        console.log(response.data)
+        setCategory(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleItemClick = (itemId) => {
+    if (itemId == "category") {
+      getCategory();
+    }
+    setExpandedItem((prevItem) => (prevItem == itemId ? null : itemId));
+  };
+
 
   useEffect(() => {
-    const savedJobs = localStorage.getItem('jobs');
-    if (savedJobs) {
-      setJobs(JSON.parse(savedJobs));
-    } else {
-      getJobs();
-    }
+    getCategory();
+  }, [])
+
+  useEffect(() => {
+    getJobs();
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       setIsTable(window.innerWidth > 768 && window.innerWidth <= 1024);
@@ -101,7 +119,60 @@ const FindJob = () => {
   return (
     <div className="find-job">
       <div className="find-job-left">
-        <SortByFilter />
+        <div className="filter">
+          <ul className="list-group expandable-list ">
+            <li className="list-group-item lgi-title">
+              <h2 className="lgi-h2">Sort By Filter</h2>
+              <CiFilter size={30} color="#455bef" />
+            </li>
+            <li
+              onClick={() => handleItemClick("category")}
+              className={`list-group-item ${expandedItem === "category" ? <IoIosArrowUp /> : <IoIosArrowDown />
+
+                }`}
+            >
+              <div className="d-flex justify-content-between align-items-center single-item">
+                <h5>Category</h5>
+                <span className="icon" role="button">
+                  {expandedItem === "category" ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                </span>
+              </div>
+
+            </li>
+            <li className="list-group-item">{expandedItem === "category" && (
+              <div className="expanded-content mt-3">
+                <div className="rowi gap-2">
+                  {category?.map((el) => {
+                    return (
+                      <>
+                        <button className="category-item-btn">
+                          {el?.category}
+                        </button>
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
+            )}</li>
+
+            {/* <li
+            onClick={() => handleItemClick("item2")}
+            className={`list-group-item ${expandedItem == "item2" ? "" : ""}`}
+          >
+            <div className="d-flex align-items-center single-item">
+              <h5>Location</h5>
+              <span className="icon" role="button">
+                {expandedItem == "item2" ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+            </div>
+            {expandedItem == "item2" && (
+              <div className="expanded-content">
+                <p>Expanded content for Item 2</p>
+              </div>
+            )}
+          </li> */}
+          </ul>
+        </div>
       </div>
       <div className="find-job-center">
         <div className="search-filter-bar">
@@ -123,7 +194,6 @@ const FindJob = () => {
         <div className="job-post-list">
           {jobs?.map((el, index) => {
             const isBookmarked = bookmarkedPosts.includes(el._id); // Check if the post is bookmarked
-
             return (
               <>
                 <div className="job-post-container" key={el._id} >

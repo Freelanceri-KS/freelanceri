@@ -119,10 +119,28 @@
                             justify-content: center;
                             border-bottom-right-radius: 10px;
                             border: none;
-
+                            font-weight: 500;
                             .a-d-p {
                                 margin: 0;
                                 font-size: 18px;
+                            }
+                        }
+                        .bp-apply-details-disabled{
+                            height: 60px;
+                            width: 140px;
+                            background-color: #eaeaea;
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-bottom-right-radius: 10px;
+                            border: none;
+                            font-weight: 500;
+                            .a-d-p {
+                                margin: 0;
+                                font-size: 18px;
+                                color: #363636;
+
                             }
                         }
                     }

@@ -3,7 +3,7 @@ import Graph from "../assets/graph.png"
 import { FiPlusCircle } from "react-icons/fi";
 import Ads from "../assets/banners/ads.png";
 import { FaBookmark } from "react-icons/fa6";
-import User2 from "../assets/profiles/2.png";
+import User2 from "../assets/profiles/freelancer.png";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import axios from "../axios"
@@ -13,7 +13,8 @@ import { FaEdit } from "react-icons/fa";
 import { setLang, } from "../redux/Functions/actions";
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { getDataFromLocalStorage } from '../Helpers/localStorage';
+import { toast } from 'react-toastify';
 
 
 const BusinessDashboard = () => {
@@ -26,7 +27,7 @@ const BusinessDashboard = () => {
             <div className="business-dashboard">
                 <div className="wrap">
                     <div className="options">
-                        <div className="create-post" onClick={() => handleOptionClick("CreatePost")}>
+                        <div className="create-post" onClick={() => handleOptionClick("CreatePost")} style={{ cursor: "pointer" }}>
                             <p>Create post <FiPlusCircle color="white" size={25} />
                             </p>
                         </div>
@@ -156,7 +157,8 @@ function Contracts(props) {
                             <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
                             <div className="oci-head-identity">
                                 <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
-                                <p>{contract?.freelancer?.profession.join(", ")}</p>
+                                <p>{contract?.freelancer?.profession[0]?.category}, {contract?.freelancer?.profession[1]?.category}</p>
+
                             </div>
                         </div>
                         <div className="oci-body">
@@ -177,7 +179,8 @@ function Contracts(props) {
                             <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
                             <div className="oci-head-identity">
                                 <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
-                                <p>{contract?.freelancer?.profession.join(", ")}</p>
+                                <p>{contract?.freelancer?.profession[0]?.category}, {contract?.freelancer?.profession[1]?.category}</p>
+
                             </div>
                         </div>
                         <div className="oci-body">
@@ -411,12 +414,15 @@ function Posts() {
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
 
+    const userDataString = localStorage.getItem("userData");
+    const userData = userDataString ? JSON.parse(userDataString) : null;
+
     useEffect(() => {
         getPosts();
     }, []);
 
     const getPosts = () => {
-        axios.get('/posts/myposts/660b170df00fffca9933298a')
+        axios.get(`/posts/myposts/${userData._id}`)
             .then((response) => {
                 setPosts(response.data);
                 localStorage.setItem('posts', JSON.stringify(response.data));
@@ -435,52 +441,51 @@ function Posts() {
                             <div className="dbpch-left">
                                 <img src={User2} alt="User" width={50} height={50} />
                                 <div className="dbpch-left-user">
-                                    <h6 className="dbpch-l-h6">{post.title}</h6>
-                                    <p className="dbpch-l-p">{post.userId.firstName} {post.userId.lastName}</p>
+                                    <h6 className="dbpch-l-h6">{post?.title}</h6>
+                                    <p className="dbpch-l-p">{post?.userId?.firstName} {post?.userId?.lastName}</p>
                                 </div>
                             </div>
                             <div className="dbpch-center-2">
                                 <div className="vert-barrier"></div>
                                 <div className="dbpch-center-tags">
                                     <p className="dbpch-c-tag">Location</p>
-                                    <h6 className="dbpch-c-value">{post.city.city}</h6>
+                                    <h6 className="dbpch-c-value">{post?.city?.city}</h6>
                                 </div>
                                 <div className="vert-barrier"></div>
                                 <div className="dbpch-center-tags">
                                     <p className="dbpch-c-tag">Experience</p>
-                                    <h6 className="dbpch-c-value">{post.experienceLevel}</h6>
+                                    <h6 className="dbpch-c-value">{post?.experienceLevel}</h6>
                                 </div>
                                 <div className="vert-barrier"></div>
                                 <div className="dbpch-center-tags">
                                     <p className="dbpch-c-tag">Category</p>
-                                    <h6 className="dbpch-c-value">{post.profession.category}</h6>
+                                    <h6 className="dbpch-c-value">{post?.profession?.category}</h6>
                                 </div>
                             </div>
-                            <FaBookmark size={25} color="#455bef" />
                         </div>
                         <div className="db-post-container-body-2">
                             <p className="dbpcb-p">
-                                {post.description}
+                                {post?.description}
                             </p>
                         </div>
                         <div className="footer-line-2"></div>
                         <div className="db-post-footer-2">
                             <div className="dbp-footer-info">
                                 <p className="tag">Kerkoj</p>
-                                <p className="value">{post.neededWorkers} freelancer</p>
+                                <p className="value">{post?.neededWorkers} freelancer</p>
                             </div>
                             <div className="vert-barrier"></div>
                             <div className="dbp-footer-info">
                                 <div className="tag">Afati</div>
-                                <div className="value">{post.duration} ditë</div>
+                                <div className="value">{post?.duration} ditë</div>
                             </div>
                             <div className="vert-barrier"></div>
                             <div className="dbp-footer-info">
                                 <div className="tag">Budget</div>
-                                <div className="value">{post.budget}$</div>
+                                <div className="value">{post?.budget}$</div>
                             </div>
-                            <button className="dbp-apply-details-2">
-                                <p className='a-d-p'>Apply</p>
+                            <button className={post?.state === "Approved" ? "dbp-apply-details-2" : "dbp-apply-details-3"}>
+                                <p className='a-d-p'>View</p>
                             </button>
                         </div>
                     </div>
@@ -493,12 +498,14 @@ function Posts() {
 
 const Applications = () => {
 
+    const userDataString = localStorage.getItem("userData");
+    const userData = userDataString ? JSON.parse(userDataString) : null;
 
     const [businessAppls, setBusinessAppls] = useState([]);
     const [appCount, setAppCount] = useState(0);
 
     const getURApplication = () => {
-        axios.get("application/under-review/660b170df00fffca9933298a")
+        axios.get(`application/under-review/${userData._id}`)
             .then((response) => {
                 setBusinessAppls(response.data);
                 setAppCount(response.data.length);
@@ -513,7 +520,7 @@ const Applications = () => {
     const [rejectedApplications, setRejectedApps] = useState([]);
 
     const getRejectedApplications = () => {
-        axios.get("/application/rejected/660b170df00fffca9933298a")
+        axios.get(`/application/rejected/${userData._id}`)
             .then((response) => {
                 console.log("rejected apps:", response.data)
                 setRejectedApps(response.data)
@@ -526,7 +533,7 @@ const Applications = () => {
     const [accpetedApps, setAcceptedAps] = useState([]);
 
     const getAcceptedApps = () => {
-        axios.get("/application/accepted/660b170df00fffca9933298a")
+        axios.get(`/application/accepted/${userData._id}`)
             .then((response) => {
                 console.log("Accepted apps:", response.data)
                 setAcceptedAps(response.data);
@@ -540,7 +547,7 @@ const Applications = () => {
     const [contractedApl, setContractedApl] = useState([]);
 
     const getContractedApls = () => {
-        axios.get("/application/contracted/660b170df00fffca9933298a")
+        axios.get(`/application/contracted/${userData._id}`)
             .then((response) => {
                 console.log(response.data);
                 setContractedApl(response.data)
@@ -565,18 +572,18 @@ const Applications = () => {
             <div className="content">
                 <div className="content-header">
                     <div className="stat">
-                        <h6 className="stat-name">Active applications</h6>
-                        <h1 className="stat-nr">{accpetedApps.length + rejectedApplications.length + appCount}</h1>
+                        <h6 className="stat-name">Under Review applications</h6>
+                        <h1 className="stat-nr">{appCount}</h1>
                     </div>
                     <div className="header-barrier"></div>
                     <div className="stat">
-                        <h6 className="stat-name">Rejected Applications</h6>
-                        <h1 className="stat-nr">{rejectedApplications.length}</h1>
-                    </div>
-                    <div className="header-barrier"></div>
-                    <div className="stat">
-                        <h6 className="stat-name">Accepted Freelancers</h6>
+                        <h6 className="stat-name">Accepted Applications</h6>
                         <h1 className="stat-nr">{accpetedApps.length}</h1>
+                    </div>
+                    <div className="header-barrier"></div>
+                    <div className="stat">
+                        <h6 className="stat-name">Contracted Freelancers</h6>
+                        <h1 className="stat-nr">{contractedApl.length}</h1>
                     </div>
                 </div>
                 <div className="business-applications">
@@ -590,7 +597,7 @@ const Applications = () => {
 
                         <div className="search-button">Search</div>
                     </div>
-                    <h4 className='business-applications-title'>Ongoing applications</h4>
+                    <h4 className='business-applications-title'>Under review applications</h4>
                     <div className="business-applications-grid">
                         {businessAppls.map((apl) => (
                             <div className="business-applications-grid-item">
@@ -598,7 +605,7 @@ const Applications = () => {
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
                                         <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>
+                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
@@ -617,7 +624,7 @@ const Applications = () => {
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
                                         <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>
+                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
@@ -635,7 +642,7 @@ const Applications = () => {
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
                                         <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>
+                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
@@ -653,7 +660,7 @@ const Applications = () => {
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
                                         <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>
+                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
@@ -673,20 +680,31 @@ const Applications = () => {
 const Find = () => {
     const [profiles, setProfiles] = useState(null);
 
+    // const findProfiles = async () => {
+    //     try {
+    //         const professionIds = [
+    //             "65a3de3efbf475afad8ca791",
+    //             "65a3de4afbf475afad8ca793",
+    //             "65a3de54fbf475afad8ca795",
+    //             "65a3de5ffbf475afad8ca797"
+    //         ]; // Example profession IDs
+    //         const response = await axios.post('/business/profiles', { professionIds });
+    //         setProfiles(response.data);
+    //         console.log(response.data);
+    //     } catch (error) {
+    //         console.error('Error fetching data:', error);
+    //     }
+    // }
+
     const findProfiles = async () => {
-        try {
-            const professionIds = [
-                "65a3de3efbf475afad8ca791",
-                "65a3de4afbf475afad8ca793",
-                "65a3de54fbf475afad8ca795",
-                "65a3de5ffbf475afad8ca797"
-            ]; // Example profession IDs
-            const response = await axios.post('/business/profiles', { professionIds });
-            setProfiles(response.data);
-            console.log(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
+        axios.get("/freelancer")
+            .then((response) => {
+                console.log(response.data);
+                setProfiles(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     useEffect(() => {
@@ -711,27 +729,24 @@ const Find = () => {
                 <div className="vert-barrier"></div>
                 <div className="search-button">Search</div>
             </div>
-            {profiles && profiles.map((profile, index) => (
-                <div key={index} className="business-find">
-                    <h4 className='business-find-title'>{profile?.freelancers[0]?.profession[0]?.category}</h4>
-                    <div className="business-find-bestof-grid">
-                        {profile.freelancers.map((freelancer, idx) => (
-                            <div key={idx} className="business-find-bestof-grid-item">
-                                <div className="bfbgi-img">
-                                    <img src={User2} alt="User" width={80} height={80} />
-                                </div>
-                                <div className="bfbgi-identity">
-                                    <h5>{freelancer?.firstName} {freelancer?.lastName}</h5>
-                                    <p>{freelancer?.profession[0]?.category}</p>
-                                </div>
-                                <div className="bfbgi-footer">
-                                    <p onClick={() => navigate(`/view-profile/${freelancer._id}`)}>View profile</p>
-                                </div>
+            <div className="business-find">
+                <div className="business-find-bestof-grid">
+                    {profiles && profiles.map((profile) => (
+                        <div key={profile._id} className="business-find-bestof-grid-item">
+                            <div className="bfbgi-img">
+                                <img src={User2} alt="User" width={80} height={80} />
                             </div>
-                        ))}
-                    </div>
+                            <div className="bfbgi-identity">
+                                <h5>{profile?.firstName} {profile?.lastName}</h5>
+                                <p>{profile?.profession[0]?.category}</p>
+                            </div>
+                            <div className="bfbgi-footer">
+                                <p onClick={() => navigate(`/view-profile/${profile?._id}`)} style={{ cursor: "pointer" }}>View profile</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
         </>
     )
 }
@@ -828,7 +843,6 @@ function CreatePost() {
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedExperience, setSelectedExperience] = useState("");
     const [selectedProfession, setSelectedProfession] = useState("");
-    const [userId, setUserId] = useState("660b170df00fffca9933298a");
     const [expiresAt, setExpiresAt] = useState("ASD");
     const [selectedWorkers, setSelectedWorkers] = useState([]);
     const [state, setState] = useState("Pending");
@@ -851,6 +865,8 @@ function CreatePost() {
         }
     };
 
+    const userDataString = localStorage.getItem("userData");
+    const userData = userDataString ? JSON.parse(userDataString) : null;
 
     const getCity = () => {
         axios.get('/city')
@@ -864,7 +880,7 @@ function CreatePost() {
 
     const handleSubmit = () => {
         const postData = {
-            userId: userId,
+            userId: userData._id,
             title: title,
             description: description,
             requirements: requirements,
@@ -890,7 +906,8 @@ function CreatePost() {
                 setBudget("");
                 setSelectedCity("");
                 setSelectedExperience("");
-                setExpiresAt("")
+                setExpiresAt("");
+                toast.success("Post created successfully!")
             })
             .catch((error) => {
                 console.error('Error creating post:', error);
@@ -910,13 +927,18 @@ function CreatePost() {
             <div className="cp-first-grid">
                 <div className="cp-first-grid-item">
                     <h6>Duration</h6>
-                    <input type="text" placeholder='7 days' className='grid-item-input' value={duration} onChange={(e) => setDuration(e.target.value)} />
+                    <select className="grid-item-input" onChange={(e) => setDuration(e.target.value)} value={duration}>
+                        <option value="">Select duration</option>
+                        <option value="7 ditë">7 ditë</option>
+                        <option value="14 ditë">14 ditë</option>
+                        <option value="30 ditë">30 ditë</option>
+                    </select>
                 </div>
                 <div className="cp-first-grid-item">
                     <h6>No. of Freelancers</h6>
                     <input
                         type="number"
-                        placeholder='7 days'
+                        placeholder='7'
                         className='grid-item-input'
                         value={numFreelancers}
                         onChange={(e) => setNumFreelancers(parseInt(e.target.value, 10))}
@@ -924,7 +946,7 @@ function CreatePost() {
                 </div>
                 <div className="cp-first-grid-item">
                     <h6>Budget</h6>
-                    <input type="number" placeholder='7 days' className='grid-item-input' value={budget} onChange={(e) => setBudget(parseInt(e.target.value, 10))} />
+                    <input type="number" placeholder='500' className='grid-item-input' value={budget} onChange={(e) => setBudget(parseInt(e.target.value, 10))} />
                 </div>
             </div>
 

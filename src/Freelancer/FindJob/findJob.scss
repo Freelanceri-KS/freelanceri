@@ -8,6 +8,101 @@
     display: flex;
     justify-content: center;
     align-items: start;
+
+    .filter {
+      width: 80%;
+
+      .expanded-content {
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        .rowi {
+          .category-item-btn {
+            border: 1px solid #eaeaea;
+            background-color: transparent;
+            padding: 8px;
+            margin: 5px;
+          }
+        }
+
+        .gap-2 {
+          padding: 0px;
+
+          /* width */
+
+
+        }
+      }
+
+      .expanded-content::-webkit-scrollbar {
+        width: 8px;
+        border-radius: 10px;
+      }
+
+      /* Track */
+      .expanded-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+
+      }
+
+      /* Handle */
+      .expanded-content::-webkit-scrollbar-thumb {
+        background: #eaeaea;
+        border-radius: 10px;
+      }
+
+      /* Handle on hover */
+      .expanded-content::-webkit-scrollbar-thumb:hover {
+        background: #455bef;
+        border-radius: 10px;
+
+      }
+
+
+      .list-group {
+        li {
+          .single-item {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            justify-content: space-between;
+          }
+        }
+      }
+
+      .list-group-item {
+        .lgi-h2 {
+          font-size: 25px;
+          margin: 0;
+          font-weight: 600;
+        }
+
+        .single-item {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+
+      .lgi-title {
+        display: flex;
+        flex-direction: row;
+        padding: 15px;
+      }
+    }
+
+    @media only screen and (max-width: 880px) {
+      .filter {
+        display: none;
+      }
+    }
   }
 
   .find-job-center {
@@ -155,9 +250,11 @@
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            .tag{
+
+            .tag {
               color: #363636;
             }
+
             .value {
               color: #455bef;
               font-weight: 700;

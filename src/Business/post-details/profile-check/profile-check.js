@@ -56,7 +56,7 @@ const ProfileCheck = () => {
 
     const acceptProfile = () => {
         const payload = {
-            state: "Accepted"
+            state: "Active"
         };
         axios.patch(`/application/${id}`, payload)
             .then((response) => {
@@ -147,8 +147,8 @@ const ProfileCheck = () => {
                 <div className="pcm-user-data">
                     <h6 className="pcm-user-data-h6">Cover letter</h6>
                     <p className="pcm-user-data-p">{profileDetail?.coverLetter}</p>
-                    <h6 className="pcm-user-data-h6">CV</h6>
-                    <button className="pcm-user-data-cv-button"><MdOutlineFileUpload color="#455bef" size={20} />  Download CV</button>
+                    {/* <h6 className="pcm-user-data-h6">CV</h6>
+                    <button className="pcm-user-data-cv-button"><MdOutlineFileUpload color="#455bef" size={20} />  Download CV</button> */}
                 </div>
                 <div className="pcm-body">
                     <div className="pcm-center-profile">

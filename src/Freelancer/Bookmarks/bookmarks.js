@@ -15,8 +15,6 @@ const Bookmarks = () => {
     const [expiredBookmarks, setExpiredBookmarks] = useState([]);
     const [userData, setUserData] = useState(null);
 
-
-
     useEffect(() => {
         const userDataString = window.localStorage.getItem("userData");
         if (userDataString) {
@@ -126,9 +124,18 @@ const Bookmarks = () => {
                                                 <div className="tag">Budget</div>
                                                 <div className="value">{bm?.postId?.budget}€</div>
                                             </div>
-                                            <button onClick={() => navigate(`/details-page/1`)} className="bp-apply-details">
+                                            <button
+                                                onClick={
+                                                    bm?.postId?.state === "Approved"
+                                                        ? () => navigate(`/details-page/${bm?.postId?._id}`)
+                                                        : () => { }
+                                                }
+                                                className={bm?.postId?.state === "Approved" ? "bp-apply-details" : "bp-apply-details-disabled"}
+                                            >
                                                 <p className='a-d-p'>Apply</p>
                                             </button>
+
+
                                         </div>
                                     </div>
 

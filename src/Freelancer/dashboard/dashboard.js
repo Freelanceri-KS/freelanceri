@@ -12,17 +12,18 @@ import { connect } from 'react-redux'
 
 
 const FreelancerDashboard = (props) => {
-    const [applications, setApplications] = useState([])
+    const [activeApl, setActiveApl] = useState([])
+    const [closedApl, setClosedApl] = useState([]);
     const [proposalState, setProposalState] = useState("Active");
     const [contractState, setContractState] = useState("Active");
     const [activeContract, setActiveContract] = useState([]);
     const [finishedContract, setFinishedContract] = useState([]);
 
 
-    const getMyApplications = () => {
-        axios.get(`application/myApplications/${userData._id}`)
+    const getActiveApplications = () => {
+        axios.get(`application/freelancer/active/${userData._id}`)
             .then((response) => {
-                setApplications(response.data);
+                setActiveApl(response.data);
             })
             .catch((error) => {
                 console.log('Error fetching applications:', error);
@@ -69,21 +70,22 @@ const FreelancerDashboard = (props) => {
     }
 
     const [reviewsList, setReviewList] = useState([]);
-    const [averageRating, setAverageRating] = useState(null);
+    const [avgRating, setAvgRating] = useState(null);
     const [fullReview, setFullReview] = useState();
 
-    // const getReviews = () => {
-    //     axios.get(`/rating/freelancer/${userData._id}`)
-    //         .then((response) => {
-    //             console.log(response.data);
-    //             setFullReview(response?.data);
-    //             setReviewList(response?.data.ratings);
-    //             setAverageRating(response?.data.averageRating)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         })
-    // }
+    const getReviews = () => {
+        axios.get(`/rating/freelancer/${userData._id}`)
+            .then((response) => {
+                console.log(response.data);
+                setFullReview(response.data);
+                setReviewList(response.data.ratings);
+                setAvgRating(response.data.averageRating)
+                console.log(response.data.five);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
     const handleFinishedContract = () => {
         setContractState("Finished");
@@ -104,9 +106,9 @@ const FreelancerDashboard = (props) => {
     }, []);
     useEffect(() => {
         if (userData && userData._id) {
-            getMyApplications();
+            getActiveApplications();
             getActiveContracts();
-            // getReviews();
+            getReviews();
         }
     }, [userData]);
 
@@ -123,31 +125,32 @@ const FreelancerDashboard = (props) => {
 
                             <div className="fdme-stats">
                                 <div className="fdme-stat-item">
-                                    <h6>This week</h6>
-                                    <h4 className='fdme-stat-item-value'>$600</h4>
+                                    <h6>Applications</h6>
+                                    <h4 className='fdme-stat-item-value'>{activeApl?.length}</h4>
                                 </div>
                                 <div className="vert-barrier"></div>
                                 <div className="fdme-stat-item">
-                                    <h6>This month</h6>
-                                    <h4 className='fdme-stat-item-value'>$1,800</h4>
+                                    <h6>Contracts</h6>
+                                    <h4 className='fdme-stat-item-value'>{activeContract.length + finishedContract.length}</h4>
                                 </div>
                                 <div className="vert-barrier"></div>
                                 <div className="fdme-stat-item">
-                                    <h6>This year</h6>
-                                    <h4 className='fdme-stat-item-value'>$4,000</h4>
+                                    <h6>Ratings</h6>
+                                    <h4 className='fdme-stat-item-value'>{reviewsList?.length}</h4>
                                 </div>
                                 <div className="vert-barrier"></div>
                                 <div className="fdme-stat-item">
-                                    <h6>All time</h6>
-                                    <h4 className='fdme-stat-item-value'>$11,600</h4>
+                                    <h6>Average Rating</h6>
+                                    <h4 className='fdme-stat-item-value'>{avgRating == null ? 0 : avgRating}</h4>
+
                                 </div>
 
                             </div>
                         </div>
                         <div className="freelancer-dashboard-main-proposals">
                             <div className="fdmp-head">
-                                <h4>Proposals Sent</h4>
-                                <h6 className='fdmp-head-h6'>View all</h6>
+                                <h4>Applications Sent</h4>
+                                {/* <h6 className='fdmp-head-h6'>View all</h6> */}
                             </div>
                             <div className="horiz-barrier"></div>
                             <div className="fdmp-options">
@@ -158,73 +161,149 @@ const FreelancerDashboard = (props) => {
 
                             </div>
                             <div className="horiz-barrier-2"></div>
-                            {applications.length === 0 ? (
-                                <><p className='null-message'>No applications found</p></>
-                            ) : (
+                            {proposalState == "Active" ? (
                                 <>
-                                    {applications.map((application) => (
-                                        <div className="bookmark-post-container" >
-                                            <div className="bookmark-post-container-header">
-                                                <div className="bpch-left">
-                                                    <img src={User2} alt="User" width={50} height={50} />
-                                                    <div className="bpch-left-user">
-                                                        <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
-                                                        <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
+                                    {activeApl.length === 0 ?
+                                        (
+                                            <><p className='null-message'>No applications found</p></>
+                                        ) :
+                                        (
+                                            <>
+                                                {activeApl.map((application) => (
+                                                    <div className="bookmark-post-container" >
+                                                        <div className="bookmark-post-container-header">
+                                                            <div className="bpch-left">
+                                                                <img src={User2} alt="User" width={50} height={50} />
+                                                                <div className="bpch-left-user">
+                                                                    <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
+                                                                    <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="bpch-center">
+                                                                <div className="vert-barrier"></div>
+                                                                <div className="bpch-center-tags">
+                                                                    <p className="bpch-c-tag">Location</p>
+                                                                    <h6 className="bpch-c-value">{application?.postId?.city.city}</h6>
+                                                                </div>
+                                                                <div className="vert-barrier"></div>
+                                                                <div className="bpch-center-tags">
+                                                                    <p className="bpch-c-tag">Experience</p>
+                                                                    <h6 className="bpch-c-value">{application?.postId?.experienceLevel}</h6>
+                                                                </div>
+                                                                <div className="vert-barrier"></div>
+                                                                <div className="bpch-center-tags">
+                                                                    <p className="bpch-c-tag">Category</p>
+                                                                    <h6 className="bpch-c-value">{application?.postId?.profession?.category}</h6>
+                                                                </div>
+                                                            </div>
+                                                            <p></p>
+                                                        </div>
+                                                        <div className="bookmark-post-container-body">
+                                                            <p className="jpcb-p">
+                                                                {application?.postId?.description}
+                                                            </p>
+                                                        </div>
+                                                        <div className="footer-line"></div>
+                                                        <div className="bookmark-post-footer">
+                                                            <div className="bp-footer-info">
+                                                                <p className="tag">Kerkoj</p>
+                                                                <p className="value">{application?.postId?.neededWorkers} freelancer</p>
+                                                            </div>
+                                                            <div className="vert-barrier"></div>
+                                                            <div className="bp-footer-info">
+                                                                <div className="tag">Afati</div>
+                                                                <div className="value">{application?.postId?.duration} ditë</div>
+                                                            </div>
+                                                            <div className="vert-barrier"></div>
+                                                            <div className="bp-footer-info">
+                                                                <div className="tag">Budget</div>
+                                                                <div className="value">{application?.postId?.budget}$</div>
+                                                            </div>
+                                                            <button onClick={() => navigate(`/details-page/${application?.postId?._id}`)} className="bp-apply-details">
+                                                                <p className='a-d-p'>View</p>
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div className="bpch-center">
-                                                    <div className="vert-barrier"></div>
-                                                    <div className="bpch-center-tags">
-                                                        <p className="bpch-c-tag">Location</p>
-                                                        <h6 className="bpch-c-value">{application?.postId?.city.city}</h6>
+                                                ))}
+                                            </>
+                                        )
+                                    }
+                                </>
+                            ) :
+                                (
+                                    <>
+                                        {closedApl.length === 0 ? (
+                                            <><p className='null-message'>No closed applications found</p></>
+                                        ) : (
+                                            <>
+                                                {closedApl.map((application) => (
+                                                    <div className="bookmark-post-container" >
+                                                        <div className="bookmark-post-container-header">
+                                                            <div className="bpch-left">
+                                                                <img src={User2} alt="User" width={50} height={50} />
+                                                                <div className="bpch-left-user">
+                                                                    <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
+                                                                    <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="bpch-center">
+                                                                <div className="vert-barrier"></div>
+                                                                <div className="bpch-center-tags">
+                                                                    <p className="bpch-c-tag">Location</p>
+                                                                    <h6 className="bpch-c-value">{application?.postId?.city.city}</h6>
+                                                                </div>
+                                                                <div className="vert-barrier"></div>
+                                                                <div className="bpch-center-tags">
+                                                                    <p className="bpch-c-tag">Experience</p>
+                                                                    <h6 className="bpch-c-value">{application?.postId?.experienceLevel}</h6>
+                                                                </div>
+                                                                <div className="vert-barrier"></div>
+                                                                <div className="bpch-center-tags">
+                                                                    <p className="bpch-c-tag">Category</p>
+                                                                    <h6 className="bpch-c-value">{application?.postId?.profession?.category}</h6>
+                                                                </div>
+                                                            </div>
+                                                            <p></p>
+                                                        </div>
+                                                        <div className="bookmark-post-container-body">
+                                                            <p className="jpcb-p">
+                                                                {application?.postId?.description}
+                                                            </p>
+                                                        </div>
+                                                        <div className="footer-line"></div>
+                                                        <div className="bookmark-post-footer">
+                                                            <div className="bp-footer-info">
+                                                                <p className="tag">Kerkoj</p>
+                                                                <p className="value">{application?.postId?.neededWorkers} freelancer</p>
+                                                            </div>
+                                                            <div className="vert-barrier"></div>
+                                                            <div className="bp-footer-info">
+                                                                <div className="tag">Afati</div>
+                                                                <div className="value">{application?.postId?.duration} ditë</div>
+                                                            </div>
+                                                            <div className="vert-barrier"></div>
+                                                            <div className="bp-footer-info">
+                                                                <div className="tag">Budget</div>
+                                                                <div className="value">{application?.postId?.budget}$</div>
+                                                            </div>
+                                                            <button onClick={() => navigate(`/details-page/${application?.postId?._id}`)} className="bp-apply-details">
+                                                                <p className='a-d-p'>View</p>
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div className="vert-barrier"></div>
-                                                    <div className="bpch-center-tags">
-                                                        <p className="bpch-c-tag">Experience</p>
-                                                        <h6 className="bpch-c-value">{application?.postId?.experienceLevel}</h6>
-                                                    </div>
-                                                    <div className="vert-barrier"></div>
-                                                    <div className="bpch-center-tags">
-                                                        <p className="bpch-c-tag">Category</p>
-                                                        <h6 className="bpch-c-value">{application?.postId?.profession?.category}</h6>
-                                                    </div>
-                                                </div>
-                                                <FaBookmark size={25} color="#455bef" />
-                                            </div>
-                                            <div className="bookmark-post-container-body">
-                                                <p className="jpcb-p">
-                                                    {application?.postId?.description}
-                                                </p>
-                                            </div>
-                                            <div className="footer-line"></div>
-                                            <div className="bookmark-post-footer">
-                                                <div className="bp-footer-info">
-                                                    <p className="tag">Kerkoj</p>
-                                                    <p className="value">{application?.postId?.neededWorkers} freelancer</p>
-                                                </div>
-                                                <div className="vert-barrier"></div>
-                                                <div className="bp-footer-info">
-                                                    <div className="tag">Afati</div>
-                                                    <div className="value">{application?.postId?.duration} ditë</div>
-                                                </div>
-                                                <div className="vert-barrier"></div>
-                                                <div className="bp-footer-info">
-                                                    <div className="tag">Budget</div>
-                                                    <div className="value">{application?.postId?.budget}$</div>
-                                                </div>
-                                                <button onClick={() => navigate(`/details-page/1`)} className="bp-apply-details">
-                                                    <p className='a-d-p'>Applied</p>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}</>
-                            )}
+                                                ))}
+                                            </>
+                                        )
+                                        }
 
+                                    </>
+                                )
+                            }
                         </div>
                         <div className="freelancer-dashboard-main-clients">
                             <div className="fdmc-head">
                                 <h4>Clients</h4>
-                                <h6 className='fdmc-head-h6'>View all</h6>
+                                {/* <h6 className='fdmc-head-h6'>View all</h6> */}
                             </div>
                             <div className="horiz-barrier"></div>
                             <div className="fdmc-options">
@@ -233,56 +312,58 @@ const FreelancerDashboard = (props) => {
                             </div>
                             <div className="horiz-barrier-2"></div>
                             <div className="clients-grid">
-                                {contractState === "Active" ? (
-                                    <>
-                                        {activeContract.length > 0 ? (
-                                            activeContract.map((ac) => (
-                                                <div class="grid-item">
-                                                    <div className="client-info">
-                                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                                        <div className="client-info-data">
-                                                            <h5>{ac?.business?.companyName}</h5>
-                                                            <p>{ac?.post?.title}</p>
+                                {contractState === "Active" ?
+                                    (
+                                        <>
+                                            {activeContract.length > 0 ? (
+                                                activeContract.map((ac) => (
+                                                    <div class="grid-item">
+                                                        <div className="client-info">
+                                                            <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
+                                                            <div className="client-info-data">
+                                                                <h5>{ac?.business?.companyName}</h5>
+                                                                <p>{ac?.post?.title}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="message-option-client">
+                                                            <p>View</p>
                                                         </div>
                                                     </div>
-                                                    <div className="message-option-client">
-                                                        <p>View</p>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className='null-message'>No active contracts found</div>
-                                        )}
-                                    </>
-                                ) : (
-                                    <>
-                                        {finishedContract.length > 0 ? (
-                                            finishedContract.map((fc) => (
-                                                <div class="grid-item">
-                                                    <div className="client-info">
-                                                        <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
-                                                        <div className="client-info-data">
-                                                            <h5>{fc?.business?.companyName}</h5>
-                                                            <p>{fc?.post?.title}</p>
+                                                ))
+                                            ) : (
+                                                <div className='null-message'>No active contracts found</div>
+                                            )}
+                                        </>
+                                    ) :
+                                    (
+                                        <>
+                                            {finishedContract.length > 0 ? (
+                                                finishedContract.map((fc) => (
+                                                    <div class="grid-item">
+                                                        <div className="client-info">
+                                                            <img src={Logo} alt='company-image' height={70} width={70} className='client-logo' />
+                                                            <div className="client-info-data">
+                                                                <h5>{fc?.business?.companyName}</h5>
+                                                                <p>{fc?.post?.title}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="message-option-client">
+                                                            <p>View</p>
                                                         </div>
                                                     </div>
-                                                    <div className="message-option-client">
-                                                        <p>View</p>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className='null-message'>No finished contracts found</div>
-                                        )}
-                                    </>
-                                )}
+                                                ))
+                                            ) : (
+                                                <div className='null-message'>No finished contracts found</div>
+                                            )}
+                                        </>
+                                    )}
 
                             </div>
                         </div>
                         <div className="freelancer-dashboard-main-reviews">
                             <div className="fdmr-head">
                                 <h4>Reviews</h4>
-                                <h6 className='fdmr-head-h6'>View all</h6>
+                                {/* <h6 className='fdmr-head-h6'>View all</h6> */}
                             </div>
                             <div className="horiz-barrier"></div>
                             <div className="reviews-list">
@@ -309,12 +390,12 @@ const FreelancerDashboard = (props) => {
                                 </div>
                                 <div className="reviews-list-side">
                                     <div className="rls-main">
-                                        {averageRating !== null ? (
+                                        {avgRating !== null ? (
                                             <>
-                                                <h5 className='rls-main-h5'>{averageRating.toFixed(2)}</h5>
+                                                <h5 className='rls-main-h5'>{avgRating.toFixed(2)}</h5>
                                                 <div className="stars">
                                                     <StarRatings
-                                                        rating={averageRating}
+                                                        rating={avgRating}
                                                         starDimension="30px"
                                                         starSpacing="5px"
                                                         starRatedColor="#455bef"
@@ -326,11 +407,12 @@ const FreelancerDashboard = (props) => {
                                             <p>Ratings not found yet..</p>
                                         )}
                                     </div>
+
                                     <div className="horiz-line"></div>
                                     <div className="rls-ratings">
                                         <div className="stars-count">
                                             <p>5 stars</p>
-                                            <p>{fullReview?.five}</p>
+                                            <p>{fullReview?.averageRating}</p>
                                         </div>
                                         <div className="stars-count">
                                             <p>4 stars</p>
@@ -349,6 +431,8 @@ const FreelancerDashboard = (props) => {
                                             <p>{fullReview?.one}</p>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>

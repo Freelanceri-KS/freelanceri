@@ -45,7 +45,7 @@ const Profile = () => {
               <p className="value">{userData ? userData?.email : ""}</p>
             </div>
             <div className="data-slot">
-              <p>Phone</p>
+              <p>Github</p>
               <p className="value">{userData ? userData?.phone : ""}</p>
             </div>
             <div className="data-slot">
@@ -63,7 +63,7 @@ const Profile = () => {
         <div className="experience">
           <div className="label">
             <h3>Experience</h3>
-            <FiEdit size={25} />
+            {/* <FiEdit size={25} /> */}
           </div>
           <div className="data-container">
             {userData && userData?.experiences ? (
@@ -87,7 +87,7 @@ const Profile = () => {
         <div className="education mt-2">
           <div className="label">
             <h3>Education</h3>
-            <FiEdit size={25} />
+            {/* <FiEdit size={25} /> */}
           </div>
           <div className="data-container">
             {userData && userData?.education ? (
@@ -112,7 +112,7 @@ const Profile = () => {
         <div className="skills mt-2">
           <div className="label">
             <h3>Skills</h3>
-            <FiEdit size={25} />
+            {/* <FiEdit size={25} /> */}
           </div>
           <div className="data-container" id="skill-container">
             {userData && userData?.skills ? (
@@ -130,7 +130,7 @@ const Profile = () => {
         <div className="certification mt-2">
           <div className="label">
             <h3>Certifications</h3>
-            <FiEdit size={25} />
+            {/* <FiEdit size={25} /> */}
           </div>
           <div className="data-container">
             <div className="data-section">
@@ -147,11 +147,8 @@ const Profile = () => {
         </div>
       </div>
       <div className="right-profile">
-        <div className="upload-cv">
+        {/* <div className="upload-cv">
           <p className="upload-cv-p">Share profile</p>
-        </div>
-        {/* <div className="portfolio">
-          <p className="portfolio-p">Portfolio</p>
         </div> */}
       </div>
     </div>

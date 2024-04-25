@@ -1,6 +1,6 @@
 import './Details.scss';
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import User from "../../assets/images/user1.png"
+import User from "../../assets/profiles/business.png"
 import User2 from "../../assets/images/user2.png"
 import Banner from "../../assets/banners/banner.png"
 import { MdOutlineBookmarkBorder } from "react-icons/md";
@@ -14,13 +14,13 @@ import { Link } from 'react-router-dom';
 import { setLang, setLoggedInBusiness, setLoggedInFreelancer } from "../../redux/Functions/actions";
 import { connect } from "react-redux";
 import { MdDeleteOutline } from "react-icons/md";
+import { FaRegBookmark } from "react-icons/fa";
 
 
 
 const DetailsPage = (props) => {
   const { id } = useParams();
   const [jobDetail, setJobDetail] = useState(null);
-  // const [jobApps,setJobApps] = useState();
 
 
   const handlePostDelte = () => {
@@ -40,21 +40,20 @@ const DetailsPage = (props) => {
 
   const [similarPosts, setSimilarPosts] = useState([]);
 
-
-
-
   useEffect(() => {
     const getJobDetail = async () => {
       try {
         const response = await axios.get(`/posts/${id}`);
+        console.log("JobDetail:", response.data);
         setJobDetail(response.data);
       } catch (error) {
         console.error('Error fetching job detail:', error);
       }
     };
-
-    getJobDetail();
-  }, [id]);
+    if (id) {
+      getJobDetail();
+    }
+  }, []);
 
   useEffect(() => {
     const getSimilarPosts = () => {
@@ -62,20 +61,38 @@ const DetailsPage = (props) => {
         axios.get(`/posts/similarPost/${jobDetail._id}`)
           .then((response) => {
             setSimilarPosts(response.data)
-            console.log("Similar posts:", response.data)
           })
           .catch((error) => {
-            console.log(error);
+            console.log("Similar posts error:", error);
           });
-      } else {
-        console.log("jobDetail is not yet available.");
       }
-    }
+    };
 
-    if (jobDetail) {
-      getSimilarPosts();
-    }
+    getSimilarPosts();
   }, [jobDetail]);
+
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+
+  // const [existCheck, setExistCheck] = useState(null);
+
+  // useEffect(() => {
+  //   const checkExistingApp = async () => {
+  //     if (userData && jobDetail && existCheck === null) {
+  //       try {
+  //         const response = await axios.get(`/application/check/${userData?._id}/${jobDetail?._id}`);
+  //         console.log(`/${userData?._id}/${jobDetail?._id}`)
+  //         console.log("Check existing app", response.data);
+  //         setExistCheck(response.data);
+  //         console.log(existCheck?.exists);
+  //       } catch (error) {
+  //         console.log("Existing app error:", error);
+  //       }
+  //     }
+  //   };
+
+  //   checkExistingApp();
+  // }, [userData, jobDetail, existCheck]);
 
 
   const navigate = useNavigate();
@@ -99,10 +116,10 @@ const DetailsPage = (props) => {
                 <h6 className='dp-cp-data-h6'>{jobDetail?.userId?.firstName} {jobDetail?.userId?.lastName}</h6>
               </div>
             </div>
-            <div className="dp-cp-data-time">
+            {/* <div className="dp-cp-data-time">
               <p className='dp-cp-data-p'>12/04/2024</p>
               <p className='dp-cp-data-p'>04:32pm</p>
-            </div>
+            </div> */}
           </div>
           <div className="horiz-barrier"></div>
           <div className="dp-left-email">
@@ -111,13 +128,13 @@ const DetailsPage = (props) => {
           </div>
           <div className="horiz-barrier"></div>
           <div className="dp-left-linkedin">
-            <p className='dp-cp-data-p'>LinkedIn</p>
-            <h5>{jobDetail?.userId?.socials?.linkedin}</h5>
+            <p className='dp-cp-data-p'>Website</p>
+            <h5>{jobDetail?.userId?.website}</h5>
           </div>
           <div className="horiz-barrier"></div>
           <div className="dp-left-instagram">
-            <p className='dp-cp-data-p'>Phone</p>
-            <h5> + {jobDetail?.userId?.phone}</h5>
+            <p className='dp-cp-data-p'>LinkedIn</p>
+            <h5>{jobDetail?.userId?.socials?.linkedin}</h5>
           </div>
         </div>
       </div>
@@ -129,7 +146,7 @@ const DetailsPage = (props) => {
               <MdDeleteOutline size={25} color='red' style={{ cursor: "pointer" }} onClick={handlePostDelte} />
 
             ) : (
-              <FaBookmark size={25} color='#455bef' />
+              <FaRegBookmark size={25} color='#455bef' />
             )
             }
           </div>
@@ -146,13 +163,16 @@ const DetailsPage = (props) => {
             <div className="vert-barrier"></div>
             <div className="category">
               <p className='mainpost-about-tag'>Category</p>
-              <p className="mainpost-about-value">{jobDetail?.profession.category}</p>
+              <p className="mainpost-about-value">{jobDetail?.profession?.category}</p>
 
             </div>
           </div>
           <div className="mainpost-description">
-            <p>
-              {jobDetail?.description}
+            <p className='mainpost-description-body'>
+              <h6>Description:</h6>
+              <p>{jobDetail?.description}</p>
+              <h6 className='requirements'>Requirements:</h6>
+              <p>{jobDetail?.requirements}</p>
             </p>
           </div>
           <div className="mainpost-footer">
@@ -189,7 +209,7 @@ const DetailsPage = (props) => {
                 <div className="job-post-container">
                   <div className="job-post-container-header">
                     <div className="jpch-left">
-                      <img src={User2} alt="User" width={50} height={50} className='jpch-left-img' />
+                      <img src={User} alt="User" width={50} height={50} className='jpch-left-img' />
                       <div className="jpch-left-user">
                         <h6 className="jpch-l-h6">{sp?.title}</h6>
                         <p className="jpch-l-p">{sp?.userId?.firstName} {sp?.userId?.lastName}</p>
@@ -199,7 +219,8 @@ const DetailsPage = (props) => {
                       <div className="vert-barrier" id='jpch-barrier'></div>
                       <div className="jpch-center-tags">
                         <p className="jpch-c-tag">Location</p>
-                        <h6 className="jpch-c-value">{sp?.city.city}</h6>
+                        <p className="mainpost-about-value">{jobDetail?.city?.city}</p>
+
                       </div>
                       <div className="vert-barrier"></div>
                       <div className="jpch-center-tags">
@@ -212,7 +233,7 @@ const DetailsPage = (props) => {
                         <h6 className="jpch-c-value">{sp?.profession?.category}</h6>
                       </div>
                     </div>
-                    <FaBookmark size={25} color="#455bef" className='jpch-bookmark' />
+                    <FaRegBookmark size={25} color="#455bef" className='jpch-bookmark' />
                   </div>
                   <div className="job-post-container-body" onClick={() => navigate(`/details-page/${sp?._id}`)}>
                     <p className="jpcb-p">
@@ -235,9 +256,10 @@ const DetailsPage = (props) => {
                       <div className="tag">Budget</div>
                       <div className="value">{sp?.budget}$</div>
                     </div>
-                    <button className="jp-apply-details" onClick={() => navigate(`/apply-form/${sp._id}`)}>
+                    <button className="jp-apply-details" onClick={() => { navigate(`/details-page/${sp._id}`) }}>
                       <p className='a-d-p'>Apply</p>
                     </button>
+
                   </div>
                 </div>
               ))

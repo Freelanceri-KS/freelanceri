@@ -48,16 +48,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     .left {
       width: 90%;
       display: flex;
       align-items: center;
       justify-content: center;
-  
+
       .left-wrap {
         width: 100%;
       }
-  
+
       .form-control {
         width: 25em;
       }
@@ -68,7 +69,7 @@
     display: none;
   }
 
- 
+
 }
 
 .forgot-password-btn {

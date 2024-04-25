@@ -43,11 +43,11 @@ const ApplicationForm = ({ closeModal }) => {
   }, [id]);
 
 
-  const [durationOffer, setDurationOffer] = useState("");
+  const [durationOffer, setDurationOffer] = useState("Më pak se 1 javë");
   const [coverLetter, setCoverLetter] = useState("");
   const [cv, setCv] = useState("CV Example");
-  const [postId, setPostId] = useState("6613e2627558f486c65154cd")
-  const [businessId, setBusinessId] = useState("660b170df00fffca9933298a");
+  const [postId, setPostId] = useState()
+  const [businessId, setBusinessId] = useState(null);
   const userDataString = localStorage.getItem("userData");
   const userData = userDataString ? JSON.parse(userDataString) : null;
 
@@ -73,6 +73,7 @@ const ApplicationForm = ({ closeModal }) => {
         setDurationOffer("")
         console.log("===============", { applData })
         navigate("/");
+        toast.success("Applied for post successfully")
       })
       .catch((error) => {
         console.log("Error creating application", error)
@@ -172,21 +173,6 @@ const ApplicationForm = ({ closeModal }) => {
         </div>
 
         <div className="apply-button">
-          <div className="text-field">
-            <div className="portfolio-text">
-              <p>Ngarko Portfolion</p>
-              <label className="custom-file-upload">
-                Choose File
-                <input
-                  type="file"
-                  className="form-control-file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
-
-                />
-              </label>
-            </div>
-          </div>
           <button className="btn-apply" onClick={handleSubmit}>
             Apliko
           </button>

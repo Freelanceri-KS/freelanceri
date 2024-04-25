@@ -56,7 +56,12 @@ const Contract = () => {
                 projectDate: formattedProjectDate,
                 state: "Active"
             };
-            axios.patch(`/application/${id}`)
+
+            const appPayload ={
+                state:"Contracted"
+            }
+
+            axios.patch(`/application/${id}`,appPayload)
                 .then((response) => {
                     console.log(response.data);
                 })
@@ -79,8 +84,6 @@ const Contract = () => {
             console.error("Invalid date value:", projectDate);
         }
     };
-
-
 
     return (
         <div className="contracts">
@@ -144,7 +147,7 @@ const Contract = () => {
                         <p className="paper-footer-p">When the client accepts the offer, you will receive confirmation.</p>
                         <div className="paper-footer-buttons">
                             <button className="pfb-1" onClick={handleSubmit}>Send to client</button>
-                            <p className="pfb-cancel">Cancel</p>
+                            <p className="pfb-cancel" onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>Cancel</p>
                         </div>
                     </div>
                 </div>
