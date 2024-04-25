@@ -149,6 +149,8 @@ const RegisterPage = (props) => {
     //     titull: "Developer",
     //   },
     // ],
+
+
     education: [
       {
         title: "Bachelor",
@@ -169,7 +171,30 @@ const RegisterPage = (props) => {
     ],
     role: 0,
   };
+  const handleAddEntry = (entriesType) => {
+    if (entriesType === "job") {
+      setJobEntries([...jobEntries, { title: "", company: "" }]);
+    } else {
+      setEducationEntries([
+        ...educationEntries,
+        { institution: "", title: "" },
+      ]);
+    }
+  };
+  const [jobEntries, setJobEntries] = useState([{ title: "", company: "" }]);
+  const [educationEntries, setEducationEntries] = useState([
+    { institution: "", title: "" },
+  ]);
 
+  const handleInputChange = (index, key, value, entriesType) => {
+    const updatedEntries = [
+      ...(entriesType === "job" ? jobEntries : educationEntries),
+    ];
+    updatedEntries[index][key] = value;
+    entriesType === "job"
+      ? setJobEntries(updatedEntries)
+      : setEducationEntries(updatedEntries);
+  };
   console.log(profile);
 
   const handleSubmitFinal = async (e) => {
@@ -288,7 +313,7 @@ const RegisterPage = (props) => {
                 <div class="form-floating mb-3">
                   <input
                     required
-                    type="text"
+                    type="password"
                     class="form-control"
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
@@ -324,17 +349,62 @@ const RegisterPage = (props) => {
                     {props?.language == true ? "Qyteti" : "City"}
                   </label>
                 </div>
-                <div class="form-floating mb-3">
-                  <input
-                    required
-                    type="text"
-                    class="form-control"
-                    onChange={(e) => setProfession(e.target.value)}
-                    placeholder="Profession"
-                  />
-                  <label for="floatingPassword">
-                    {props?.language == true ? "Profesioni" : "Profession"}
-                  </label>
+                <div>
+                  {jobEntries.map((entry, index) => (
+                    <div key={index} className="d-flex gap-2">
+                      <div className="col-6 form-floating">
+                        <input
+                          required
+                          type="text"
+                          className="form-control mt-2"
+                          placeholder="title"
+                          value={entry.title}
+                          onChange={(e) =>
+                            handleInputChange(
+                              index,
+                              "title",
+                              e.target.value,
+                              "job"
+                            )
+                          }
+                        />
+                        <label htmlFor="title">
+                          {props?.language == true
+                            ? "Web Zhvillues"
+                            : "Web Developer"}
+                        </label>
+                      </div>
+                      <div className="col-6 form-floating">
+                        <input
+                          required
+                          type="text"
+                          className="form-control mt-2"
+                          placeholder="company"
+                          value={entry.company}
+                          onChange={(e) =>
+                            handleInputChange(
+                              index,
+                              "company",
+                              e.target.value,
+                              "job"
+                            )
+                          }
+                        />
+                        <label htmlFor="company">
+                          {props?.language == true
+                            ? "Emri i Kompanise"
+                            : "Company Name"}
+                        </label>
+                      </div>
+                    </div>
+                  ))}
+                  <div
+                    role="button"
+                    className="card addbtn mt-2 mb-1 text-primary"
+                    onClick={() => handleAddEntry("job")}
+                  >
+                    Add More +
+                  </div>
                 </div>
                 <div class="form-floating mb-3">
                   <input
@@ -351,7 +421,7 @@ const RegisterPage = (props) => {
 
                 <form onSubmit={handleSubmitStep2}>
                   {/* Step 2 form fields */}
-                  <button type="submit">Continue</button>
+                  <button type="submit" className="register-page-btn">Continue</button>
                 </form>
               </div>
             )}

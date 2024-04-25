@@ -3,13 +3,29 @@ import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import ProfilePic from "../../assets/profiles/1.png";
 import { getDataFromLocalStorage } from "../../Helpers/localStorage";
+import axios from "../../axios";
+
 
 const Profile = () => {
   const [userData, setUserData] = useState([]);
 
+  const [profile, setProfile] = useState(null);
+
+  const getProfile = () => {
+    axios.get(`/freelancer/${userData._id}`)
+      .then((response) => {
+        setProfile(response.data);
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     const storedUserData = getDataFromLocalStorage("userData");
     setUserData(storedUserData);
+    getProfile();
   }, []);
 
   return (
@@ -25,9 +41,7 @@ const Profile = () => {
                   : "John Doe"}
               </h5>
               <p>
-                {userData && userData?.profession
-                  ? userData?.profession?.join(", ")
-                  : ""}
+                {profile?.profession[0]?.category}
               </p>
             </div>
           </div>

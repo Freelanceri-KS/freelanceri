@@ -39,7 +39,7 @@ function App(props) {
     <>
       <ToastContainer />
       <BrowserRouter>
-        {window.location.pathname != "/register" &&
+        {
         window.location.pathname != "/welcome" ? (
           <NewHeader />
         ) : (
