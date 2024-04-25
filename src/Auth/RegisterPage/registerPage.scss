@@ -9,7 +9,7 @@
     align-items: center;
     flex-direction: column;
     width: 45%;
-    .register-page-btn{
+    .register-page-btn {
       border: none;
       width: 13em;
       height: 3.5em;
@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    .right-img-placeholder{
+    .right-img-placeholder {
       width: 85%;
       height: 85%;
       background-image: url("../../assets/images/register.png");
@@ -33,5 +33,30 @@
       object-fit: cover;
       border-radius: 10px;
     }
+  }
+
+  .primary-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 15px;
+  }
+
+  .left-btn,
+  .right-btn {
+    width: calc(50% - 10px);
+  }
+
+  .primary-buttons .left-btn,
+  .primary-buttons .right-btn {
+    background-color: white;
+    color: #455bef;
+    border: 1px solid #455bef;
+  }
+
+  .primary-buttons .left-btn:hover,
+  .primary-buttons .right-btn:hover {
+    background-color: #455bef;
+    color: white;
   }
 }

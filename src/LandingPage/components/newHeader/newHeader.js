@@ -17,7 +17,6 @@ const NewHeader = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-
   const handleProfileClick = () => {
     navigate("/profile");
   };
@@ -63,8 +62,9 @@ const NewHeader = (props) => {
                 <>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname === "/" ? " active" : ""
-                        }`}
+                      className={`nav-link ${
+                        location.pathname === "/" ? " active" : ""
+                      }`}
                       onClick={() => navigate("/")}
                       style={{ cursor: "pointer" }}
                     >
@@ -72,14 +72,23 @@ const NewHeader = (props) => {
                     </a>
                   </li>
                   <li className="nav-item margin">
-                    <a className={`nav-link ${location.pathname === "/freelancer-dashboard" ? "active" : ""}`} onClick={() => navigate("/freelancer-dashboard")} style={{ cursor: "pointer" }}>
+                    <a
+                      className={`nav-link ${
+                        location.pathname === "/freelancer-dashboard"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => navigate("/freelancer-dashboard")}
+                      style={{ cursor: "pointer" }}
+                    >
                       Dashboard
                     </a>
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
-                        }`}
+                      className={`nav-link ${
+                        location.pathname === "/bookmarks" ? " active" : ""
+                      }`}
                       onClick={() => navigate("/bookmarks")}
                       style={{ cursor: "pointer" }}
                     >
@@ -88,8 +97,9 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname === "/profile" ? " active" : ""
-                        }`}
+                      className={`nav-link ${
+                        location.pathname === "/profile" ? " active" : ""
+                      }`}
                       onClick={() => navigate("/profile")}
                       style={{ cursor: "pointer" }}
                     >
@@ -102,8 +112,9 @@ const NewHeader = (props) => {
                 <>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname === "/find-jobs" ? " active" : ""
-                        }`}
+                      className={`nav-link ${
+                        location.pathname === "/find-jobs" ? " active" : ""
+                      }`}
                       onClick={() => navigate("/")}
                     >
                       Home
@@ -116,15 +127,19 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname === "/bookmarks" ? " active" : ""
-                        }`}
+                      className={`nav-link ${
+                        location.pathname === "/bookmarks" ? " active" : ""
+                      }`}
                       onClick={() => navigate("/about-us")}
                     >
                       About us
                     </a>
                   </li>
                   <li className="nav-item margin">
-                    <a className="nav-link" onClick={() => navigate("/contact-us")}>
+                    <a
+                      className="nav-link"
+                      onClick={() => navigate("/contact-us")}
+                    >
                       Contact
                     </a>
                   </li>
@@ -134,8 +149,18 @@ const NewHeader = (props) => {
             <div className="headerItems">
               {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
                 <div className="auth-buttons">
-                  <button className="loginbtn" onClick={() => navigate("/login")}>Log In</button>
-                  <button className="regbtn" onClick={() => navigate("/register")}>Register</button>
+                  <button
+                    className="loginbtn"
+                    onClick={() => navigate("/login")}
+                  >
+                    Log In
+                  </button>
+                  <button
+                    className="regbtn"
+                    onClick={() => navigate("/register")}
+                  >
+                    Register
+                  </button>
                 </div>
               )}
               {!props.isLoggedinBusiness && !props.isLoggedinFreelancer && (
