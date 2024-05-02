@@ -32,19 +32,19 @@ import PostDetail from "./Business/post-details/post-details";
 import ProfileCheck from "./Business/post-details/profile-check/profile-check";
 import Contract from "./Business/contracts/offer_contract/contract";
 import NotFound from "./LandingPage/404/404";
-import TestShit from "./LandingPage/AboutUs/Test/testshit";
 import ViewContract from "./Business/contracts/view_contract/viewContract";
+import Career from "./Freelancer/Careers/career";
 function App(props) {
   return (
     <>
       <ToastContainer />
       <BrowserRouter>
         {
-        window.location.pathname != "/welcome" ? (
-          <NewHeader />
-        ) : (
-          ""
-        )}
+          window.location.pathname != "/welcome" ? (
+            <NewHeader />
+          ) : (
+            ""
+          )}
         <Routes>
           {!props.isLoggedInBusiness && !props.isLoggedinFreelancer && (
             <>
@@ -55,7 +55,6 @@ function App(props) {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/faqs" element={<FAQs />} />
-              <Route path="/testshit" element={<TestShit />} />
             </>
           )}
           {props.isLoggedInBusiness && (
@@ -83,27 +82,9 @@ function App(props) {
               <Route path="*" element={<NotFound />} />
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/career" element={<Career />} />
             </>
           )}
-          {/* <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/find-jobs" element={<FindJob />} />
-          <Route path="/details-page/:id" element={<DetailsPage />} />
-          <Route path="/apply-form/:id" element={<ApplicationForm />} />
-          <Route path="/business-dashboard" element={<BusinessDashboard />} />
-          <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
-          <Route path="/bookmarks" element={<Bookmarks />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/business-dashboard" element={<BusinessDashboard />} />
-          <Route path="/view-profile" element={<ViewProfile />} />
-          <Route path="/faqs" element={<FAQs />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/contact-us" element={<Contact />} />
-          <Route path="/post-detail/:id" element={<PostDetail />} />
-          <Route path="/post-controll" element={<PostControll />} />
-          <Route path="/profile-check/:id" element={<ProfileCheck />} />
-          <Route path="/view-profile/:id" element={<ViewProfile />} />
-          <Route path="/contract" element={<Contract />} /> */}
         </Routes>
       </BrowserRouter>
     </>

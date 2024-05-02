@@ -206,21 +206,7 @@ const FindJob = () => {
                       </div>
                     </div>
                     <div className="jpch-center">
-                      <div className="vert-barrier"></div>
-                      <div className="jpch-center-tags">
-                        <p className="jpch-c-tag">Location</p>
-                        <h6 className="jpch-c-value">{el?.city.city}</h6>
-                      </div>
-                      <div className="vert-barrier"></div>
-                      <div className="jpch-center-tags">
-                        <p className="jpch-c-tag">Experience</p>
-                        <h6 className="jpch-c-value">{el?.experienceLevel}</h6>
-                      </div>
-                      <div className="vert-barrier"></div>
-                      <div className="jpch-center-tags">
-                        <p className="jpch-c-tag">Category</p>
-                        <h6 className="jpch-c-value">{el?.profession.category}</h6>
-                      </div>
+
                     </div>
                     {isBookmarked ? (
                       <FaBookmark size={25} color="#455bef" onClick={() => removeBookmark(el._id)} />
@@ -236,18 +222,18 @@ const FindJob = () => {
                   <div className="footer-line"></div>
                   <div className="job-post-footer">
                     <div className="jp-footer-info">
-                      <p className="tag">Kerkoj</p>
-                      <p className="value">{el?.neededWorkers} freelancer</p>
+                      <p className="tag">Category</p>
+                      <p className="value">{el?.profession.category}</p>
                     </div>
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">
-                      <div className="tag">Afati</div>
-                      <div className="value">{el?.duration} ditë</div>
+                      <div className="tag">City</div>
+                      <div className="value">{el?.city.city}</div>
                     </div>
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">
-                      <div className="tag">Budget</div>
-                      <div className="value">{el?.budget}$</div>
+                      <div className="tag">Experience</div>
+                      <div className="value">{el?.experienceLevel}</div>
                     </div>
                     <button onClick={() => navigate(`/details-page/${el._id}`)} className="jp-apply-details">
                       <p className='a-d-p'>Apply</p>

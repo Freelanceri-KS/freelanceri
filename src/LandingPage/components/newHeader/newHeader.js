@@ -100,12 +100,14 @@ const NewHeader = (props) => {
                   </li>
                   <li className="nav-item margin">
                     <a
-                      className={`nav-link ${location.pathname === "/profile" ? " active" : ""
+                      className={`nav-link ${location.pathname === "/career"
+                        ? "active"
+                        : ""
                         }`}
-                      onClick={() => navigate("/profile")}
+                      onClick={() => navigate("/career")}
                       style={{ cursor: "pointer" }}
                     >
-                      Profile
+                      Career
                     </a>
                   </li>
                 </>
@@ -190,7 +192,7 @@ const NewHeader = (props) => {
                             src={Albania}
                             alt="mdo"
                             width="25"
-                            height="25"
+                            height="30"
                             className="lang-btn"
                           />{" "}
                           Alb
@@ -207,7 +209,7 @@ const NewHeader = (props) => {
                           <img
                             src={English}
                             alt="mdo"
-                            width="25"
+                            width="30"
                             height="25"
                             className="lang-btn"
                           />{" "}
@@ -222,7 +224,8 @@ const NewHeader = (props) => {
 
               {props.isLoggedinFreelancer && (
                 <div role="button" className="dropdown text-center lang profile-logout">
-                  <p>{userData?.firstName} {userData?.lastName}</p>
+                  <p data-bs-toggle="dropdown"
+                    aria-expanded="false">{userData?.firstName} {userData?.lastName}</p>
                   <a
                     className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                     data-bs-toggle="dropdown"
@@ -237,6 +240,15 @@ const NewHeader = (props) => {
                     />
                   </a>
                   <ul className="dropdown-menu text-small lang-dr">
+                    <li>
+                      <div
+                        role="button"
+                        className="dropdown-item"
+                        onClick={() => navigate("/profile")}
+                      >
+                        <p>Profile</p>
+                      </div>
+                    </li>
                     <li>
                       <div
                         role="button"
@@ -287,7 +299,7 @@ const NewHeader = (props) => {
                       <img
                         src={props.language ? Albania : English}
                         alt="mdo"
-                        width="32"
+                        width="40"
                         height="32"
                         className="lang-btn"
                       />

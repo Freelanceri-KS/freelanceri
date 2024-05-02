@@ -15,7 +15,10 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getDataFromLocalStorage } from '../Helpers/localStorage';
 import { toast } from 'react-toastify';
-
+import Recruit from "../assets/icons/help/recruitment.png"
+import Tick1 from "../assets/icons/help/check.png"
+import Tick2 from "../assets/icons/help/check2.png"
+import Tick3 from "../assets/icons/help/check3.png"
 
 const BusinessDashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Posts');
@@ -33,7 +36,7 @@ const BusinessDashboard = () => {
                         </div>
                         <ul>
                             <li>
-                                <a href="" onClick={() => handleOptionClick('Posts')} className={
+                                <a href="#" onClick={() => handleOptionClick('Posts')} className={
                                     selectedOption === 'Posts'
                                         ? 'selected-text'
                                         : 'unselected-text'
@@ -74,6 +77,16 @@ const BusinessDashboard = () => {
                             <div className="barrier"></div>
                             <li>
                                 <a href="#" className={
+                                    selectedOption === 'Help'
+                                        ? 'selected-text'
+                                        : 'unselected-text-2'
+                                } onClick={() => handleOptionClick('Help')}>
+                                    Let us help you
+                                </a>
+                            </li>
+                            <div className="barrier"></div>
+                            <li>
+                                <a href="#" className={
                                     selectedOption === 'Profile'
                                         ? 'selected-text'
                                         : 'unselected-text'
@@ -106,6 +119,9 @@ const BusinessDashboard = () => {
                         {selectedOption === "CreatePost" && (
                             <CreatePost />
                         )}
+                        {selectedOption === "Help" && (
+                            <Help />
+                        )}
                     </div>
                 </div>
             </div>
@@ -113,6 +129,146 @@ const BusinessDashboard = () => {
     );
 }
 
+
+function Help() {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    return (
+        <div className="help">
+            <div className="help-head-wrapper">
+                <div className="help-head">
+                    <h4 className='help-head-h4'>Couldn't find what you were {!isMobile && (<br />)}
+                        looking for?
+                    </h4>
+                    <p className='help-head-p'>Let us provide you with the services that help you</p>
+                </div>
+            </div>
+            <div className="help-services-grid">
+                <div className="help-services-item">
+                    <div className="hsi-body">
+                        <div className="hsi-body-left">
+                            <div className="hsi-body-left-image-circle">
+                                <img src={Recruit} alt="Recruitment" />
+                            </div>
+                            <p className='hbl-p'>Our services</p>
+                            <p className='hbl-p2'>Recruitment</p>
+                        </div>
+                        <div className="hsi-body-center">
+
+                            <div className="hbc-service">
+                                <img src={Tick1} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Talent Haunt</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick1} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Recruiting</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick1} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Team creation</h6>
+                            </div>
+
+
+
+                        </div>
+                        <div className="hsi-body-right">
+                            <div className="hbc-service">
+                                <img src={Tick1} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Interviewing</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick1} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Candidate Testing</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hsi-footer">
+                        <h5 className='hsi-footer-h4'>Contact Us</h5>
+                    </div>
+                </div>
+                <div className="help-services-item-2">
+                    <div className="hsi-body">
+                        <div className="hsi-body-left">
+                            <div className="hsi-body-left-image-circle">
+                                <img src={Recruit} alt="Recruitment" />
+                            </div>
+                            <p className='hbl-p'>Our services</p>
+                            <p className='hbl-p2'>Consulting</p>
+                        </div>
+                        <div className="hsi-body-center">
+                            <div className="hbc-service">
+                                <img src={Tick2} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Business Strategy </h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick2} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Marketing and Branding</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick2} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>HR Consulting</h6>
+                            </div>
+                        </div>
+                        <div className="hsi-body-right">
+                            <div className="hbc-service">
+                                <img src={Tick2} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Financial Consulting</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick2} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Digital Transformation </h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick2} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Sustainability & CSR </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hsi-footer-2">
+                        <h5 className='hsi-footer-h4'>Contact Us</h5>
+                    </div>
+                </div>
+                <div className="help-services-item-3">
+                    <div className="hsi-body">
+                        <div className="hsi-body-left">
+                            <div className="hsi-body-left-image-circle">
+                                <img src={Recruit} alt="Recruitment" />
+                            </div>
+                            <p className='hbl-p'>Our services</p>
+                            <p className='hbl-p2'>Project Management</p>
+                        </div>
+                        <div className="hsi-body-center">
+                            <div className="hbc-service">
+                                <img src={Tick3} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Project Planning and Execution</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick3} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Risk Management</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick3} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Software Development</h6>
+                            </div>
+                        </div>
+                        <div className="hsi-body-right">
+                            <div className="hbc-service">
+                                <img src={Tick3} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Social Media Management</h6>
+                            </div>
+                            <div className="hbc-service">
+                                <img src={Tick3} alt="Tick" width={40} height={40} />
+                                <h6 className='hbc-service-h5'>Advertising</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hsi-footer-3">
+                        <h5 className='hsi-footer-h4'>Contact Us</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 function Contracts(props) {
     const navigate = useNavigate();
@@ -604,8 +760,18 @@ const Applications = () => {
                                 <div className="bagi-head">
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
-                                        <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
+                                        <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5><p>
+                                            <p>
+                                                {(apl?.freelancerId?.profession[0]?.category || apl?.freelancerId?.profession[1]?.category) && (
+                                                    <>
+                                                        {apl.freelancerId.profession[0]?.category}
+                                                        {apl.freelancerId.profession[1]?.category && `, ${apl.freelancerId.profession[1].category}`}
+                                                    </>
+                                                )}
+                                            </p>
+
+                                        </p>
+
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
