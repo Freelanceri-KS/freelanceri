@@ -117,7 +117,17 @@ const ProfileCheck = () => {
                         <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
                         <div className="pcmh-left-id">
                             <h5>{profileDetail?.freelancerId?.firstName} {profileDetail?.freelancerId?.lastName}</h5>
-                            <p>{profileDetail?.freelancerId?.profession[0]}, {profileDetail?.freelancerId?.profession[1]}.</p>
+                            <p>
+                                <p>
+                                    {(profileDetail?.freelancerId?.profession[0]?.category || profileDetail?.freelancerId?.profession[1]?.category) && (
+                                        <>
+                                            {profileDetail.freelancerId.profession[0]?.category}
+                                            {profileDetail.freelancerId.profession[1]?.category && `, ${profileDetail.freelancerId.profession[1].category}`}
+                                        </>
+                                    )}
+                                </p>
+
+                            </p>
                         </div>
                     </div>
                     <div className="pcmh-right">

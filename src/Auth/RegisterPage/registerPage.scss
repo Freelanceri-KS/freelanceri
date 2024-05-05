@@ -17,6 +17,17 @@
       color: white;
       background-color: #455bef;
     }
+    .register-add-more{
+      border: 1px solid #455bef;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      border-radius: 10px;
+    }
   }
 
   .right {
@@ -59,6 +70,10 @@
     background-color: #455bef;
     color: white;
   }
+}
+.rowfc{
+  width: 100%!important;
+  margin: 0;
 }
 @media screen and (max-width:786px) {
   

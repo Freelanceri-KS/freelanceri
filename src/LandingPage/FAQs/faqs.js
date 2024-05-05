@@ -162,7 +162,7 @@ const FAQs = (props) => {
               </div>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-sm">
               <div
                 className={`question-container ${
@@ -223,8 +223,8 @@ const FAQs = (props) => {
                 )}
               </div>
             </div>
-          </div>
-          <div className="row">
+          </div> */}
+          {/* <div className="row">
             <div className="col-sm">
               <div
                 className={`question-container ${
@@ -285,7 +285,7 @@ const FAQs = (props) => {
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="space"></div>
         {/* <p className="title">

@@ -20,15 +20,20 @@ const FreelancerDashboard = (props) => {
     const [finishedContract, setFinishedContract] = useState([]);
 
 
+    // Get Applications
+
     const getActiveApplications = () => {
         axios.get(`application/freelancer/active/${userData._id}`)
             .then((response) => {
                 setActiveApl(response.data);
+                console.log("Active applications:", response.data)
             })
             .catch((error) => {
                 console.log('Error fetching applications:', error);
             });
     }
+
+    // Get Contracts
 
     const getActiveContracts = () => {
         axios.get(`/contract/freelancer/active/${userData._id}`)
@@ -36,8 +41,8 @@ const FreelancerDashboard = (props) => {
                 setActiveContract(response.data);
                 console.log("Active contracts:", response.data);
             })
-            .then((error) => {
-                console.log(error);
+            .catch((error) => {
+                console.log("Active Contracts errors:", error);
             })
     }
 
@@ -48,7 +53,7 @@ const FreelancerDashboard = (props) => {
                 console.log("Finished contracts", response.data);
             })
             .then((error) => {
-                console.log(error);
+                console.log("Finished Contracts Error:", error);
             })
     }
 
@@ -449,7 +454,7 @@ const FreelancerDashboard = (props) => {
                                 </div>
                                 <h5>Getting started with Freelanceri</h5>
                                 <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link'>Read more</p>
+                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
 
                             </div>
                             <div className="horiz-barrier-article"></div>
@@ -459,7 +464,7 @@ const FreelancerDashboard = (props) => {
                                 </div>
                                 <h5>How to get your first project</h5>
                                 <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link'>Read more</p>
+                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
                             </div>
                             <div className="horiz-barrier-article"></div>
                             <div className="fdsc-article">
@@ -468,7 +473,7 @@ const FreelancerDashboard = (props) => {
                                 </div>
                                 <h5>Freelanceri for businesses</h5>
                                 <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link'>Read more</p>
+                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
                             </div>
                             <div className="horiz-barrier-article"></div>
                             <div className="fdsc-article">
@@ -477,7 +482,7 @@ const FreelancerDashboard = (props) => {
                                 </div>
                                 <h5>Being yourselves boss</h5>
                                 <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link'>Read more</p>
+                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
                             </div>
                         </div>
                         <div className="freelancer-dashboard-side-contact">
@@ -488,7 +493,7 @@ const FreelancerDashboard = (props) => {
                             <div className="fdsc-body">
                                 <p>Contact Freelanceri support 7 days a week. We are serious about your Growth</p>
                                 <div className="horiz-barrier-contact"></div>
-                                <p className='fdsc-body-p'>Email: <span style={{ color: "#455bef", fontWeight: '500' }}>support@freelanceri-ks.com</span></p>
+                                <p className='fdsc-body-p'>Email: <span style={{ color: "#455bef", fontWeight: '500' }}>platforma.freelanceri@gmail.com</span></p>
                                 <div className="horiz-barrier-contact"></div>
                                 <p className='fdsc-body-p'>Contact us and we will reach out to you soon to hear about your needs</p>
 

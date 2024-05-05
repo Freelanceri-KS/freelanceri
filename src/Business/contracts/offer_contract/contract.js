@@ -15,19 +15,32 @@ const Contract = () => {
     const { id } = useParams();
     const [contractDetail, setContractDetail] = useState(null);
     const navigate = useNavigate();
+
     useEffect(() => {
         const getContractDetail = async () => {
             try {
                 const response = await axios.get(`/application/${id}`);
                 setContractDetail(response.data);
-                console.log(response.data);
+                // Extract the date part from the response and set it as the project date
+                const dateFromDatabase = response.data.projectDate;
+                if (dateFromDatabase) {
+                    const parsedDate = new Date(dateFromDatabase);
+                    // Check if the parsedDate is valid
+                    if (!isNaN(parsedDate.getTime())) {
+                        const formattedDate = parsedDate.toISOString().split('T')[0];
+                        setProjectDate(formattedDate);
+                    } else {
+                        console.error("Invalid date value:", dateFromDatabase);
+                    }
+                } else {
+                    console.error("Date value not present in database response.");
+                }
             } catch (error) {
                 console.error('Error fetching contract detail:', error);
             }
         };
         getContractDetail();
     }, [id]);
-
 
     const [projectType, setProjectType] = useState("Project Based");
     const [projectDescription, setProjectDescription] = useState("");
@@ -36,14 +49,10 @@ const Contract = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const [day, month, year] = projectDate.split('-').map(Number);
-
+        const [year, month, day] = projectDate.split('-').map(Number);
         const projectDateAsDate = new Date(year, month - 1, day);
-
         if (!isNaN(projectDateAsDate.getTime())) {
             const formattedProjectDate = projectDateAsDate.toISOString();
-
             const payload = {
                 freelancer: contractDetail?.freelancerId?._id,
                 business: contractDetail?.businessId?._id,
@@ -56,20 +65,16 @@ const Contract = () => {
                 projectDate: formattedProjectDate,
                 state: "Active"
             };
-
-            const appPayload ={
-                state:"Contracted"
+            const appPayload = {
+                state: "Contracted"
             }
-
-            axios.patch(`/application/${id}`,appPayload)
+            axios.patch(`/application/${id}`, appPayload)
                 .then((response) => {
                     console.log(response.data);
                 })
                 .catch((error) => {
                     console.log(error)
                 })
-
-
             axios.post("/contract", payload)
                 .then((response) => {
                     console.log(response.data);
@@ -84,6 +89,8 @@ const Contract = () => {
             console.error("Invalid date value:", projectDate);
         }
     };
+
+    const today = new Date().toISOString().split('T')[0];
 
     return (
         <div className="contracts">
@@ -104,9 +111,9 @@ const Contract = () => {
                         <h6 className="paper-body-h6">Description</h6>
                         <textarea type="text" placeholder={contractDetail?.postId?.description} className="paper-body-textarea" rows={5} cols={10} disabled />
                         {/* <h6 className="paper-body-h6">Attachments</h6>
-                        <div className="attachment">
-                            <p>Drag or <span style={{ color: "#455bef" }}>Upload</span> projects files</p>
-                        </div> */}
+                            <div className="attachment">
+                                <p>Drag or <span style={{ color: "#455bef" }}>Upload</span> projects files</p>
+                            </div> */}
                         <h6 className="paper-body-h6">Terms</h6>
                         <div className="terms">
                             <div className="terms-project">
@@ -131,7 +138,13 @@ const Contract = () => {
                                 </div>
                                 <div className="vert-barrier"></div>
                                 <div class="input-with-icon">
-                                    <input type="text" class="form-control" placeholder="01/01/2024" value={projectDate} onChange={(e) => setProjectDate(e.target.value)} />
+                                    <input
+                                        type="date"
+                                        className="form-control"
+                                        value={contractDetail?.postId?.duration}
+                                        placeholder={contractDetail?.postId?.duration}
+                                    />
+
                                     <span class="icon-prefix"><MdOutlineCalendarMonth size={20} />
                                     </span>
                                 </div>

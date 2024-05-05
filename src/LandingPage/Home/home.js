@@ -151,7 +151,7 @@ const Home = (props) => {
           {/* SECTION 2 */}
           <div className="mt-5 mb-5">
             <div className="row">
-              <div className="col-sm-4">
+              {/* <div className="col-sm-4">
                 <div className="card-title-line3">
                   {props?.language == true
                     ? "Kategoritë e Njohura"
@@ -215,9 +215,9 @@ const Home = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
-              {/* MAPING */}
-
+              </div> */}
+      
+{/* 
               <div className="col-sm-4">
                 <div className="card-outline">
                   <div className="card-header">
@@ -405,7 +405,7 @@ const Home = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* SECTION 2 */}

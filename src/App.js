@@ -83,6 +83,7 @@ function App(props) {
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/career" element={<Career />} />
+              <Route path="/blogs" element={<Blogs/>} />
             </>
           )}
         </Routes>

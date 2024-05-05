@@ -1,37 +1,43 @@
 import React, { useEffect, useState } from "react";
 import "./findJob.scss";
 import User2 from "../../assets/profiles/2.png";
-import Ads from "../../assets/banners/ads.png";
-import AdBanner from "../../assets/banners/adBanner.png"
 import axios from "../../axios";
-import SortByFilter from "./SortByFilter/sortByFilter";
 import { IoSearchOutline } from "react-icons/io5";
-import { CiLocationOn } from "react-icons/ci";
-import { FaBookmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import { FaRegBookmark } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { CiFilter } from "react-icons/ci";
+import AdBanner from "../../assets/banners/adBanner.png"
+import { FaRegBookmark } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa6";
+import { MdWorkOutline } from "react-icons/md";
 
 const FindJob = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTable] = useState(false);
-  const [jobs, setJobs] = useState([])
-
-  const navigate = useNavigate()
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categoryQuery, setCategoryQuery] = useState('');
+  const [jobs, setJobs] = useState([]);
+  const navigate = useNavigate();
   const getJobs = () => {
-    axios.get('/posts/approved').then((response) => {
-      console.log(response.data);
-      setJobs(response.data);
-    }).catch(
-      err => {
-        console.log(err);
-      }
-    );
+    axios.get('/posts/approved', { params: { search: searchQuery, category: categoryQuery } })
+      .then((response) => {
+        setJobs(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching jobs:", error);
+      });
   };
 
+  useEffect(() => {
+    getJobs();
+  }, [searchQuery, categoryQuery]); // Update the dependency array to include categoryQuery
+
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategoryQuery(event.target.value);
+  };
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const handleBookmark = (postId) => {
     const payload = {
@@ -61,20 +67,6 @@ const FindJob = () => {
 
   const [userData, setUserData] = useState(null);
 
-
-
-  useEffect(() => {
-    const userDataString = window.localStorage.getItem("userData");
-    if (userDataString) {
-      try {
-        const parsedUserData = JSON.parse(userDataString);
-        setUserData(parsedUserData);
-      } catch (error) {
-        console.error("Error parsing userData:", error);
-      }
-    }
-  }, []);
-
   const [expandedItem, setExpandedItem] = useState('category');
   const [category, setCategory] = useState([]);
   const getCategory = () => {
@@ -99,22 +91,6 @@ const FindJob = () => {
   useEffect(() => {
     getCategory();
   }, [])
-
-  useEffect(() => {
-    getJobs();
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      setIsTable(window.innerWidth > 768 && window.innerWidth <= 1024);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div className="find-job">
@@ -154,49 +130,48 @@ const FindJob = () => {
                 </div>
               </div>
             )}</li>
-
-            {/* <li
-            onClick={() => handleItemClick("item2")}
-            className={`list-group-item ${expandedItem == "item2" ? "" : ""}`}
-          >
-            <div className="d-flex align-items-center single-item">
-              <h5>Location</h5>
-              <span className="icon" role="button">
-                {expandedItem == "item2" ? <IoIosArrowUp /> : <IoIosArrowDown />}
-              </span>
-            </div>
-            {expandedItem == "item2" && (
-              <div className="expanded-content">
-                <p>Expanded content for Item 2</p>
-              </div>
-            )}
-          </li> */}
           </ul>
         </div>
       </div>
       <div className="find-job-center">
         <div className="search-filter-bar">
-          <div class="input-with-icon">
-            <input type="text" class="form-control" placeholder=" Job title..." />
-            <span class="icon-prefix"><IoSearchOutline size={20} />
+          <div className="input-with-icon">
+            <input
+              type="text"
+              className="form-control mx-2"
+              placeholder="Search job title..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            <span className="icon-prefix">
+              <IoSearchOutline size={20} />
             </span>
           </div>
-          <div className="vert-barrier"></div>
-          <div class="input-with-icon">
-            <input type="text" class="form-control" placeholder=" City, Location..." />
-            <span class="icon-prefix"><CiLocationOn size={20} />
-
+          <div className="vert-barriers"></div>
+          <div className="input-with-icon">
+            <input
+              type="text"
+              className="form-control mx-2"
+              placeholder="Profession..."
+              value={categoryQuery}
+              onChange={handleCategoryChange}
+            />
+            <span className="icon-prefix">
+              <MdWorkOutline size={20} />
             </span>
           </div>
-          <div className="vert-barrier"></div>
-          <div className="search-button">Search</div>
         </div>
         <div className="job-post-list">
-          {jobs?.map((el, index) => {
-            const isBookmarked = bookmarkedPosts.includes(el._id); // Check if the post is bookmarked
-            return (
-              <>
-                <div className="job-post-container" key={el._id} >
+          {jobs.map((el) => {
+            const isBookmarked = bookmarkedPosts.includes(el._id);
+
+            const matchesSearch = el.title.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesCategory = el.profession.category.toLowerCase().includes(categoryQuery.toLowerCase());
+
+            // Check if the job matches either the search query, the category query, or both
+            if (matchesSearch || matchesCategory) {
+              return (
+                <div className="job-post-container" key={el._id}>
                   <div className="job-post-container-header">
                     <div className="jpch-left">
                       <img src={User2} alt="User" width={50} height={50} />
@@ -206,7 +181,7 @@ const FindJob = () => {
                       </div>
                     </div>
                     <div className="jpch-center">
-
+                      {/* Center content */}
                     </div>
                     {isBookmarked ? (
                       <FaBookmark size={25} color="#455bef" onClick={() => removeBookmark(el._id)} />
@@ -215,9 +190,7 @@ const FindJob = () => {
                     )}
                   </div>
                   <div className="job-post-container-body">
-                    <p className="jpcb-p">
-                      {el?.description}
-                    </p>
+                    <p className="jpcb-p">{el?.description}</p>
                   </div>
                   <div className="footer-line"></div>
                   <div className="job-post-footer">
@@ -227,34 +200,35 @@ const FindJob = () => {
                     </div>
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">
-                      <div className="tag">City</div>
-                      <div className="value">{el?.city.city}</div>
+                      <p className="tag">City</p>
+                      <p className="value">{el?.city.city}</p>
                     </div>
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">
-                      <div className="tag">Experience</div>
-                      <div className="value">{el?.experienceLevel}</div>
+                      <p className="tag">Experience</p>
+                      <p className="value">{el?.experienceLevel}</p>
                     </div>
                     <button onClick={() => navigate(`/details-page/${el._id}`)} className="jp-apply-details">
                       <p className='a-d-p'>Apply</p>
                     </button>
                   </div>
                 </div>
-              </>
-            )
+              );
+            } else {
+              <><p>No post found</p></>
+            }
           })}
 
-          {/* <img src={Ads} alt="Banner" className="job-list-banner" /> */}
+
         </div>
+
       </div>
       <div className="find-job-right">
         <img src={AdBanner} alt="Advertising" className="find-job-right-banner" />
       </div>
     </div>
   );
+
 };
-
-
-
 
 export default FindJob;

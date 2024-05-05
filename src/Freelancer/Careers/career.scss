@@ -57,11 +57,16 @@
 
         .cvc {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             padding-top: 4em;
 
             .career-values-left {
                 width: 60%;
+                background-color: rebeccapurple;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                text-align: start;
 
                 .cvl-underline {
                     margin-top: 1em;
@@ -78,11 +83,18 @@
             }
 
             .career-values-right {
-                width: 70%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
                 .cvr-item {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     margin-top: 1em;
+                    width: 100%;
+
                     .cvri-box {
                         width: 75px;
                         height: 75px;
@@ -91,6 +103,14 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        overflow: hidden; // Ensure content inside the box is clipped
+
+                        .cvri-box-img {
+                            width: 32px;
+                            height: 32px;
+                            max-width: 100%; // Ensure image fills the circular container
+                            max-height: 100%; // Maintain aspect ratio
+                        }
                     }
 
                     .cvri-txt {
@@ -118,7 +138,8 @@
     .trainings {
         width: 100%;
         margin-top: 5em;
-        margin-bottom: 20em;
+        margin-bottom: 10em;
+
         .trainings-underline {
             width: 35px;
             height: 7px;
@@ -159,4 +180,335 @@
             }
         }
     }
+
+    .career-cta {
+        width: 100%;
+        height: 60vh;
+        background-color: #455bef;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .career-cta-box {
+            width: 50%;
+            padding: 15px;
+            height: 85%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .ccb-left {
+                width: 35%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+
+            .ccb-right {
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+
+                .career-input {
+                    border-right: none;
+                    border-left: none;
+                    border-top: none;
+                    border-bottom: 2.5px solid #eaeaea;
+                    font-size: 17px;
+                    margin-top: 2em;
+                }
+
+                .career-select {
+                    border-right: none;
+                    border-left: none;
+                    border-top: none;
+                    border-bottom: 2.5px solid #eaeaea;
+                    width: 100%;
+                    margin-top: 2em;
+                    font-size: 17px;
+                    color: grey;
+                }
+
+                .ccbr-row {
+                    display: flex;
+                    margin-top: 2em;
+
+                    .checkbox {
+                        height: 30px;
+                        width: 30px;
+                        margin-right: 10px;
+                    }
+
+                }
+
+                .career-submit-btn {
+                    width: 50%;
+                    margin-top: 2em;
+                    border: none;
+                    padding: 15px;
+                    border-radius: 10px;
+                    background-color: #455bef;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .career {
+        margin-top: 8em;
+        width: 100%;
+        height: auto;
+
+        .career-s1 {
+            width: 95%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+
+            .career-s1-btn {
+                margin-top: 2em;
+                border: none;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                padding-right: 20px;
+                padding-left: 20px;
+                border-radius: 30px;
+                background-color: #455bef;
+                color: white;
+            }
+        }
+
+        .career-video {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .career-video-container {
+                margin-top: 2em;
+                border-radius: 40px;
+                background-color: rgba(69, 91, 239, 0.6);
+                height: 40vh;
+                width: 95%;
+                padding: 0.4em;
+
+                .career-video-container-img {
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 40px;
+                    background-image: url("../../assets/thumbnail.png");
+                    object-fit: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+
+        .career-values {
+            margin-top: 3em;
+            width: 100%;
+            background-color: #f7f7f7;
+            height: auto;
+
+            .cvc {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding-top: 4em;
+                width: 95%;
+
+                .career-values-left {
+                    width: 90%;
+
+                    .cvl-underline {
+                        margin-top: 1em;
+                        width: 35px;
+                        height: 7px;
+                        background-color: #455bef;
+                        border-radius: 10px;
+                    }
+
+                    .cvl-p {
+                        width: 90%;
+                        margin-top: 1em;
+                    }
+                }
+
+                .career-values-right {
+                    width: 90%;
+
+                    .cvr-item {
+                        display: flex;
+                        align-items: center;
+                        margin-top: 1em;
+
+                        .cvri-box {
+                            width: 75px;
+                            height: 75px;
+                            border-radius: 50%;
+                            background-color: rgba(69, 91, 239, 1);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .cvri-txt {
+                            margin-left: 1em;
+                            display: flex;
+                            align-items: start;
+                            justify-content: center;
+                            flex-direction: column;
+
+                            .cvri-p {
+                                font-weight: 700;
+                                color: #363636;
+                            }
+
+                            .cvri-p2 {
+                                color: #909090;
+                                width: 90%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .trainings {
+            width: 100%;
+            margin-top: 5em;
+            margin-bottom: 10em;
+
+            .trainings-underline {
+                width: 35px;
+                height: 7px;
+                border-radius: 10px;
+                background-color: #455bef;
+            }
+
+            .trainings-dsc {
+                width: 90%;
+                margin-top: 2.5em;
+                color: #909090;
+            }
+
+            .t-grid {
+                margin-top: 2em;
+                display: grid;
+                grid-template-columns: auto;
+                justify-content: center;
+                column-gap: 10px;
+                row-gap: 30px;
+
+                .t-grid-item {
+                    width: 17em;
+                    background-color: #f7f7f7;
+                    border-radius: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 15px;
+
+                    .t-grid-item-h3 {
+                        margin-top: 1em;
+                    }
+
+                    .t-grid-item-p {
+                        color: #909090;
+                        font-weight: 300;
+                        margin-top: 1em;
+                    }
+                }
+            }
+        }
+
+        .career-cta {
+            width: 100%;
+            background-color: #455bef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            margin-bottom: 2em;
+
+            .career-cta-box {
+                width: 95%;
+                margin: 10px;
+                padding: 15px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: column;
+
+                .ccb-left {
+                    width: 95%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .ccb-left-p {
+                        display: none;
+                    }
+                }
+
+                .ccb-right {
+                    width: 95%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .career-input {
+                        border-right: none;
+                        border-left: none;
+                        border-top: none;
+                        border-bottom: 2.5px solid #eaeaea;
+                        font-size: 17px;
+                        margin-top: 2em;
+                        width: 100%;
+                    }
+
+                    .career-select {
+                        border-right: none;
+                        border-left: none;
+                        border-top: none;
+                        border-bottom: 2.5px solid #eaeaea;
+                        width: 100%;
+                        margin-top: 2em;
+                        font-size: 17px;
+                        color: grey;
+                    }
+
+                    .ccbr-row {
+                        display: flex;
+                        margin-top: 2em;
+
+                        .checkbox {
+                            height: 30px;
+                            width: 30px;
+                            margin-right: 10px;
+                        }
+
+                    }
+
+                    .career-submit-btn {
+                        width: 50%;
+                        margin-top: 2em;
+                        border: none;
+                        padding: 15px;
+                        border-radius: 10px;
+                        background-color: #455bef;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+
 }

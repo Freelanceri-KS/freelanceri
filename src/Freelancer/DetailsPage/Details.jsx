@@ -113,13 +113,9 @@ const DetailsPage = (props) => {
               <img src={User} alt="User profile picture" height={60} className='dpcp-image' />
               <div className="dp-cp-data">
                 <p className='dp-cp-data-p'>Posted by:</p>
-                <h6 className='dp-cp-data-h6'>{jobDetail?.userId?.firstName} {jobDetail?.userId?.lastName}</h6>
+                <h6 className='dp-cp-data-h6'>{jobDetail?.userId?.companyName}</h6>
               </div>
             </div>
-            {/* <div className="dp-cp-data-time">
-              <p className='dp-cp-data-p'>12/04/2024</p>
-              <p className='dp-cp-data-p'>04:32pm</p>
-            </div> */}
           </div>
           <div className="horiz-barrier"></div>
           <div className="dp-left-email">
@@ -151,7 +147,7 @@ const DetailsPage = (props) => {
             }
           </div>
           <div className="mainpost-about">
-            <div className="location">
+            {/* <div className="location">
               <p className='mainpost-about-tag'>Location</p>
               <p className="mainpost-about-value">{jobDetail?.city.city}</p>
             </div>
@@ -165,7 +161,7 @@ const DetailsPage = (props) => {
               <p className='mainpost-about-tag'>Category</p>
               <p className="mainpost-about-value">{jobDetail?.profession?.category}</p>
 
-            </div>
+            </div> */}
           </div>
           <div className="mainpost-description">
             <p className='mainpost-description-body'>
@@ -177,19 +173,19 @@ const DetailsPage = (props) => {
           </div>
           <div className="mainpost-footer">
             <div className="freelancers-nr">
-              <p className='mainpost-footer-p'>Kërkoj</p>
-              <h6 className='mainpost-footer-h6'>{jobDetail?.neededWorkers} freelancer</h6>
+              <p className='mainpost-footer-p'>Location</p>
+              <h6 className='mainpost-footer-h6'>{jobDetail?.city.city}</h6>
             </div>
             <div className="vert-barrier"></div>
             <div className="deadline">
-              <p className='mainpost-footer-p'>Afati</p>
-              <h6 className='mainpost-footer-h6'>{jobDetail?.duration} days</h6>
+              <p className='mainpost-footer-p'>Experience</p>
+              <h6 className='mainpost-footer-h6'>{jobDetail?.experienceLevel}</h6>
 
             </div>
             <div className="vert-barrier"></div>
             <div className="budget-details">
-              <p className='mainpost-footer-p'>Bugjeti</p>
-              <h6 className='mainpost-footer-h6'>{jobDetail?.budget}$</h6>
+              <p className='mainpost-footer-p'>Category</p>
+              <h6 className='mainpost-footer-h6'>{jobDetail?.profession?.category}</h6>
 
             </div>
             <Link to={`/apply-form/${jobDetail?._id}`} key={jobDetail?._id} style={{ textDecoration: 'none' }}>

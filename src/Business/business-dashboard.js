@@ -341,7 +341,7 @@ function Contracts(props) {
                         </div>
                         <div className="oci-body">
                             <p>Project offer: {contract?.projectOffer}</p>
-                            <p>Deadline: {contract?.projectDate.substring(0, 10)}</p>
+                            <p>Duration: {contract?.post?.duration}</p>
                         </div>
                         <div className="oci-footer">
                             <p>View contract</p>
@@ -602,7 +602,7 @@ function Posts() {
                                 </div>
                             </div>
                             <div className="dbpch-center-2">
-                                <div className="vert-barrier"></div>
+                                {/* <div className="vert-barrier"></div>
                                 <div className="dbpch-center-tags">
                                     <p className="dbpch-c-tag">Location</p>
                                     <h6 className="dbpch-c-value">{post?.city?.city}</h6>
@@ -616,7 +616,7 @@ function Posts() {
                                 <div className="dbpch-center-tags">
                                     <p className="dbpch-c-tag">Category</p>
                                     <h6 className="dbpch-c-value">{post?.profession?.category}</h6>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="db-post-container-body-2">
@@ -627,18 +627,18 @@ function Posts() {
                         <div className="footer-line-2"></div>
                         <div className="db-post-footer-2">
                             <div className="dbp-footer-info">
-                                <p className="tag">Kerkoj</p>
-                                <p className="value">{post?.neededWorkers} freelancer</p>
+                                <p className="tag">Location</p>
+                                <p className="value">{post?.city?.city}</p>
                             </div>
                             <div className="vert-barrier"></div>
                             <div className="dbp-footer-info">
-                                <div className="tag">Afati</div>
-                                <div className="value">{post?.duration} ditë</div>
+                                <div className="tag">Experience</div>
+                                <div className="value">{post?.experienceLevel}</div>
                             </div>
                             <div className="vert-barrier"></div>
                             <div className="dbp-footer-info">
-                                <div className="tag">Budget</div>
-                                <div className="value">{post?.budget}$</div>
+                                <div className="tag">Category</div>
+                                <div className="value">{post?.profession?.category}</div>
                             </div>
                             <button className={post?.state === "Approved" ? "dbp-apply-details-2" : "dbp-apply-details-3"}>
                                 <p className='a-d-p'>View</p>
@@ -760,7 +760,8 @@ const Applications = () => {
                                 <div className="bagi-head">
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
-                                        <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5><p>
+                                        <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
+                                        <p>
                                             <p>
                                                 {(apl?.freelancerId?.profession[0]?.category || apl?.freelancerId?.profession[1]?.category) && (
                                                     <>
@@ -790,7 +791,17 @@ const Applications = () => {
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
                                         <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
+                                        <p>
+                                            <p>
+                                                {(apl?.freelancerId?.profession[0]?.category || apl?.freelancerId?.profession[1]?.category) && (
+                                                    <>
+                                                        {apl.freelancerId.profession[0]?.category}
+                                                        {apl.freelancerId.profession[1]?.category && `, ${apl.freelancerId.profession[1].category}`}
+                                                    </>
+                                                )}
+                                            </p>
+
+                                        </p>
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
@@ -808,7 +819,17 @@ const Applications = () => {
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
                                         <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
+                                        <p>
+                                            <p>
+                                                {(apl?.freelancerId?.profession[0]?.category || apl?.freelancerId?.profession[1]?.category) && (
+                                                    <>
+                                                        {apl.freelancerId.profession[0]?.category}
+                                                        {apl.freelancerId.profession[1]?.category && `, ${apl.freelancerId.profession[1].category}`}
+                                                    </>
+                                                )}
+                                            </p>
+
+                                        </p>
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
@@ -826,7 +847,17 @@ const Applications = () => {
                                     <img src={User2} alt="User" width={80} height={80} />
                                     <div className="bagi-head-identity">
                                         <h5>{apl?.freelancerId?.firstName} {apl?.freelancerId?.lastName}</h5>
-                                        <p>{apl?.freelancerId?.profession[0].category}, {apl?.freelancerId?.profession[1].category}</p>
+                                        <p>
+                                            <p>
+                                                {(apl?.freelancerId?.profession[0]?.category || apl?.freelancerId?.profession[1]?.category) && (
+                                                    <>
+                                                        {apl.freelancerId.profession[0]?.category}
+                                                        {apl.freelancerId.profession[1]?.category && `, ${apl.freelancerId.profession[1].category}`}
+                                                    </>
+                                                )}
+                                            </p>
+
+                                        </p>
                                     </div>
                                 </div>
                                 <p className='bagi-position'>Position: {apl?.postId?.title}</p>
@@ -843,48 +874,36 @@ const Applications = () => {
     )
 }
 
+
 const Find = () => {
+    const [nameSearch, setNameSearch] = useState('');
     const [profiles, setProfiles] = useState(null);
 
-    // const findProfiles = async () => {
-    //     try {
-    //         const professionIds = [
-    //             "65a3de3efbf475afad8ca791",
-    //             "65a3de4afbf475afad8ca793",
-    //             "65a3de54fbf475afad8ca795",
-    //             "65a3de5ffbf475afad8ca797"
-    //         ]; // Example profession IDs
-    //         const response = await axios.post('/business/profiles', { professionIds });
-    //         setProfiles(response.data);
-    //         console.log(response.data);
-    //     } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //     }
-    // }
-
     const findProfiles = async () => {
-        axios.get("/freelancer")
-            .then((response) => {
-                console.log(response.data);
-                setProfiles(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+        try {
+            const response = await axios.get("/freelancer", { params: { search: nameSearch } });
+            console.log(response.data);
+            setProfiles(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleNameChange = (event) => {
+        setNameSearch(event.target.value);
     }
 
     useEffect(() => {
         findProfiles();
-    }, []);
+    }, [nameSearch]); // Call findProfiles whenever nameSearch changes
 
     const navigate = useNavigate();
-
 
     return (
         <>
             <div className="search-filter-bar">
                 <div className="input-with-icon">
-                    <input type="text" className="form-control" placeholder=" Emri Mbiemri" />
+                    <input type="text" className="form-control" placeholder="Emri Mbiemri" value={nameSearch} onChange={handleNameChange} />
                     <span className="icon-prefix"><IoSearchOutline size={20} /></span>
                 </div>
                 <div className="vert-barrier"></div>
@@ -914,8 +933,11 @@ const Find = () => {
                 </div>
             </div>
         </>
-    )
+    );
 }
+
+
+
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -1068,11 +1090,8 @@ function CreatePost() {
                 setDescription("");
                 setRequirements("");
                 setDuration("");
-                setNumFreelancers("");
-                setBudget("");
                 setSelectedCity("");
                 setSelectedExperience("");
-                setExpiresAt("");
                 toast.success("Post created successfully!")
             })
             .catch((error) => {
@@ -1100,23 +1119,7 @@ function CreatePost() {
                         <option value="30 ditë">30 ditë</option>
                     </select>
                 </div>
-                <div className="cp-first-grid-item">
-                    <h6>No. of Freelancers</h6>
-                    <input
-                        type="number"
-                        placeholder='7'
-                        className='grid-item-input'
-                        value={numFreelancers}
-                        onChange={(e) => setNumFreelancers(parseInt(e.target.value, 10))}
-                    />
-                </div>
-                <div className="cp-first-grid-item">
-                    <h6>Budget</h6>
-                    <input type="number" placeholder='500' className='grid-item-input' value={budget} onChange={(e) => setBudget(parseInt(e.target.value, 10))} />
-                </div>
-            </div>
 
-            <div className="cp-first-grid" id='secgrid'>
                 <div className="cp-first-grid-item">
                     <h6>City</h6>
                     <select className="grid-item-input" onChange={(e) => setSelectedCity(e.target.value)} value={selectedCity}>
@@ -1136,6 +1139,10 @@ function CreatePost() {
                         ))}
                     </select>
                 </div>
+            </div>
+
+            <div className="cp-first-grid" id='secgrid'>
+
                 <div className="cp-first-grid-item">
                     <h6>Experience needed</h6>
                     <select className="grid-item-input" onChange={(e) => setSelectedExperience(e.target.value)} value={selectedExperience}>
@@ -1153,7 +1160,6 @@ function CreatePost() {
         </div>
     )
 }
-
 
 
 const mapStateToProps = (state) => {

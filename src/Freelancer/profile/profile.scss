@@ -4,6 +4,23 @@
     align-items: start;
     margin-top: 6em;
 
+    .edit-input {
+        border-bottom: 1px solid #eaeaea;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+    }
+    .add-button{
+        border: none;
+        padding: 8px;
+        background-color: #455bef;
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .left-profile {
         width: 25%;
         height: 80vh;
@@ -35,6 +52,7 @@
                 .identity {
                     text-align: start;
                     margin-left: 10px;
+
                 }
             }
         }
@@ -197,10 +215,12 @@
             flex-direction: column;
             justify-content: start;
             align-items: center;
-            .account{
+
+            .account {
                 margin-top: 1em;
                 width: 95%;
             }
+
             .account-details-body {
                 display: none;
 
