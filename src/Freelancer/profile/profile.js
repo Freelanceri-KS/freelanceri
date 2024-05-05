@@ -7,6 +7,7 @@ import axios from "../../axios";
 
 const Profile = () => {
   const [userData, setUserData] = useState({
+    _id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -17,9 +18,7 @@ const Profile = () => {
       github: "",
       behance: "",
     },
-    experiences: [
-      { titull: "", cmp: "", startDate: "", endDate: "" }
-    ],
+    experiences: [{ titull: "", cmp: "", startDate: "", endDate: "" }],
     education: [],
     skills: [],
   });
@@ -29,7 +28,7 @@ const Profile = () => {
     title: "",
     company: "",
     startDate: "",
-    endDate: ""
+    endDate: "",
   });
   const [experiences, setExperiences] = useState([]);
   const [newSkill, setNewSkill] = useState("");
@@ -38,7 +37,7 @@ const Profile = () => {
     titull: "",
     uni: "",
     startDate: "",
-    endDate: ""
+    endDate: "",
   });
   const [education, setEducation] = useState([]);
 
@@ -49,19 +48,34 @@ const Profile = () => {
   }, []);
 
   const getProfile = () => {
-    axios.get(`/freelancer/${userData._id}`)
+    axios
+      .get(`/freelancer/6637db1d953d082d45bd7e48`)
       .then((response) => {
+        // setUserData(response.data);
+        setUserData((prevState) => ({
+          ...prevState,
+          experiences: [
+            ...prevState.experiences,
+            {
+              titull: newExperience.titull,
+              cmp: newExperience.cmp,
+              startDate: newExperience.startDate,
+              endDate: newExperience.endDate,
+            },
+          ],
+        }));
         setProfile(response.data);
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   const updateUserProfile = () => {
-    axios.put(`/freelancer/${userData._id}`, userData)
+    axios
+      .put(`/freelancer/6637db1d953d082d45bd7e48`, userData)
       .then((response) => {
-        console.log("Update user:", response.data)
+        console.log("Update user:", response.data);
         console.log("User profile updated successfully!");
       })
       .catch((error) => {
@@ -72,28 +86,54 @@ const Profile = () => {
   const handleProfileUpdate = () => {
     setEditState(false);
     updateUserProfile();
-  }
+  };
 
   const handleAddExperience = () => {
-    setUserData(prevState => ({
+    const newStartDate =
+      newExperience.startDate !== null
+        ? newExperience.startDate
+        : "Default Start Date";
+    const newEndDate =
+      newExperience.endDate !== null
+        ? newExperience.endDate
+        : "Default End Date";
+
+    setUserData((prevState) => ({
       ...prevState,
       experiences: [
         ...prevState.experiences,
         {
           titull: newExperience.titull,
           cmp: newExperience.cmp,
-          startDate: newExperience.startDate,
-          endDate: newExperience.endDate
-        }
+          startDate: newStartDate,
+          endDate: newEndDate,
+        },
       ],
     }));
-  };
 
+    // Update local storage
+    const updatedUserData = {
+      ...userData,
+      experiences: [
+        ...userData.experiences,
+        {
+          titull: newExperience.titull,
+          cmp: newExperience.cmp,
+          startDate: newStartDate,
+          endDate: newEndDate,
+        },
+      ],
+    };
+    setUserData("userData", updatedUserData);
+
+    // Update backend
+    updateUserProfile();
+  };
 
   const handleAddSkill = () => {
     setSkills([...skills, newSkill]);
     setNewSkill("");
-  }
+  };
 
   const handleAddEducation = () => {
     setEducation([...education, newEducation]);
@@ -101,39 +141,37 @@ const Profile = () => {
       title: "",
       university: "",
       startDate: "",
-      endDate: ""
+      endDate: "",
     });
-  }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewExperience(prevExperience => ({
+    setNewExperience((prevExperience) => ({
       ...prevExperience,
-      [name]: value
+      [name]: value,
     }));
   };
 
-
   const handleSkillChange = (e) => {
     setNewSkill(e.target.value);
-  }
+  };
 
   const handleEducationChange = (e) => {
     const { name, value } = e.target;
     setNewEducation({ ...newEducation, [name]: value });
-  }
+  };
   const handleSocialChange = (e, platform) => {
     const { value } = e.target;
     // Merge the updated socials object correctly
-    setUserData(prevState => ({
+    setUserData((prevState) => ({
       ...prevState,
       socials: {
         ...prevState.socials,
-        [platform]: value
-      }
+        [platform]: value,
+      },
     }));
   };
-
 
   return (
     <div className="profile">
@@ -300,7 +338,9 @@ const Profile = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <button onClick={handleAddExperience} className="add-button">Add Experience</button>
+                <button onClick={handleAddExperience} className="add-button">
+                  Add Experience
+                </button>
               </div>
             )}
           </div>
@@ -339,7 +379,10 @@ const Profile = () => {
                     name="title"
                     value={newEducation.title}
                     onChange={(e) =>
-                      setNewEducation({ ...newEducation, title: e.target.value })
+                      setNewEducation({
+                        ...newEducation,
+                        title: e.target.value,
+                      })
                     }
                   />
                   <input
@@ -348,7 +391,10 @@ const Profile = () => {
                     name="university"
                     value={newEducation.university}
                     onChange={(e) =>
-                      setNewEducation({ ...newEducation, university: e.target.value })
+                      setNewEducation({
+                        ...newEducation,
+                        university: e.target.value,
+                      })
                     }
                   />
                 </div>
@@ -359,7 +405,10 @@ const Profile = () => {
                     name="startDate"
                     value={newEducation.startDate}
                     onChange={(e) =>
-                      setNewEducation({ ...newEducation, startDate: e.target.value })
+                      setNewEducation({
+                        ...newEducation,
+                        startDate: e.target.value,
+                      })
                     }
                   />
                   <input
@@ -368,11 +417,16 @@ const Profile = () => {
                     name="endDate"
                     value={newEducation.endDate}
                     onChange={(e) =>
-                      setNewEducation({ ...newEducation, endDate: e.target.value })
+                      setNewEducation({
+                        ...newEducation,
+                        endDate: e.target.value,
+                      })
                     }
                   />
                 </div>
-                <button onClick={handleAddEducation} className="add-button">Add Education</button>
+                <button onClick={handleAddEducation} className="add-button">
+                  Add Education
+                </button>
               </div>
             )}
           </div>
@@ -400,7 +454,9 @@ const Profile = () => {
                   value={newSkill}
                   onChange={handleSkillChange}
                 />
-                <button onClick={handleAddSkill} className="add-button my-2">Add Skill</button>
+                <button onClick={handleAddSkill} className="add-button my-2">
+                  Add Skill
+                </button>
               </div>
             )}
           </div>
