@@ -1,5 +1,4 @@
 import axios from "axios";
-console.log("api",process.env.REACT_APP_API)
 
 let token = window.localStorage.getItem("token");
 const defaultInstance = axios.create({

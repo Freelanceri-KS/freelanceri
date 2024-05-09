@@ -10,6 +10,7 @@ import AdBanner from "../../assets/banners/adBanner.png"
 import { FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa6";
 import { MdWorkOutline } from "react-icons/md";
+import AdArea from "../../assets/banners/adarea.png"
 
 const FindJob = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,6 +21,7 @@ const FindJob = () => {
     axios.get('/posts/approved', { params: { search: searchQuery, category: categoryQuery } })
       .then((response) => {
         setJobs(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching jobs:", error);
@@ -28,7 +30,7 @@ const FindJob = () => {
 
   useEffect(() => {
     getJobs();
-  }, [searchQuery, categoryQuery]); // Update the dependency array to include categoryQuery
+  }, [searchQuery, categoryQuery]);
 
 
   const handleSearchChange = (event) => {
@@ -40,19 +42,25 @@ const FindJob = () => {
   };
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const handleBookmark = (postId) => {
-    const payload = {
-      postId: postId,
-      freelancerId: userData._id
+    // Ensure userData is not null before accessing its properties
+    if (userData && userData._id) {
+      const payload = {
+        postId: postId,
+        freelancerId: userData._id
+      }
+      axios.post("/bookmark", payload)
+        .then((response) => {
+          console.log(response.data);
+          setBookmarkedPosts([...bookmarkedPosts, postId]); // Add the postId to bookmarked list
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } else {
+      console.error('Error: userData or userData._id is null');
     }
-    axios.post("/bookmark", payload)
-      .then((response) => {
-        console.log(response.data);
-        setBookmarkedPosts([...bookmarkedPosts, postId]); // Add the postId to bookmarked list
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   }
+
 
   const removeBookmark = (postId) => {
     axios.delete(`/bookmark/${postId}`)
@@ -95,7 +103,7 @@ const FindJob = () => {
   return (
     <div className="find-job">
       <div className="find-job-left">
-        <div className="filter">
+        {/* <div className="filter">
           <ul className="list-group expandable-list ">
             <li className="list-group-item lgi-title">
               <h2 className="lgi-h2">Sort By Filter</h2>
@@ -131,7 +139,7 @@ const FindJob = () => {
               </div>
             )}</li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className="find-job-center">
         <div className="search-filter-bar">
@@ -168,25 +176,24 @@ const FindJob = () => {
             const matchesSearch = el.title.toLowerCase().includes(searchQuery.toLowerCase());
             const matchesCategory = el.profession.category.toLowerCase().includes(categoryQuery.toLowerCase());
 
-            // Check if the job matches either the search query, the category query, or both
             if (matchesSearch || matchesCategory) {
               return (
-                <div className="job-post-container" key={el._id}>
+                <div className="job-post-container" key={el?._id}>
                   <div className="job-post-container-header">
                     <div className="jpch-left">
                       <img src={User2} alt="User" width={50} height={50} />
                       <div className="jpch-left-user">
                         <h6 className="jpch-l-h6">{el?.title}</h6>
-                        <p className="jpch-l-p">{el?.userId.firstName} {el?.userId.lastName}</p>
+                        <p className="jpch-l-p">{el?.userId?.firstName} {el?.userId?.lastName}</p>
                       </div>
                     </div>
                     <div className="jpch-center">
                       {/* Center content */}
                     </div>
                     {isBookmarked ? (
-                      <FaBookmark size={25} color="#455bef" onClick={() => removeBookmark(el._id)} />
+                      <FaBookmark size={25} color="#455bef" onClick={() => removeBookmark(el?._id)} />
                     ) : (
-                      <FaRegBookmark size={25} color="#455bef" onClick={() => handleBookmark(el._id)} />
+                      <FaRegBookmark size={25} color="#455bef" onClick={() => handleBookmark(el?._id)} />
                     )}
                   </div>
                   <div className="job-post-container-body">
@@ -224,7 +231,7 @@ const FindJob = () => {
 
       </div>
       <div className="find-job-right">
-        <img src={AdBanner} alt="Advertising" className="find-job-right-banner" />
+        <img src={AdArea} alt="Advertising" className="find-job-right-banner" />
       </div>
     </div>
   );

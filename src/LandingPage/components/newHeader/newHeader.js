@@ -165,7 +165,7 @@ const NewHeader = (props) => {
                       Register
                     </button>
                   </div>
-                  <div role="button" className="dropdown text-center lang">
+                  {/* <div role="button" className="dropdown text-center lang">
                     <a
                       className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                       data-bs-toggle="dropdown"
@@ -217,7 +217,7 @@ const NewHeader = (props) => {
                         </div>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
 
                 </>
               )}
@@ -290,7 +290,7 @@ const NewHeader = (props) => {
                       </li>
                     </ul>
                   </div>
-                  <div role="button" className="dropdown text-center lang">
+                  {/* <div role="button" className="dropdown text-center lang">
                     <a
                       className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                       data-bs-toggle="dropdown"
@@ -342,7 +342,7 @@ const NewHeader = (props) => {
                         </div>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </>
               )}
             </div>

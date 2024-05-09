@@ -454,7 +454,7 @@ const FreelancerDashboard = (props) => {
                                 </div>
                                 <h5>Getting started with Freelanceri</h5>
                                 <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
+                                <p className='fdsc-article-link' onClick={() => navigate("/blogs")}>Read more</p>
 
                             </div>
                             <div className="horiz-barrier-article"></div>
@@ -462,28 +462,28 @@ const FreelancerDashboard = (props) => {
                                 <div className="fdsc-article-nr">
                                     <p>2</p>
                                 </div>
-                                <h5>How to get your first project</h5>
-                                <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
+                                <h5>Freelanceri for professionals</h5>
+                                <p>We offer training programs and workshops to enter the market.</p>
+                                <p className='fdsc-article-link' onClick={() => navigate("/blogs")}>Read more</p>
                             </div>
                             <div className="horiz-barrier-article"></div>
                             <div className="fdsc-article">
                                 <div className="fdsc-article-nr">
                                     <p>3</p>
                                 </div>
-                                <h5>Freelanceri for businesses</h5>
-                                <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
+                                <h5>How to get your first project</h5>
+                                <p>The most important bit, your first project.</p>
+                                <p className='fdsc-article-link' onClick={() => navigate("/blogs")}>Read more</p>
                             </div>
-                            <div className="horiz-barrier-article"></div>
+                            {/* <div className="horiz-barrier-article"></div>
                             <div className="fdsc-article">
                                 <div className="fdsc-article-nr">
                                     <p>4</p>
                                 </div>
                                 <h5>Being yourselves boss</h5>
                                 <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link' onClick={()=>navigate("/blogs")}>Read more</p>
-                            </div>
+                                <p className='fdsc-article-link' onClick={() => navigate("/blogs")}>Read more</p>
+                            </div> */}
                         </div>
                         <div className="freelancer-dashboard-side-contact">
                             <div className="fdsc-head">

@@ -3,7 +3,7 @@ import axios from "../../axios";
 import { toast } from "react-toastify";
 import "./registerPage.scss";
 import { useNavigate } from "react-router-dom";
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 const RegisterPage = (props) => {
   const [step, setStep] = useState(1);
@@ -23,7 +23,12 @@ const RegisterPage = (props) => {
   const [companyType, setCompanyType] = useState("");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
+  const [captcha, setCaptcha] = useState(false)
 
+
+  function CaptchaValidation(data) {
+    setCaptcha(data)
+  }
 
   const navigate = useNavigate();
 
@@ -135,46 +140,6 @@ const RegisterPage = (props) => {
     handleSubmitStep(e, 2);
   };
 
-  const handleAddEntry = (entriesType) => {
-    if (entriesType === "job") {
-      setJobEntries([...jobEntries, { title: "", company: "" }]);
-    } else {
-      setEducationEntries([
-        ...educationEntries,
-        { institution: "", title: "" },
-      ]);
-    }
-  };
-  const [jobEntries, setJobEntries] = useState([{ title: "", company: "" }]);
-  const [educationEntries, setEducationEntries] = useState([
-    { institution: "", title: "" },
-  ]);
-
-  const handleInputChange = (index, key, value, entriesType) => {
-    const updatedEntries = [
-      ...(entriesType === "job" ? jobEntries : educationEntries),
-    ];
-    updatedEntries[index][key] = value;
-    entriesType === "job"
-      ? setJobEntries(updatedEntries)
-      : setEducationEntries(updatedEntries);
-  };
-
-
-  const handleExperienceChange = (index, key, value) => {
-    const updatedExperiences = [...experiences];
-    updatedExperiences[index][key] = value;
-    setExperiences(updatedExperiences);
-  };
-
-  const handleAddExperience = () => {
-    setExperiences([...experiences, { titull: "", cmp: "", startDate: "", endDate: "" }]);
-  };
-
-  const handleSocialsChange = (key, value) => {
-    setSocials({ ...socials, [key]: value });
-  };
-
   const handleBusinessSubmit = async (e) => {
     e.preventDefault();
 
@@ -188,33 +153,41 @@ const RegisterPage = (props) => {
       companyName: companyName,
       companyType: companyType,
       phone: phone,
-      website: website
+      website: website,
+      recaptchaToken: captcha  // Include reCAPTCHA token in the payload
     };
-    const response = await axios.post(
-      "https://weak-lime-squid-fez.cyclic.app/business/signup",
-      businessPayload
-    ).then((response) => {
-      console.log(response.data);
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPassword("");
-      setCity("");
-      setCompanyName("");
-      setCompanyType("");
-      setPhone("");
-      setWebsite("");
-      toast.success("You have been registered successfully!")
-    })
-      .catch((error) => {
-        console.log(error);
-        console.log(businessPayload);
-      });
-    setLoading(false);
-    return;
+
+    // Make API call to register the user
+    try {
+      if (captcha == false) {
+        toast.warning("Please verify you're not a robot.")
+      } else {
+
+        const response = await axios.post(
+          "https://weak-lime-squid-fez.cyclic.app/business/signup",
+          businessPayload
+        );
+        console.log(response.data);
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+        setCity("");
+        setCompanyName("");
+        setCompanyType("");
+        setPhone("");
+        setWebsite("");
+        setCaptcha(false); // Reset reCAPTCHA state
+        toast.success("You have been registered successfully!");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log("Register error:", error);
+      toast.error("Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
-
-
 
   const handleFreelancerSubmit = async (e) => {
     let freelancerPayload = {
@@ -226,20 +199,6 @@ const RegisterPage = (props) => {
     e.preventDefault();
 
     setLoading(true);
-
-    // const experienceData = experiences.map(experience => ({
-    //   titull: experience.titull,
-    //   cmp: experience.cmp,
-    //   startDate: experience.startDate,
-    //   endDate: experience.endDate
-    // }));
-
-    // const educationData = education.map(edu => ({
-    //   titull: edu.titull,
-    //   uni: edu.uni,
-    //   startDate: edu.startDate,
-    //   endDate: edu.endDate
-    // }));
 
     axios.post("/freelancer/signup", freelancerPayload)
       .then((response) => {
@@ -554,10 +513,10 @@ const RegisterPage = (props) => {
                     type="text"
                     class="form-control"
                     onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="Full Name"
+                    placeholder="First Name"
                   />
                   <label for="floatingPassword">
-                    {props?.language === true ? "Emri i plote" : "Full Name"}
+                    {props?.language === true ? "Emri" : "First Name"}
                   </label>
                 </div>
                 <div class="form-floating mb-3">
@@ -587,7 +546,7 @@ const RegisterPage = (props) => {
                 <div class="form-floating mb-3">
                   <input
                     required
-                    type="text"
+                    type="password"
                     class="form-control"
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
@@ -669,10 +628,15 @@ const RegisterPage = (props) => {
                     {props?.language === true ? "Website" : "Website"}
                   </label>
                 </div>
+                <ReCAPTCHA
+                  // size="invisible"
+                  sitekey="6LfjPdUpAAAAAFWGYr9XT_VDMqQvRoX6tpw3Ru7z"
+                  onChange={CaptchaValidation}
+                />
                 <form onSubmit={handleSubmitStepBussines1}>
-                  {/* Step 1 form fields */}
 
-                  <button type="submit" className="register-page-btn" onClick={handleBusinessSubmit}>
+                  <button type="submit" className="register-page-btn" onClick={handleBusinessSubmit} disabled={loading || captcha == false}
+                  >
                     Continue
                   </button>
                 </form>

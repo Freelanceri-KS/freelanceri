@@ -63,7 +63,7 @@ const Contract = () => {
                 projectDescription,
                 projectOffer,
                 projectDate: formattedProjectDate,
-                state: "Active"
+                state: "Contracted"
             };
             const appPayload = {
                 state: "Contracted"

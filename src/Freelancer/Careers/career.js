@@ -11,14 +11,17 @@ import Ae from "../../assets/icons/trainings/design/ae.png"
 import Ai from "../../assets/icons/trainings/design/ai.jpg"
 import Pr from "../../assets/icons/trainings/design/pr.png"
 import Ps from "../../assets/icons/trainings/design/ps.png"
+import { useNavigate } from "react-router-dom";
 
 const Career = () => {
+
+    const navigate = useNavigate();
     return (
         <div className="career">
             <div className="career-s1">
                 <h3>Create the <span style={{ color: "#455bef", fontWeight: "600" }}>career</span> you love</h3>
                 <p>We're looking for creative minds to help them build their careers and give them opportunities</p>
-                <button className="career-s1-btn"> View opportunities</button>
+                <button className="career-s1-btn" onClick={() => navigate("/")}> View opportunities</button>
             </div>
             <div className="container">
                 <div className="career-video">
@@ -31,12 +34,15 @@ const Career = () => {
             </div>
             <div className="career-values">
                 <div className="cvc">
-                    <div className="career-values-left">
-                        <h6>Our values</h6>
-                        <div className="cvl-underline"></div>
-                        <div className="cvl-p">
-                            <p>
-                                At <span style={{ fontWeight: "700" }}>Freelanceri</span>, our values are centered around empowering freelancers to thrive in their careers. We believe in providing comprehensive support through <span style={{ fontWeight: "700" }}>training, mentoring, and resources</span> tailored to their needs.</p>
+                    <div className="d-flex cvlw">
+                        <div className="career-values-left">
+                            <div>
+                                <h6>Our values</h6>
+                                <div className="cvl-underline"></div>
+                                <div className="cvl-p">
+                                    <p>At <span style={{ fontWeight: "700" }}>Freelanceri</span>, our values are centered around empowering freelancers to thrive in their careers. We believe in providing comprehensive support through <span style={{ fontWeight: "700" }}>training, mentoring, and resources</span> tailored to their needs.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="career-values-right">
@@ -93,42 +99,49 @@ const Career = () => {
                         <div className="t-grid-item">
                             <img src={Flutter} alt="Flutter" width={70} height={70} />
                             <h3 className="t-grid-item-h3">Flutter</h3>
-                            <p className="t-grid-item-p">Extensive Flutter training from Zero to Hero, with the most qualified trainers in industry.</p>
+                            <p className="t-grid-item-p">Intensive Flutter training, from beginners to advanced developers, led by industry experts</p>
                         </div>
                         <div className="t-grid-item">
                             <img src={NodeJs} alt="NodeJs" width={70} height={70} />
                             <h3 className="t-grid-item-h3">NodeJs</h3>
-                            <p className="t-grid-item-p">Extensive NodeJS training from Zero to Hero, with the most qualified trainers in industry.</p>
+                            <p className="t-grid-item-p">From fundamentals to advanced techniques, learn from top-tier instructors and become a Node.js expert.</p>
                         </div>
                         <div className="t-grid-item">
                             <img src={Python} alt="Python" width={70} height={70} />
                             <h3 className="t-grid-item-h3">Python</h3>
-                            <p className="t-grid-item-p">Extensive Python training from Zero to Hero, with the most qualified trainers in industry.</p>
+                            <p className="t-grid-item-p">Join our seasoned instructors to dive deep into Python's versatility and become a skilled developer.</p>
                         </div>
                         <div className="t-grid-item">
                             <img src={Ae} alt="ReactJs" width={70} height={70} />
                             <h3 className="t-grid-item-h3">After Effects</h3>
-                            <p className="t-grid-item-p">Extensive After Effects training from Zero to Hero, with the most qualified trainers in industry.</p>
+                            <p className="t-grid-item-p">Craft captivating visuals with our After Effects training, led by industry pros. Dive into motion graphics and effects like a pro.</p>
                         </div>
                         <div className="t-grid-item">
                             <img src={Ai} alt="Flutter" width={70} height={70} />
                             <h3 className="t-grid-item-h3">Illustrator</h3>
-                            <p className="t-grid-item-p">Extensive Illustrator training from Zero to Hero, with the most qualified trainers in industry.</p>
+                            <p className="t-grid-item-p">Master vector graphics with our Adobe Illustrator training. From logos to illustrations, unleash your creativity.</p>
                         </div>
                         <div className="t-grid-item">
                             <img src={Pr} alt="NodeJs" width={70} height={70} />
                             <h3 className="t-grid-item-h3">Premiere Pro</h3>
-                            <p className="t-grid-item-p">Extensive Premiere Pro training from Zero to Hero, with the most qualified trainers in industry.</p>
+                            <p className="t-grid-item-p">Edit like a pro with our Premiere Pro training. Elevate your video production skills with expert guidance.</p>
                         </div>
                         <div className="t-grid-item">
                             <img src={Ps} alt="Python" width={70} height={70} />
                             <h3 className="t-grid-item-h3">Photoshop</h3>
-                            <p className="t-grid-item-p">Extensive Photoshop training from Zero to Hero, with the most qualified trainers in industry.</p>
+                            <p className="t-grid-item-p">Refine your digital artistry with our Adobe Photoshop training. Learn photo editing and design from industry experts.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* <div className="career-cta">
+        </div>
+    )
+}
+
+
+export default Career;
+
+{/* <div className="career-cta">
                 <div className="career-cta-box">
                     <div className="ccb-left">
                         <h1>Get started <br />with Freelanceri Career</h1>
@@ -151,11 +164,3 @@ const Career = () => {
                     </div>
                 </div>
             </div> */}
-        </div>
-    )
-}
-
-
-export default Career;
-
-{/* <p className="cvri-p2">Freelanceri ensures exposure for the most rated Freelancer that have made contract through the platform</p> */ }

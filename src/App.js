@@ -55,6 +55,8 @@ function App(props) {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/faqs" element={<FAQs />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog-details/:id" element={<BlogDetails />} />
             </>
           )}
           {props.isLoggedInBusiness && (
@@ -83,7 +85,8 @@ function App(props) {
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/career" element={<Career />} />
-              <Route path="/blogs" element={<Blogs/>} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blog-details" element={<BlogDetails />} />
             </>
           )}
         </Routes>

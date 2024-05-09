@@ -12,7 +12,7 @@
         align-items: center;
 
         .main-article {
-            width: 90%;
+            width: 100%;
 
             .main-article-img {
                 width: 100%;
@@ -54,7 +54,7 @@
             display: grid;
             grid-template-columns: auto auto;
             row-gap: 20px;
-            width: 90%;
+            width: 100%;
             justify-content: space-between;
 
             .grid-article-item {

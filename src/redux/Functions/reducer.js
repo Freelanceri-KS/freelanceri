@@ -1,7 +1,7 @@
 import { SET_LANG, SET_TOKEN, SET_LOGGEDINFreelancer, SET_LOGGEDINBusiness } from "./types";
 
 const INITIAL_STATE = {
-  language: true,
+  language: false,
   token: "",
   isLoggedinFreelancer: false,
   isLoggedinBusiness: false,

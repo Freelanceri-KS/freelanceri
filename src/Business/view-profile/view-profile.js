@@ -86,7 +86,7 @@ const ViewProfile = () => {
                             <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
                             <div className="vpmh-left-id">
                                 <h5>{profile?.firstName} {profile?.lastName}</h5>
-                                <p>{profile?.profession[0].category}</p>
+                                <p>{profile?.profession[0]?.category}</p>
                             </div>
                         </div>
                         <p>Rating: {profileRating?.averageRating}</p>
@@ -105,8 +105,8 @@ const ViewProfile = () => {
                                                 <p className="name-company">{prf?.cmp}</p>
                                             </div>
                                             <div className="dates">
-                                                <p className="start-date">{prf?.startDate.substring(0, 10)}</p>
-                                                <p className="end-date">{prf?.endDate ? prf.endDate.substring(0, 10) : ""}</p>
+                                                <p className="start-date">{prf?.startDate?.substring(0, 10)}</p>
+                                                <p className="end-date">{prf?.endDate ? prf?.endDate?.substring(0, 10) : ""}</p>
 
                                             </div>
                                         </div>

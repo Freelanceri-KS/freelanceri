@@ -307,48 +307,60 @@ function Contracts(props) {
         <div className="contract-db">
             <h4>{props.language === true ? "Kontratat aktive" : "Active Contracts"}</h4>
             <div className="ongoing-contracts">
-                {activeContracts.map((contract) => (
-                    <div className="ongoing-contract-item" onClick={() => navigate(`/view-contract/${contract?._id}`)}>
-                        <div className="oci-head">
-                            <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                            <div className="oci-head-identity">
-                                <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
-                                <p>{contract?.freelancer?.profession[0]?.category}, {contract?.freelancer?.profession[1]?.category}</p>
-
+                {activeContracts.length === 0 ? (
+                    <div className="no-data-message">
+                        <p>No active contracts available.</p>
+                    </div>
+                ) : (
+                    activeContracts.map((contract) => (
+                        <div className="ongoing-contract-item" onClick={() => navigate(`/view-contract/${contract?._id}`)}>
+                            <div className="oci-head">
+                                <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                                <div className="oci-head-identity">
+                                    <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
+                                    <p>{contract?.freelancer?.profession[0]?.category}, {contract?.freelancer?.profession[1]?.category}</p>
+                                </div>
+                            </div>
+                            <div className="oci-body">
+                                <p>Project offer: {contract?.projectOffer}</p>
+                                <p>Deadline: {contract?.projectDate.substring(0, 10)}</p>
+                            </div>
+                            <div className="oci-footer">
+                                <p>View contract</p>
                             </div>
                         </div>
-                        <div className="oci-body">
-                            <p>Project offer: {contract?.projectOffer}</p>
-                            <p>Deadline: {contract?.projectDate.substring(0, 10)}</p>
-                        </div>
-                        <div className="oci-footer">
-                            <p>View contract</p>
-                        </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
+
             <h4 className="finished">Finished Contracts</h4>
             <div className="ongoing-contracts">
-                {finishedContracts.map((contract) => (
-                    <div className="ongoing-contract-item" onClick={() => navigate(`/view-contract/${contract?._id}`)}>
-                        <div className="oci-head">
-                            <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
-                            <div className="oci-head-identity">
-                                <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
-                                <p>{contract?.freelancer?.profession[0]?.category}, {contract?.freelancer?.profession[1]?.category}</p>
-
+                {finishedContracts.length === 0 ? (
+                    <div className="no-data-message">
+                        <p>No finished contracts available.</p>
+                    </div>
+                ) : (
+                    finishedContracts.map((contract) => (
+                        <div className="ongoing-contract-item" onClick={() => navigate(`/view-contract/${contract?._id}`)}>
+                            <div className="oci-head">
+                                <img src={User2} alt="User" width={70} height={70} className='oci-head-img' />
+                                <div className="oci-head-identity">
+                                    <h5>{contract?.freelancer?.firstName} {contract?.freelancer?.lastName}</h5>
+                                    <p>{contract?.freelancer?.profession[0]?.category}, {contract?.freelancer?.profession[1]?.category}</p>
+                                </div>
+                            </div>
+                            <div className="oci-body">
+                                <p>Project offer: {contract?.projectOffer}</p>
+                                <p>Duration: {contract?.post?.duration}</p>
+                            </div>
+                            <div className="oci-footer">
+                                <p>View contract</p>
                             </div>
                         </div>
-                        <div className="oci-body">
-                            <p>Project offer: {contract?.projectOffer}</p>
-                            <p>Duration: {contract?.post?.duration}</p>
-                        </div>
-                        <div className="oci-footer">
-                            <p>View contract</p>
-                        </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
+
         </div>
     );
 }
@@ -743,8 +755,8 @@ const Applications = () => {
                     </div>
                 </div>
                 <div className="business-applications">
-                    <h4 className='business-applications-title'>Applications</h4>
-                    <div className="search-filter-bar" id='business-sfb'>
+                    {/* <h4 className='business-applications-title'>Applications</h4> */}
+                    {/* <div className="search-filter-bar" id='business-sfb'>
                         <div class="input-with-icon">
                             <input type="text" class="form-control" placeholder=" Job title..." />
                             <span class="icon-prefix"><IoSearchOutline size={20} />
@@ -752,7 +764,7 @@ const Applications = () => {
                         </div>
 
                         <div className="search-button">Search</div>
-                    </div>
+                    </div> */}
                     <h4 className='business-applications-title'>Under review applications</h4>
                     <div className="business-applications-grid">
                         {businessAppls.map((apl) => (
@@ -878,10 +890,11 @@ const Applications = () => {
 const Find = () => {
     const [nameSearch, setNameSearch] = useState('');
     const [profiles, setProfiles] = useState(null);
+    const [categoryQuery, setCategoryQuery] = useState('');
 
     const findProfiles = async () => {
         try {
-            const response = await axios.get("/freelancer", { params: { search: nameSearch } });
+            const response = await axios.get("/freelancer", { params: { search: nameSearch, category: categoryQuery } });
             console.log(response.data);
             setProfiles(response.data);
         } catch (error) {
@@ -892,10 +905,13 @@ const Find = () => {
     const handleNameChange = (event) => {
         setNameSearch(event.target.value);
     }
+    const handleCategoryChange = (event) => {
+        setCategoryQuery(event.target.value)
+    }
 
     useEffect(() => {
         findProfiles();
-    }, [nameSearch]); // Call findProfiles whenever nameSearch changes
+    }, [nameSearch, categoryQuery]); // Call findProfiles whenever nameSearch changes
 
     const navigate = useNavigate();
 
@@ -908,7 +924,7 @@ const Find = () => {
                 </div>
                 <div className="vert-barrier"></div>
                 <div className="input-with-icon">
-                    <input type="text" className="form-control" placeholder="Profesioni..." />
+                    <input type="text" className="form-control" placeholder="Profesioni..." value={categoryQuery} onChange={handleCategoryChange} />
                     <span className="icon-prefix"><CiLocationOn size={20} /></span>
                 </div>
                 <div className="vert-barrier"></div>
@@ -935,9 +951,6 @@ const Find = () => {
         </>
     );
 }
-
-
-
 
 const Profile = () => {
     const [user, setUser] = useState(null);

@@ -2,55 +2,51 @@ import "./profile.scss";
 import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import ProfilePic from "../../assets/profiles/1.png";
-import { getDataFromLocalStorage } from "../../Helpers/localStorage";
+import { getDataFromLocalStorage, saveDataToLocalStorage } from "../../Helpers/localStorage";
 import axios from "../../axios";
+import Select from "react-select"
+import { MdDeleteOutline } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Profile = () => {
+  const [selectedJobTitles, setSelectedJobTitles] = useState([]);
   const [userData, setUserData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    city: "",
     socials: {
-      linkedIn: "",
       github: "",
       behance: "",
+      linkedIn: ""
     },
-    experiences: [
-      { titull: "", cmp: "", startDate: "", endDate: "" }
-    ],
-    education: [],
-    skills: [],
+    profession: []
   });
   const [profile, setProfile] = useState(null);
   const [editState, setEditState] = useState(false);
-  const [newExperience, setNewExperience] = useState({
-    title: "",
-    company: "",
-    startDate: "",
-    endDate: ""
-  });
-  const [experiences, setExperiences] = useState([]);
-  const [newSkill, setNewSkill] = useState("");
-  const [skills, setSkills] = useState([]);
-  const [newEducation, setNewEducation] = useState({
-    titull: "",
-    uni: "",
-    startDate: "",
-    endDate: ""
-  });
-  const [education, setEducation] = useState([]);
+
+  const handleJobTitleSelect = (selectedOptions) => {
+    const selectedTitles = selectedOptions.map(option => option.value);
+    setSelectedJobTitles(selectedTitles);
+  };
+  const [freelancer, setFreelancer] = useState(null);
 
   useEffect(() => {
     const storedUserData = getDataFromLocalStorage("userData");
-    setUserData(storedUserData);
-    getProfile();
+    const updatedUserData = {
+      ...storedUserData,
+      socials: storedUserData.socials || { github: "", behance: "", linkedIn: "" }
+    };
+    setUserData(updatedUserData);
+    setFreelancer(updatedUserData._id);
+    setGithub(updatedUserData.socials.github);
+    setBehance(updatedUserData.socials.behance);
+    setLinkedin(updatedUserData.socials.linkedIn);
   }, []);
+
+
 
   const getProfile = () => {
     axios.get(`/freelancer/${userData._id}`)
       .then((response) => {
+        console.log("userData:", userData);
+        console.log(response.data);
         setProfile(response.data);
       })
       .catch((error) => {
@@ -58,81 +54,256 @@ const Profile = () => {
       })
   }
 
+  useEffect(() => {
+    if (userData && userData._id) {
+      getProfile();
+    }
+  }, [userData]);
+
+
+  const [github, setGithub] = useState("");
+  const [linkedIn, setLinkedin] = useState("");
+  const [behance, setBehance] = useState("");
+
   const updateUserProfile = () => {
-    axios.put(`/freelancer/${userData._id}`, userData)
+    const payload = {
+      socials: {
+        github: github,
+        linkedIn: linkedIn,
+        behance: behance
+      },
+    }
+    axios.patch(`/freelancer/${userData._id}`, payload)
       .then((response) => {
-        console.log("Update user:", response.data)
+        console.log("Update user:", response.data);
         console.log("User profile updated successfully!");
+        setUserData(response.data);
       })
       .catch((error) => {
         console.log("Profile update error:", error);
       });
-  };
-
-  const handleProfileUpdate = () => {
     setEditState(false);
-    updateUserProfile();
-  }
-
-  const handleAddExperience = () => {
-    setUserData(prevState => ({
-      ...prevState,
-      experiences: [
-        ...prevState.experiences,
-        {
-          titull: newExperience.titull,
-          cmp: newExperience.cmp,
-          startDate: newExperience.startDate,
-          endDate: newExperience.endDate
-        }
-      ],
-    }));
+    setEditProfession(false);
   };
 
+  useEffect(() => {
+    if (userData && userData._id) {
+      getEducation();
+    }
+  }, [userData])
 
-  const handleAddSkill = () => {
-    setSkills([...skills, newSkill]);
-    setNewSkill("");
-  }
 
+
+  //? Education
+  const [titullEdu, setTitullEdu] = useState(null);
+  const [uni, setUni] = useState(null);
+  const [startDateEdu, setStartDateEdu] = useState(null);
+  const [endDateEdu, setEndDateEdu] = useState(null);
+  const [eduEdit, setEduEdit] = useState(false);
+  const [education, setEducation] = useState([]);
   const handleAddEducation = () => {
-    setEducation([...education, newEducation]);
-    setNewEducation({
-      title: "",
-      university: "",
-      startDate: "",
-      endDate: ""
-    });
-  }
+    const [startYear, startMonth, startDay] = startDateEdu.split('-').map(Number);
+    const startEduDateAsDate = new Date(Date.UTC(startYear, startMonth - 1, startDay));
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewExperience(prevExperience => ({
-      ...prevExperience,
-      [name]: value
-    }));
+    const [endYear, endMonth, endDay] = endDateEdu.split('-').map(Number);
+    const endEduDateAsDate = new Date(Date.UTC(endYear, endMonth - 1, endDay));
+
+    if (!isNaN(startEduDateAsDate.getTime()) && !isNaN(endEduDateAsDate.getTime())) {
+      const formattedStartDateEdu = startEduDateAsDate.toISOString();
+      const formattedEndDateEdu = endEduDateAsDate.toISOString();
+
+      const payload = {
+        freelancer: freelancer,
+        titull: titullEdu,
+        uni: uni,
+        startDate: formattedStartDateEdu,
+        endDate: formattedEndDateEdu
+      };
+
+      axios.post("/education", payload)
+        .then((response) => {
+          console.log("Educations:", response.data);
+          setEducation([...education, response.data]);
+          setTitullEdu("");
+          setUni("");
+          setStartDateEdu("");
+          setEndDateEdu("");
+        })
+        .catch((error) => {
+          console.log("Education error: ", error)
+        });
+
+      setEduEdit(false);
+    } else {
+      console.error("Invalid date value:", startDateEdu, endDateEdu);
+    }
   };
 
 
-  const handleSkillChange = (e) => {
-    setNewSkill(e.target.value);
+  const getEducation = () => {
+    axios.get(`/education/freelancer/${userData._id}`)
+      .then((response) => {
+        setEducation(response.data);
+        console.log(response.data)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  const deleteEducation = (id) => {
+    axios.delete(`/education/${id}`)
+      .then((response) => {
+        console.log("Delte education", response.data)
+        setEducation(education.filter(education => education._id !== id))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  const handleEducationChange = (e) => {
-    const { name, value } = e.target;
-    setNewEducation({ ...newEducation, [name]: value });
+  //!EXPERIENCES
+  const [experiences, setExperiences] = useState([]);
+  const [titullExp, setTitullExp] = useState("");
+  const [cmp, setCmp] = useState("");
+  const [startDateExp, setStartDateExp] = useState("");
+  const [endDateExp, setEndDateExp] = useState("");
+  const [expEdit, setExpEdit] = useState(false);
+  const getExperience = () => {
+    axios.get(`/experience/freelancer/${userData?._id}`)
+      .then((response) => {
+        console.log("Experiences", response.data)
+        setExperiences(response.data);
+      })
+      .catch((error) => {
+        console.log("Experience error:", error);
+      })
   }
-  const handleSocialChange = (e, platform) => {
-    const { value } = e.target;
-    // Merge the updated socials object correctly
-    setUserData(prevState => ({
-      ...prevState,
-      socials: {
-        ...prevState.socials,
-        [platform]: value
+  useEffect(() => {
+    if (userData && userData._id) {
+      getExperience();
+    }
+  }, [userData]);
+  const handleAddExperience = () => {
+    const [startYear, startMonth, startDay] = startDateExp.split('-').map(Number);
+    const startExpDateAsDate = new Date(Date.UTC(startYear, startMonth - 1, startDay));
+
+    const [endYear, endMonth, endDay] = endDateExp.split('-').map(Number);
+    const endExpDateAsDate = new Date(Date.UTC(endYear, endMonth - 1, endDay));
+
+    if (!isNaN(startExpDateAsDate.getTime()) && !isNaN(endExpDateAsDate.getTime())) {
+      const formattedStartDateExp = startExpDateAsDate.toISOString();
+      const formattedEndDateExp = endExpDateAsDate.toISOString();
+
+      const payload = {
+        freelancer: freelancer,
+        titull: titullExp,
+        cmp: cmp,
+        startDate: formattedStartDateExp,
+        endDate: formattedEndDateExp
+      };
+
+      axios.post("/experience", payload)
+        .then((response) => {
+          console.log(response);
+          console.log(payload);
+          // Add the new experience to the existing experiences array
+          setExperiences([...experiences, response.data]);
+          // Clear input fields
+          setTitullExp("");
+          setCmp("");
+          setStartDateExp("");
+          setEndDateExp("");
+          // Set the expEdit state to false
+          setExpEdit(false);
+          // Refresh experiences
+          getExperience();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.error("Invalid date value:", startDateExp, endDateExp);
+    }
+  };
+
+  const deleteExperience = (id) => {
+    axios.delete(`/experience/${id}`)
+      .then((response) => {
+        console.log(response.data)
+        setExperiences(experiences.filter(experience => experience._id !== id));
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+
+  //? Professions
+  const [profession, setProfession] = useState([]);
+  const [editProfession, setEditProfession] = useState(false);
+  const getProffesion = () => {
+    axios.get('/profession').then(
+      data => {
+        setProfession(data.data)
       }
-    }));
-  };
+    ).catch(err => {
+      console.log(err)
+    })
+  }
+  useState(() => {
+    getProffesion();
+  })
+  const updateProfession = (id) => {
+    const payload = {
+      profId: selectedJobTitles,
+      freelancer: id
+    }
+    axios.post("/freelancer-professions", payload)
+      .then((response) => {
+        console.log(response.data);
+        setEditProfession(false);
+        setSelectedJobTitles([]);
+        getFreelancerProfessions();
+
+      })
+      .catch((error) => {
+        if (error.response && error.response.data.error === "Freelancer already has this profession.") {
+          toast.error("Profession has been added already.")
+        }
+        console.log(error)
+      })
+  }
+  const [freelancerProfessions, setFreelancerProfessions] = useState([]);
+  const getFreelancerProfessions = () => {
+    axios.get(`/freelancer-professions/freelancer/${userData?._id}`)
+      .then((response) => {
+        console.log(response.data)
+        setFreelancerProfessions(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+  const deleteProfessions = (id) => {
+    axios.delete(`/freelancer-professions/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setFreelancerProfessions(prevState =>
+          prevState.filter(fp => fp._id !== id)
+        );
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  useEffect(() => {
+    if (userData && userData._id) {
+      getFreelancerProfessions()
+    }
+  }, [userData])
+
 
 
   return (
@@ -142,41 +313,20 @@ const Profile = () => {
           <div className="left-side">
             <img src={ProfilePic} alt="profile-pic" className="profile-pic" />
             <div className="identity">
-              {editState ? (
-                <div className="d-flex">
-                  <input
-                    type="text"
-                    value={userData?.firstName}
-                    onChange={(e) =>
-                      setUserData({ ...userData, firstName: e.target.value })
-                    }
-                    style={{ width: "50%" }}
-                    className="mx-1 edit-input"
-                  />
-                  <input
-                    type="text"
-                    value={userData?.lastName}
-                    onChange={(e) =>
-                      setUserData({ ...userData, lastName: e.target.value })
-                    }
-                    style={{ width: "50%" }}
-                    className="mx-1 edit-input"
-                  />
-                </div>
-              ) : (
-                <div>
-                  <h5>
-                    {userData?.firstName} {userData?.lastName}
-                  </h5>
-                  <p>{profile?.profession[0]?.category}</p>
-                </div>
-              )}
+
+              <div>
+                <h5>
+                  {userData?.firstName} {userData?.lastName}
+                </h5>
+                {/* <p>{userData?.profession[0]?.category}</p> */}
+              </div>
+
             </div>
           </div>
           {editState === false ? (
-            <FiEdit size={25} onClick={() => setEditState(true)} />
+            <FiEdit size={25} onClick={() => setEditState(true)} style={{ cursor: "pointer" }} />
           ) : (
-            <p onClick={handleProfileUpdate}>Done</p>
+            <p onClick={updateUserProfile}>Done</p>
           )}
         </div>
         <div className="account-details">
@@ -190,9 +340,9 @@ const Profile = () => {
                 <input
                   type="text"
                   value={userData?.email}
-                  onChange={(e) => handleChange(e)}
                   className="edit-input"
                   name="email"
+                  disabled
                 />
               ) : (
                 <p className="value">{userData?.email}</p>
@@ -203,8 +353,9 @@ const Profile = () => {
               {editState ? (
                 <input
                   type="text"
-                  value={userData?.socials?.github}
-                  onChange={(e) => handleSocialChange(e, "github")}
+                  value={github}
+                  name="github"
+                  onChange={(e) => setGithub(e.target.value)}
                   className="edit-input"
                 />
               ) : (
@@ -216,8 +367,9 @@ const Profile = () => {
               {editState ? (
                 <input
                   type="text"
-                  value={userData?.socials?.behance}
-                  onChange={(e) => handleSocialChange(e, "behance")}
+                  value={behance}
+                  name="behance"
+                  onChange={(e) => setBehance(e.target.value)}
                   className="edit-input"
                 />
               ) : (
@@ -229,14 +381,16 @@ const Profile = () => {
               {editState ? (
                 <input
                   type="text"
-                  value={userData?.socials?.linkedIn}
-                  onChange={(e) => handleSocialChange(e, "linkedIn")}
+                  name="linkedIn"
+                  value={linkedIn}
+                  onChange={(e) => setLinkedin(e.target.value)}
                   className="edit-input"
                 />
               ) : (
                 <p className="value">{userData?.socials?.linkedIn}</p>
               )}
             </div>
+
           </div>
         </div>
       </div>
@@ -244,60 +398,75 @@ const Profile = () => {
         <div className="experience">
           <div className="label">
             <h3>Experience</h3>
+            <FiEdit size={20} onClick={() => setExpEdit(!expEdit)} style={{ cursor: "pointer" }} />
+
           </div>
           <div className="data-container">
-            {userData && userData?.experiences ? (
-              userData?.experiences?.map((experience, index) => (
-                <div key={index} className="data-section">
-                  <div className="names">
-                    <p className="name-profession">{experience?.titull}</p>
-                    <p className="name-company">{experience?.cmp}</p>
+            {experiences && experiences.length > 0 ? (
+              experiences.map((experience, index) => (
+                <React.Fragment key={index}>
+                  <div className="data-section">
+                    <div className="names">
+                      <p className="name-profession">{experience?.titull}</p>
+                      <p className="name-company">{experience?.cmp}</p>
+                    </div>
+                    {expEdit && (
+                      <button className="delete-button" onClick={() => deleteExperience(experience._id)}>
+                        Delete experience
+                      </button>
+                    )}
+                    <div className="dates">
+                      <p className="start-date">
+                        {experience?.startDate.substring(0, 10)}
+                      </p>
+                      <p className="end-date">
+                        {experience?.endDate.substring(0, 10)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="dates">
-                    <p className="start-date">
-                      {experience?.startDate.substring(0, 10)}
-                    </p>
-                    <p className="end-date">
-                      {experience?.endDate.substring(0, 10)}
-                    </p>
-                  </div>
-                </div>
+                  {index !== experiences.length - 1 && <div className="barrier"></div>}
+                </React.Fragment>
               ))
             ) : (
               <p>No experiences available</p>
             )}
-            {editState && (
+
+            {expEdit && (
               <div>
                 <div className="d-flex justify-content-between my-2">
                   <input
                     type="text"
                     placeholder="Title"
-                    name="title"
-                    value={newExperience.titull}
-                    onChange={handleChange}
+                    className="edit-input-2"
+                    name="titull"
+                    value={titullExp}
+                    onChange={(e) => setTitullExp(e.target.value)}
                   />
                   <input
                     type="text"
                     placeholder="Company"
-                    name="company"
-                    value={newExperience.cmp}
-                    onChange={handleChange}
+                    name="cmp"
+                    className="edit-input-2"
+                    value={cmp}
+                    onChange={(e) => setCmp(e.target.value)}
                   />
                 </div>
                 <div className="d-flex justify-content-between my-2">
                   <input
-                    type="text"
+                    type="date"
                     placeholder="Start Date"
                     name="startDate"
-                    value={newExperience.startDate}
-                    onChange={handleChange}
+                    className="edit-input-2"
+                    value={startDateExp}
+                    onChange={(e) => setStartDateExp(e.target.value)}
                   />
                   <input
-                    type="text"
+                    type="date"
                     placeholder="End Date"
                     name="endDate"
-                    value={newExperience.endDate}
-                    onChange={handleChange}
+                    className="edit-input-2"
+                    value={endDateExp}
+                    onChange={(e) => setEndDateExp(e.target.value)}
                   />
                 </div>
                 <button onClick={handleAddExperience} className="add-button">Add Experience</button>
@@ -308,108 +477,131 @@ const Profile = () => {
         <div className="education mt-2">
           <div className="label">
             <h3>Education</h3>
+            <FiEdit size={20} onClick={(e) => setEduEdit(!eduEdit)} />
           </div>
           <div className="data-container">
-            {userData && userData?.education ? (
-              userData?.education?.map((education, index) => (
-                <div key={index} className="data-section">
-                  <div className="names">
-                    <p className="name-profession">{education?.titull}</p>
-                    <p className="name-company">{education?.uni}</p>
+            {education && education.length > 0 ? (
+              education.map((edu, index) => (
+                <React.Fragment key={index}>
+                  <div className="data-section mt-1">
+                    <div className="names">
+                      <p className="name-profession">{edu?.titull}</p>
+                      <p className="name-company">{edu?.uni}</p>
+                    </div>
+                    {eduEdit && (
+                      <button className="delete-button" onClick={() => deleteEducation(edu._id)}>Delete Education</button>
+                    )}
+                    <div className="dates">
+                      <p className="start-date">
+                        {edu?.startDate ? edu.startDate.substring(0, 10) : ''}
+                      </p>
+                      <p className="end-date">
+                        {edu?.endDate ? edu.endDate.substring(0, 10) : ''}
+                      </p>
+                    </div>
                   </div>
-                  <div className="dates">
-                    <p className="start-date">
-                      {education?.startDate.substring(0, 10)}
-                    </p>
-                    <p className="end-date">
-                      {education?.endDate.substring(0, 10)}
-                    </p>
-                  </div>
-                </div>
+                  {index !== education.length - 1 && <div className="horiz-barrier"></div>}
+                </React.Fragment>
               ))
             ) : (
               <p>No education available</p>
             )}
-            {editState && (
+            {eduEdit && (
               <div>
                 <div className="d-flex justify-content-between my-2">
                   <input
                     type="text"
                     placeholder="Title"
-                    name="title"
-                    value={newEducation.title}
-                    onChange={(e) =>
-                      setNewEducation({ ...newEducation, title: e.target.value })
-                    }
+                    name="titull"
+                    className="edit-input-2"
+                    value={titullEdu}
+                    onChange={(e) => setTitullEdu(e.target.value)}
                   />
                   <input
                     type="text"
                     placeholder="University"
-                    name="university"
-                    value={newEducation.university}
-                    onChange={(e) =>
-                      setNewEducation({ ...newEducation, university: e.target.value })
-                    }
+                    name="uni"
+                    className="edit-input-2"
+                    value={uni}
+                    onChange={(e) => setUni(e.target.value)}
                   />
                 </div>
                 <div className="d-flex justify-content-between my-2">
                   <input
-                    type="text"
+                    type="date"
                     placeholder="Start Date"
                     name="startDate"
-                    value={newEducation.startDate}
-                    onChange={(e) =>
-                      setNewEducation({ ...newEducation, startDate: e.target.value })
-                    }
+                    value={startDateEdu}
+                    onChange={(e) => setStartDateEdu(e.target.value)}
+                    className="edit-input-2"
                   />
+
                   <input
-                    type="text"
+                    type="date"
                     placeholder="End Date"
                     name="endDate"
-                    value={newEducation.endDate}
-                    onChange={(e) =>
-                      setNewEducation({ ...newEducation, endDate: e.target.value })
-                    }
+                    value={endDateEdu}
+                    onChange={(e) => setEndDateEdu(e.target.value)}
+                    className="edit-input-2"
                   />
+
                 </div>
                 <button onClick={handleAddEducation} className="add-button">Add Education</button>
               </div>
             )}
           </div>
         </div>
-
-        <div className="skills mt-2">
+        <div className="education mt-2 mb-5">
           <div className="label">
-            <h3>Skills</h3>
+            <h3>Professions</h3>
+            <FiEdit size={20} onClick={(e) => setEditProfession(!editProfession)} style={{ cursor: "pointer" }} />
           </div>
-          <div className="data-container" id="skill-container">
-            {userData && userData?.skills ? (
-              userData?.skills?.map((skill, index) => (
-                <div key={index} className="skill-box">
-                  {skill}
+          <div className="data-container">
+            <div className="mt-3">
+              {editProfession && (
+                <p>Select Professions:</p>
+              )}
+              <div>
+                <div className="mt-3">
+                  {freelancerProfessions && freelancerProfessions.length > 0 && (
+                    freelancerProfessions.map((fp, index) => (
+                      <div key={index}>
+                        {fp.profId.map((profession, profIndex) => (
+                          <div className="skill-box" key={profIndex}>
+                            {profession.category}
+                            {editProfession && (
+                              <MdDeleteOutline size={25} color='red' style={{ cursor: "pointer" }} onClick={() => deleteProfessions(fp._id)} />
+                            )}
+
+                          </div>
+                        ))}
+                      </div>
+                    ))
+                  )}
                 </div>
-              ))
-            ) : (
-              <p>No skills available</p>
-            )}
-            {editState && (
-              <div className="my-2">
-                <input
-                  type="text"
-                  placeholder="Add new skill"
-                  value={newSkill}
-                  onChange={handleSkillChange}
-                />
-                <button onClick={handleAddSkill} className="add-button my-2">Add Skill</button>
+
+                {editProfession && (
+                  <>
+                    <Select
+                      isMulti
+                      options={profession.map((el) => ({ value: el._id, label: el.category }))}
+                      onChange={handleJobTitleSelect}
+                      value={selectedJobTitles.map((title) => ({ value: title, label: title }))}
+                    />
+                    <button className="add-profession" onClick={() => updateProfession(profile._id)}>
+                      Finish editing
+                    </button>
+                  </>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>
       <div className="right-profile">
         {/* <div className="upload-cv">
-          <p className="upload-cv-p">Share profile</p>
-        </div> */}
+            <p className="upload-cv-p">Share profile</p>
+          </div> */}
       </div>
     </div>
   );

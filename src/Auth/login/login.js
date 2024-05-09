@@ -66,6 +66,9 @@ const LoginPage = (props) => {
       if (error.response && error.response.data.error === "Incorrect password") {
         setLoading(false);
         return toast.error("Incorrect password!")
+      } else if (error.response && error.response.data.error === "Incorrect email") {
+        setLoading(false);
+        return toast.error("Incorrect email")
       } else {
         setLoading(false);
         return toast.error("An error occurred while logging in!")
