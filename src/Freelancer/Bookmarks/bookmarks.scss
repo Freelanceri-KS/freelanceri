@@ -80,6 +80,14 @@
 
                     .bookmark-post-container-body {
                         padding: 0.8em;
+                        .jpcb-p{
+                            max-height: 4.5em;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: normal;
+                            display: block;
+                            width: 100%;
+                        }
                     }
 
                     .bookmark-post-footer {
@@ -315,7 +323,7 @@
                                 text-align: start;
 
                                 .bpch-left-user {
-                                    margin-left: 1em;
+                                    margin-left: 0.5em;
                                 }
 
                                 .bpch-l-h6 {
@@ -375,31 +383,34 @@
                                 margin-left: 10px;
                                 margin-right: 10px;
                                 background-color: #eaeaea;
+                                display: none;
                             }
 
                             .bp-footer-info {
-                                margin-left: 2em;
+                                margin-left: 0.5em;
                                 display: flex;
                                 justify-content: center;
                                 flex-direction: column;
                                 align-items: center;
-
+                                display: none;
                                 .value {
+                                    display: none;
                                     color: #455bef;
                                     font-weight: 700;
-                                    font-size: 15px;
+                                    font-size: 13px;
                                 }
                             }
 
                             .bp-apply-details {
-                                height: auto;
-                                width: 140px;
+                                height: 60px;
+                                width: 100%;
                                 background-color: #455bef;
                                 color: white;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
                                 border-bottom-right-radius: 10px;
+                                border-bottom-left-radius: 10px;
                                 border: none;
 
                                 .a-d-p {

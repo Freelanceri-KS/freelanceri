@@ -1,7 +1,6 @@
 import "./profile.scss";
 import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
-import ProfilePic from "../../assets/profiles/1.png";
 import { getDataFromLocalStorage, saveDataToLocalStorage } from "../../Helpers/localStorage";
 import axios from "../../axios";
 import Select from "react-select"
@@ -45,8 +44,6 @@ const Profile = () => {
   const getProfile = () => {
     axios.get(`/freelancer/${userData._id}`)
       .then((response) => {
-        console.log("userData:", userData);
-        console.log(response.data);
         setProfile(response.data);
       })
       .catch((error) => {
@@ -75,8 +72,6 @@ const Profile = () => {
     }
     axios.patch(`/freelancer/${userData._id}`, payload)
       .then((response) => {
-        console.log("Update user:", response.data);
-        console.log("User profile updated successfully!");
         setUserData(response.data);
       })
       .catch((error) => {
@@ -122,7 +117,6 @@ const Profile = () => {
 
       axios.post("/education", payload)
         .then((response) => {
-          console.log("Educations:", response.data);
           setEducation([...education, response.data]);
           setTitullEdu("");
           setUni("");
@@ -144,7 +138,6 @@ const Profile = () => {
     axios.get(`/education/freelancer/${userData._id}`)
       .then((response) => {
         setEducation(response.data);
-        console.log(response.data)
 
       })
       .catch((error) => {
@@ -154,7 +147,6 @@ const Profile = () => {
   const deleteEducation = (id) => {
     axios.delete(`/education/${id}`)
       .then((response) => {
-        console.log("Delte education", response.data)
         setEducation(education.filter(education => education._id !== id))
       })
       .catch((error) => {
@@ -172,7 +164,6 @@ const Profile = () => {
   const getExperience = () => {
     axios.get(`/experience/freelancer/${userData?._id}`)
       .then((response) => {
-        console.log("Experiences", response.data)
         setExperiences(response.data);
       })
       .catch((error) => {
@@ -205,18 +196,12 @@ const Profile = () => {
 
       axios.post("/experience", payload)
         .then((response) => {
-          console.log(response);
-          console.log(payload);
-          // Add the new experience to the existing experiences array
           setExperiences([...experiences, response.data]);
-          // Clear input fields
           setTitullExp("");
           setCmp("");
           setStartDateExp("");
           setEndDateExp("");
-          // Set the expEdit state to false
           setExpEdit(false);
-          // Refresh experiences
           getExperience();
         })
         .catch((error) => {
@@ -230,7 +215,6 @@ const Profile = () => {
   const deleteExperience = (id) => {
     axios.delete(`/experience/${id}`)
       .then((response) => {
-        console.log(response.data)
         setExperiences(experiences.filter(experience => experience._id !== id));
 
       })
@@ -262,7 +246,6 @@ const Profile = () => {
     }
     axios.post("/freelancer-professions", payload)
       .then((response) => {
-        console.log(response.data);
         setEditProfession(false);
         setSelectedJobTitles([]);
         getFreelancerProfessions();
@@ -279,7 +262,6 @@ const Profile = () => {
   const getFreelancerProfessions = () => {
     axios.get(`/freelancer-professions/freelancer/${userData?._id}`)
       .then((response) => {
-        console.log(response.data)
         setFreelancerProfessions(response.data)
       })
       .catch((error) => {
@@ -289,7 +271,6 @@ const Profile = () => {
   const deleteProfessions = (id) => {
     axios.delete(`/freelancer-professions/${id}`)
       .then((response) => {
-        console.log(response.data);
         setFreelancerProfessions(prevState =>
           prevState.filter(fp => fp._id !== id)
         );
@@ -311,9 +292,7 @@ const Profile = () => {
       <div className="left-profile">
         <div className="account">
           <div className="left-side">
-            <img src={ProfilePic} alt="profile-pic" className="profile-pic" />
             <div className="identity">
-
               <div>
                 <h5>
                   {userData?.firstName} {userData?.lastName}

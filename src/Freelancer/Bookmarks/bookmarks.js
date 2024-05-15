@@ -3,7 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { FaBookmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import User2 from "../../assets/profiles/2.png";
+// import User2 from "../../assets/profiles/2.png";
 import axios from "../../axios"
 import localStorage from "redux-persist/es/storage";
 import { useState, useEffect } from "react";
@@ -29,7 +29,6 @@ const Bookmarks = () => {
     const getMyBookmarks = () => {
         axios.get(`/bookmark/freelancer/${userData._id}`)
             .then((response) => {
-                console.log(response.data)
                 setBookmarks(response.data)
             })
             .catch((error) => {
@@ -47,7 +46,6 @@ const Bookmarks = () => {
     const removeBookmark = (postId) => {
         axios.delete(`/bookmark/${postId}`)
             .then((response) => {
-                console.log(response.data);
                 setBookmarks(bookmarks.filter(bm => bm._id !== postId)); // Update local bookmarks state
 
             })
@@ -78,13 +76,12 @@ const Bookmarks = () => {
                                     <div className="bookmark-post-container">
                                         <div className="bookmark-post-container-header">
                                             <div className="bpch-left">
-                                                <img src={User2} alt="User" width={50} height={50} />
                                                 <div className="bpch-left-user">
                                                     <h6 className="bpch-l-h6">{bm?.postId?.title}</h6>
                                                     <p className="bpch-l-p">{bm?.freelancerId?.firstName} {bm?.freelancerId?.lastName}</p>
                                                 </div>
                                             </div>
-                                            <div className="bpch-center">
+                                            {/* <div className="bpch-center">
                                                 <div className="vert-barrier"></div>
                                                 <div className="bpch-center-tags">
                                                     <p className="bpch-c-tag">Location</p>
@@ -100,7 +97,7 @@ const Bookmarks = () => {
                                                     <p className="bpch-c-tag">Category</p>
                                                     <h6 className="bpch-c-value"></h6>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <FaBookmark size={25} color="#455bef" onClick={() => removeBookmark(bm._id)} />
                                         </div>
                                         <div className="bookmark-post-container-body">
@@ -111,18 +108,18 @@ const Bookmarks = () => {
                                         <div className="footer-line"></div>
                                         <div className="bookmark-post-footer">
                                             <div className="bp-footer-info">
-                                                <p className="tag">Kerkoj</p>
-                                                <p className="value">{bm?.postId?.neededWorkers} freelancer</p>
+                                                <p className="tag">Category</p>
+                                                <p className="value">{bm?.postId?.profession?.category}</p>
                                             </div>
                                             <div className="vert-barrier"></div>
                                             <div className="bp-footer-info">
-                                                <div className="tag">Afati</div>
-                                                <div className="value">{bm?.postId?.duration} dite</div>
+                                                <div className="tag">Duration</div>
+                                                <div className="value">{bm?.postId?.duration}</div>
                                             </div>
                                             <div className="vert-barrier"></div>
                                             <div className="bp-footer-info">
-                                                <div className="tag">Budget</div>
-                                                <div className="value">{bm?.postId?.budget}€</div>
+                                                <div className="tag">Experience</div>
+                                                <div className="value">{bm?.postId?.experienceLevel}</div>
                                             </div>
                                             <button
                                                 onClick={
@@ -132,7 +129,7 @@ const Bookmarks = () => {
                                                 }
                                                 className={bm?.postId?.state === "Approved" ? "bp-apply-details" : "bp-apply-details-disabled"}
                                             >
-                                                <p className='a-d-p'>Apply</p>
+                                                <p className='a-d-p'>View post</p>
                                             </button>
 
 

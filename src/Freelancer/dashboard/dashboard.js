@@ -5,7 +5,6 @@ import axios from "../../axios"
 import { useState, useEffect } from 'react'
 import { FaBookmark } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import User2 from "../../assets/profiles/2.png";
 import StarRatings from 'react-star-ratings';
 import { setLang } from '../../redux/Functions/actions'
 import { connect } from 'react-redux'
@@ -23,10 +22,9 @@ const FreelancerDashboard = (props) => {
     // Get Applications
 
     const getActiveApplications = () => {
-        axios.get(`application/freelancer/active/${userData._id}`)
+        axios.get(`/application/freelancer/active/${userData._id}`)
             .then((response) => {
                 setActiveApl(response.data);
-                console.log("Active applications:", response.data)
             })
             .catch((error) => {
                 console.log('Error fetching applications:', error);
@@ -39,7 +37,6 @@ const FreelancerDashboard = (props) => {
         axios.get(`/contract/freelancer/active/${userData._id}`)
             .then((response) => {
                 setActiveContract(response.data);
-                console.log("Active contracts:", response.data);
             })
             .catch((error) => {
                 console.log("Active Contracts errors:", error);
@@ -50,7 +47,6 @@ const FreelancerDashboard = (props) => {
         axios.get(`/contract/freelancer/finished/${userData._id}`)
             .then((response) => {
                 setFinishedContract(response.data)
-                console.log("Finished contracts", response.data);
             })
             .then((error) => {
                 console.log("Finished Contracts Error:", error);
@@ -61,7 +57,6 @@ const FreelancerDashboard = (props) => {
 
     const handleActiveProposal = () => {
         setProposalState("Active");
-        console.log(proposalState);
     }
 
     const handleClosedProposal = () => {
@@ -85,7 +80,6 @@ const FreelancerDashboard = (props) => {
                 setFullReview(response.data);
                 setReviewList(response.data.ratings);
                 setAvgRating(response.data.averageRating)
-                console.log(response.data.five);
             })
             .catch((error) => {
                 console.log(error);
@@ -122,7 +116,7 @@ const FreelancerDashboard = (props) => {
     return (
         <>
             <div className="freelancer-dashboard">
-                <p className='freelancer-dashboard-title'>{props.language == true ? "Mirë se vini" : "Welcome"},<span style={{ fontWeight: "600" }}> Kujtim Gjokaj!</span></p>
+                <p className='freelancer-dashboard-title'>{props.language == true ? "Mirë se vini" : "Welcome back"}</p>
                 <div className="freelancer-dashboard-wrap">
                     <div className="freelancer-dashboard-main">
                         <div className="freelancer-dashboard-main-earnings">
@@ -178,17 +172,16 @@ const FreelancerDashboard = (props) => {
                                                     <div className="bookmark-post-container" >
                                                         <div className="bookmark-post-container-header">
                                                             <div className="bpch-left">
-                                                                <img src={User2} alt="User" width={50} height={50} />
                                                                 <div className="bpch-left-user">
                                                                     <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
                                                                     <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
                                                                 </div>
                                                             </div>
-                                                            <div className="bpch-center">
+                                                            {/* <div className="bpch-center">
                                                                 <div className="vert-barrier"></div>
                                                                 <div className="bpch-center-tags">
                                                                     <p className="bpch-c-tag">Location</p>
-                                                                    <h6 className="bpch-c-value">{application?.postId?.city.city}</h6>
+                                                                    <h6 className="bpch-c-value">{application?.duration}</h6>
                                                                 </div>
                                                                 <div className="vert-barrier"></div>
                                                                 <div className="bpch-center-tags">
@@ -200,7 +193,7 @@ const FreelancerDashboard = (props) => {
                                                                     <p className="bpch-c-tag">Category</p>
                                                                     <h6 className="bpch-c-value">{application?.postId?.profession?.category}</h6>
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                             <p></p>
                                                         </div>
                                                         <div className="bookmark-post-container-body">
@@ -211,18 +204,18 @@ const FreelancerDashboard = (props) => {
                                                         <div className="footer-line"></div>
                                                         <div className="bookmark-post-footer">
                                                             <div className="bp-footer-info">
-                                                                <p className="tag">Kerkoj</p>
-                                                                <p className="value">{application?.postId?.neededWorkers} freelancer</p>
+                                                                <p className="tag">Category</p>
+                                                                <p className="value">{application?.postId?.profession?.category}</p>
                                                             </div>
                                                             <div className="vert-barrier"></div>
                                                             <div className="bp-footer-info">
-                                                                <div className="tag">Afati</div>
-                                                                <div className="value">{application?.postId?.duration} ditë</div>
+                                                                <div className="tag">Duration</div>
+                                                                <div className="value">{application?.postId?.duration}</div>
                                                             </div>
                                                             <div className="vert-barrier"></div>
                                                             <div className="bp-footer-info">
-                                                                <div className="tag">Budget</div>
-                                                                <div className="value">{application?.postId?.budget}$</div>
+                                                                <div className="tag">Experience</div>
+                                                                <div className="value">{application?.postId?.experienceLevel}</div>
                                                             </div>
                                                             <button onClick={() => navigate(`/details-page/${application?.postId?._id}`)} className="bp-apply-details">
                                                                 <p className='a-d-p'>View</p>
@@ -245,7 +238,6 @@ const FreelancerDashboard = (props) => {
                                                     <div className="bookmark-post-container" >
                                                         <div className="bookmark-post-container-header">
                                                             <div className="bpch-left">
-                                                                <img src={User2} alt="User" width={50} height={50} />
                                                                 <div className="bpch-left-user">
                                                                     <h6 className="bpch-l-h6">{application?.postId?.title}</h6>
                                                                     <p className="bpch-l-p">{application?.freelancerId?.firstName} {application?.freelancerId?.lastName}</p>
@@ -475,15 +467,6 @@ const FreelancerDashboard = (props) => {
                                 <p>The most important bit, your first project.</p>
                                 <p className='fdsc-article-link' onClick={() => navigate("/blogs")}>Read more</p>
                             </div>
-                            {/* <div className="horiz-barrier-article"></div>
-                            <div className="fdsc-article">
-                                <div className="fdsc-article-nr">
-                                    <p>4</p>
-                                </div>
-                                <h5>Being yourselves boss</h5>
-                                <p>The new window of global work opportunitites</p>
-                                <p className='fdsc-article-link' onClick={() => navigate("/blogs")}>Read more</p>
-                            </div> */}
                         </div>
                         <div className="freelancer-dashboard-side-contact">
                             <div className="fdsc-head">

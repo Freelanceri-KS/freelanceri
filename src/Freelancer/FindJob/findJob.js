@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./findJob.scss";
-import User2 from "../../assets/profiles/2.png";
 import axios from "../../axios";
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +20,6 @@ const FindJob = () => {
     axios.get('/posts/approved', { params: { search: searchQuery, category: categoryQuery } })
       .then((response) => {
         setJobs(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching jobs:", error);
@@ -41,8 +39,10 @@ const FindJob = () => {
     setCategoryQuery(event.target.value);
   };
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+
   const handleBookmark = (postId) => {
-    // Ensure userData is not null before accessing its properties
     if (userData && userData._id) {
       const payload = {
         postId: postId,
@@ -50,8 +50,7 @@ const FindJob = () => {
       }
       axios.post("/bookmark", payload)
         .then((response) => {
-          console.log(response.data);
-          setBookmarkedPosts([...bookmarkedPosts, postId]); // Add the postId to bookmarked list
+          setBookmarkedPosts([...bookmarkedPosts, postId]);
         })
         .catch((error) => {
           console.log(error)
@@ -65,7 +64,6 @@ const FindJob = () => {
   const removeBookmark = (postId) => {
     axios.delete(`/bookmark/${postId}`)
       .then((response) => {
-        console.log(response.data);
         setBookmarkedPosts(bookmarkedPosts.filter(id => id !== postId)); // Remove the postId from bookmarked list
       })
       .catch((error) => {
@@ -73,15 +71,12 @@ const FindJob = () => {
       })
   }
 
-  const [userData, setUserData] = useState(null);
-
   const [expandedItem, setExpandedItem] = useState('category');
   const [category, setCategory] = useState([]);
   const getCategory = () => {
     axios
       .get("/profession")
       .then((response) => {
-        console.log(response.data)
         setCategory(response.data);
       })
       .catch((err) => {
@@ -181,7 +176,6 @@ const FindJob = () => {
                 <div className="job-post-container" key={el?._id}>
                   <div className="job-post-container-header">
                     <div className="jpch-left">
-                      <img src={User2} alt="User" width={50} height={50} />
                       <div className="jpch-left-user">
                         <h6 className="jpch-l-h6">{el?.title}</h6>
                         <p className="jpch-l-p">{el?.userId?.firstName} {el?.userId?.lastName}</p>
@@ -196,7 +190,7 @@ const FindJob = () => {
                       <FaRegBookmark size={25} color="#455bef" onClick={() => handleBookmark(el?._id)} />
                     )}
                   </div>
-                  <div className="job-post-container-body">
+                  <div className="job-post-container-body" onClick={() => navigate(`/details-page/${el?._id}`)}>
                     <p className="jpcb-p">{el?.description}</p>
                   </div>
                   <div className="footer-line"></div>
@@ -207,8 +201,8 @@ const FindJob = () => {
                     </div>
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">
-                      <p className="tag">City</p>
-                      <p className="value">{el?.city.city}</p>
+                      <p className="tag">Duration</p>
+                      <p className="value">{el?.duration}</p>
                     </div>
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">
@@ -225,10 +219,7 @@ const FindJob = () => {
               <><p>No post found</p></>
             }
           })}
-
-
         </div>
-
       </div>
       <div className="find-job-right">
         <img src={AdArea} alt="Advertising" className="find-job-right-banner" />

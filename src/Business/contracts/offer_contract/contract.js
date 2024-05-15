@@ -70,14 +70,12 @@ const Contract = () => {
             }
             axios.patch(`/application/${id}`, appPayload)
                 .then((response) => {
-                    console.log(response.data);
                 })
                 .catch((error) => {
                     console.log(error)
                 })
             axios.post("/contract", payload)
                 .then((response) => {
-                    console.log(response.data);
                     toast.success("Contract has been created!")
                     navigate("/")
                 })

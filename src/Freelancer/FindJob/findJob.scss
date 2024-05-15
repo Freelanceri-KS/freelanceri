@@ -205,13 +205,13 @@
             }
 
             .jpch-center-tags {
-              .jpch-c-tag {
+              .jpcb-c-tag {
                 font-size: 14px;
                 color: #363636;
                 font-weight: 400;
               }
 
-              .jpch-c-value {
+              .jpcb-c-value {
                 font-size: 18px;
                 font-weight: 600;
                 color: #455bef;
@@ -230,6 +230,17 @@
           padding: 0.8em;
           color: #363636;
           font-weight: 500;
+
+          .jpcb-p {
+            max-height: 4.5em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            display: block;
+            width: 100%;
+          }
+
+
         }
 
         .job-post-footer {

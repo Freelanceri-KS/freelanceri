@@ -2,12 +2,10 @@ import "./dashboard.scss"
 import Graph from "../../assets/graph.png"
 import { useState, createContext } from "react";
 import { BrowserRouter as Routes, Router, Route, Link } from 'react-router-dom';
-import ProfilePic from "../../assets/images/single-profile.png"
 import { AiOutlineExport } from "react-icons/ai";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { IoSearchOutline } from 'react-icons/io5';
 import { CiLocationOn } from 'react-icons/ci';
-import User2 from "../../assets/profiles/2.png";
 
 
 
@@ -170,7 +168,6 @@ function Posts() {
       <div className="posts-list">
         <div className="post-container">
           <div className="post-container-header">
-            <img src={ProfilePic} alt="Profile picture" height={50} width={50} />
             <p className="header-paragraph">Company Name</p>
             <p className="header-paragraph">Category</p>
             <p className="header-paragraph">Post Title</p>
@@ -255,7 +252,6 @@ function Employers() {
       <div className="employers-list">
         <div className="employers-container">
           <div className="employers-container-identity">
-            <img src={ProfilePic} alt="Employer picture" height={50} width={50} />
             <p className="employer-name"> City design</p>
           </div>
           <p>Advertising company</p>
@@ -264,7 +260,6 @@ function Employers() {
         </div>
         <div className="employers-container">
           <div className="employers-container-identity">
-            <img src={ProfilePic} alt="Employer picture" height={50} width={50} />
             <p className="employer-name"> City design</p>
           </div>
           <p>Advertising company</p>
@@ -273,7 +268,6 @@ function Employers() {
         </div>
         <div className="employers-container">
           <div className="employers-container-identity">
-            <img src={ProfilePic} alt="Employer picture" height={50} width={50} />
             <p className="employer-name"> City design</p>
           </div>
           <p>Advertising company</p>
@@ -308,7 +302,6 @@ function Freelancers() {
       <h4 className="freelancers-profession-h4">Developers</h4>
       <div className="freelancers-grid">
         <div className="freelancers-grid-item">
-          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
           <div className="fgi-identity">
             <h5>Full name</h5>
             <p>Profession</p>
@@ -318,7 +311,6 @@ function Freelancers() {
           </div>
         </div>
         <div className="freelancers-grid-item">
-          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
           <div className="fgi-identity">
             <h5>Full name</h5>
             <p>Profession</p>
@@ -328,7 +320,6 @@ function Freelancers() {
           </div>
         </div>
         <div className="freelancers-grid-item">
-          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
           <div className="fgi-identity">
             <h5>Full name</h5>
             <p>Profession</p>
@@ -338,7 +329,6 @@ function Freelancers() {
           </div>
         </div>
         <div className="freelancers-grid-item">
-          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
           <div className="fgi-identity">
             <h5>Full name</h5>
             <p>Profession</p>
@@ -348,7 +338,6 @@ function Freelancers() {
           </div>
         </div>
         <div className="freelancers-grid-item">
-          <img src={User2} alt="User" height={100} width={100} className="fgi-image" />
           <div className="fgi-identity">
             <h5>Full name</h5>
             <p>Profession</p>

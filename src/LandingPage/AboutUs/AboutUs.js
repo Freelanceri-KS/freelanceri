@@ -4,7 +4,6 @@ import Footer from '../components/footer';
 import { setLang } from "../../redux/Functions/actions";
 import { connect } from "react-redux";
 import ExploreSection from '../../LandingPage/explore/ExploreSection';
-import User from "../../assets/profiles/1.png"
 
 const AboutUs = (props) => {
   return (
@@ -77,28 +76,24 @@ const AboutUs = (props) => {
           </div>
           <div className="our-team-grid">
             <div className="otg-item">
-              <img src={User} alt="Kujtim Gjokaj" width={100} height={100} className='otgi-img rounded-circle' />
               <h4 className='otgi-h3'>Kujtim Gjokaj</h4>
               <p className='otgi-p'>CEO & Founder</p>
               <p className='otgi-p2'>gjokajkujtim9@gmail.com</p>
             </div>
             <div className="otg-item">
-              <img src={User} alt="Kujtim Gjokaj" width={100} height={100} className='otgi-img rounded-circle' />
               <h4 className='otgi-h3'>Mentor Rexhepi</h4>
               <p className='otgi-p'>Chief Business Officer</p>
-              <p className='otgi-p2'>gjokajkujtim9@gmail.com</p>
+              <p className='otgi-p2'>mentor.sh.rexhepi@gmail.com</p>
             </div>
             <div className="otg-item">
-              <img src={User} alt="Kujtim Gjokaj" width={100} height={100} className='otgi-img rounded-circle' />
               <h4 className='otgi-h3'>Alan Greenberg</h4>
               <p className='otgi-p'>Advisor</p>
-              <p className='otgi-p2'>gjokajkujtim9@gmail.com</p>
+              <p style={{visibility:"hidden"}}>aksdjsakldj</p>
             </div>
             <div className="otg-item">
-              <img src={User} alt="Kujtim Gjokaj" width={100} height={100} className='otgi-img rounded-circle' />
               <h4 className='otgi-h3'>Albrim Bajrami</h4>
               <p className='otgi-p'>Lead Developer</p>
-              <p className='otgi-p2'>gjokajkujtim9@gmail.com</p>
+              <p className='otgi-p2'>albrimb7@gmail.com</p>
             </div>
           </div>
         </div>

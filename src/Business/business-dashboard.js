@@ -19,6 +19,7 @@ import Recruit from "../assets/icons/help/recruitment.png"
 import Tick1 from "../assets/icons/help/check.png"
 import Tick2 from "../assets/icons/help/check2.png"
 import Tick3 from "../assets/icons/help/check3.png"
+import ReCAPTCHA from "react-google-recaptcha";
 
 const BusinessDashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Posts');
@@ -65,7 +66,7 @@ const BusinessDashboard = () => {
                                 </a>
                             </li>
                             <div className="barrier"></div>
-                            <li>
+                            {/* <li>
                                 <a href="#" className={
                                     selectedOption === 'Contracts'
                                         ? 'selected-text'
@@ -73,7 +74,7 @@ const BusinessDashboard = () => {
                                 } onClick={() => handleOptionClick('Contracts')}>
                                     Contracts
                                 </a>
-                            </li>
+                            </li> */}
                             <div className="barrier"></div>
                             <li>
                                 <a href="#" className={
@@ -131,6 +132,15 @@ const BusinessDashboard = () => {
 
 
 function Help() {
+    const recipient = 'platforma.freelanceri@gmail.com';
+    const subject = "I Need Freelanceri's Services: ";
+    const body = '';
+
+    const handleClick = () => {
+        window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     return (
         <div className="help">
@@ -181,8 +191,8 @@ function Help() {
                             </div>
                         </div>
                     </div>
-                    <div className="hsi-footer">
-                        <h5 className='hsi-footer-h4'>Contact Us</h5>
+                    <div className="hsi-footer" style={{ cursor: "pointer" }}>
+                        <h5 className='hsi-footer-h4' onClick={handleClick}>Contact Us</h5>
                     </div>
                 </div>
                 <div className="help-services-item-2">
@@ -223,7 +233,7 @@ function Help() {
                             </div>
                         </div>
                     </div>
-                    <div className="hsi-footer-2">
+                    <div className="hsi-footer-2" style={{ cursor: "pointer" }}>
                         <h5 className='hsi-footer-h4'>Contact Us</h5>
                     </div>
                 </div>
@@ -261,7 +271,7 @@ function Help() {
                             </div>
                         </div>
                     </div>
-                    <div className="hsi-footer-3">
+                    <div className="hsi-footer-3" style={{ cursor: "pointer" }}>
                         <h5 className='hsi-footer-h4'>Contact Us</h5>
                     </div>
                 </div>
@@ -280,7 +290,6 @@ function Contracts(props) {
     const getActiveContracts = () => {
         axios.get("/contract/active")
             .then((response) => {
-                console.log(response.data);
                 setActiveContracts(response.data);
             })
             .catch((error) => {
@@ -290,7 +299,6 @@ function Contracts(props) {
     const getFinishedContracts = () => {
         axios.get("/contract/finished")
             .then((response) => {
-                console.log(response.data);
                 setFinishedContracts(response.data);
             })
             .catch((error) => {
@@ -391,7 +399,6 @@ function Overview() {
                 // Slice the response data to get the last 4 applications
                 const lastFourApplications = response.data.slice(-4);
                 setBusinessAppls(lastFourApplications);
-                console.log("Response: ", lastFourApplications);
             })
             .catch((error) => {
                 console.log("Error fetching applications: ", error);
@@ -603,62 +610,54 @@ function Posts() {
         <div className="posts-business">
             <h4>All posts</h4>
             <div className="ongoing-posts">
-                {posts.map((post) => (
-                    <div className="db-post-container-2" onClick={() => navigate(`/details-page/${post._id}`)} key={post._id}>
-                        <div className="db-post-container-header-2">
-                            <div className="dbpch-left">
-                                <img src={User2} alt="User" width={50} height={50} />
-                                <div className="dbpch-left-user">
-                                    <h6 className="dbpch-l-h6">{post?.title}</h6>
-                                    <p className="dbpch-l-p">{post?.userId?.firstName} {post?.userId?.lastName}</p>
-                                </div>
-                            </div>
-                            <div className="dbpch-center-2">
-                                {/* <div className="vert-barrier"></div>
-                                <div className="dbpch-center-tags">
-                                    <p className="dbpch-c-tag">Location</p>
-                                    <h6 className="dbpch-c-value">{post?.city?.city}</h6>
-                                </div>
-                                <div className="vert-barrier"></div>
-                                <div className="dbpch-center-tags">
-                                    <p className="dbpch-c-tag">Experience</p>
-                                    <h6 className="dbpch-c-value">{post?.experienceLevel}</h6>
-                                </div>
-                                <div className="vert-barrier"></div>
-                                <div className="dbpch-center-tags">
-                                    <p className="dbpch-c-tag">Category</p>
-                                    <h6 className="dbpch-c-value">{post?.profession?.category}</h6>
-                                </div> */}
-                            </div>
-                        </div>
-                        <div className="db-post-container-body-2">
-                            <p className="dbpcb-p">
-                                {post?.description}
-                            </p>
-                        </div>
-                        <div className="footer-line-2"></div>
-                        <div className="db-post-footer-2">
-                            <div className="dbp-footer-info">
-                                <p className="tag">Location</p>
-                                <p className="value">{post?.city?.city}</p>
-                            </div>
-                            <div className="vert-barrier"></div>
-                            <div className="dbp-footer-info">
-                                <div className="tag">Experience</div>
-                                <div className="value">{post?.experienceLevel}</div>
-                            </div>
-                            <div className="vert-barrier"></div>
-                            <div className="dbp-footer-info">
-                                <div className="tag">Category</div>
-                                <div className="value">{post?.profession?.category}</div>
-                            </div>
-                            <button className={post?.state === "Approved" ? "dbp-apply-details-2" : "dbp-apply-details-3"}>
-                                <p className='a-d-p'>View</p>
-                            </button>
-                        </div>
+                {posts.length === 0 ? (
+                    <div className="no-posts-message">
+                        <p className='mt-5'>No posts available</p>
                     </div>
+                ) : (
+                    posts.map((post) => (
+                        <div className="db-post-container-2" onClick={() => navigate(`/details-page/${post._id}`)} key={post._id}>
+                            <div className="db-post-container-header-2">
+                                <div className="dbpch-left">
+                                    <img src={User2} alt="User" width={50} height={50} />
+                                    <div className="dbpch-left-user">
+                                        <h6 className="dbpch-l-h6">{post?.title}</h6>
+                                        <p className="dbpch-l-p">{post?.userId?.firstName} {post?.userId?.lastName}</p>
+                                    </div>
+                                </div>
+                                <div className="dbpch-center-2">
+                                    {/* Remaining code for post details */}
+                                </div>
+                            </div>
+                            <div className="db-post-container-body-2">
+                                <p className="dbpcb-p">
+                                    {post?.description}
+                                </p>
+                            </div>
+                            <div className="footer-line-2"></div>
+                            <div className="db-post-footer-2">
+                                <div className="dbp-footer-info">
+                                    <p className="tag">Duration</p>
+                                    <p className="value">{post?.duration}</p>
+                                </div>
+                                <div className="vert-barrier"></div>
+                                <div className="dbp-footer-info">
+                                    <div className="tag">Experience</div>
+                                    <div className="value">{post?.experienceLevel}</div>
+                                </div>
+                                <div className="vert-barrier"></div>
+                                <div className="dbp-footer-info">
+                                    <div className="tag">Category</div>
+                                    <div className="value">{post?.profession?.category}</div>
+                                </div>
+                                <button className={post?.state === "Approved" ? "dbp-apply-details-2" : "dbp-apply-details-3"}>
+                                    <p className='a-d-p'>View</p>
+                                </button>
+                            </div>
+                        </div>
+                    ))
+                )}
 
-                ))}
             </div>
         </div>
     );
@@ -677,7 +676,6 @@ const Applications = () => {
             .then((response) => {
                 setBusinessAppls(response.data);
                 setAppCount(response.data.length);
-                console.log("Response: ", response.data);
             })
             .catch((error) => {
                 console.log("Error fetching applications: ", error);
@@ -703,7 +701,6 @@ const Applications = () => {
     const getAcceptedApps = () => {
         axios.get(`/application/accepted/${userData._id}`)
             .then((response) => {
-                console.log("Accepted apps:", response.data)
                 setAcceptedAps(response.data);
             })
             .catch((error) => {
@@ -717,7 +714,6 @@ const Applications = () => {
     const getContractedApls = () => {
         axios.get(`/application/contracted/${userData._id}`)
             .then((response) => {
-                console.log(response.data);
                 setContractedApl(response.data)
             })
             .catch((error) => {
@@ -953,16 +949,18 @@ const Find = () => {
 }
 
 const Profile = () => {
+
+    const userDataString = localStorage.getItem("userData");
+    const userData = userDataString ? JSON.parse(userDataString) : null;
     const [user, setUser] = useState(null);
     useEffect(() => {
         getUser();
     }, []);
 
     const getUser = () => {
-        axios.get('/business/summary/660b170df00fffca9933298a')
+        axios.get(`/business/summary/${userData?._id}`)
             .then((response) => {
                 setUser(response.data);
-                console.log(response.data)
             })
             .catch((error) => {
                 console.error('Error fetching posts:', error);
@@ -1032,24 +1030,19 @@ const Profile = () => {
     )
 }
 
-function CreatePost() {
+function CreatePost({ selectedOption, handleOptionClick }) {
+    const [captcha, setCaptcha] = useState(false);
     const [professions, setProfessions] = useState([]);
-    const [cities, setCities] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [requirements, setRequirements] = useState("");
     const [duration, setDuration] = useState("");
-    const [numFreelancers, setNumFreelancers] = useState("");
-    const [budget, setBudget] = useState("");
-    const [selectedCity, setSelectedCity] = useState("");
     const [selectedExperience, setSelectedExperience] = useState("");
     const [selectedProfession, setSelectedProfession] = useState("");
-    const [expiresAt, setExpiresAt] = useState("ASD");
-    const [selectedWorkers, setSelectedWorkers] = useState([]);
-    const [state, setState] = useState("Pending");
+    const [state, setState] = useState("Approved");
+
     useEffect(() => {
         getProfessions();
-        getCity();
     }, []);
 
     const getProfessions = () => {
@@ -1058,7 +1051,6 @@ function CreatePost() {
                 .get("/profession")
                 .then((response) => {
                     setProfessions(response.data);
-                    console.log(response.data);
                 })
                 .catch((error) => {
                     console.error('Error fetching professions:', error);
@@ -1069,16 +1061,6 @@ function CreatePost() {
     const userDataString = localStorage.getItem("userData");
     const userData = userDataString ? JSON.parse(userDataString) : null;
 
-    const getCity = () => {
-        axios.get('/city')
-            .then((response) => {
-                setCities(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching cities:', error);
-            });
-    };
-
     const handleSubmit = () => {
         const postData = {
             userId: userData._id,
@@ -1086,26 +1068,21 @@ function CreatePost() {
             description: description,
             requirements: requirements,
             duration: duration,
-            neededWorkers: numFreelancers,
-            budget: budget,
-            city: selectedCity,
             profession: selectedProfession,
             experienceLevel: selectedExperience,
-            expiresAt: expiresAt,
             state: state,
-            selectedWorkers: selectedWorkers
+            recaptchaToken: captcha
         };
 
         axios.post('/posts', postData)
             .then((response) => {
-                console.log('Post created successfully:', response.data);
                 setTitle("");
                 setDescription("");
                 setRequirements("");
                 setDuration("");
-                setSelectedCity("");
                 setSelectedExperience("");
-                toast.success("Post created successfully!")
+                toast.success("Post created successfully!");
+                handleOptionClick('Posts'); // Change state to 'Posts'
             })
             .catch((error) => {
                 console.error('Error creating post:', error);
@@ -1117,34 +1094,26 @@ function CreatePost() {
             <h4>Create a post</h4>
             <h6 className='cp-title'>Title</h6>
             <input type="text" placeholder='Title' className='title-input' value={title} onChange={(e) => setTitle(e.target.value)} />
-            <h6 className='cp-title'>Requirements</h6>
-            <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder='Requirements' value={requirements} onChange={(e) => setRequirements(e.target.value)}></textarea>
             <h6 className='cp-title'>Description</h6>
             <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <h6 className='cp-title'>Requirements</h6>
+            <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder='Requirements' value={requirements} onChange={(e) => setRequirements(e.target.value)}></textarea>
 
             <div className="cp-first-grid">
                 <div className="cp-first-grid-item">
                     <h6>Duration</h6>
                     <select className="grid-item-input" onChange={(e) => setDuration(e.target.value)} value={duration}>
                         <option value="">Select duration</option>
-                        <option value="7 ditë">7 ditë</option>
-                        <option value="14 ditë">14 ditë</option>
-                        <option value="30 ditë">30 ditë</option>
+                        <option value="7 days">7 days</option>
+                        <option value="14 days">14 days</option>
+                        <option value="30 days">30 days</option>
                     </select>
                 </div>
 
                 <div className="cp-first-grid-item">
-                    <h6>City</h6>
-                    <select className="grid-item-input" onChange={(e) => setSelectedCity(e.target.value)} value={selectedCity}>
-                        <option value="">Select a city</option>
-                        {cities.map((city) => (
-                            <option key={city._id} value={city._id}>{city.city}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="cp-first-grid-item">
                     <h6>Profession</h6>
                     <select className="grid-item-input" onChange={(e) => setSelectedProfession(e.target.value)} value={selectedProfession}>
+                        <option value="">Select Profession</option>
                         {professions.map((profession) => (
                             <option key={profession._id} value={profession._id} style={{ color: "black" }} className='select-option'>
                                 {profession.category}
@@ -1152,10 +1121,6 @@ function CreatePost() {
                         ))}
                     </select>
                 </div>
-            </div>
-
-            <div className="cp-first-grid" id='secgrid'>
-
                 <div className="cp-first-grid-item">
                     <h6>Experience needed</h6>
                     <select className="grid-item-input" onChange={(e) => setSelectedExperience(e.target.value)} value={selectedExperience}>
@@ -1166,13 +1131,19 @@ function CreatePost() {
                     </select>
                 </div>
             </div>
+            <ReCAPTCHA
+                className='mt-3'
+                sitekey="6Lcnq9opAAAAAB9qRPMYpf7OA399qWn813YFHtp8"
+                onChange={(data) => setCaptcha(data)}
+            />
 
             <div className="cp-btn">
                 <p onClick={handleSubmit}>Create post</p>
             </div>
         </div>
-    )
+    );
 }
+
 
 
 const mapStateToProps = (state) => {

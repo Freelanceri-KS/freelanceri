@@ -167,7 +167,6 @@ const RegisterPage = (props) => {
           "https://weak-lime-squid-fez.cyclic.app/business/signup",
           businessPayload
         );
-        console.log(response.data);
         setFirstName("");
         setLastName("");
         setEmail("");
@@ -195,6 +194,7 @@ const RegisterPage = (props) => {
       lastName: lastName,
       email: email,
       password: password,
+      recaptchaToken: captcha
     }
     e.preventDefault();
 
@@ -208,7 +208,6 @@ const RegisterPage = (props) => {
         setFirstName("");
         setLastName("");
         setPassword("");
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -220,7 +219,7 @@ const RegisterPage = (props) => {
   return (
     <div className="register-page">
       <div className="left">
-        <div class="col-md-9 col-lg-8 mx-auto">
+        <div class="col-md-9 col-lg-8 left-head">
           <h1 class="login-heading mb-4">
             {props?.language === true ? "Regjistrohu si" : "Register as"}
           </h1>
@@ -252,7 +251,7 @@ const RegisterPage = (props) => {
           (
             <>
               {step === 1 && (
-                <div class="col-md-9 col-lg-8 mx-auto">
+                <div class="col-md-9 col-lg-8 left-head">
                   <div class="form-floating mb-3">
                     <input
                       required
@@ -301,6 +300,11 @@ const RegisterPage = (props) => {
                       {props?.language === true ? "Fjalekalimi" : "Password"}
                     </label>
                   </div>
+                  <ReCAPTCHA
+                    // size="invisible"
+                    sitekey="6Lcnq9opAAAAAB9qRPMYpf7OA399qWn813YFHtp8"
+                    onChange={CaptchaValidation}
+                  />
                   <form onSubmit={handleFreelancerSubmit}>
                     {/* Step 1 form fields */}
 
@@ -506,7 +510,7 @@ const RegisterPage = (props) => {
         {role === "business" && (
           <>
             {stepBussines === 1 && (
-              <div class="col-md-9 col-lg-8 mx-auto">
+              <div class="col-md-9 col-lg-8 mx-auto left-head">
                 <div class="form-floating mb-3">
                   <input
                     required
@@ -563,7 +567,7 @@ const RegisterPage = (props) => {
               </div>
             )}
             {stepBussines === 2 && (
-              <div class="col-md-9 col-lg-8 mx-auto">
+              <div class="col-md-9 col-lg-8 mx-auto left-head">
                 <div class="form-floating mb-3">
                   <input
                     required
@@ -630,7 +634,7 @@ const RegisterPage = (props) => {
                 </div>
                 <ReCAPTCHA
                   // size="invisible"
-                  sitekey="6LfjPdUpAAAAAFWGYr9XT_VDMqQvRoX6tpw3Ru7z"
+                  sitekey="6Lcnq9opAAAAAB9qRPMYpf7OA399qWn813YFHtp8"
                   onChange={CaptchaValidation}
                 />
                 <form onSubmit={handleSubmitStepBussines1}>

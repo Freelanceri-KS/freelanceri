@@ -54,7 +54,6 @@ const ViewContract = () => {
             try {
                 const response = await axios.post("/rating/check", payload);
                 setCheck(response.data.rated);
-                console.log("Check state:", response.data.rated);
             } catch (error) {
                 console.log(error);
             }
@@ -71,12 +70,10 @@ const ViewContract = () => {
 
         try {
             const response = await axios.post("/rating", payload);
-            console.log(response.data);
             setComment("");
             setRating(0);
             toast.success("Freelancer has been rated!");
             checkRating();
-            console.log("Is rated:", check);
         } catch (error) {
             console.log("Freelancer ID: ", contractDetail?.freelancer?._id);
             console.log(error);

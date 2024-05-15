@@ -105,11 +105,7 @@ const RegisterPage = (props) => {
       preferedRate: preferedRate,
       prederdDurationEng: prederdDurationEng,
     };
-    console.log(DataUser);
-    // Api call qitu e shtin Data User mi qu databaz
-    // } else {
-    //   alert("Please fill in all required fields.");
-    // }
+
   };
 
   // Rendering the form based on the current step

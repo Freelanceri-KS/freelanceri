@@ -44,7 +44,8 @@
                 background-image: url("../../assets/thumbnail.png");
                 background-size: cover;
                 background-repeat: no-repeat;
-                background-position: center; /* Center the background image */
+                background-position: center;
+                /* Center the background image */
             }
         }
     }
@@ -327,53 +328,73 @@
 
             .cvc {
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                justify-content: space-around;
                 flex-direction: column;
                 padding-top: 4em;
-                width: 95%;
-
-                .career-values-left {
+                .cvlw {
                     width: 90%;
-
-                    .cvl-underline {
-                        margin-top: 1em;
-                        width: 35px;
-                        height: 7px;
-                        background-color: #455bef;
-                        border-radius: 10px;
-                    }
-
-                    .cvl-p {
+                    display: flex;
+                    justify-content: center;
+                    .career-values-left {
                         width: 90%;
-                        margin-top: 1em;
+                        display: flex;
+                        align-items: center;
+                        justify-content: start;
+                        flex-direction: column;
+
+                        .cvl-underline {
+                            margin-top: 1em;
+                            width: 35px;
+                            height: 7px;
+                            background-color: #455bef;
+                            border-radius: 10px;
+                        }
+
+                        .cvl-p {
+                            width: 100%;
+                            margin-top: 1em;
+                        }
                     }
                 }
 
                 .career-values-right {
-                    width: 90%;
-
+                    width: 95%;
+                    margin-left: 0.5em;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
                     .cvr-item {
                         display: flex;
                         align-items: center;
+                        justify-content: center;
                         margin-top: 1em;
+                        width: 100%;
 
                         .cvri-box {
-                            width: 75px;
-                            height: 75px;
+                            padding: 20px;
                             border-radius: 50%;
                             background-color: rgba(69, 91, 239, 1);
                             display: flex;
                             justify-content: center;
                             align-items: center;
+                            overflow: hidden;
+
+                            .cvri-box-img {
+                                width: 32px;
+                                height: 32px;
+                                max-width: 100%;
+                                max-height: 100%;
+                            }
                         }
 
                         .cvri-txt {
-                            margin-left: 1em;
+                            margin-left: 0.3em; 
+                            flex-grow: 1; 
+                            flex-shrink: 1;
                             display: flex;
-                            align-items: start;
-                            justify-content: center;
                             flex-direction: column;
+                            align-items: flex-start; // Align text to start
 
                             .cvri-p {
                                 font-weight: 700;
@@ -382,10 +403,12 @@
 
                             .cvri-p2 {
                                 color: #909090;
-                                width: 90%;
+                                width: 90%; // Adjust width as needed
+                                word-wrap: break-word; // Allow long words to break
                             }
                         }
                     }
+
                 }
             }
         }
@@ -403,7 +426,7 @@
             }
 
             .trainings-dsc {
-                width: 90%;
+                width: 95%;
                 margin-top: 2.5em;
                 color: #909090;
             }
@@ -417,7 +440,7 @@
                 row-gap: 30px;
 
                 .t-grid-item {
-                    width: 17em;
+                    width: 95%;
                     background-color: #f7f7f7;
                     border-radius: 15px;
                     display: flex;

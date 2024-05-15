@@ -1,0 +1,152 @@
+.full-time-ap {
+    margin-top: 5.5em;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: space-between;
+
+    .ftap-left {
+        width: 40%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2em;
+
+        .ftap-left-content {
+            width: 80%;
+            height: 80%;
+
+            .ftap-ta {
+                border-radius: 8px;
+                border: 1px solid #eaeaea;
+                padding: 10px;
+            }
+
+            .consent {
+                margin-top: 1em;
+                width: 85%;
+                color: #909090;
+            }
+
+            .ftap-submit-btn {
+                border: none;
+                width: 85%;
+                margin-top: 1em;
+                padding: 10px;
+                background-color: #455bef;
+                color: white;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .ftap-right {
+        width: 60%;
+        height: 100%;
+        padding: 0.5em;
+
+        .ftap-right-content {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            background-image: url("../../assets/images/appform2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .ftap-rc-head {
+                display: flex;
+                padding: 10px;
+
+                .containers {
+                    border: 4px solid white;
+                    padding: 10px;
+                    height: 4em;
+                    border-radius: 10px;
+                }
+            }
+
+            .ftap-rc-footer {
+                display: flex;
+                width: 65%;
+                color: white;
+                flex-direction: column;
+                padding: 10px;
+
+                .frf-h3 {
+                    margin-bottom: 1em;
+                }
+
+                .frf-p {
+                    font-size: 20px;
+                }
+
+                .containers {
+                    border: 4px solid white;
+                    padding: 10px;
+                    width: auto;
+                    height: 4em;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .full-time-ap {
+        margin-top: 1.5em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .ftap-left {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
+
+            .ftap-left-content {
+                width: 100%;
+
+                .ftap-ta {
+                    border-radius: 8px;
+                    border: 1px solid #eaeaea;
+                    padding: 10px;
+                    width: 100%;
+                }
+
+                .consent {
+                    margin-top: 1em;
+                    width: 95%;
+                    color: #909090;
+                }
+
+                .ftap-submit-btn {
+                    border: none;
+                    width: 85%;
+                    margin-top: 1em;
+                    padding: 10px;
+                    background-color: #455bef;
+                    color: white;
+                    border-radius: 5px;
+                    margin-bottom: 3em;
+                }
+            }
+        }
+
+        .ftap-right {
+           display: none;
+        }
+    }
+
+}

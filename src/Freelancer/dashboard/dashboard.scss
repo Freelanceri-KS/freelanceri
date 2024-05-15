@@ -2,9 +2,11 @@
     padding-top: 5em;
     display: flex;
     flex-direction: column;
-    .null-message{
+
+    .null-message {
         padding: 20px;
     }
+
     .freelancer-dashboard-title {
         margin-left: 6em;
         margin-bottom: 1em;
@@ -182,6 +184,15 @@
 
                     .bookmark-post-container-body {
                         padding: 0.8em;
+
+                        .jpcb-p {
+                            max-height: 4.5em;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: normal;
+                            display: block;
+                            width: 100%;
+                        }
                     }
 
                     .bookmark-post-footer {

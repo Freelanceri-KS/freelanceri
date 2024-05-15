@@ -30,7 +30,6 @@ const DetailsPage = (props) => {
     try {
       axios.patch(`/posts/${jobDetail._id}`, payload)
         .then((response) => {
-          console.log(response.data);
           navigate(-1);
         })
     } catch (error) {
@@ -44,7 +43,6 @@ const DetailsPage = (props) => {
     const getJobDetail = async () => {
       try {
         const response = await axios.get(`/posts/${id}`);
-        console.log("JobDetail:", response.data);
         setJobDetail(response.data);
       } catch (error) {
         console.error('Error fetching job detail:', error);
@@ -129,8 +127,8 @@ const DetailsPage = (props) => {
           </div>
           <div className="horiz-barrier"></div>
           <div className="dp-left-instagram">
-            <p className='dp-cp-data-p'>LinkedIn</p>
-            <h5>{jobDetail?.userId?.socials?.linkedin}</h5>
+            <p className='dp-cp-data-p'>Industry</p>
+            <h5>{jobDetail?.userId?.companyType}</h5>
           </div>
         </div>
       </div>
@@ -173,8 +171,8 @@ const DetailsPage = (props) => {
           </div>
           <div className="mainpost-footer">
             <div className="freelancers-nr">
-              <p className='mainpost-footer-p'>Location</p>
-              <h6 className='mainpost-footer-h6'>{jobDetail?.city.city}</h6>
+              <p className='mainpost-footer-p'>Duration:</p>
+              <h6 className='mainpost-footer-h6'>{jobDetail?.duration}</h6>
             </div>
             <div className="vert-barrier"></div>
             <div className="deadline">
@@ -188,11 +186,10 @@ const DetailsPage = (props) => {
               <h6 className='mainpost-footer-h6'>{jobDetail?.profession?.category}</h6>
 
             </div>
-            <Link to={`/apply-form/${jobDetail?._id}`} key={jobDetail?._id} style={{ textDecoration: 'none' }}>
-              <button className="apply-details">
+              <button className="apply-details" key={jobDetail?._id} onClick={() => navigate(`/app-form/${jobDetail?._id}`)} style={{ textDecoration: 'none' }}>
                 <p className='a-d-p'>Apply</p>
               </button>
-            </Link>
+
           </div>
         </div>
         {!props.isLoggedInBusiness && (
@@ -215,7 +212,7 @@ const DetailsPage = (props) => {
                       <div className="vert-barrier" id='jpch-barrier'></div>
                       <div className="jpch-center-tags">
                         <p className="jpch-c-tag">Location</p>
-                        <p className="mainpost-about-value">{jobDetail?.city?.city}</p>
+                        <p className="mainpost-about-value">{jobDetail?.duration}</p>
 
                       </div>
                       <div className="vert-barrier"></div>
@@ -252,9 +249,10 @@ const DetailsPage = (props) => {
                       <div className="tag">Budget</div>
                       <div className="value">{sp?.budget}$</div>
                     </div>
-                    <button className="jp-apply-details" onClick={() => { navigate(`/details-page/${sp._id}`) }}>
+                    <button className="jp-apply-details" onClick={() => navigate(`/details-page/${sp?._id}`)}>
                       <p className='a-d-p'>Apply</p>
                     </button>
+
 
                   </div>
                 </div>

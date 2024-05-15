@@ -34,6 +34,7 @@ import Contract from "./Business/contracts/offer_contract/contract";
 import NotFound from "./LandingPage/404/404";
 import ViewContract from "./Business/contracts/view_contract/viewContract";
 import Career from "./Freelancer/Careers/career";
+import FullTimeAP from "./Freelancer/FullTimeAppForm/ftap";
 function App(props) {
   return (
     <>
@@ -87,6 +88,7 @@ function App(props) {
               <Route path="/career" element={<Career />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blog-details" element={<BlogDetails />} />
+              <Route path="/app-form/:id" element={<FullTimeAP />} />
             </>
           )}
         </Routes>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./postControll.scss";
-import User1 from "../../assets/profiles/5.png";
 // import Left from "../../assets/images/left.png";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import User from "../../assets/images/user1.png"
 
 
 const PostControll = () => {
@@ -220,7 +218,6 @@ const PostControll = () => {
             <div className="horiz-barrier"></div>
             <div className="pc-left-container-profile">
               <div className="pc-cp-left">
-                <img src={User} alt="User profile picture" height={60} className='dccp-image' />
                 <div className="pc-cp-data">
                   <p className='pc-cp-data-p'>Posted by:</p>
                   <h6 className='pc-cp-data-h6'>Malena Buchholz</h6>

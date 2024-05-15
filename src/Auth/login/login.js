@@ -81,9 +81,9 @@ const LoginPage = (props) => {
   return (
     <div className="login-page">
       <div className="left">
-        <div className="left-wrap">
+        <div className="left-wrap col-md-8 col-lg-7">
           <h3 className="left-h3">{props?.language == true ? "Kyçu si" : "Log in as"}</h3>
-          <div className="button-group">
+          <div className=" col-md-9 col-lg-8 button-group">
             <button
               onClick={() => handleUserTypeSelect("freelancer")}
               style={{
@@ -93,7 +93,7 @@ const LoginPage = (props) => {
               }}
               className="btn btn-primary left-btn"
             >
-              {props?.language == true ? "Freelancer" : "Freelancer"}
+              Freelancer
             </button>
             <button
               onClick={() => handleUserTypeSelect("business")}
@@ -104,12 +104,12 @@ const LoginPage = (props) => {
               }}
               className="btn btn-primary right-btn"
             >
-              {props?.language == true ? "Biznes" : "Business"}
+              Business
 
             </button>
           </div>
           <form onSubmit={handleSubmit} className="login-form">
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-3 ">
               <input
                 required
                 type="email"

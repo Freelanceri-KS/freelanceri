@@ -28,7 +28,6 @@ const Contact = (props) => {
 
         axios.post(process.env.REACT_APP_API + "/contact", payload)
             .then((response) => {
-                console.log(response.data);
                 setFullName("");
                 setBusinessName("");
                 setEmail("");
@@ -37,7 +36,6 @@ const Contact = (props) => {
             })
             .catch((error) => {
                 console.log("Error posting data: ", error);
-                console.log(payload);
             })
     }
 
@@ -64,7 +62,7 @@ const Contact = (props) => {
                                     onChange={(e) => setFullName(e.target.value)}
                                     required
                                 />
-                                  <input
+                                <input
                                     type="text"
                                     placeholder={props.language == true ? "Emri i Biznesit (opsionale)" : "Business Name (optional)"}
                                     name="Business name"
@@ -81,7 +79,7 @@ const Contact = (props) => {
                                 />
                             </div>
                             <div className="left-inputs">
-                            <input
+                                <input
                                     type="text"
                                     placeholder={props.language == true ? "Industria e Biznesit" : "Business Industry"}
                                     name="Business Industry"
@@ -101,7 +99,7 @@ const Contact = (props) => {
                             </div>
                         </div>
                     </form>
-                    <button className="send-btn-contact" onClick={handleSubmit}>{props?.language==true?"Dërgo":"Submit"}</button>
+                    <button className="send-btn-contact" onClick={handleSubmit}>{props?.language == true ? "Dërgo" : "Submit"}</button>
                 </div>
             </div>
         </div>

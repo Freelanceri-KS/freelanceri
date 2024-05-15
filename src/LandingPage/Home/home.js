@@ -20,16 +20,7 @@ import signleImg from "../../assets/images/single-profile.png";
 import { FaPhotoVideo } from "react-icons/fa";
 import { AiTwotoneDatabase } from "react-icons/ai";
 import { FaNetworkWired } from "react-icons/fa";
-import img1 from "../../assets/profiles/1.png"
-import img2 from "../../assets/profiles/2.png";
-import img3 from "../../assets/profiles/3.png";
-import img4 from "../../assets/profiles/4.jpg";
-import img5 from "../../assets/profiles/5.png";
-import img6 from "../../assets/profiles/6.png";
-import img7 from "../../assets/profiles/7.png";
-import img8 from "../../assets/profiles/8.png";
-import img9 from "../../assets/profiles/9.png";
-import img10 from "../../assets/profiles/10.png";
+
 import guypc from "../../assets/pcguy.png"
 import collaboration from "../../assets/icons/collaboration.png"
 import community from "../../assets/icons/community.png"

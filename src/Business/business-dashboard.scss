@@ -409,6 +409,7 @@
                 flex-direction: column;
                 align-items: start;
 
+
                 .ongoing-posts {
                     display: grid;
                     width: 100%;
@@ -986,7 +987,7 @@
                             justify-content: center;
                             align-items: center;
                             margin-top: 1em;
-
+                            cursor: pointer;
                             .hsi-footer-h4 {
                                 color: white;
 
@@ -1067,6 +1068,7 @@
                             justify-content: center;
                             align-items: center;
                             margin-top: 1em;
+                            cursor: pointer;
 
                             .hsi-footer-h4 {
                                 color: white;
@@ -1148,6 +1150,7 @@
                             justify-content: center;
                             align-items: center;
                             margin-top: 1em;
+                            cursor: pointer;
 
                             .hsi-footer-h4 {
                                 color: white;
@@ -1551,6 +1554,8 @@
                     flex-direction: column;
                     align-items: start;
                     width: 100%;
+
+
 
                     .ongoing-posts {
                         overflow-x: auto;

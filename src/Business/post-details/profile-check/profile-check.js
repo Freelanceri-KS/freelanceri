@@ -1,5 +1,5 @@
 import "./profile-check.scss"
-import User from "../../../assets/images/user1.png"
+// import User from "../../../assets/images/user1.png"
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineFileUpload } from "react-icons/md";
 import React, { useEffect, useState } from 'react';
@@ -13,7 +13,6 @@ const ProfileCheck = () => {
     const { id } = useParams();
 
     const [profileDetail, setProfileDetail] = useState(null);
-    const [freelancerRating, setFreelancerRating] = useState(null);
     const [dataFetched, setDataFetched] = useState(false);
 
     useEffect(() => {
@@ -24,20 +23,83 @@ const ProfileCheck = () => {
                     setProfileDetail(profileResponse.data);
                     setDataFetched(true);
                 }
-
-                if (profileDetail) {
-                    const freelancerId = profileDetail.freelancerId._id;
-                    const ratingResponse = await axios.get(`/rating/freelancer/${freelancerId}`);
-                    setFreelancerRating(ratingResponse.data);
-                    console.log(profileDetail);
-                }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
 
         fetchData();
-    }, [id, profileDetail, dataFetched]);
+    }, [id, dataFetched]);
+    const [profileRating, setProfileRating] = useState(null);
+    const getFreelancerRatings = async () => {
+        axios.get(`/rating/freelancer/${profileDetail?.freelancerId?._id}`)
+            .then((response) => {
+                setProfileRating(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    //PROFESSIONS
+    const [freelancerProfessions, setFreelancerProfessions] = useState([]);
+    const getFreelancerProfessions = () => {
+        axios.get(`/freelancer-professions/freelancer/${profileDetail?.freelancerId?._id}`)
+            .then((response) => {
+                setFreelancerProfessions(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    //EXPERIENCES
+    const [experiences, setExperiences] = useState([]);
+    const getExperience = () => {
+        axios.get(`/experience/freelancer/${profileDetail?.freelancerId?._id}`)
+            .then((response) => {
+                setExperiences(response.data);
+            })
+            .catch((error) => {
+                console.log("Experience error:", error);
+            })
+    }
+
+
+    // EDUCATION
+
+    const [education, setEducation] = useState([]);
+    const getEducation = () => {
+        axios.get(`/education/freelancer/${profileDetail?.freelancerId?._id}`)
+            .then((response) => {
+                setEducation(response.data);
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const [profile, setProfile] = useState(null);
+
+    const getProfile = async () => {
+        axios.get(`/freelancer/${profileDetail?.freelancerId?._id}`)
+            .then((response) => {
+                console.log(response.data);
+                setProfile(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    useEffect(() => {
+        if (profileDetail) {
+            getFreelancerRatings();
+            getExperience();
+            getEducation();
+            getFreelancerProfessions();
+            getProfile();
+        }
+    }, [profileDetail]);
 
     const rejectProfile = () => {
         const payload = {
@@ -45,7 +107,6 @@ const ProfileCheck = () => {
         };
         axios.patch(`/application/${id}`, payload)
             .then((response) => {
-                console.log(response.data);
                 toast.success("Freelancer's offer has been rejected")
                 navigate(-1);
             })
@@ -53,22 +114,19 @@ const ProfileCheck = () => {
                 console.log(error);
             })
     }
-
     const acceptProfile = () => {
         const payload = {
-            state: "Active"
+            state: "Accepted"
         };
         axios.patch(`/application/${id}`, payload)
             .then((response) => {
-                console.log(response.data);
                 toast.success("Freelancer's offer has been accepted")
-                navigate(`/contract/${id}`);
+                // navigate(`/contract/${id}`);
             })
             .catch((error) => {
                 console.log(error);
             })
     }
-
     const navigate = useNavigate();
 
     return (
@@ -83,30 +141,25 @@ const ProfileCheck = () => {
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-container-profile">
                             <div className="vp-cp-left">
-                                <img src={User} alt="User profile picture" height={60} className='dccp-image' style={{ borderRadius: "50%" }} />
                                 <div className="vp-cp-data">
-                                    <h6 className='vp-cp-data-h6'>{profileDetail?.businessId?.companyName}</h6>
+                                    <h5 className='vp-cp-data-h6'>{profile?.firstName} {profile?.lastName}</h5>
                                 </div>
-                            </div>
-                            <div className="vp-cp-data-time">
-                                <p className='vp-cp-data-p'>12/04/2024</p>
-                                <p className='vp-cp-data-p'>04:32pm</p>
                             </div>
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-email">
                             <p className='vp-cp-data-p'>Email</p>
-                            <h5>{profileDetail?.businessId?.email}</h5>
+                            <h5>{profile?.email}</h5>
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-linkedin">
-                            <p className='vp-cp-data-p'>Company</p>
-                            <h5>{profileDetail?.businessId?.companyType}</h5>
+                            <p className='vp-cp-data-p'>Github</p>
+                            <h5>{profile?.socials?.github}</h5>
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-instagram">
-                            <p className='vp-cp-data-p'>Website</p>
-                            <h5>{profileDetail?.businessId?.website}</h5>
+                            <p className='vp-cp-data-p'>LinkedIn</p>
+                            <h5>{profile?.socials?.linkedIn}</h5>
                         </div>
                     </div>
                 </div>
@@ -114,15 +167,15 @@ const ProfileCheck = () => {
             <div className="profile-check-main">
                 <div className="pcm-header">
                     <div className="pcmh-left">
-                        <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
+                        {/* <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} /> */}
                         <div className="pcmh-left-id">
-                            <h5>{profileDetail?.freelancerId?.firstName} {profileDetail?.freelancerId?.lastName}</h5>
+                            <h5>{profile?.firstName} {profile?.lastName}</h5>
                             <p>
                                 <p>
-                                    {(profileDetail?.freelancerId?.profession[0]?.category || profileDetail?.freelancerId?.profession[1]?.category) && (
+                                    {(profile?.freelancerId?.profession[0]?.category || profile?.freelancerId?.profession[1]?.category) && (
                                         <>
-                                            {profileDetail.freelancerId.profession[0]?.category}
-                                            {profileDetail.freelancerId.profession[1]?.category && `, ${profileDetail.freelancerId.profession[1].category}`}
+                                            {profile?.freelancerId?.profession[0]?.category}
+                                            {profile?.freelancerId?.profession[1]?.category && `, ${profile?.freelancerId?.profession[1]?.category}`}
                                         </>
                                     )}
                                 </p>
@@ -131,8 +184,8 @@ const ProfileCheck = () => {
                         </div>
                     </div>
                     <div className="pcmh-right">
-                        <p>Rating: {freelancerRating?.averageRating}</p>
-                        {profileDetail && profileDetail.state !== "Contracted" && (
+                        <p>Rating: {profileRating?.averageRating}</p>
+                        {profileDetail && profileDetail?.state !== "Accepted" || "Rejected" && (
                             <div className="post-controll-options">
                                 <button className="pc-accept" onClick={acceptProfile}>Accept</button>
                                 <button className="pc-reject" onClick={rejectProfile}>Reject</button>
@@ -141,7 +194,7 @@ const ProfileCheck = () => {
                     </div>
                 </div>
                 <div className="pcm-subhead">
-                    <div className="pcm-subhead-content">
+                    {/* <div className="pcm-subhead-content">
                         <div className="psc-item">
                             <p>Oferta</p>
                             <h4 className="psc-item-h4">{profileDetail?.freelancerPrice}€</h4>
@@ -152,7 +205,7 @@ const ProfileCheck = () => {
                             <h4 className="psc-item-h4">{profileDetail?.duration}</h4>
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
                 <div className="pcm-user-data">
                     <h6 className="pcm-user-data-h6">Cover letter</h6>
@@ -167,19 +220,27 @@ const ProfileCheck = () => {
                                 <h6>Experience</h6>
                             </div>
                             <div className="data-container">
-                                {profileDetail?.freelancerId?.experiences.map((prf) => (
-                                    <div className="data-section" key={prf?.freelancerId?.experiences[0]?.title}>
-                                        <div className="names">
-                                            <p className="name-profession">{prf?.titull}</p>
-                                            <p className="name-company">{prf?.cmp}</p>
+                                {experiences && experiences.length > 0 ? (
+                                    experiences.map((experience, index) => (
+                                        <div className="data-section">
+                                            <div className="names">
+                                                <p className="name-profession">{experience?.titull}</p>
+                                                <p className="name-company">{experience?.cmp}</p>
+                                            </div>
+                                            <div className="dates">
+                                                <p className="start-date">
+                                                    {experience?.startDate.substring(0, 10)}
+                                                </p>
+                                                <p className="end-date">
+                                                    {experience?.endDate.substring(0, 10)}
+                                                </p>
+                                            </div>
+                                            {index !== experiences.length - 1 && <div className="barrier"></div>}
                                         </div>
-                                        <div className="dates">
-                                            <p className="start-date">{prf?.startDate.substring(0, 10)}</p>
-                                            <p className="end-date">{prf?.endDate ? prf.endDate.substring(0, 10) : ""}</p>
-
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))
+                                ) : (
+                                    <p>No experiences available</p>
+                                )}
 
 
                             </div>
@@ -190,40 +251,61 @@ const ProfileCheck = () => {
                             </div>
                             <div className="data-container">
 
-                                {profileDetail?.freelancerId?.education.map((prf) => (
-                                    <div className="data-section">
-                                        <div className="names">
-                                            <p className="name-profession">{prf?.titull}</p>
-                                            <p className="name-company">{prf?.uni}</p>
+                                {education && education.length > 0 ? (
+                                    education.map((edu, index) => (
+                                        <div className="data-section mt-1">
+                                            <div className="names">
+                                                <p className="name-profession">{edu?.titull}</p>
+                                                <p className="name-company">{edu?.uni}</p>
+                                            </div>
+                                            <div className="dates">
+                                                <p className="start-date">
+                                                    {edu?.startDate ? edu.startDate.substring(0, 10) : ''}
+                                                </p>
+                                                <p className="end-date">
+                                                    {edu?.endDate ? edu.endDate.substring(0, 10) : ''}
+                                                </p>
+                                            </div>
+                                            {index !== education.length - 1 && <div className="horiz-barrier"></div>}
                                         </div>
-                                        <div className="dates">
-                                            <p className="start-date">{prf?.startDate.substring(0, 10)}</p>
-                                            <p className="end-date">{prf?.endDate.substring(0, 10)}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))
+                                ) : (
+                                    <p>No education available</p>
+                                )}
 
                             </div>
                         </div>
-                        <div className="certification mt-2">
+                        <div className="education mt-2 mb-5">
                             <div className="label">
-                                <h6>Skills</h6>
+                                <h3>Professions</h3>
                             </div>
                             <div className="data-container">
-                                <div className="skill-section" id="skill-box">
-                                    {profileDetail?.freelancerId?.skills.map((skill) => (
-                                        <div className="skill-box">{skill}</div>
-                                    ))}
+                                <div className="mt-3">
+                                    <div>
+                                        <div className="mt-3">
+                                            {freelancerProfessions && freelancerProfessions.length > 0 && (
+                                                freelancerProfessions.map((fp, index) => (
+                                                    <div key={index}>
+                                                        {fp.profId.map((profession, profIndex) => (
+                                                            <div className="skill-box" key={profIndex}>
+                                                                {profession.category}
+
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                ))
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="rating">
                             <h6>Ratings</h6>
                             <div className="rating-list">
-                                {freelancerRating?.ratings.map((fr) => (
+                                {profileRating?.ratings.map((fr) => (
                                     <div className="rating-list-item">
                                         <div className="rli-head">
-                                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} className="pccp-image" />
                                             <div className="rli-head-id">
                                                 <h5>{fr?.businessId?.companyName}</h5>
                                                 <p>{fr?.rating}.0</p>

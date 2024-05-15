@@ -1,7 +1,7 @@
 import "./post-details.scss"
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import User from "../../assets/images/user1.png"
-import User2 from "../../assets/profiles/2.png";
+// import User from "../../assets/images/user1.png"
+// import User2 from "../../assets/profiles/2.png";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -38,7 +38,6 @@ const PostDetail = () => {
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-container-profile">
                             <div className="vp-cp-left">
-                                <img src={User} alt="User profile picture" height={60} className='dccp-image' style={{ borderRadius: "50%" }} />
                                 <div className="vp-cp-data">
                                     <h6 className='vp-cp-data-h6'>Malena Buchholz</h6>
                                 </div>
@@ -125,7 +124,6 @@ const PostDetail = () => {
                 <div className="accepted-freelancers-grid">
                     <div className="accepted-freelancers-grid-item">
                         <div className="bagi-head">
-                            <img src={User2} alt="User" width={80} height={80} />
                             <div className="bagi-head-identity">
                                 <h5>Name Surname</h5>
                                 <p>Job title</p>
@@ -138,7 +136,6 @@ const PostDetail = () => {
                     </div>
                     <div className="accepted-freelancers-grid-item">
                         <div className="bagi-head">
-                            <img src={User2} alt="User" width={80} height={80} />
                             <div className="bagi-head-identity">
                                 <h5>Name Surname</h5>
                                 <p>Job title</p>
@@ -151,7 +148,6 @@ const PostDetail = () => {
                     </div>
                     <div className="accepted-freelancers-grid-item">
                         <div className="bagi-head">
-                            <img src={User2} alt="User" width={80} height={80} />
                             <div className="bagi-head-identity">
                                 <h5>Name Surname</h5>
                                 <p>Job title</p>
@@ -168,7 +164,6 @@ const PostDetail = () => {
                     {jobDetail?.applications.map((apl) => (
                         <div className="accepted-freelancers-grid-item">
                             <div className="bagi-head">
-                                <img src={User2} alt="User" width={80} height={80} />
                                 <div className="bagi-head-identity">
                                     <h5>{apl.freelancerId.firstName} {apl.freelancerId.lastName}</h5>
                                     <p>{apl?.freelancerId?.profession[0]}, {apl?.freelancerId?.profession[1]}</p>

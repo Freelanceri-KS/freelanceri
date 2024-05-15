@@ -64,14 +64,12 @@ const ApplicationForm = ({ closeModal }) => {
     }
     axios.post("/application", applData)
       .then((response) => {
-        console.log('Application sent successfully', response.data);
         setBusinessId("");
         setCoverLetter("");
         setCv("");
         setPostId("");
         setProjectPrice("");
         setDurationOffer("")
-        console.log("===============", { applData })
         navigate("/");
         toast.success("Applied for post successfully")
       })
@@ -84,17 +82,6 @@ const ApplicationForm = ({ closeModal }) => {
         }
       })
   }
-
-
-
-  useEffect(() => {
-    console.log("User data:", userData);
-    console.log("User ID:", userData._id);
-    console.log("First Name:", userData.firstName);
-    console.log("Email:", userData.email);
-
-  }, []);
-
 
   return (
     <div className="modal">

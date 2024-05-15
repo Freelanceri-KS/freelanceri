@@ -5,19 +5,15 @@ import { FiEdit } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import axios from "../../axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { getDataFromLocalStorage } from "../../Helpers/localStorage";
+import React from "react"
 const ViewProfile = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-
     const { id } = useParams();
-
     const [profile, setProfile] = useState(null);
-
-
     const getProfile = async () => {
         axios.get(`/freelancer/${id}`)
             .then((response) => {
-                console.log(response.data)
                 setProfile(response.data);
             })
             .catch((error) => {
@@ -29,8 +25,46 @@ const ViewProfile = () => {
     const getFreelancerRatings = async () => {
         axios.get(`/rating/freelancer/${id}`)
             .then((response) => {
-                console.log(response.data)
                 setProfileRating(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    //PROFESSIONS
+    const [freelancerProfessions, setFreelancerProfessions] = useState([]);
+    const getFreelancerProfessions = () => {
+        axios.get(`/freelancer-professions/freelancer/${id}`)
+            .then((response) => {
+                setFreelancerProfessions(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    //EXPERIENCES
+    const [experiences, setExperiences] = useState([]);
+    const getExperience = () => {
+        axios.get(`/experience/freelancer/${id}`)
+            .then((response) => {
+                setExperiences(response.data);
+            })
+            .catch((error) => {
+                console.log("Experience error:", error);
+            })
+    }
+
+
+    // EDUCATION
+
+    const [education, setEducation] = useState([]);
+    const getEducation = () => {
+        axios.get(`/education/freelancer/${id}`)
+            .then((response) => {
+                setEducation(response.data);
+
             })
             .catch((error) => {
                 console.log(error)
@@ -39,6 +73,9 @@ const ViewProfile = () => {
 
     useEffect(() => {
         getFreelancerRatings();
+        getExperience();
+        getEducation();
+        getFreelancerProfessions();
         getProfile();
     }, [])
     const navigate = useNavigate();
@@ -54,9 +91,8 @@ const ViewProfile = () => {
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-container-profile">
                             <div className="vp-cp-left">
-                                <img src={User} alt="User profile picture rounded-circle" height={60} className='dccp-image' />
                                 <div className="vp-cp-data">
-                                    <h6 className='vp-cp-data-h6'>{profile?.firstName + " " + profile?.lastName}</h6>
+                                    <h5 className='vp-cp-data-h6'>{profile?.firstName + " " + profile?.lastName}</h5>
                                 </div>
                             </div>
 
@@ -73,8 +109,13 @@ const ViewProfile = () => {
                         </div>
                         {!isMobile && (<div className="horiz-barrier"></div>)}
                         <div className="vp-left-instagram">
-                            <p className='vp-cp-data-p'>Facebook</p>
-                            <h5>{profile?.socials?.facebook}</h5>
+                            <p className='vp-cp-data-p'>Github</p>
+                            <h5>{profile?.socials?.github}</h5>
+                        </div>
+                        {!isMobile && (<div className="horiz-barrier"></div>)}
+                        <div className="vp-left-instagram">
+                            <p className='vp-cp-data-p'>Behance</p>
+                            <h5>{profile?.socials?.behance}</h5>
                         </div>
                     </div>
                 </div>
@@ -83,10 +124,9 @@ const ViewProfile = () => {
                 <div className="view-profile-main">
                     <div className="vpm-header">
                         <div className="vpmh-left">
-                            <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} />
                             <div className="vpmh-left-id">
                                 <h5>{profile?.firstName} {profile?.lastName}</h5>
-                                <p>{profile?.profession[0]?.category}</p>
+                                {/* <p>{profile?.profession[0]?.category}</p> */}
                             </div>
                         </div>
                         <p>Rating: {profileRating?.averageRating}</p>
@@ -98,19 +138,29 @@ const ViewProfile = () => {
                                     <h6>Experience</h6>
                                 </div>
                                 <div className="data-container">
-                                    {profile?.experiences.map((prf) => (
-                                        <div className="data-section" key={prf?.freelancerId?.experiences[0]?.title}>
-                                            <div className="names">
-                                                <p className="name-profession">{prf?.titull}</p>
-                                                <p className="name-company">{prf?.cmp}</p>
+                                    {experiences && experiences.length > 0 ? (
+                                        experiences.map((experience, index) => (
+                                            <div className="data-section">
+                                                <div className="names">
+                                                    <p className="name-profession">{experience?.titull}</p>
+                                                    <p className="name-company">{experience?.cmp}</p>
+                                                </div>
+                                                <div className="dates">
+                                                    <p className="start-date">
+                                                        {experience?.startDate.substring(0, 10)}
+                                                    </p>
+                                                    <p className="end-date">
+                                                        {experience?.endDate.substring(0, 10)}
+                                                    </p>
+                                                </div>
+                                                {index !== experiences.length - 1 && <div className="barrier"></div>}
                                             </div>
-                                            <div className="dates">
-                                                <p className="start-date">{prf?.startDate?.substring(0, 10)}</p>
-                                                <p className="end-date">{prf?.endDate ? prf?.endDate?.substring(0, 10) : ""}</p>
+                                        ))
+                                    ) : (
+                                        <p>No experiences available</p>
+                                    )}
 
-                                            </div>
-                                        </div>
-                                    ))}
+
                                 </div>
                             </div>
                             <div className="education mt-2">
@@ -118,30 +168,52 @@ const ViewProfile = () => {
                                     <h6>Education</h6>
                                 </div>
                                 <div className="data-container">
+                                    {education && education.length > 0 ? (
+                                        education.map((edu, index) => (
+                                            <div className="data-section mt-1">
+                                                <div className="names">
+                                                    <p className="name-profession">{edu?.titull}</p>
+                                                    <p className="name-company">{edu?.uni}</p>
+                                                </div>
+                                                <div className="dates">
+                                                    <p className="start-date">
+                                                        {edu?.startDate ? edu.startDate.substring(0, 10) : ''}
+                                                    </p>
+                                                    <p className="end-date">
+                                                        {edu?.endDate ? edu.endDate.substring(0, 10) : ''}
+                                                    </p>
+                                                </div>
+                                                {index !== education.length - 1 && <div className="horiz-barrier"></div>}
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No education available</p>
+                                    )}
 
-                                    {profile?.education.map((prf) => (
-                                        <div className="data-section">
-                                            <div className="names">
-                                                <p className="name-profession">{prf?.titull}</p>
-                                                <p className="name-company">{prf?.uni}</p>
-                                            </div>
-                                            <div className="dates">
-                                                <p className="start-date">{prf?.startDate.substring(0, 10)}</p>
-                                                <p className="end-date">{prf?.endDate.substring(0, 10)}</p>
-                                            </div>
-                                        </div>
-                                    ))}
                                 </div>
                             </div>
-                            <div className="certification mt-2">
+                            <div className="education mt-2 mb-5">
                                 <div className="label">
-                                    <h6>Skills</h6>
+                                    <h3>Professions</h3>
                                 </div>
                                 <div className="data-container">
-                                    <div className="skill-section" id="skill-box">
-                                        {profile?.skills.map((skill) => (
-                                            <div className="skill-box">{skill}</div>
-                                        ))}
+                                    <div className="mt-3">
+                                        <div>
+                                            <div className="mt-3">
+                                                {freelancerProfessions && freelancerProfessions.length > 0 && (
+                                                    freelancerProfessions.map((fp, index) => (
+                                                        <div key={index}>
+                                                            {fp.profId.map((profession, profIndex) => (
+                                                                <div className="skill-box" key={profIndex}>
+                                                                    {profession.category}
+
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    ))
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -149,17 +221,17 @@ const ViewProfile = () => {
                                 <h6>Ratings</h6>
                                 <div className="rating-list">
                                     {profileRating && profileRating.length > 0 ? (
-                                        profileRating.map((fr) => (
-                                            <div className="rating-list-item" key={fr._id}>
+                                        profileRating?.map((fr) => (
+                                            <div className="rating-list-item" key={fr?._id}>
                                                 <div className="rli-head">
                                                     <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} className="pccp-image" />
                                                     <div className="rli-head-id">
-                                                        <h5>{fr.businessId?.companyName}</h5>
-                                                        <p>{fr.rating}.0</p>
+                                                        <h5>{fr?.businessId?.companyName}</h5>
+                                                        <p>{fr?.rating}.0</p>
                                                     </div>
                                                 </div>
                                                 <div className="rli-body">
-                                                    <p>{fr.comment}</p>
+                                                    <p>{fr?.comment}</p>
                                                 </div>
                                             </div>
                                         ))
