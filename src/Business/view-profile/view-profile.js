@@ -1,6 +1,5 @@
 import "./view-profile.scss"
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import User from "../../assets/images/user1.png"
 import { FiEdit } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import axios from "../../axios";
@@ -224,7 +223,6 @@ const ViewProfile = () => {
                                         profileRating?.map((fr) => (
                                             <div className="rating-list-item" key={fr?._id}>
                                                 <div className="rli-head">
-                                                    <img src={User} alt="User" height={60} width={60} style={{ borderRadius: "50%" }} className="pccp-image" />
                                                     <div className="rli-head-id">
                                                         <h5>{fr?.businessId?.companyName}</h5>
                                                         <p>{fr?.rating}.0</p>

@@ -1,19 +1,142 @@
-.blog-details{
+.blog-details {
     margin-top: 6em;
-    .container{
-        .blog-details-title{
-            margin-top:3em;
+
+    .container {
+        .blog-header {
+            border-radius: 20px;
+            padding: 15px;
+            background-color: #f9f4f0;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            flex-direction: column;
+            margin-bottom: 1em;
         }
-        .blog-img{
+
+        .blog-img {
             width: 100%;
             height: 32em;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 20px;
             margin-top: 2em;
         }
-        .blog-details-content{
+
+        .blog-details-content {
             margin-top: 2em;
             margin-bottom: 3em;
-        } 
+        }
+
+        .subscribe {
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .sub-wrapper {
+                margin-top: 3em;
+                border-radius: 15px;
+                background-color: #f9f4f0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .swh4{
+                    margin-top: 3em;
+                }
+                .email-sub {
+                    margin-top: 3em;
+                    margin-bottom: 3em;
+                    width: 40%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    background-color: white;
+                    border-radius: 25px;
+                    padding: 10px;
+
+                    .es-input {
+                        border: none;
+                        background-color: transparent;
+
+                        &:focus {
+                            outline: none;
+                            border: none;
+                        }
+                    }
+
+                    .es-btn {
+                        background-color: #455BEF;
+                        border-radius: 25px;
+                        color: white;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        padding-right: 30px;
+                        padding-left: 30px;
+                    }
+
+                }
+
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .blog-details .container .subscribe .sub-wrapper .email-sub{
+        width: 100%;
+    } 
+    .subscribe {
+        text-align: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .sub-wrapper {
+            margin-top: 3em;
+            border-radius: 15px;
+            background-color: #f9f4f0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .swh4{
+                margin-top: 3em;
+            }
+            .email-sub {
+                margin-top: 3em;
+                margin-bottom: 3em;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: white;
+                border-radius: 25px;
+                padding: 10px;
+
+                .es-input {
+                    border: none;
+                    background-color: transparent;
+
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+                }
+
+                .es-btn {
+                    background-color: #455BEF;
+                    border-radius: 25px;
+                    color: white;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    padding-right: 20px;
+                    padding-left: 20px;
+                }
+
+            }
+
+        }
     }
 }

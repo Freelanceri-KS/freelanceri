@@ -1,5 +1,4 @@
 import "./dashboard.scss"
-import Graph from "../../assets/graph.png"
 import { useState, createContext } from "react";
 import { BrowserRouter as Routes, Router, Route, Link } from 'react-router-dom';
 import { AiOutlineExport } from "react-icons/ai";
@@ -126,7 +125,6 @@ function Overview() {
           </div>
         </div>
         <div className="graph">
-          <img src={Graph} alt="Graph" className="graph-pic" />
         </div>
       </div>
 

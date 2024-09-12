@@ -1,0 +1,212 @@
+.pricing {
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .p-wrapper {
+        width: 50%;
+        margin-top: 3em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .pw-h1 {
+            font-weight: 700;
+            font-size: 50px;
+            color: #363636;
+        }
+
+        .pw-p {
+            color: #909090;
+        }
+
+        .switch {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pw-cards {
+            margin-top: 3em;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            
+            .pw-card-1 {
+                margin: 10px;
+                width: 25em;
+                background-color: #f7f7f7;
+                border: 1px solid #909090;
+                border-radius: 10px;
+                padding: 15px;
+
+                .pwc-dsc {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: start;
+                    align-items: start;
+                }
+
+                .price-features {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .get-started-btn {
+                    width: 100%;
+                    padding: 1em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid #909090;
+                    border-radius: 35px;
+
+                    &:hover {
+                        background-color: #455bef;
+                        color: white;
+                    }
+                }
+            }
+
+            .pw-card-2 {
+                margin: 10px;
+                width: 25em;
+                background-color: #455bef;
+                border: 1px solid #eaeaea;
+                border-radius: 10px;
+                color: white;
+                padding: 15px;
+
+                .get-started-btn2 {
+                    width: 100%;
+                    padding: 1em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid #eaeaea;
+                    border-radius: 35px;
+
+                    &:hover {
+                        background-color: white;
+                        color: #455bef;
+                    }
+                }
+            }
+
+        }
+
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .pricing {
+        margin-top: 5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .p-wrapper {
+            width: 95%;
+            margin-top: 3em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .pw-h1 {
+                font-weight: 700;
+                font-size: 40px;
+                color: #363636;
+                text-align: center;
+            }
+
+            .pw-p {
+                color: #909090;
+            }
+
+            .switch {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .pw-cards {
+                margin-top: 3em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                margin-bottom: 3em;
+                .pw-card-1 {
+                    margin: 10px;
+                    width: 100%;
+                    background-color: #f7f7f7;
+                    border: 1px solid #909090;
+                    border-radius: 10px;
+                    padding: 15px;
+
+                    .pwc-dsc {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: start;
+                        align-items: start;
+                    }
+
+                    .price-features {
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    .get-started-btn {
+                        width: 100%;
+                        padding: 1em;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 1px solid #909090;
+                        border-radius: 35px;
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #455bef;
+                            color: white;
+                        }
+                    }
+                }
+
+                .pw-card-2 {
+                    margin: 10px;
+                    width: 100%;
+                    background-color: #455bef;
+                    border: 1px solid #eaeaea;
+                    border-radius: 10px;
+                    color: white;
+                    padding: 15px;
+
+                    .get-started-btn2 {
+                        width: 100%;
+                        padding: 1em;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 1px solid #eaeaea;
+                        border-radius: 35px;
+                        cursor: pointer;
+                        &:hover {
+                            cursor: pointer;
+                            background-color: white;
+                            color: #455bef;
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+}

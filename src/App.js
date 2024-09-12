@@ -35,6 +35,8 @@ import NotFound from "./LandingPage/404/404";
 import ViewContract from "./Business/contracts/view_contract/viewContract";
 import Career from "./Freelancer/Careers/career";
 import FullTimeAP from "./Freelancer/FullTimeAppForm/ftap";
+import Pricing from "./LandingPage/pricings/pricings"
+import Images from "./imgs";
 function App(props) {
   return (
     <>
@@ -50,14 +52,15 @@ function App(props) {
           {!props.isLoggedInBusiness && !props.isLoggedinFreelancer && (
             <>
               <Route path="/" element={<Home />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/contact-us" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/faqs" element={<FAQs />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blog-details/:id" element={<BlogDetails />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/contact-us" element={<Contact />} />
+              <Route path="/2@23" element={<Images />} />
+
             </>
           )}
           {props.isLoggedInBusiness && (

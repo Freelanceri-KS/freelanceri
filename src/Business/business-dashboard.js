@@ -1,7 +1,5 @@
 import './business-dashboard.scss'
-import Graph from "../assets/graph.png"
 import { FiPlusCircle } from "react-icons/fi";
-import Ads from "../assets/banners/ads.png";
 import { FaBookmark } from "react-icons/fa6";
 import User2 from "../assets/profiles/freelancer.png";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +18,7 @@ import Tick1 from "../assets/icons/help/check.png"
 import Tick2 from "../assets/icons/help/check2.png"
 import Tick3 from "../assets/icons/help/check3.png"
 import ReCAPTCHA from "react-google-recaptcha";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const BusinessDashboard = () => {
     const [selectedOption, setSelectedOption] = useState('Posts');
@@ -883,31 +882,69 @@ const Applications = () => {
 }
 
 
+
 const Find = () => {
     const [nameSearch, setNameSearch] = useState('');
-    const [profiles, setProfiles] = useState(null);
-    const [categoryQuery, setCategoryQuery] = useState('');
+    const [profiles, setProfiles] = useState(null); // For automatic fetching
+    const [dropdownProfiles, setDropdownProfiles] = useState(null); // For dropdown selection
+    const [fCat, setfCat] = useState('');
+    const [category, setCategory] = useState([]);
 
     const findProfiles = async () => {
         try {
-            const response = await axios.get("/freelancer", { params: { search: nameSearch, category: categoryQuery } });
+            const response = await axios.get("/freelancer/summarizeall", {
+                params: { search: nameSearch }
+            });
             console.log(response.data);
             setProfiles(response.data);
         } catch (error) {
-            console.log(error);
+            console.error("Error fetching profiles:", error);
         }
-    }
+    };
+
+    const getFreelancersByProfession = (categoryId) => {
+        axios.get(`/freelancer-professions/${categoryId}`)
+            .then((response) => {
+                console.log(response.data);
+                setDropdownProfiles(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const getCategory = () => {
+        axios
+            .get("/profession")
+            .then((response) => {
+                setCategory(response.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     const handleNameChange = (event) => {
         setNameSearch(event.target.value);
-    }
+    };
+
     const handleCategoryChange = (event) => {
-        setCategoryQuery(event.target.value)
-    }
+        const categoryId = event.target.value;
+        setfCat(categoryId);
+        if (categoryId) {
+            getFreelancersByProfession(categoryId);
+        } else {
+            setDropdownProfiles(null);
+        }
+    };
 
     useEffect(() => {
         findProfiles();
-    }, [nameSearch, categoryQuery]); // Call findProfiles whenever nameSearch changes
+    }, [nameSearch, fCat]);
+
+    useEffect(() => {
+        getCategory();
+    }, []);
 
     const navigate = useNavigate();
 
@@ -920,33 +957,75 @@ const Find = () => {
                 </div>
                 <div className="vert-barrier"></div>
                 <div className="input-with-icon">
-                    <input type="text" className="form-control" placeholder="Profesioni..." value={categoryQuery} onChange={handleCategoryChange} />
-                    <span className="icon-prefix"><CiLocationOn size={20} /></span>
+                    <select
+                        className="form-control mx-3 dropdown-query"
+                        value={fCat}
+                        onChange={handleCategoryChange}
+                    >
+                        <option value="">Select Profession</option>
+                        {category.map((el) => (
+                            <option key={el._id} value={el._id}>{el.category}</option>
+                        ))}
+                    </select>
+                    <span className="icon-prefix">
+                        <RiArrowDropDownLine size={25} />
+                    </span>
                 </div>
                 <div className="vert-barrier"></div>
                 <div className="search-button">Search</div>
             </div>
             <div className="business-find">
                 <div className="business-find-bestof-grid">
-                    {profiles && profiles.map((profile) => (
-                        <div key={profile._id} className="business-find-bestof-grid-item">
-                            <div className="bfbgi-img">
-                                <img src={User2} alt="User" width={80} height={80} />
+                    {(fCat && dropdownProfiles && dropdownProfiles.length > 0) ? (
+                        dropdownProfiles.map((profile) => (
+                            <div key={profile?._id} className="business-find-bestof-grid-item">
+                                <div className="bfbgi-img">
+                                    <img src={User2} alt="User" width={70} height={70} />
+                                </div>
+                                <div className="bfbgi-identity">
+                                    <h5>{profile?.firstName} {profile?.lastName}</h5>
+                                </div>
+                                <div className="bfbgi-identity">
+                                    <p>{profile?.email}</p>
+                                </div>
+                                <div className="bfbgi-footer">
+                                    <p onClick={() => navigate(`/view-profile/${profile?.freelancer?._id}`)} style={{ cursor: "pointer" }}>View profile</p>
+                                </div>
                             </div>
-                            <div className="bfbgi-identity">
-                                <h5>{profile?.firstName} {profile?.lastName}</h5>
-                                <p>{profile?.profession[0]?.category}</p>
-                            </div>
-                            <div className="bfbgi-footer">
-                                <p onClick={() => navigate(`/view-profile/${profile?._id}`)} style={{ cursor: "pointer" }}>View profile</p>
-                            </div>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        dropdownProfiles && dropdownProfiles.length === 0 ? (
+                            <p>No profiles found for the selected profession.</p>
+                        ) : (
+                            profiles && profiles.map((profile) => (
+                                <div key={profile.freelancer?._id} className="business-find-bestof-grid-item">
+                                    <div className="bfbgi-img">
+                                        <img src={User2} alt="User" width={70} height={70} />
+                                    </div>
+                                    <div className="bfbgi-identity">
+                                        <h5>{profile?.freelancer?.firstName} {profile?.freelancer?.lastName}</h5>
+                                    </div>
+                                    <div className="bfbgi-identity">
+                                        <p>{profile?.professions?.[0]?.profId?.[0]?.category || 'No category'}</p>
+                                    </div>
+                                    <div className="bfbgi-identity">
+                                        <p>{profile?.freelancer?.email}</p>
+                                    </div>
+                                    <div className="bfbgi-footer">
+                                        <p onClick={() => navigate(`/view-profile/${profile?.freelancer?._id}`)} style={{ cursor: "pointer" }}>View profile</p>
+                                    </div>
+                                </div>
+                            ))
+                        )
+                    )}
                 </div>
             </div>
         </>
     );
 }
+
+
+
 
 const Profile = () => {
 

@@ -10,6 +10,7 @@ import { FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa6";
 import { MdWorkOutline } from "react-icons/md";
 import AdArea from "../../assets/banners/adarea.png"
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const FindJob = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -152,15 +153,18 @@ const FindJob = () => {
           </div>
           <div className="vert-barriers"></div>
           <div className="input-with-icon">
-            <input
-              type="text"
-              className="form-control mx-2"
-              placeholder="Profession..."
-              value={categoryQuery}
+            <select
+              className="form-control mx-3 dropdown-query"
+              value={category}
               onChange={handleCategoryChange}
-            />
+            >
+              <option value="">Select Profession</option>
+              {category.map((el) => (
+                <option key={el._id} value={el.category}>{el.category}</option>
+              ))}
+            </select>
             <span className="icon-prefix">
-              <MdWorkOutline size={20} />
+              <RiArrowDropDownLine size={25} />
             </span>
           </div>
         </div>
@@ -178,7 +182,7 @@ const FindJob = () => {
                     <div className="jpch-left">
                       <div className="jpch-left-user">
                         <h6 className="jpch-l-h6">{el?.title}</h6>
-                        <p className="jpch-l-p">{el?.userId?.firstName} {el?.userId?.lastName}</p>
+                        <p className="jpch-l-p">{el?.userId?.companyName}</p>
                       </div>
                     </div>
                     <div className="jpch-center">

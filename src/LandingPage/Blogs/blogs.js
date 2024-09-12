@@ -1,10 +1,10 @@
 import "./blogs.scss"
-import mainimg from "../../assets/images/section1imgmain.jpg"
 import { useNavigate } from "react-router-dom";
-import blog1 from "../../assets/blogs/blog1cover.jpeg"
 import blog2 from "../../assets/blogs/blog2.jpg";
-import blog3 from "../../assets/blogs/blog3.jpg";
-import blog4 from "../../assets/blogs/blog4.png"
+import mainimg from "../../assets/blogs/main.jpg"
+import { FaRegArrowAltCircleUp } from "react-icons/fa";
+import axios from "../../axios";
+import { useEffect, useState } from "react";
 
 
 const Blogs = () => {
@@ -12,40 +12,55 @@ const Blogs = () => {
     const handleBlogClick = (blogId) => {
         navigate(`/blog-details/${blogId}`);
     };
+
+    const [blogs, setBlogs] = useState(null);
+    const getBlogs = () => {
+        axios.get("/blogs")
+            .then((response) => {
+                console.log(response.data);
+                setBlogs(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+
+    useEffect(() => {
+        getBlogs();
+    }, [blogs])
+
     return (
         <div className="blogs">
             <div className="container blogs-wrapper">
-                <a href="https://medium.com/@platforma.freelanceri/in-todays-dynamic-business-landscape-traditional-recruitment-methods-are-being-left-behind-by-a42c45a7333f" target="_blank" style={{ textDecoration: "none" }}>
-                    <div className="main-article" style={{ cursor: "pointer" }}>
-                        <img src={blog4} alt="Article" className="main-article-img" />
-                        <div className="article-tags">
-                            <div className="first-tag">
-                                <p>For businesses</p>
+                {blogs && blogs.length > 0 && (
+                    <a href={`/blog-details/${blogs[0]._id}`} style={{ textDecoration: "none", width: "100%", justifyContent: 'center', display: 'flex' }} >
+                        <div className="main-article" style={{ cursor: "pointer" }}>
+                            <img src={blogs[0].cover} alt="Article" className="main-article-img" style={{ borderRadius: '10px' }} />
+                            <div className="article-preview d-flex justify-content-between align-items-center">
+                                <h1 className="article-preview-title">{blogs[0].title}</h1>
+                                <FaRegArrowAltCircleUp size={35} className="rotate-icon" color="#909090" />
                             </div>
-                            {/* <p className="first-tag-p">For Businesses</p>
-                        <p className="first-tag-p">• 10/04/2024</p> */}
-                        </div>
-                        <div className="article-preview">
-                            <h1 className="article-preview-title">Getting started with Freelanceri</h1>
-                            <p className="article-preview-description">In today’s dynamic business landscape, traditional recruitment methods are being left behind by innovative platforms like ours. At Freelanceri, we’re not just another job board; we’re transforming the way businesses connect with professionals through cutting-edge AI technology.</p>
-                        </div>
-                    </div>
-                </a>
-                <div className="grid-articles mb-5">
-                    <a href="https://medium.com/@platforma.freelanceri/freelanceri-for-professionals-77d43420cd9c" target="_blank" style={{ textDecoration: "none" }}>
-                        <div className="grid-article-item" style={{ cursor: "pointer" }}>
-                            <img src={blog2} alt="article-grid" className="article-img" />
-                            <h4 className="grid-article-title">Freelanceri for professionals</h4>
-                            <p className="grid-article-paragraph">Freelanceri is dedicated to empowering professionals with the tools and resources they need to succeed in today's competitive market,through our comprehensive training programs and workshops.</p>
+                            <p style={{ color: '#909090' }}>June 2, 2024</p>
                         </div>
                     </a>
-                    <a href="https://medium.com/@platforma.freelanceri/how-to-get-your-first-project-1d0dd2bbdbdb" target="_blank" style={{ textDecoration: "none" }}>
-                        <div className="grid-article-item" style={{ cursor: "pointer" }} >
-                            <img src={blog3} alt="article-grid" className="article-img" />
-                            <h4 className="grid-article-title">How to get your first project</h4>
-                            <p className="grid-article-paragraph">The most important bit, your first project.</p>
-                        </div>
-                    </a>
+                )}
+                {!blogs || blogs.length === 0 && (
+                    <div>No blogs available</div>
+                )}
+                <div className="grid-articles mb-3">
+                    {blogs && blogs.slice(1).map((blog, index) => (
+                        <a href={`/blog-details/${blog._id}`} key={index} style={{ textDecoration: "none" }}>
+                            <div className="grid-article-item" style={{ cursor: "pointer" }}>
+                                <img src={blog.cover} alt="article-grid" className="article-img" style={{ borderRadius: '10px' }} />
+                                <div className="gatw d-flex justify-content-between align-items-center">
+                                    <h4 className="grid-article-title">{blog.title}</h4>
+                                    <FaRegArrowAltCircleUp className="rotate-icon" size={35} color="#909090" />
+                                </div>
+                                <p style={{ color: '#909090' }}>{blog.date}</p>
+                            </div>
+                        </a>
+                    ))}
                 </div>
             </div>
         </div>

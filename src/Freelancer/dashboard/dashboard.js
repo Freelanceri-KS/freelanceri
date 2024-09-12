@@ -141,15 +141,12 @@ const FreelancerDashboard = (props) => {
                                 <div className="fdme-stat-item">
                                     <h6>Average Rating</h6>
                                     <h4 className='fdme-stat-item-value'>{avgRating == null ? 0 : avgRating}</h4>
-
                                 </div>
-
                             </div>
                         </div>
                         <div className="freelancer-dashboard-main-proposals">
                             <div className="fdmp-head">
                                 <h4>Applications Sent</h4>
-                                {/* <h6 className='fdmp-head-h6'>View all</h6> */}
                             </div>
                             <div className="horiz-barrier"></div>
                             <div className="fdmp-options">
@@ -479,7 +476,6 @@ const FreelancerDashboard = (props) => {
                                 <p className='fdsc-body-p'>Email: <span style={{ color: "#455bef", fontWeight: '500' }}>platforma.freelanceri@gmail.com</span></p>
                                 <div className="horiz-barrier-contact"></div>
                                 <p className='fdsc-body-p'>Contact us and we will reach out to you soon to hear about your needs</p>
-
                             </div>
                         </div>
                     </div>

@@ -31,8 +31,8 @@ const LoginPage = (props) => {
 
     const endpoint =
       selectedUserType === "freelancer"
-        ? "https://weak-lime-squid-fez.cyclic.app/freelancer/login"
-        : "https://weak-lime-squid-fez.cyclic.app/business/login";
+        ? "https://frillenser-87bfe5f5abe0.herokuapp.com/freelancer/login"
+        : "https://frillenser-87bfe5f5abe0.herokuapp.com/business/login";
 
     try {
       setLoading(true);

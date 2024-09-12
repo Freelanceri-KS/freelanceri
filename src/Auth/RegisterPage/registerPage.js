@@ -164,7 +164,7 @@ const RegisterPage = (props) => {
       } else {
 
         const response = await axios.post(
-          "https://weak-lime-squid-fez.cyclic.app/business/signup",
+          "https://frillenser-87bfe5f5abe0.herokuapp.com/business/signup",
           businessPayload
         );
         setFirstName("");
@@ -194,7 +194,7 @@ const RegisterPage = (props) => {
       lastName: lastName,
       email: email,
       password: password,
-      recaptchaToken: captcha
+      // recaptchaToken: captcha
     }
     e.preventDefault();
 
@@ -208,9 +208,10 @@ const RegisterPage = (props) => {
         setFirstName("");
         setLastName("");
         setPassword("");
+        console.log(response.data)
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Freelancer signup error:",error);
       })
   }
 
@@ -300,11 +301,11 @@ const RegisterPage = (props) => {
                       {props?.language === true ? "Fjalekalimi" : "Password"}
                     </label>
                   </div>
-                  <ReCAPTCHA
+                  {/* <ReCAPTCHA
                     // size="invisible"
                     sitekey="6Lcnq9opAAAAAB9qRPMYpf7OA399qWn813YFHtp8"
                     onChange={CaptchaValidation}
-                  />
+                  /> */}
                   <form onSubmit={handleFreelancerSubmit}>
                     {/* Step 1 form fields */}
 

@@ -3,6 +3,10 @@
   display: flex;
   justify-content: space-around;
 
+  .dropdown-query {
+    border: none;
+  }
+
   .find-job-left {
     width: 20%;
     display: flex;
@@ -400,6 +404,67 @@
   .jpcb-p {
     @media screen and (max-width: 768px) {
       font-size: 15px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .find-job {
+    .find-job-center {
+      .search-filter-bar {
+        border: 1px solid #eaeaea;
+        border-radius: 10px;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+  
+        .input-with-icon {
+          position: relative;
+          flex: 2;
+        }
+  
+        .vert-barriers {
+          display: none;
+        }
+  
+        .input-with-icon input {
+          padding-left: 30px;
+          border: none;
+        }
+  
+        .input-with-icon .icon-prefix {
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+  
+        .search-button {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #455bef;
+          font-weight: 500;
+        }
+  
+      }
+      .job-post-list {
+        .job-post-container {
+          .job-post-footer {
+            .vert-barrier{
+              display: none;
+            }
+            .jp-footer-info {
+              display: none;
+            }
+            .jp-apply-details{
+              width: 100%!important;
+              border-bottom-left-radius:10px ;
+            }
+          }
+        }
+      }
     }
   }
 }

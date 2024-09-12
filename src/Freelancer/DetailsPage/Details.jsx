@@ -1,7 +1,6 @@
 import './Details.scss';
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import User from "../../assets/profiles/business.png"
-import User2 from "../../assets/images/user2.png"
 import Banner from "../../assets/banners/banner.png"
 import { MdOutlineBookmarkBorder } from "react-icons/md";
 import { FaBookmark } from "react-icons/fa";
@@ -242,7 +241,7 @@ const DetailsPage = (props) => {
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">
                       <div className="tag">Afati</div>
-                      <div className="value">{sp?.duration}ditë</div>
+                      <div className="value">{sp?.duration}</div>
                     </div>
                     <div className="vert-barrier"></div>
                     <div className="jp-footer-info">

@@ -2,7 +2,6 @@ import './faqs.scss'
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import Footer from '../components/footer';
-import singleprofile from "../../assets/images/single-profile.png";
 import { setLang } from "../../redux/Functions/actions";
 import { connect } from "react-redux";
 import ExploreSection from '../explore/ExploreSection'
@@ -16,7 +15,7 @@ const FAQs = (props) => {
     findAndBid: false,
     freelancerSelection: false,
     platformFee: false,
-    Tarifa:false
+    Tarifa: false
   };
 
   const [isExpanded, setExpanded] = useState(initialStates);
@@ -32,19 +31,15 @@ const FAQs = (props) => {
     <div className="faqs">
       <div className="wrapper">
         <p className="title">
-          {props?.language
-            ? "Pyetjet më të shpeshta"
-            : " Frequently asked questions"}
+          Frequently asked questions
         </p>
-
         <div className="container questions">
           <div className="row">
             <div className="col-sm">
               <div
-                className={`question-container ${
-                  isExpanded.freelancerPlatform ? "expanded" : ""
-                }`}
-               >
+                className={`question-container ${isExpanded.freelancerPlatform ? "expanded" : ""
+                  }`}
+              >
                 <div
                   className="qc-header"
                   onClick={() => toggleExpansion("freelancerPlatform")}
@@ -71,9 +66,8 @@ const FAQs = (props) => {
             </div>
             <div className="col-sm">
               <div
-                className={`question-container ${
-                  isExpanded.postProject ? "expanded" : ""
-                }`}
+                className={`question-container ${isExpanded.postProject ? "expanded" : ""
+                  }`}
               >
                 <div
                   className="qc-header"
@@ -103,9 +97,8 @@ const FAQs = (props) => {
           <div className="row">
             <div className="col-sm">
               <div
-                className={`question-container ${
-                  isExpanded.qualityOfWork ? "expanded" : ""
-                }`}
+                className={`question-container ${isExpanded.qualityOfWork ? "expanded" : ""
+                  }`}
               >
                 <div
                   className="qc-header"
@@ -133,9 +126,8 @@ const FAQs = (props) => {
             </div>
             <div className="col-sm">
               <div
-                className={`question-container ${
-                  isExpanded.findAndBid ? "expanded" : ""
-                }`}
+                className={`question-container ${isExpanded.findAndBid ? "expanded" : ""
+                  }`}
               >
                 <div
                   className="qc-header"
@@ -288,55 +280,7 @@ const FAQs = (props) => {
           </div> */}
         </div>
         <div className="space"></div>
-        {/* <p className="title">
-          {props?.language
-            ? "Nuk gjetët një përgjigje"
-            : "Didn't find an answer?"}
-        </p>
-        <p className="subtitle">
-          {props?.language
-            ? "Kontakto një nga anëtaret e ekipit"
-            : "Contact one of our team members"}
-        </p>
-        <div className="container profiles">
-          <div className="row">
-            <div className="col-sm profile-card">
-              <img src={singleprofile} alt="" />
-              <div className="title-small">
-                <h5>Kujtim Gjokaj</h5>
-                <p>CEO</p>
-              </div>
-              <p>gjokaj@gmail.com</p>
-            </div>
-            <div className="col-sm profile-card">
-              <img src={singleprofile} alt="" />
-              <div className="title-small">
-                <h5>Kujtim Gjokaj</h5>
-                <p>CEO</p>
-              </div>
-              <p>gjokaj@gmail.com</p>
-            </div>
-            <div className="col-sm profile-card">
-              <img src={singleprofile} alt="" />
-              <div className="title-small">
-                <h5>Kujtim Gjokaj</h5>
-                <p>CEO</p>
-              </div>
-              <p>gjokaj@gmail.com</p>
-            </div>
-            <div className="col-sm profile-card">
-              <img src={singleprofile} alt="" />
-              <div className="title-small">
-                <h5>Kujtim Gjokaj</h5>
-                <p>CEO</p>
-              </div>
-              <p>gjokaj@gmail.com</p>
-            </div>
-          </div>
-        </div> */}
       </div>
-      <ExploreSection />
-      <Footer />
     </div>
   );
 }

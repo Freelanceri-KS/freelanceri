@@ -41,7 +41,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .login-page {
     display: flex;
     flex-direction: column;
@@ -63,6 +63,10 @@
 
   .right {
     display: none;
+    .right-img{
+      display: none;
+      visibility: hidden;
+    }
   }
 
 
